@@ -1,0 +1,126 @@
+{#{% block post_categories_widget %}
+    {% spaceless %}
+        {% if expanded %}
+            <ul {{ block('widget_container_attributes') }}>
+            {% for child in form %}
+                <li>
+                    {{ form_widget(child) }}
+                    {{ form_label(child) }}
+                </li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            
+            {{ block('choice_widget') }}
+        {% endif %}
+    {% endspaceless %}
+{% endblock %}#}
+
+{% block p4m_corebundle_wallcategory_choice_widget_options %}
+{% spaceless %}
+{% for index, choice in options %}
+{% if choice is iterable %}
+<optgroup label="{{ index|trans({}, translation_domain) }}">
+    {% for nested_choice in choice %}
+    <option value="{{ nested_choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ nested_choice.label|trans({}, translation_domain) }}</option>
+    {% endfor %}
+</optgroup>
+{% else %}
+<option  data-img="{%if choice.data.iconColor%}{{asset(choice.data.iconColor)}}{%endif%}"  value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label|trans({}, translation_domain) }}</option>
+{% endif %}
+{% endfor %}
+{% endspaceless %}
+{% endblock p4m_corebundle_wallcategory_choice_widget_options %}
+        
+        
+
+{% block p4m_corebundle_wallcategory_choice_widget_collapsed %}
+{% spaceless %}
+<select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+    {% if empty_value is not none %}
+    <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
+    {% endif %}
+    {% if preferred_choices|length > 0 %}
+    {% set options = preferred_choices %}
+    {{ block('choice_widget_options') }}
+    {% if choices|length > 0 and separator is not none %}
+    <option disabled="disabled">{{ separator }}</option>
+    {% endif %}
+    {% endif %}
+    {% set options = choices %}
+    {{ block('p4m_corebundle_wallcategory_choice_widget_options') }}
+</select>
+{% endspaceless %}
+{% endblock p4m_corebundle_wallcategory_choice_widget_collapsed %}
+
+
+
+
+{% block p4m_corebundle_wallcategory_widget %}
+
+{% spaceless %}
+{% if expanded %}
+    <ul {{ block('widget_container_attributes') }} data-prototype='<li class="create-wall-form-item category-item " data-categoryId="%_elementId_%" data-tileId="category_%_elementId_%" >
+            <button title="%_elementName_%" type="button" class="category-button">
+                <img src="%_elementIcon_%" class="category-icon" alt="%_elementName_%">
+            </button>
+            <input type="checkbox" value="%_elementId_%" name="{{form.vars.full_name}}[]" id="" checked="checked"/>
+        </li>'>
+{#    {%for choice in choices%}#}
+    {%for child in form%}
+        {% set choice =  form.vars.choices[child.vars.value]%}
+        {% if value[choice.value] == true %}
+        <li class="create-wall-form-item category-item {% if value[choice.value] == false %} hidden{% endif %}" data-categoryId="{{choice.data.id}}" data-tileId="category_{{choice.data.id}}" >
+            <button title="{{choice.data.name}}" type="button" class="category-button">
+                <img src="{{asset(choice.data.iconColor)}}" class="category-icon" alt="{{choice.data.name}}">
+            </button>
+            <input type="checkbox" value="{{choice.value}}" name="{{form.vars.full_name}}[]" id="" checked="checked" />
+        </li>
+           {%endif%}  
+    {% endfor%}
+    </ul>
+
+{% else %}
+
+{{ block('p4m_corebundle_wallcategory_choice_widget_collapsed') }}
+{% endif %}
+{% endspaceless %}
+{% endblock %}
+
+
+{% block p4m_corebundle_walltag_widget %}
+
+{% spaceless %}
+{% if expanded %}
+    <ul {{ block('widget_container_attributes') }} data-prototype='<li class="create-wall-form-item tag-item" data-tileId="tag_%_elementId_%" >
+
+            <button title="%_elementName_%" type="button" class="tag-button">
+               <span class="glyphicon tag"></span> %_elementName_%
+           </button>
+           <input type="checkbox" value="%_elementId_%" name="{{form.vars.full_name}}[]" id="" checked="checked"/>
+{#           {{ form_widget(child) }}#}
+       </li>' >
+
+    {%for child in form%}
+        {% set choice =  form.vars.choices[child.vars.value]%}
+        {% if value[choice.value] == true %}
+        <li class="create-wall-form-item tag-item {% if value[choice.value] == false %} hidden{% endif %}" data-tileId="tag_{{choice.data.id}}" >
+
+            <button title="Histoire" type="button" class="tag-button">
+               <span class="glyphicon tag"></span> {{choice.data.name}}
+           </button>
+           <input type="checkbox" value="{{choice.value}}" name="{{form.vars.full_name}}[]" id="" checked="checked"/>
+
+       </li>
+       {%endif%}
+       
+        
+    {% endfor%}
+    </ul>
+
+{% else %}
+
+{{ block('p4m_corebundle_wallcategory_choice_widget_collapsed') }}
+{% endif %}
+{% endspaceless %}
+{% endblock %}

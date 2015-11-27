@@ -1,0 +1,33 @@
+{% set wallId =  null%}
+{% if wall is defined %}
+{% set wallId = wall.id%}
+{% endif %}
+
+{%set errMode = false%}
+{%if app.session.flashbag.get('error')|length%}
+{%set errMode = true%}
+{%endif%}
+
+<li class="action-bar-item">
+    <a class="action-bar-link {%if errMode ==false %}current-action-bar-item{%endif%}" data-toggle="action-bar" data-target="#section-create-wall-first" href="#create-wall-first" title="Picked some categories!">
+        <span class="action-bar-icon glyphicon circle_info"></span>
+    </a>
+</li>
+<li class="action-bar-item">
+    <a class="action-bar-link content-modifier ajax_action" data-loader="content" data-url="{{path('p4m_ajax_action')}}" data-action="getWallCategories" data-params="{{ {'wallId':wallId,callBack:'createStrewManage'}|json_encode() }}" data-key="{{'getWallCategories'|sha512()}}" data-toggle="action-bar" data-target="#section-create-wall-categories" href="#create-wall-categories" title="Picked some categories!">
+        <span class="action-bar-icon glyphicon book"></span>
+    </a>
+</li>
+
+<li class="action-bar-item">
+    <a class="action-bar-link content-modifier ajax_action" data-loader="content" data-url="{{path('p4m_ajax_action')}}" data-action="getWallTags" data-params="{{ {'wallId':wallId,callBack:'createStrewManage'}|json_encode() }}" data-key="{{'getWallTags'|sha512()}}" data-toggle="action-bar" data-target="#section-create-wall-tags" href="#create-wall-tags"  title="Picked some tags!">
+        <span class="action-bar-icon glyphicon tags"></span>
+    </a>
+ </li>
+
+
+<li class="action-bar-item">
+    <a class="action-bar-link {%if errMode == true%}current-action-bar-item{%endif%}" data-toggle="action-bar" data-target="#section-create-wall-resume" href="#meta"  title="Resume!">
+        <span class="action-bar-icon glyphicon ok_2"></span>
+    </a>
+</li>

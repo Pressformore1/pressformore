@@ -1,0 +1,26 @@
+<div class="action-bar-block">
+<p class="big text-center" id="pressformersCount">{{post.pressforms|length}}</p>
+<p class="middle text-center">Pressformers pressed this content</p>
+{% if post.pressforms|length%}
+    <ul class="pressformersList list-unstyled">
+    {%set maxPressformers = 4%}
+    {%if post.pressforms|length < maxPressformers%}
+    {%set maxPressformers = post.pressforms|length%}
+    {%endif%}
+        {%set colWidth = 60/maxPressformers%}
+        {%set displayedPressers = []%}
+        {% for i in 1..maxPressformers%}
+            {%set pressformerIndex = random(post.pressforms|length-1)%}
+            {%set pressform = post.pressforms[pressformerIndex]%}
+            {%if pressform.sender.username in displayedPressers == false%}
+            <li class="pressformersListElement col-md-{{colWidth}} col-xs-{{colWidth}} col-sm-{{colWidth}} col-lg-{{colWidth}}"><a href="{{path('p4m_social_profile',{username:pressform.sender.username})}}" title="" class="roundedImageLink pressformerLink" data-original-title="View profile">
+                <img alt="{{pressform.sender.username}}" src="{{asset(pressform.sender.picture.webPath)}}" class="thumb-align resize-test" style="visibility: visible; height: 38px; width: auto; left: 0px; top: 0px;" />
+            </a></li>
+                {%set displayedPressers = displayedPressers|merge([pressform.sender.username])%}
+            {%endif%}
+        {%endfor%}
+    
+    </ul>
+        <div class="clearfix"></div>
+{%endif%}
+</div>

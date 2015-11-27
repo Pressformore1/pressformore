@@ -1,0 +1,29 @@
+{% extends "P4MBackofficeBundle::my-account.html.twig" %}
+
+
+{% block page %}
+
+<h2 class="form-title">Your bank accounts list</h2>
+<a href="{{path('p4_m_backoffice_money_bankAccount_create_iban')}}" class="main-button-link">NEW IBAN</a>
+
+<table class="table table-striped table-sortable">
+            <thead>
+                <tr>
+                    <th>Label</th>
+                    <th>Code</th>
+                    <th>Type</th>
+                    <th>Owner Name</th>
+                </tr>
+            </thead>
+            <tbody>
+            {%for account in accounts%}
+                <tr >
+                    <td>{{account.Tag}}</td>
+                    <td>{%if account.Type == 'IBAN'%}{{account.Details.IBAN}}{%endif%}</td>
+                    <td>{{account.Type}}</td>
+                    <td><a href="#">{{account.OwnerName}}</a></td>
+                </tr>
+            {% endfor%}
+             </tbody>
+          </table>
+{% endblock %}

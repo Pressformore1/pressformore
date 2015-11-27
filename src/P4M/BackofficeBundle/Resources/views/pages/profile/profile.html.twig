@@ -1,0 +1,162 @@
+{% extends "P4MBackofficeBundle::my-account.html.twig" %}
+
+
+
+ {% block page %}
+<h2 class="form-title">Edit your informations</h2>
+<form method="post" enctype="multipart/form-data"  class="form-horizontal" role="form" action="">
+    {%set errors = app.session.flashbag.get('error')%}
+    {%set success = app.session.flashbag.get('success')%}
+    {%if errors|length or success|length%}
+    <div class="explanation-zone">
+    {{ form_errors(form) }}
+        
+    {% for flashMessage in errors %}
+{#       <div class="alert alert-error">#}
+{#           <button type="button" class="close" data-dismiss="explanation-zone">&times;</button>#}
+           {{ flashMessage }}
+{#       </div>#}
+   {% endfor %}
+   {% for flashMessage in success %}
+       
+{#           <button type="button" class="close" data-dismiss="explanation-zone">&times;</button>#}
+           {{ flashMessage }}
+       
+   {% endfor %}
+        
+    </div>
+   {%endif%}
+
+    <div id="p4m_userbundle_user">
+
+        <div class="form-group">
+            <label class="col-sm-20 control-label form-field-title" for="{{form.username.vars.id}}">Username {%if form.username.vars.required%}*{%endif%}<br /><small class="form-field-explanation">(Title of your profile)</small></label>
+
+            <div class="col-sm-30">
+                 {{form_widget(form.username,{attr:{class:'form-control'} })}} 
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="{{form.email.vars.id}}" class="col-sm-20 control-label form-field-title required">Email {%if form.username.vars.required%}*{%endif%}</label>
+
+            <div class="col-sm-30">
+                {{form_widget(form.email,{attr:{class:'form-control'} })}}
+                <div class="form-field-privacy">
+                        <p>
+                            <small>Who can see my e-email address</small>
+                            {{form_widget(form.publicStatus.email)}}
+                        </p>
+
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+
+        <div class="form-group">
+            <label for="{{form.firstName.vars.id}}" class="col-sm-20 control-label form-field-title required">First Name {%if form.username.vars.required%}*{%endif%}</label>
+
+            <div class="col-sm-30">
+                {{form_widget(form.firstName,{attr:{class:'form-control'} })}}
+                
+                <div class="clear"></div>
+            </div>
+         </div>
+        <div class="form-group">
+            <label for="{{form.lastName.vars.id}}" class="col-sm-20 control-label form-field-title required">Last Name {%if form.username.vars.required%}*{%endif%}</label>
+
+            <div class="col-sm-30">
+                {{form_widget(form.lastName,{attr:{class:'form-control'} })}}
+                <div class="form-field-privacy">
+                    <p>
+                        <small>Who can see my name</small>
+                        {{form_widget(form.publicStatus.name)}}
+                    </p>
+
+                </div>
+                <div class="clear"></div>
+            </div>
+         </div>
+
+        <div class="form-group">
+            <label for="{{form.birthDate.year.vars.id}}" class="col-sm-20 control-label form-field-title required">Birth Date {%if form.username.vars.required%}*{%endif%}</label>
+
+            <div class="col-sm-30">
+                {{form_widget(form.birthDate,{attr:{class:''} })}}
+                <div class="clear"></div>
+            </div>
+         </div>
+
+        <div class="form-group">
+             <label for="{{form.address.vars.id}}" class="col-sm-20 control-label form-field-title required">Address {%if form.username.vars.required%}*{%endif%}</label>
+
+             <div class="col-sm-30">
+                 {{form_widget(form.address,{attr:{class:'form-control'} })}}
+                 {{form_widget(form.city,{attr:{class:'form-control'} })}}
+                 {{form_widget(form.country,{attr:{class:'main-select2'} })}}
+                 <div class="form-field-privacy">
+                         <p>
+                             <small>Who can see my place</small>
+                             {{form_widget(form.publicStatus.localisation)}}
+                         </p>
+
+                 </div>
+                 <div class="clear"></div>
+             </div>
+         </div>
+
+
+        <div class="form-group">
+             <label for="{{form.website.vars.id}}"  class="col-sm-20 control-label form-field-title required">Website</label>
+
+             <div class="col-sm-30">
+                 {{form_widget(form.website,{attr:{class:'form-control'} })}}
+                 <div class="form-field-privacy">
+                     <p>
+                         <small>Who can see your website</small>
+                         {{form_widget(form.publicStatus.website)}}
+                     </p>
+                 </div>
+
+                 <div class="clear"></div>
+             </div>
+         </div>
+        <div class="form-group">
+             <label  class="col-sm-20 control-label form-field-title required" for="{{form.bio.vars.id}}">Bio <small class="form-field-explanation">(A short description of yourself)</small></label><small class="form-field-explanation">
+
+             <div class="col-sm-30">
+                  {{form_widget(form.bio,{attr:{class:'form-control','maxlength':160,'rows':3,'cols':10} })}}
+{#                 <textarea maxlength="160" rows="3" cols="10" class="form-control" required="required" name="p4m_userbundle_user[bio]" id="p4m_userbundle_user_bio">Entre �l�phant et web-dev, je fait du yoga tous les samedi avant d'aller au march�</textarea>#}
+                 <div class="clear"></div>
+             </div>
+         </div>
+
+         <div class="form-group">
+             <label for="{{form.skills.vars.id}}" class="col-sm-20 control-label form-field-title required">Skills</label>
+
+             <div class="col-sm-30">
+                 {{form_widget(form.skills,{attr:{class:'form-control'} })}}
+{#                 <input class="form-control" type="text" value="Lots of stuff" name="p4m_userbundle_user[skills]" id="p4m_userbundle_user_skills">#}
+                 <div class="clear"></div>
+             </div>
+         </div>
+         {{form_rest(form)}}
+
+                <button class="primary" type="submit">Send</button>
+
+            </div>
+    </form>
+
+
+
+
+
+{% endblock%}
+
+
+
+
+

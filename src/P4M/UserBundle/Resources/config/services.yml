@@ -1,0 +1,59 @@
+parameters:
+    my_user_provider.class: P4M\UserBundle\Security\Core\User\FOSUBUserProvider
+#    p4_m_user.example.class: P4M\UserBundle\Example
+
+services:
+    userlink_repository:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.entity_manager
+        factory_method: getRepository
+        arguments:
+            - P4M\UserBundle\Entity\UserLink
+
+    p4mUser.user_utils:
+        class: P4M\UserBundle\Service\UserUtils
+        arguments: [ @doctrine.orm.entity_manager,@service_container ]
+    p4m_userbundle.registration.form.type:
+        class: P4M\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags:
+            -
+                name: form.type
+                alias: p4m_user_registration
+    P4M_User.type.skill_selector:
+        class: P4M\UserBundle\Form\Type\UserSkillType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: userskills }
+    my_user_provider:
+        class: "%my_user_provider.class%"
+        #this is the place where the properties are passed to the UserProvider - see config.yml
+        arguments: [@fos_user.user_manager,{facebook: facebook_id, google: google_id}]
+    
+    P4M.registration.form.type:
+        class: P4M\UserBundle\Form\Type\RegistrationFormType
+        arguments: [%fos_user.model.user.class%]
+        tags: [{ name: "form.type", alias: "p4m_user_registration" }]
+
+    P4M.invitation.form.type:
+        class: P4M\UserBundle\Form\Type\InvitationFormType
+        arguments: [@p4m.invitation.form.data_transformer]
+        tags: [{ name: "form.type", alias: "p4m_invitation_type" }]
+
+    P4M.invitation.form.data_transformer:
+        class: P4M\UserBundle\Form\DataTransformer\InvitationToCodeTransformer
+        arguments: [@doctrine.orm.entity_manager]
+        
+    P4M.user.password_resetting:
+        class: P4M\UserBundle\Listener\PasswordResettingListener
+        arguments: [ @router ]
+        tags:
+            - { name: kernel.event_subscriber }
+            
+
+    #override to additionaly use a cookie
+    security.authentication.success_handler:
+        class:  P4M\UserBundle\Handler\AuthenticationSuccessHandler
+        arguments:  ["@security.http_utils", {}]
+        tags:
+            - { name: 'monolog.logger', channel: 'security' }

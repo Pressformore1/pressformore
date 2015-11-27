@@ -1,0 +1,206 @@
+
+{#Modal addPost#}
+<!-- /.modal -->
+<div class="modal fade pfm-modal" id="modal-addPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Add Post</h4>
+                        </div>
+                    <form class="post-form ajax_form" id="commentform" method="post" action="{{path('p4m_core_addPost')}}" data-action="addPostForm" data-url="{{path('p4m_ajax_action')}}" data-key="{{'addPostForm'|sha512}}" data-target="serialize">
+                            <div class="modal-body">
+                                    <div class="add-post" id="addPostZone">
+                                          
+                                    </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                    <input type="submit" class="btn btn-primary" value="Add Post" />
+                            </div>
+                        </form>
+                </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% if post is defined %}
+<!-- Report Modal -->
+<div class="modal fade pfm-modal" id="modal-reportPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            <h4 class="modal-title" id="myModalLabel">Report Post</h4>
+                    </div>
+                {% if post.flag %}
+                    <form class="post-form ajax_form" id="commentform" data-action="confirmFlag" data-url="{{path('p4m_ajax_action')}}" data-key="{{'confirmFlag'|sha512}}" data-target="serialize">
+                        <input type="hidden" id="postId" name="flagId"  value="{{post.flag.id}}"/>
+                        <div class="modal-body">
+                            <div class="add-post" id="reportPostZone">
+                                This post has been reported as <strong>{{post.flag.type.name}}</strong>
+                                <div class="formElement">
+                                    {{form_label(reportForm.confirmed)}}
+                                    {{form_widget(reportForm.confirmed)}}
+                                </div>
+                            </div>
+                        </div>
+                        {{form_rest(reportForm)}}
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-primary" value="Edit Post" />
+                        </div>
+                    </form>
+                {% else %}
+                    <form class="post-form ajax_form" id="commentform" data-action="reportPost" data-url="{{path('p4m_ajax_action')}}" data-key="{{'reportPost'|sha512}}" data-target="serialize">
+                        <input type="hidden" id="postId" name="postId"  value="{{post.id}}"/>
+                        <div class="modal-body">
+                            <div class="add-post" id="reportPostZone">
+                                <div class="formElement">
+                                    {{form_label(reportForm.type)}}
+                                    {{form_widget(reportForm.type)}}
+                                </div>
+                                
+                                {#<div class="formElement">
+                                    {{form_label(reportForm.description)}}
+                                    {{form_widget(reportForm.description)}}
+                                </div>#}
+                            </div>
+                        </div>
+                        {{form_rest(reportForm)}}
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-primary" value="Edit Post" />
+                        </div>
+                    </form>
+                {%endif%}
+                    
+                </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div>
+<!-- Modal -->
+<div class="modal fade pfm-modal" id="modal-editPost" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+                <div class="modal-content">
+                        <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="myModalLabel">Edit Post</h4>
+                        </div>
+                    <form class="post-form ajax_form" id="commentform" method="post" action="{{path('p4m_core_addPost')}}" data-action="editPostForm" data-url="{{path('p4m_ajax_action')}}" data-key="{{'editPostForm'|sha512}}" data-target="serialize">
+                        <input type="hidden" id="postId" name="postId"  value="{{post.id}}"/>
+                        <div class="modal-body">
+                            <div class="add-post" id="editPostZone">
+
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <input type="submit" class="btn btn-primary" value="Edit Post" />
+                        </div>
+                        </form>
+                </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+</div>
+<!-- Modal -->
+
+
+<!-- Modal -->
+{% endif %}
+
+{%if commentForm is defined %}
+{%if post is defined%}
+    {%set action = 'postComment'%}
+    {%set hiddenKey = 'postId'%}
+    {%set hiddenValue = post.id%}
+{% elseif wall is defined%}
+    {%set action = 'wallComment'%}
+    {%set hiddenKey = 'wallId'%}
+    {%set hiddenValue = wall.id%}
+{%endif%}
+
+<div class="modal fade pfm-modal" id="modal-addComment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Leave a reply</h4>
+            </div>
+            <form class="comment-form ajax_form" id="commentform" data-action="{{action}}" data-url="{{path('p4m_ajax_action')}}" data-key="{{action|sha512}}" data-target="{{['p4m_corebundle_comment_content',hiddenKey,'parentId']|json_encode()}}"method="post" action="">
+                <div class="modal-body">
+                    <div class="comment-respond" id="respond">
+                        <input type="hidden" id="{{hiddenKey}}" value="{{hiddenValue}}"/>
+                        <input type="hidden" id="parentId" value=""/>
+                                 {{ form_widget(commentForm.content,{ 'attr': {'id': 'commentBody'} }) }}
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-primary" value="Post comment" />
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{%endif%}
+
+<div class="modal fade pfm-modal" id="modal-error" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Error</h4>
+            </div>
+                <div class="modal-body">
+                    
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+                </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+<div class="modal fade pfm-modal" id="modal-confirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Confirm</h4>
+            </div>
+                <div class="modal-body">
+                    
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default confirm-btn" data-dismiss="modal">Confirm</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+
+{%if user is not defined or user is null%}
+<div class="modal fade pfm-modal" id="modal-register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">You're not logged in</h4>
+            </div>
+            
+{#            #}
+            <a class="main-button-link"  href="{{path('fos_user_security_login')}}">Log in</a>
+            <a class="main-button-link" id="join-beta" href="{{path('fos_user_registration_register')}}" >Register</a>
+            <div class="clear"></div>
+{#            {%endif%}#}
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{%endif%}
+

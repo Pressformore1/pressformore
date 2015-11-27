@@ -1,0 +1,7 @@
+parameters:
+#    p4_m_admin.example.class: P4M\Bundle\AdminBundle\Example
+
+services:
+#    p4_m_admin.example:
+#        class: %p4_m_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

@@ -1,0 +1,8 @@
+{%if notifications is not defined%}
+    {%set notifications = user.notifications|slice(0, 15)%}
+ {%endif%}
+{%for notification in notifications%}
+    {% include 'P4MBackofficeBundle:pages/notification:notification-line.html.twig'%}
+{%endfor%}
+
+           

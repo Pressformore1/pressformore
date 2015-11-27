@@ -1,0 +1,51 @@
+{# On étend notre layout #}
+{% extends "P4MAdminBundle::admin.html.twig" %}
+
+{% block pageTitle%}Edit Invitation{% endblock %}
+{% block pageSubTitle%}<h3 class="entry-title"><a href="{{path('p4m_admin_invitationList')}}">Back to invitation list</a></h3>{% endblock %}
+{# Dans notre layout, il faut définir le block body #}
+{% block leftCol %}
+{{parent()}}
+
+        <fieldset class="info_fieldset">
+            
+            <div id="note">
+            
+            </div>
+            <div id="contacts-form">
+                <form method="post" {{ form_enctype(form) }}>
+                    <div class="formElement">
+                        {{ form_errors(form.email) }}
+                        {{ form_label(form.email, 'Email :') }}
+                        {{ form_widget(form.email) }}  
+                    </div>
+                    
+                    {{form_rest(form)}}
+                    <div class="formElement">
+                        <input type="submit" class="btn btn-primary" />
+                    </div>
+              </form>
+            </div>
+            <div class="clear"></div>
+            {% if invitation.id %}
+            <div class="clear text-right edit-actions">
+                <a href="{{path('p4m_admin_deleteInvitation',{'invitationId':invitation.id})}}" class="btn btn-danger">DELETE INVITATION</a>
+            </div>
+            {%endif%}
+                                  <!-- end #contact-form -->
+        </fieldset>
+
+
+                        
+{% endblock %}{# empty Twig template #}
+
+
+{%block scriptPlugins %}
+{{parent()}}
+<script type="text/javascript" src="{{ asset('bundles/jonlilckfinder/ckfinder.js') }}"></script>
+{% endblock %}
+
+{% block scriptCustom %}
+{{parent()}}
+<script type="text/javascript" src="{{asset('js/scripts/admin/script-admin.js')}}"></script>
+{%endblock%}{# empty Twig template #}

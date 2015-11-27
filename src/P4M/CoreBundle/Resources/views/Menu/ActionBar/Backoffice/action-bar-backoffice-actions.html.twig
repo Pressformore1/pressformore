@@ -1,0 +1,59 @@
+{%include 'P4MCoreBundle:Menu/ActionBar/Backoffice:action-bar-money.html.twig'%} 
+{%include 'P4MCoreBundle:Menu/ActionBar/Backoffice:action-bar-backoffice-wallet-charge.html.twig'%} 
+
+
+<li class="action-bar-section" id="section-strews">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon show_thumbnails"></span> Manage your strews</h1>
+        <p>Create, edit or filter your strews</p>
+    </div>
+    
+    <form data-target="serialize" data-url="{{path('p4m_ajax_action')}}" id="profile-wall-form" data-action="loadAccountWalls" data-loader="content" data-key="{{'loadAccountWalls'|sha512}}" method="post" class="ajax_form">
+        {%include 'P4MCoreBundle:Menu/ActionBar/Common:action-bar-strew-filters-form.html.twig'%}
+    </form>
+
+</li>
+
+
+<li class="action-bar-section" id="section-notifications">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon bell"></span> Notifications</h1>
+        <p>An historic of your notifications</p>
+    </div>
+
+    <div class="action-bar-block">
+{#        {{notifications|length}}#}
+        <ul class="notifications-list">
+            
+       {# {%for notification in notifications%}#}
+            {% include 'P4MBackofficeBundle:pages/notification:notification.html.twig'%}
+{#        {%endfor%}#}
+        <li class="notification"><a class="align-right ajax_action" id="more-notifications-actionBar" href="#" data-url="{{path('p4m_ajax_action')}}" data-action="loadUserNotifications" data-key="{{'loadUserNotifications'|sha512}}" data-params="{{ {page:2,target:'more-notifications-actionBar',callBack:'loadUserNotifications'}|json_encode() }}">More Notifications</a></li>
+        </ul>
+        
+        
+    </div>
+</li>
+
+
+<li class="action-bar-section" id="section-messages">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon message_empty"></span>  Your Messages</h1>
+        <p>You're using an early access version, be patient!</p>
+    </div>
+</li>
+
+
+<li class="action-bar-section" id="section-stats">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon charts"></span>  Your Stats</h1>
+        <p>You're using an early access version, be patient!</p>
+    </div>
+</li>
+
+<li class="action-bar-section" id="section-skills-badges">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon crown"></span>  Your Reputation</h1>
+        <p>You're using an early access version, be patient!</p>
+    </div>
+</li>

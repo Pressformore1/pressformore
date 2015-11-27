@@ -1,0 +1,26 @@
+{# On étend notre layout #}
+{% extends "P4MAdminBundle::admin.html.twig" %}
+
+
+{%block pageTitle%}Edit User : {{user.username}} {%endblock%}
+{%block pageSubTitle%}<h3 class="entry-title"><a href="{{path('p4m_admin_userlist')}}">Back to user list</a></h3>{%endblock%}
+{% block leftCol %}
+{{parent()}}
+
+        <fieldset class="info_fieldset">
+            
+            <div id="note">
+               {#On affiche les messages flash que définissent les contrôleurs du bundle #}
+            </div>
+            <div id="contacts-form">
+                <form method="post" {{ form_enctype(form) }}>
+                {{ form_widget(form) }}
+                <input type="submit" class="btn btn-primary" />
+              </form>
+            </div>
+                                  <!-- end #contact-form -->
+        </fieldset>
+
+
+                        
+{% endblock %}{# empty Twig template #}

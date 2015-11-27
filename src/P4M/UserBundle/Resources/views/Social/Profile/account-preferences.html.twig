@@ -1,0 +1,97 @@
+{%extends 'P4MUserBundle:Social/Profile:my-account.html.twig'%}
+
+
+{%block accountTitle%}Change your profile picture{%endblock%}
+
+{%block accountNote%}
+    {%if form_errors(form)|length %}
+        <p><i class="icon-info-sign"></i>{{ form_errors(form) }}</p>
+    {%endif%}
+{%endblock%}
+
+{%block accountForm%}
+<div class="form-field">
+        {{form_label(form.categories,label|default(null), { 'label_attr': { 'class': 'form-field-title' } }) }}
+        {{form_widget(form.categories)}}
+       
+</div>
+
+<div class="form-field">
+        <label class="required form-field-title" for="p4m_userbundle_user_title">Tags</label>
+
+        <input id="searchTags" type="text" value="" placeholder="Find the tags you would like follow" />
+        <div class="clear"></div>
+        <div id="searchTags-wrap">
+                <ul id="searchTags-list" class="tags-list">
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>blip^p</a>
+                        </li>
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>ncihe</a>
+                        </li>
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>poapap</a>
+                        </li>
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>tata</a>
+                        </li>
+
+                </ul>	
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="tagsFollowed-wrap">
+                <h5 class="form-field-subTitle">Tags followed</h5>
+                <ul id="tagsFollowed" class="tags-list">
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>téléphant</a>
+                        </li>
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>nsfw</a>
+                        </li>
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>nichez</a>
+                        </li>
+
+                </ul>
+                <div class="clear"></div>
+        </div>
+        <div id="tagsBanned-wrap">
+                <h5 class="form-field-subTitle">Tags Banned</h5>
+                <ul id="tagsBanned" class="tags-list">
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>dieudonné</a>
+                        </li>
+                </ul>
+                <div class="clear"></div>
+        </div>
+
+        <div class="clear"></div>
+
+        <div id="mostPopularTags-wrap">
+                <h5 class="form-field-subTitle">Most popular tags</h5>
+                <ul id="mostPopularTags" class="tags-list">
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>Sex</a>
+                        </li>
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>Hard</a>
+                        </li>
+                        <li class="tag">
+                                <a href="" target="_blank" class="tag-text"><i class="icon-tag"></i>Asian</a>
+                        </li>
+                </ul>
+                <div class="clear"></div>
+        </div>
+
+{{form_rest(form)}}
+
+
+{%endblock%}
+        
+{%block scripts%}
+        {{parent()}}
+{#        <script type="text/javascript" src="{{ asset('js/jquery.passstrength.min.js')}}"></script>#}
+
+{%endblock%}

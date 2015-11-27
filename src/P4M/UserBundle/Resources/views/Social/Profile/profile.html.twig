@@ -1,0 +1,35 @@
+{% extends "P4MCoreBundle:Core/Template:wall-template.html.twig" %}
+
+{% block headTitle %}{{parent()}} {{userDisplayed.username}}{%endblock%}
+
+{% block meta %}
+    {{parent()}}
+    {% if userDisplayed is defined and userDisplayed %}
+    <meta property="og:url" content="{{url('p4m_social_profile',{username : userDisplayed.username})}}" />
+    <meta property="og:title" content="Profile of {{userDisplayed.username}}" />
+    <meta name="description" content="{{userDisplayed.bio}}">
+    <meta name="og:description" content="{{userDisplayed.bio}}">
+    <meta name="og:image" content="{{app.request.getSchemeAndHttpHost() ~asset(userDisplayed.picture.webPath)}}">
+    {%endif%}
+{%endblock%}
+
+{% block actionBarMenu %}
+{%if user%}
+{% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-menu.html.twig"%}
+{%else%}
+{% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-menu-nolog.html.twig"%}
+{%endif%}
+{% endblock%}
+
+{% block actionBarAction %}
+{%if user%}
+{% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-actions.html.twig"%}
+{%else%}
+{% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-actions-nolog.html.twig"%}
+{%endif%}
+{% endblock%}
+
+
+
+
+

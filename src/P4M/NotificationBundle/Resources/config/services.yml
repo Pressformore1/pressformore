@@ -1,0 +1,15 @@
+parameters:
+    
+#    p4_m_notification.example.class: P4M\NotificationBundle\Example
+
+services:
+    p4m.notification.like:
+        class: P4M\NotificationBundle\Event\Listener\LikeListener
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: kernel.event_listener, event: p4m.notification.like, method: onNotification }
+    p4m.notification.comment:
+        class: P4M\NotificationBundle\Event\Listener\CommentListener
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: kernel.event_listener, event: p4m.notification.comment, method: onNotification }

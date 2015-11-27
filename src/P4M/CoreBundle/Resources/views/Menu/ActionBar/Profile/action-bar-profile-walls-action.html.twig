@@ -1,0 +1,14 @@
+<li class="action-bar-section" id="section-strews">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon show_thumbnails"></span> {{userDisplayed.walls|length}} Strews</h1>
+        <p>Explore the strews created by {{userDisplayed.username}}</p>
+    </div>
+
+    <form data-target="serialize" data-url="{{path('p4m_ajax_action')}}" id="profile-wall-form" data-action="loadUserWalls" data-key="{{'loadUserWalls'|sha512}}" method="post" class="ajax_form">
+        <input type="hidden" name="userId" value="{{userDisplayed.id}}" />
+       {%include 'P4MCoreBundle:Menu/ActionBar/Common:action-bar-strew-filters-form.html.twig'%}
+    </form>
+
+    <div class="clear"></div>
+        
+</li>

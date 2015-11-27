@@ -1,0 +1,114 @@
+{% extends "P4MBackofficeBundle::my-account.html.twig" %}
+
+
+{% block page %}
+
+<h2 class="form-title">Register IBAN bank account</h2>
+<form method="post" enctype="multipart/form-data"  class="form-horizontal {%if bankAccount.id is null%}new{%endif%}" role="form" action="">
+    {%set errors = app.session.flashbag.get('error')%}
+    {%set success = app.session.flashbag.get('success')%}
+    {%if errors|length or success|length%}
+    <div class="explanation-zone">
+    {{ form_errors(form) }}
+        
+    {% for flashMessage in errors %}
+{#       <div class="alert alert-error">#}
+{#           <button type="button" class="close" data-dismiss="explanation-zone">&times;</button>#}
+           {{ flashMessage }}
+{#       </div>#}
+   {% endfor %}
+   {% for flashMessage in success %}
+       
+{#           <button type="button" class="close" data-dismiss="explanation-zone">&times;</button>#}
+           {{ flashMessage }}
+       
+   {% endfor %}
+        
+    </div>
+   {%endif%}
+
+        <div id="p4m_userbundle_user">
+
+             <div class="form-group">
+                <label class="col-sm-20 control-label form-field-title" for="{{form.iban.vars.id}}">IBAN {%if form.iban.vars.required%}*{%endif%}
+                <br />
+                <small class="form-field-explanation">Without spaces</small>
+                </label>
+
+                <div class="col-sm-30">
+                     {{form_widget(form.iban,{attr:{class:'form-control'} })}} 
+                    <div class="clear"></div>
+                    {{form_errors(form.iban)}}
+                </div>
+                <div class="clear"></div>
+            </div>
+             <div class="form-group">
+                <label class="col-sm-20 control-label form-field-title" for="{{form.bic.vars.id}}">BIC {%if form.bic.vars.required%}*{%endif%}</label>
+
+                <div class="col-sm-30">
+                     {{form_widget(form.bic,{attr:{class:'form-control'} })}} 
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+             <div class="form-group">
+                <label class="col-sm-20 control-label form-field-title" for="{{form.ownerName.vars.id}}">Owner Name {%if form.ownerName.vars.required%}*{%endif%}</label>
+
+                <div class="col-sm-30">
+                     {{form_widget(form.ownerName,{attr:{class:'form-control'} })}} 
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+             <div class="form-group">
+                <label class="col-sm-20 control-label form-field-title" for="{{form.ownerAddress.vars.id}}">Owner Address {%if form.ownerAddress.vars.required%}*{%endif%}</label>
+
+                <div class="col-sm-30">
+                     {{form_widget(form.ownerAddress,{attr:{class:'form-control'} })}} 
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+             <div class="form-group">
+                <label class="col-sm-20 control-label form-field-title" for="{{form.tag.vars.id}}">Label {%if form.tag.vars.required%}*{%endif%}</label>
+                    
+                <div class="col-sm-30">
+                     {{form_widget(form.tag,{attr:{class:'form-control'} })}} 
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+                    
+            <div class="form-group">
+{#                <label for="currentPassword" class="col-sm-20 control-label form-field-title required">Account Type</label>#}
+
+                <div class="col-sm-30">
+                    
+                   {{form_rest(form)}}
+                </div>
+                <div class="clear"></div>
+            </div>
+
+           {# <div class="form-group">
+                <label for="{{form.plainPassword.first.vars.id}}"  class="col-sm-20 control-label required  form-field-title">New password</label>
+
+                <div class="col-sm-30">
+                    {{form_widget(form.plainPassword.first,{attr : {class:'form-control'} })}}<br />
+                    {{form_widget(form.plainPassword.second,{attr : {class:'form-control'} })}}<br />
+                    <p id="password-match"><small>Password are similar</small></p>
+                    <p id="password-no-match"><small>Password are not similar</small></p>
+                    <div class="clear"></div>
+                </div>
+            </div>#}
+
+
+            
+
+
+
+            <button class="primary" type="submit">Send</button>
+
+        </div>
+</form>
+
+{% endblock %}

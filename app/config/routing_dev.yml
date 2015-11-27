@@ -1,0 +1,69 @@
+_wdt:
+    resource: "@WebProfilerBundle/Resources/config/routing/wdt.xml"
+    prefix:   /_wdt
+
+_profiler:
+    resource: "@WebProfilerBundle/Resources/config/routing/profiler.xml"
+    prefix:   /_profiler
+
+_configurator:
+    resource: "@SensioDistributionBundle/Resources/config/routing/webconfigurator.xml"
+    prefix:   /_configurator
+
+_main:
+    resource: routing.yml
+
+console:
+    resource: "@CoreSphereConsoleBundle/Resources/config/routing.yml"
+    
+    
+
+p4m_core_defaultStrews:
+    pattern: /userToAuthor
+    defaults: { _controller: P4MCoreBundle:Import:fromUserToAuthor}
+#p4m_core_defaultStrews:
+#    pattern: /defaultStrews
+#    defaults: { _controller: P4MCoreBundle:Import:defaultStrews}
+#p4m_core_flag:
+#    pattern: /setFlags
+#    defaults: { _controller: P4MCoreBundle:Import:setFlags}
+#p4m_core_scores:
+#    pattern: /setScore
+#    defaults: { _controller: P4MCoreBundle:Import:setScore}
+#p4m_core_roles:
+#    pattern: /setRoles/{userName}/{role}
+#    defaults: { _controller: P4MCoreBundle:Import:setRoles}
+
+#p4m_core_deletePosts:
+#    pattern: /deletePosts
+#    defaults: { _controller: P4MCoreBundle:Import:deletePosts }
+
+#p4m_core_importLangues:
+#    pattern: /importLangues
+#    defaults: { _controller: P4MCoreBundle:Import:insertLangues }
+#p4m_core_aupdateActivities:
+#    pattern: /updateActivity
+#    defaults: { _controller: P4MCoreBundle:Import:updateActivity }
+#p4m_core_importCountry:
+#    pattern: /importCountries
+#    defaults: { _controller: P4MCoreBundle:Import:insertCountry }
+
+#p4m_core_assignTags:
+#    pattern: /assignTags
+#    defaults: { _controller: P4MCoreBundle:Import:assignTags}
+
+#p4m_core_slug:
+#    pattern: /forceSlugs
+#    defaults: { _controller: P4MCoreBundle:Import:postSlug }
+#
+#p4m_core_resetslug:
+#    pattern: /resetSlugs
+#    defaults: { _controller: P4MCoreBundle:Import:resetSlug }
+#p4m_core_oldPosts:
+#    pattern: /import
+#    defaults: { _controller: P4MCoreBundle:Import:import }
+#    
+#p4m_core_oldUsers:
+#    pattern: /import_users
+#    defaults: { _controller: P4MCoreBundle:Import:importUsers }
+    

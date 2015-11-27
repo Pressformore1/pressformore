@@ -1,0 +1,84 @@
+p4_m_backoffice_homepage:
+    pattern:  /
+    defaults: { _controller: P4MBackofficeBundle:BackOffice:index }
+
+p4_m_backoffice_profile_infos:
+    pattern:  /profile-infos
+    defaults: { _controller: P4MBackofficeBundle:Profile:myAccount }
+
+p4_m_backoffice_password:
+    pattern:  /profile-password
+    defaults: { _controller: P4MBackofficeBundle:Profile:myAccountPassword }
+
+p4_m_backoffice_profile_picture:
+    pattern:  /profile-picture
+    defaults: { _controller: P4MBackofficeBundle:Profile:pictureEdit }
+
+p4_m_backoffice_notifications:
+    pattern:  /notifications
+    defaults: { _controller: P4MBackofficeBundle:Notification:notification }
+    
+#WALLS
+p4m_backoffice_wall_create:
+    pattern:  /strew-create
+    defaults: { _controller: P4MCoreBundle:Wall:create}
+    
+p4m_backoffice_wall_edit:
+    pattern:  /strew-edit/{wallSlug}
+    defaults: { _controller: P4MCoreBundle:Wall:create}
+    requirements:
+        wallSlug: ([\w@. -]+[/]?([a-zA-Z@-]+[0-9]*))
+
+p4_m_backoffice_walls:
+    pattern:  /walls
+    defaults: { _controller: P4MBackofficeBundle:Wall:wallEdit }
+
+p4_m_backoffice_wallAdd:
+    pattern:  /wall-add
+    defaults: { _controller: P4MBackofficeBundle:Wall:wallEdit }
+
+p4_m_backoffice_wallEdit:
+    pattern:  /wall-edit/{wallSlug}
+    defaults: { _controller: P4MBackofficeBundle:Wall:wallEdit }
+    requirements:
+        wallSlug: ([\w@. -]+[/]?([a-zA-Z@-]+[0-9]*))
+
+   
+#PRODUCER
+p4_m_backoffice_producer_key:
+    pattern:  /producer/key
+    defaults: { _controller: P4MBackofficeBundle:Producer:key }
+p4_m_backoffice_producer_money:
+    pattern:  /producer/payouts
+    defaults: { _controller: P4MBackofficeBundle:Producer:payOuts }
+p4_m_backoffice_producer_pressforms:
+    pattern:  /producer/pressforms
+    defaults: { _controller: P4MBackofficeBundle:Producer:pressforms }
+    
+p4_m_backoffice_producer_activate:
+    pattern:  /producer/activate
+    defaults: { _controller: P4MBackofficeBundle:Producer:activate }
+p4_m_backoffice_producer_bankAccount:
+    pattern:  /producer/bank-account
+    defaults: { _controller: P4MBackofficeBundle:Money:accounts }
+    
+#MANGO PAY
+p4_m_backoffice_money:
+    pattern:  /money
+    defaults: { _controller: P4MBackofficeBundle:Money:index }
+    
+
+
+p4_m_backoffice_money_bankAccount_create_iban:
+    pattern:  /money/bank-account/create/iban
+    defaults: { _controller: P4MBackofficeBundle:Money:accountCreateIban }
+#
+#p4_m_backoffice_dashboardReader:
+#    pattern:  /dashboardReader
+#    defaults: { _controller: P4MBackofficeBundle:BackOffice:dashboardReader }
+#    
+#
+#p4_m_backoffice_profileEdit:
+#    pattern:  /profile
+#    defaults: { _controller: P4MBackofficeBundle:Profile:profileEdit }
+#    

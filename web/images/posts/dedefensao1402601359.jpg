@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head prefix="og: http://ogp.me/ns#">
+	<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dedefensa.org</title>
+
+<!-- <link rel="shortcut icon" href="favicon.ico" /> -->
+<link rel="icon" type="image/png" href="http://www.dedefensa.org/img/favicon.png" />
+
+<!-- Rss feed -->
+<link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.dedefensa.org/rss" />
+
+<!-- Bootstrap -->
+<link href="http://www.dedefensa.org/css/styles.css" rel="stylesheet" media="screen">
+<!-- Print css -->
+<link href="http://www.dedefensa.org/css/print.css" rel="stylesheet" media="print">
+
+<!-- Jquery ui for bootstrap -->
+
+<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+	<![endif]-->
+	
+	
+		</head>
+<body>
+	<div id="fb-root"></div>
+	<script>
+		(function(d, s, id) {
+			var js, fjs = d.getElementsByTagName(s)[0];
+			if (d.getElementById(id)) return;
+			js = d.createElement(s); js.id = id;
+			js.src = "//connect.facebook.net/fr_FR/all.js#xfbml=1&appId=227720857274020";
+			fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
+	</script>
+	
+			
+	<!-- Fixed navbar -->
+	<div id="titlebar">
+		<div class="navbar navbar-dde navbar-fixed-top" id="titlebar" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="http://www.dedefensa.org/" title="dedefensa.org - dde.crisis">
+						<img src="http://www.dedefensa.org/img/dde-logo.png" width="232" height="45" alt="Dde Logo"/>
+					</a>
+				</div>
+				<div class="navbar-collapse collapse">
+										<form action="http://www.dedefensa.org/recherche/do" class="navbar-form navbar-right" id="simple-search-form" role="form" method="post" accept-charset="utf-8"><div style="display:none">
+<input type="hidden" name="action" value="simple_search" />
+</div>						<div class="form-group">
+							<input type="search" placeholder="Rechercher&hellip;" class="form-control" name="search_string" id="header_search_input" />
+						</div>
+						<button type="submit" class="btn">Chercher</button>
+					</form>				</div><!--/.navbar-collapse -->
+			</div><!--/.container -->
+		</div><!--/.navbar -->
+	</div><!--/#titlebar -->
+	
+		
+		<!-- Menu user -->
+	<div class="user-menu-wrapper hidden-xs hidden-sm">
+		<div class="container">
+			<div class="row">
+								<div class="col-md-6">
+					<form action="http://www.dedefensa.org/login/validate_credentials" method="post" accept-charset="utf-8" class="form-inline" id="inpage-login" role="form">
+<input type="hidden" name="redirect" value="http://www.dedefensa.org/images/logo-fb-75.gif" />
+					<div class="form-group">
+						<label class="sr-only" for="email">Votre Email</label>
+						<input type="email" name="email" class="form-control input-sm" id="email" placeholder="Votre Email">
+					</div>
+					<div class="form-group">
+						<label class="sr-only" for="password">Votre mot de passe</label>
+						<input type="password" name="password" class="form-control input-sm" id="password" placeholder="Mot de passe">
+					</div>
+					<button type="submit" class="btn btn-default btn-sm">Envoyer</button>
+					</form>				</div>
+				<div class="col-md-5">
+					<p>
+						Pas encore de compte ?&nbsp;&nbsp;
+						<span class="glyphicon glyphicon-pencil"></span>&nbsp;&nbsp;
+						<a href="http://www.dedefensa.org/inscription" class="user-menu-link">
+							Inscrivez-vous.
+						</a>
+					</p>
+				</div>
+								<div class="col-md-1">
+					<div class="user-menu-switch" data-toggle="tooltip" data-placement="bottom" title="Afficher / Masquer les raccourcis vers mon compte">
+						<a href="#" class="user-menu-link" id="um-switch-1"><span class="glyphicon glyphicon-download"></span></a>
+					</div>
+				</div>
+				
+			</div><!--/.row -->
+		</div><!--/.container -->
+	</div><!--/.user-menu-wrapper -->	
+	<!-- Donation -->
+<div class="donation">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 id="donation-title">
+					Appel du 19 courant...<br />
+  <small><a href="#" id="donation-toggle">Afficher | Masquer</a></small>
+				</h1>
+			</div>
+			
+			<div class="donation-inner">
+				<div class="col-md-12">
+					<p>Ce titre d&eacute;sormais connu renvoie &agrave; une &ldquo;tradition&rdquo; &eacute;tablie de relance de notre campagne de donation, le 19 de chaque mois. Nous avons affich&eacute; ici les donations pour le mois de novembre 2015, &agrave; la date du <strong>19 de ce mois</strong>. Comme nous l&rsquo;expliquions lorsque fut lanc&eacute;e cette formule des donations, dans notre texte du <a href="http://www.dedefensa.org/article-dedefensaorg_nouvelle_epoque_01_03_2011.html">1er mars 2011</a> (dans notre rubrique <a href="http://www.dedefensa.org/section-notre_situation.html">Notre Situation</a>), il s&rsquo;agit de solliciter votre intervention et votre soutien pour atteindre de &euro;2.000 &agrave; &euro;3.000 par mois (&laquo;&nbsp;... <em>les montants de &euro;2.000 et &euro;3.000, qui constituent pour nous les sommes permettant respectivement un fonctionnement minimum des fonctions essentielles du site et un fonctionnement plus ais&eacute; de ces fonctions&nbsp;</em>&raquo;). Nos lecteurs savent &eacute;videmment que, depuis 2011, les conditions &eacute;conomiques ont &eacute;volu&eacute; et que les sommes propos&eacute;es doivent &ecirc;tre d&eacute;finies diff&eacute;remment. Le seuil du &laquo;&nbsp;<em>fonctionnement minimum des fonctions essentielles du site</em>&nbsp;&raquo; d&eacute;passe aujourd&rsquo;hui <strong>tr&egrave;s largement</strong> les &euro;2.000 et le reste &agrave; l&rsquo;avenant, et nous esp&eacute;rons que nos lecteurs en tiendront compte dans leur action de solidarit&eacute; et de soutien.</p>
+
+<p>Nous voulons rajouter &agrave; ces pr&eacute;cisions d&rsquo;ordre comptable certaines pr&eacute;cisions d&rsquo;un autre domaine, concernant la raison d&rsquo;&ecirc;tre, les origines et le fonctionnement de <em>dedefensa.org</em>. Nous pensons qu&rsquo;on trouve dans les textes cit&eacute;s nombre de r&eacute;ponses aux questions que certains lecteurs (notamment les lecteurs les plus r&eacute;cents) peuvent l&eacute;gitimement se poser concernant le fonctionnement et les besoins du site, en fonction des conceptions journalistiques &eacute;tendues &agrave; des missions de commentaire, de conceptualisation et d&rsquo;analyse profonde de la situation du monde suivies par <em>dedefensa.org</em>. L&rsquo;anciennet&eacute; de ces textes t&eacute;moigne du fait que ces pr&eacute;occupations et ce besoin d&rsquo;information sont constants chez nos lecteurs, et nos r&eacute;ponses et notre position g&eacute;n&eacute;rale &agrave; cet &eacute;gard, &eacute;galement constantes. Les trois textes cit&eacute;s (par ordre d&rsquo;importance selon nous, et non par ordre chronologique) sont ceux du <a href="http://www.dedefensa.org/article-r_flexions_et_commentaires_pour_un_lecteur_l_autre_i_25_08_2007.html">25 ao&ucirc;t 2007</a>, du <a href="http://www.dedefensa.org/article-r_flexions_et_commentaires_pour_un_lecteur_l_autre_ii_29_10_2011.html">3 septembre 2007</a> et du <a href="http://www.dedefensa.org/article-pr_cisions_pour_des_lecteurs_nerveux_04_10_2006.html">4 octobre 2006</a>.</p>
+
+<p>Les r&eacute;sultats apr&egrave;s 18 jours de cette donation mensuelle de&nbsp;novembtr&nbsp;2015 atteignaient &euro;1041. Nous exprimons notre tr&egrave;s chaleureuse reconnaissance aux personnes qui sont intervenues dans le cadre de cette donation. (Pour effectuer des <a href="http://www.dedefensa.org/donations.html">donations</a>, voyez &eacute;galement nos pages sp&eacute;ciales: pour les lecteurs <a href="http://www.dedefensa.org/abonnement.html">ayant un compte</a>, pour ceux qui <a href="http://www.dedefensa.org/donations.html">n&rsquo;en ont pas</a>.) Si vous en avez le c&oelig;ur et les moyens, et si vous en comprenez la n&eacute;cessit&eacute;, soutenez-nous, soutenez <em>dedefensa.org</em>. Merci.</p>
+				</div><!--/.col-md-12 -->
+				
+				<div class="col-md-12">
+					<div class="donation-progress">
+												<div class="row">
+														<div class="col-md-3">
+								<p class="text-left topad">
+									<a href="http://www.dedefensa.org/page/donations" class="btn btn-sm btn-success"><strong>Faire un don</strong></a>
+								</p>
+							</div>
+														<div class="col-md-3">
+								<p class="text-left">
+									<span class="badge badge-blued">0 &euro;</span>
+								</p>
+							</div>
+							<div class="col-md-2">
+								<p class="text-center">
+									<span class="badge badge-blued">1500 &euro;</span>
+								</p>
+							</div>
+							<div class="col-md-3">
+								<p class="text-right">
+									<span class="badge badge-blued">3000 &euro;</span>
+								</p>
+							</div>
+						</div><!--/.row -->
+						
+						<div class="row">
+							<div class="col-md-3">
+								<p class="dark pad">
+									Levée de fonds dévolus aux frais de fonctionnement.<br />
+									novembre 2015 : <strong>1853 &euro; récoltés</strong>
+								</p>
+							</div>
+							<div class="col-md-8">
+																<div class="progress progress-striped active" id="donation-bar" title="novembre 2015" data-content="Nous avons rassemblé à ce jour 1853 &euro;">
+									<div class="progress-bar progress-bar-primary" role="progressbar" aria-valuenow="1853" aria-valuemin="0" aria-valuemax="3000" style="width: 62%;">
+										<strong>1853 &euro;</strong>
+									</div><!--/.progress-bar -->
+								</div><!--/.progress -->
+							</div><!--/.col-md-8 -->
+						</div><!--/.row -->
+											</div><!--/.donation-progress -->
+				</div><!--/.col-md-12 -->
+				
+			</div><!--/.donation-inner -->
+			
+		</div><!--/.row -->
+	</div><!--/.container -->
+</div><!--/.donation -->
+	
+	<div class="socle">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3">
+					<!-- Editable menu -->
+<nav class="list-group" id="dde-menu">
+																														<a 
+				href="http://www.dedefensa.org/"
+													class="list-group-item menu-link"
+													title="Aller à : Accueil"
+							>
+				Accueil			</a>
+																																	<a 
+				href="http://www.dedefensa.org/blog/journal-ddecrisis-de-philippe-grasset"
+													class="list-group-item menu-link"
+													title="Aller à : dde.crisis de Philippe Grasset"
+							>
+				dde.crisis de Philippe Grasset			</a>
+														<a 
+				href="http://www.dedefensa.org/page/donations"
+													class="list-group-item menu-link"
+													title="Page : Donations"
+							>
+				Donations			</a>
+														<a 
+				href="http://www.dedefensa.org/section/bloc-notes"
+													class="list-group-item menu-link"
+													title="Section : Bloc-Notes"
+							>
+				Bloc-Notes			</a>
+														<a 
+				href="http://www.dedefensa.org/section/analyse"
+													class="list-group-item menu-link"
+													title="Section : Analyse"
+							>
+				Analyse			</a>
+														<a 
+				href="http://www.dedefensa.org/section/analyse-ddecrisis"
+													class="list-group-item menu-link"
+													title="Section : Analyse (dde.crisis)"
+							>
+				Analyse (dde.crisis)			</a>
+														<a 
+				href="http://www.dedefensa.org/section/faits-et-commentaires"
+													class="list-group-item menu-link"
+													title="Section : Faits et commentaires"
+							>
+				Faits et commentaires			</a>
+														<a 
+				href="http://www.dedefensa.org/section/la-grace-de-lhistoire"
+													class="list-group-item menu-link"
+													title="Section : La grâce de l'histoire"
+							>
+				La grâce de l'histoire			</a>
+														<a 
+				href="http://www.dedefensa.org/section/ouverture-libre"
+													class="list-group-item menu-link"
+													title="Section : Ouverture libre"
+							>
+				Ouverture libre			</a>
+														<a 
+				href="http://www.dedefensa.org/section/notre-situation"
+													class="list-group-item menu-link"
+													title="Section : Notre situation"
+							>
+				Notre situation			</a>
+														<a 
+				href="http://www.dedefensa.org/section/archivesphg"
+													class="list-group-item menu-link"
+													title="Section : ArchivesPhG"
+							>
+				ArchivesPhG			</a>
+														<a 
+				href="http://www.dedefensa.org/section/glossairedde"
+													class="list-group-item menu-link"
+													title="Section : Glossaire.dde"
+							>
+				Glossaire.dde			</a>
+														<a 
+				href="http://www.dedefensa.org/section/breves-de-crise"
+													class="list-group-item menu-link"
+													title="Section : Brèves de crise"
+							>
+				Brèves de crise			</a>
+														<a 
+				href="http://www.dedefensa.org/section/les-conversations-de-dedefensaorg"
+													class="list-group-item menu-link"
+													title="Section : Les conversations de dedefensa.org"
+							>
+				Les Conversations			</a>
+														<a 
+				href="http://www.dedefensa.org/forum/"
+													class="list-group-item menu-link"
+													title="Aller à : Forum"
+							>
+				Forum			</a>
+														<a 
+				href="http://www.dedefensa.org/page/a-propos-de-dedefensaorg"
+													class="list-group-item menu-link"
+													title="Page : A propos de dedefensa.org"
+							>
+				A propos			</a>
+			</nav>
+
+<!-- Site menu -->
+<!--
+<nav class="list-group" id="dde-menu">
+	<a href="" class="list-group-item menu-link ">
+		Accueil
+	</a>
+	 
+		<a href="" class="list-group-item menu-link ">
+					</a>
+		
+	
+	<a href="http://www.dedefensa.org/section-bloc-notes.html" class="list-group-item menu-link">Bloc-Notes</a>
+	<a href="http://www.dedefensa.org/section-analyse.html" class="list-group-item menu-link">Analyse</a>
+	<a href="http://www.dedefensa.org/section-analyse_ddecrisis.html" class="list-group-item menu-link">Analyse (dde.crisis)</a>
+	<a href="http://www.dedefensa.org/section-notes_de_lectures.html" class="list-group-item menu-link">Notes de lectures</a>
+	<a href="http://www.dedefensa.org/section-de_defensa.html" class="list-group-item menu-link">de defensa</a>
+	<a href="http://www.dedefensa.org/section-context.html" class="list-group-item menu-link">Context</a>
+	<a href="http://www.dedefensa.org/section-journal.html" class="list-group-item menu-link">Journal</a>
+	<a href="http://www.dedefensa.org/section-notre_bibliotheque.html" class="list-group-item menu-link">Notre bibliothèque</a>
+	<a href="http://www.dedefensa.org/section-messagerie.html" class="list-group-item menu-link">Messagerie</a>
+	<a href="http://www.dedefensa.org/section-faits_et_commentaires.html" class="list-group-item menu-link">Faits et commentaires</a>
+	<a href="http://www.dedefensa.org/section-extraits.html" class="list-group-item menu-link">Extraits</a>
+	<a href="http://www.dedefensa.org/section-la_grace_de_l_histoire.html" class="list-group-item menu-link">La grâce de l'histoire</a>
+	<a href="http://www.dedefensa.org/section-ouverture_libre.html" class="list-group-item menu-link">Ouverture libre</a>
+	<a href="http://www.dedefensa.org/section-dialogues.html" class="list-group-item menu-link">Dialogues</a>
+	<a href="http://www.dedefensa.org/section-notre_situation.html" class="list-group-item menu-link">Notre situation</a>
+	<a href="http://www.dedefensa.org/section-archivesphg.html" class="list-group-item menu-link">ArchivesPhG</a>
+	<a href="http://www.dedefensa.org/section-glossairedde.html" class="list-group-item menu-link">Glossaire.dde</a>
+	<a href="http://www.dedefensa.org/section-br_ves_de_crise.html" class="list-group-item menu-link">Brèves de crise</a>
+	<a href="http://www.dedefensa.org/forum.html" class="list-group-item menu-link">Forum</a>
+	<a href="http://www.dedefensa.org/apropos.html" class="list-group-item menu-link">A propos </a>
+	<a href="http://www.dedefensa.org/donations.html" class="list-group-item menu-link">Donations</a>
+	
+</nav>
+-->					
+										<div class="sidebar-block">
+												<div class="btn-group">
+							<button type="button" class="btn btn-default" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-user"></span> 
+								Votre compte
+							</button>
+							<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="http://www.dedefensa.org/login">Identifiez-vous</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="http://www.dedefensa.org/inscription">Créez un compte</a>
+								</li>
+							</ul>
+						</div>
+											</div>
+					
+					<!-- Menu Blog month by month -->
+										
+					<!-- Menu Blog -->
+										
+					<!-- Donations : lien -->
+					<div class="sidebar-block hidden-xs hidden-sm side-donation">
+						<h3 class="sidebar-title">Soutenez <em>dedefensa.org</em></h3>
+						<div class="call-to-action clearfix">
+							<div class="btn-group">
+								<button type="button" class="btn btn-danger" data-toggle="dropdown">
+									<span class="glyphicon glyphicon-heart-empty"></span> 
+									Faire un don
+								</button>
+								<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+									<span class="caret"></span>
+									<span class="sr-only">Toggle Dropdown</span>
+								</button>
+								<ul class="dropdown-menu" role="menu">
+									<li>
+										<a href="http://www.dedefensa.org/page/donations">Faire un don via <em>Paypal &reg;</em></a>
+									</li>
+									<li>
+										<a href="http://www.dedefensa.org/page/donations">Faire un don par chêque ou par virement bancaire</a>
+									</li>
+									<li class="divider"></li>
+									<li>
+										<a href="http://www.dedefensa.org/inscription">Créer un compte sur <em>dedefensa.org</em></a>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<!-- Donation -->
+											</div>
+					
+					<!-- Liens sociaux -->
+					<div class="sidebar-block hidden-xs hidden-sm">
+						<h3 class="sidebar-title">
+							Suivez <em>dedefensa.org</em> sur les réseaux sociaux
+						</h3>
+						<!-- Facebook like -->
+						<h4>Sur Facebook</h4>
+						<div class="well">
+							<div class="fb-like" data-href="http://www.dedefensa.org" data-layout="button_count" data-action="like" data-show-faces="true" data-share="false"></div>
+						</div>
+						<!-- Twitter follow -->
+						<h4>Sur Twitter</h4>
+						<div class="well">
+							<a href="https://twitter.com/dedefensa" class="twitter-follow-button" data-show-count="false" data-lang="fr" data-size="large">
+								Suivre @dedefensa
+							</a>
+						</div>
+						<!-- RSS follow -->
+						<h4>Via RSS</h4>
+						<div class="well">
+							<a href="http://www.dedefensa.org/rss" class="btn btn-primary btn-sm rss-follow-button">
+								<span class="glyphicon glyphicon-fire"></span>
+								Fil Rss
+							</a>
+						</div>
+						<script>
+							!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');
+						</script>
+					</div>
+					
+					<!-- La Grâce de l'histoire -->
+					<!-- 
+					<div class="sidebar-block hidden-xs hidden-sm hidden-md">
+						<h3><em>La Grâce de l'Histoire</em></h3>
+						<h4>Publication en ligne</h4>
+						<img src="http://www.dedefensa.org/img/grace-cover.png" width="200" height="290" alt="Grace Cover" class="img-thumbnail">
+						<p>
+							Voyez notre <a href="http://www.dedefensa.org/section/la-grace-de-lhistoire">rubrique</a> sur les textes de présentation et sur la publication périodique du texte de l'essai de <strong>Philippe Grasset</strong>
+						</p>
+						<p>Vous pouvez également <a href="http://www.dedefensa.org/librairie-dde-phg.html">acheter</a> le livre sur ce site</p>
+						<div class="btn-group">
+							<button type="button" class="btn btn-danger" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-book"></span> 
+								La Grâce de l'Histoire
+							</button>
+							<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="#">Acheter le livre</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="http://www.dedefensa.org/section/la-grace-de-lhistoire">Découvrir l'ouvrage via notre rubrique</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					-->
+					
+					<!-- Les Âmes de Verdun -->
+					<div class="sidebar-block hidden-xs hidden-sm hidden-md">
+						<h3><em>Les Âmes de Verdun</em></h3>
+						<h4>Achat en ligne</h4>
+						<img src="http://www.dedefensa.org/img/verdun-cover-thumb.jpg" width="200" height="200" alt="Grace Cover" class="img-thumbnail">
+						<p>
+							Ce livre est disponible via notre librairie en ligne <a href="http://www.edde.eu/publication-les_ames_de_verdun.html" title="Les âmes de Verdun">www.edde.eu</a>
+						</p>
+						<div class="btn-group">
+							<button type="button" class="btn btn-danger"><span class="glyphicon glyphicon-book"></span> Les Âmes de Verdun</button>
+							<button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown">
+								<span class="caret"></span>
+								<span class="sr-only">Toggle Dropdown</span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								<li>
+									<a href="http://www.edde.eu/publication-les_ames_de_verdun.html">Acheter sur <em>edde.eu</em></a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="http://www.lesamesdeverdun.com/galerie.html">Découvrir quelques photographies extraites de l'ouvrage</a>
+								</li>
+								<li>
+									<a href="http://www.dedefensa.org/article-verdun_ou_la_repetition_generale_22_09_2008.html">Lire un extrait</a>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+					<!-- Articles récents -->
+									</div>
+				<!-- Main Zone -->
+				<div class="col-md-9">
+									<div class="well social clearfix">
+					<h1>La page que vous recherchez n'existe pas</h1>
+					<p class="lead">La page que vous demandez n'existe pas sur notre site</p>
+				</div>				</div><!-- /.col-md-9 -->
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</div><!-- /.socle -->
+	
+		<footer class="pagefooter">
+		<p>&copy; www.dedefensa.org - Euredit S.P.R.L.</p>
+		<p>Tél.:+32/4/355.05.50 - Fax: +32/4/355.08.35</p>
+		<p>
+			22 rue du Centenaire<br />
+			B-4624 Fléron<br />
+			<strong>Belgique</strong>
+		</p>
+	</footer>	
+		
+			<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="http://www.dedefensa.org/js/jquery-1.11.0.min.js"></script>
+	<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script> -->
+		
+	<!-- Jquery ui for bootstrap -->
+	
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="http://www.dedefensa.org/js/bootstrap/affix.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/alert.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/button.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/carousel.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/collapse.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/dropdown.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/modal.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/tooltip.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/popover.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/scrollspy.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/tab.js"></script>
+	<script src="http://www.dedefensa.org/js/bootstrap/transition.js"></script>
+	
+	<!-- Plugins -->
+	<script src="http://www.dedefensa.org/js/lib/ekko-lightbox.js"></script>
+	<script src="http://www.dedefensa.org/js/lib/jquery.scrollto.min.js"></script>
+	<script src="http://www.dedefensa.org/js/lib/typeahead.bundle.min.js"></script>
+	
+	<script src="http://www.dedefensa.org/js/lib/moment-locales.min.js"></script>
+	<script src="http://www.dedefensa.org/js/lib/bootstrap-datetimepicker.js"></script>
+	
+	<script src="http://www.dedefensa.org/js/lib/retina.min.js"></script>
+	
+		
+	<!-- Common functions -->
+	<script src="http://www.dedefensa.org/js/script.js"></script>
+	
+	<!-- Analytics tracking -->
+	<script>
+		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+		
+		ga('create', 'UA-1852262-2', 'auto');
+		ga('send', 'pageview');
+	</script>	
+</body>
+</html>

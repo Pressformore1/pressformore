@@ -1,0 +1,79 @@
+{% extends "P4MCoreBundle::layout.html.twig" %}
+
+{% block headTitle %}{{parent()}} - {% if wall is defined %}{{wall.name}}{% endif%}{%endblock%}
+
+{% block actionBar %}
+<div id="action-bar-wrap" {%if isMobile()%}class="mobile"{%endif%}>
+   <div id="action-bar-remove"><a  href="#closeSections"><i class="glyphicon-remove glyphicon remove"></i></a></div>
+   {#  *
+   *
+   *   MENU
+   *
+   #}
+   
+    <ul id="action-bar">
+        {% block actionBarMenu %}{% endblock%}
+    </ul>
+    {#  *
+    *
+    *   Actions
+    *
+    #}
+    <div id="action-bar-sections-wrap">
+        
+        <div id="action-bar-sections-slider">
+            <ul id="action-bar-sections">
+                {% block actionBarAction %}{% endblock%}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+
+
+
+{% block content %}
+<div id="content-wrap" {%if isMobile()%}class="mobile"{%endif%}>
+    <div id="loading-zone-content">
+                    
+                    <div class="bubblingG">
+                    <span id="bubblingG_1">
+                    </span>
+                    <span id="bubblingG_2">
+                    </span>
+                    <span id="bubblingG_3">
+                    </span>
+                    </div> 
+    </div>
+    {%include "P4MCoreBundle:Wall:post-container.html.twig"%}
+</div>
+{% endblock %}
+
+
+{% block pagination %}
+{% include "P4MCoreBundle:Wall:pagination.html.twig" %}
+{% endblock %}
+
+{% block scriptPlugins%}
+{{parent()}}
+{% javascripts 'js/plugin/wall/*.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{%endblock%}
+
+{% block scriptCustom %}
+{{parent()}}
+{% javascripts 'js/scripts/wall/*.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{%endblock%}
+
+    
+{%block stylesheets%}
+    {{parent()}}
+    {% stylesheets 'css/wall/*.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+{%endblock%}

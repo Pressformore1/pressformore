@@ -1,0 +1,15 @@
+<li id="li-comment-{{comment.id}}" class="comment byuser comment-author-admin bypostauthor odd alt depth-2">
+    <article class="comment clearfix" id="comment-{{comment.id}}">
+            <header class="comment-meta comment-author vcard">
+                    <div class="comment-avatar"><img width="75" height="75" class="avatar avatar-75 photo" src="{%if comment.user.picture %}{{asset(comment.user.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}" alt=""><br></div><cite class="fn"><a class="url" rel="external nofollow" href="{{path('p4m_social_profile',{'username':comment.user.username})}}">{{comment.user.username}}</a></cite><a href="" class="comment-meta-time muted-small"><time datetime="{{comment.dateAdded|date('c')}}">{{comment.dateAdded|date('F j Y G:i')}}</time></a>
+            </header><!-- .comment-meta -->
+
+            <section class="comment-content comment">
+                    <p>{{comment.content}}</p>
+            </section><!-- .comment-content -->
+             <div class="reply clearfix">
+                    <a href="#" class="comment-reply-link" data-target="#modal-addComment" data-toggle="modal" data-id="{{comment.parent.id}}">Reply</a> <i class="icon-reply"></i>
+            </div><!-- .reply -->
+    </article><!-- #comment-## -->
+</li><!-- #comment-## -->
+      

@@ -1,0 +1,23 @@
+
+{% set dataUrl = postPath %}
+
+    <li class="action-bar-section" id="section-filters">
+        <div class="action-bar-block">
+            <h1 class="action-bar-title"><span class="glyphicon file"></span> History</h1>
+{#            <p>Explore the content of {{wall.name}} strew</p>#}
+        </div>    
+        <form data-target="serialize" data-url="{{dataUrl}}" id="action-bar-filters-form" method="post" class="ajax_form">
+            <input type="hidden" name="callBack" value="backToPostsListener" />
+            {% set languages = getLanguages(posts)%}
+
+            {% include 'P4MCoreBundle:Menu/ActionBar/filters:action-bar-posts-filter.html.twig'%}
+        </form>
+    </li>
+
+
+
+           
+
+            
+
+           

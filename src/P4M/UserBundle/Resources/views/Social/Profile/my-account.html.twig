@@ -1,0 +1,67 @@
+{% extends "P4MCoreBundle::layout.html.twig" %}
+
+{% block welcomeMessage %}
+{% include "P4MUserBundle:Social/Profile:presentation.html.twig" %}
+{% endblock %}
+
+{% block widgetArea %}
+{% endblock %}
+
+{% block content %}
+<div role="main" class="container" id="content">
+        <div class="row-fluid">
+                <!-- START SIDEBAR -->
+                <div id="secondary" class="widget-area span4 sb4" role="complementary">
+                        <aside class="widget widget_tag_cloud clearfix">
+                            {% render(controller('P4MUserBundle:User:accountMenu',{'routeName':app.request.get('_route')}))%}
+                               
+                        </aside>
+
+                        <!-- .span4 -->
+                </div>
+                <!-- END SIDEBAR -->
+
+
+                <div class="span8">
+                        <div class="form-wrap">
+                                <form enctype="multipart/form-data" method="post">
+                                        <header class="entry-header">
+                                            <h1 class="entry-title">{%block accountTitle%}{%endblock%}</h1>
+                                                <div title="standard" class="entry-format border">
+                                                        <i class="icon-wrench"></i>
+                                                </div><!-- .entry-format -->
+                                        </header>
+                                        <div class="explanation-zone">
+                                            {%block accountNote%}{%endblock%}
+                                        </div>
+
+                                        <div id="p4m_userbundle_user">
+                                            {%block accountForm%}{%endblock%}
+
+                                                
+                                        </div>
+
+                                        <input type="submit" class="btn btn-primary form-submit" />
+                                        <div class="clear"></div>
+                                </form>
+                        </div>
+                </div>
+                <!-- .span8-->
+        </div>
+</div>
+
+{% endblock %}
+
+
+{% block pagination %}
+{#{% include "P4MCoreBundle:Core/MyWall:pagination.html.twig" %}#}
+{% endblock %}
+
+
+{% block scripts %}
+
+{% include "P4MCoreBundle:Core:scripts.html.twig" %}
+{% endblock %}
+
+
+

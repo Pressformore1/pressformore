@@ -1,0 +1,4 @@
+{% extends "P4MBackofficeBundle:pages/notification/notification-line:notification-line.html.twig" %}
+
+
+{%block text%}<a href="{{path('p4m_social_profile',{username:notification.comment.user.username})}}">{{notification.comment.user.username }}</a> commented your <a href="{{path('p4m_core_post',{postSlug:notification.comment.post.slug})}}">post</a>{%endblock%}

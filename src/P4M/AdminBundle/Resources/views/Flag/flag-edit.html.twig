@@ -1,0 +1,63 @@
+{# On étend notre layout #}
+{% extends "P4MAdminBundle::admin.html.twig" %}
+
+{% block pageTitle%}Edit Flag {{flag.name}}{% endblock %}
+{% block pageSubTitle%}<h3 class="entry-title"><a href="{{path('p4m_admin_flagList')}}">Back to flags list</a></h3>{% endblock %}
+{# Dans notre layout, il faut définir le block body #}
+{% block leftCol %}
+{{parent()}}
+
+        <fieldset class="info_fieldset">
+            
+            <div id="note">
+            
+            </div>
+            <div id="contacts-form">
+                <form method="post" {{ form_enctype(form) }}>
+                    <div class="formElement">
+                        {{ form_errors(form.name) }}
+                        {{ form_label(form.name, 'Flag Name :') }}
+                        {{ form_widget(form.name) }}  
+                    </div>
+                    <div class="formElement">
+                        {{ form_errors(form.description) }}
+                        {{ form_label(form.description, 'Flag description :') }}
+                        {{ form_widget(form.description) }}  
+                    </div>
+                                        
+                    <div class="formElement">
+                        {{ form_errors(form.level) }}
+                        {{ form_label(form.level, 'Flag Level :') }}
+                        {{ form_widget(form.level) }}  
+                    </div>
+                    
+                    
+                    {{form_rest(form)}}
+                    <div class="formElement">
+                        <input type="submit" class="btn btn-primary" />
+                    </div>
+              </form>
+            </div>
+            <div class="clear"></div>
+            {% if flag.id %}
+            <div class="clear text-right edit-actions">
+                <a href="{{path('p4m_admin_deleteFlag',{'flagId':flag.id})}}" class="btn btn-danger">DELETE Flag Type</a>
+            </div>
+            {%endif%}
+                                  <!-- end #contact-form -->
+        </fieldset>
+
+
+                        
+{% endblock %}{# empty Twig template #}
+
+
+{%block scriptPlugins %}
+{{parent()}}
+<script type="text/javascript" src="{{ asset('bundles/jonlilckfinder/ckfinder.js') }}"></script>
+{% endblock %}
+
+{% block scriptCustom %}
+{{parent()}}
+<script type="text/javascript" src="{{asset('js/scripts/admin/script-admin.js')}}"></script>
+{%endblock%}{# empty Twig template #}

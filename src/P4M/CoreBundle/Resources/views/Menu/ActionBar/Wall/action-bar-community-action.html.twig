@@ -1,0 +1,66 @@
+<li class="action-bar-section" id="section-community">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon group"></span> {{wall.name}} strew community</h1>
+        <p>Explore the community of {{wall.name}} strew</p>
+    </div>    
+
+    <div id="section-community-followers">
+        <p>
+            <span class="community-title-count">{{wall.followers|length}}</span><br />
+        </p>
+    </div>
+    
+    <div id="section-community-filters" class="action-bar-block">
+            <div id="action-bar-wall-community-type">
+                <ul id="wall-community-type" class="filter-type-checkbox">
+                    <li class="wall-community-type filter-checkbox selected" id="community-followers">
+                        <img alt="" data-unselected="{{asset('images/design/icons/running-gray-color.png')}}" data-selected="{{asset('images/design/icons/running-full-color.png')}}" src="{{asset('images/design/icons/running-gray-color.png')}}" />
+                        <span class="filter-label">Followers</span>
+                        <input type="checkbox" checked="checked"  name="filter-community[]" value="" />   
+                    </li>
+
+                </ul>
+                <div class="clear"></div>
+            </div>
+    </div>
+    
+    <form data-target="serialize" data-url="{{path('p4m_ajax_action')}}" id="wall-community-form" data-action="loadWallMembers" data-key="{{'loadWallMembers'|sha512}}" method="post" class="action-bar-block ajax_form">
+        <input type="hidden" name="wallId" value="1" />
+        <input type="hidden" name="callBack" value="backToPostsListener" />
+        <div class="filter-wrap-large">
+             <h4 class="action-bar-small-title"><span class="glyphicon star"></span>Rank</h4>	
+             <ul class="filter-type-radio">
+                     {# <li class="filter-radio selected">
+                         <span class="filter-label">Reputation</span>
+                         <input type="radio" name="rank" value="comments" checked="checked" />   
+                     </li> #}
+                     <li class="filter-radio">
+                         <span class="filter-label">Strews</span>
+                         <input type="radio"  name="rank" value="press" />   
+                     </li> 
+                     {#<li class="filter-radio">
+                         <span class="filter-label">Load</span>
+                         <input type="radio" name="rank" value="like" />   
+                     </li> 
+
+                     <li class="filter-radio">
+                         <span class="filter-label">badges</span>
+                         <input type="radio"  name="rank" value="view" />   
+                     </li> #}
+                      <li class="filter-radio selected">
+                         <span class="filter-label">Content add</span>
+                         <input type="radio"  name="filter-rank" value="added" checked="checked" />   
+                     </li> 
+
+             </ul>
+             <div class="clear"></div>
+        </div>
+       <div class="clear"></div>
+    </form>
+
+    
+    
+    
+
+    
+</li>

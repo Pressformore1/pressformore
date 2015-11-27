@@ -1,0 +1,111 @@
+p4_m_console:
+    resource: "@P4MConsoleBundle/Resources/config/routing.yml"
+    prefix:   /
+
+p4_m_my_elastica:
+    resource: "@P4MMyElasticaBundle/Resources/config/routing.yml"
+    prefix:   /
+
+p4_m_blog:
+    resource: "@P4MBlogBundle/Resources/config/routing.yml"
+    prefix:   /
+p4_m_mango_pay:
+    resource: "@P4MMangoPayBundle/Resources/config/routing.yml"
+    prefix:   /
+
+p4_m_contact:
+    resource: "@P4MContactBundle/Resources/config/routing.yml"
+    prefix:   /contact
+
+#p4_m_mail:
+#    resource: "@P4MMailBundle/Resources/config/routing.yml"
+#    prefix:   /
+#
+p4_m_admin:
+    resource: "@P4MAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin-old
+skcms_admin:
+    resource: "@SKCMSAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+skcms_admin:
+    resource: "@SKCMSAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin
+
+p4_m_notification:
+    resource: "@P4MNotificationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+p4_m_pinocchio:
+    resource: "@P4MPinocchioBundle/Resources/config/routing.yml"
+    prefix:   /
+
+p4_m_backoffice:
+    resource: "@P4MBackofficeBundle/Resources/config/routing.yml"
+    prefix:   /my-account
+    
+
+p4_m_tracking:
+    resource: "@P4MTrackingBundle/Resources/config/routing.yml"
+    prefix:   /
+
+p4_m_moderation:
+    resource: "@P4MModerationBundle/Resources/config/routing.yml"
+    prefix:   /
+
+hwi_oauth_redirect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+    prefix:   /secure_area/connect
+
+hwi_oauth_login:
+    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+    prefix:   /secure_area/connect
+
+hwi_oauth_connect:
+    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+    prefix:   /secure_area/connect
+
+hwi_facebook_login:
+    pattern: /secure_area/login/check-facebook
+
+
+
+p4_m_admin:
+    resource: "@P4MAdminBundle/Resources/config/routing.yml"
+    prefix:   /admin-old
+
+p4_m_user:
+    resource: "@P4MUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+p4_m_core:
+    resource: "@P4MCoreBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+    prefix: /secure_area
+
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /secure_area/profile
+
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /secure_area/register
+
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /secure_area/resetting
+
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /secure_area/profile
+
+    
+
+    
+ck_finder:
+    resource: "@JonlilCKFinderBundle/Resources/config/routing/routing.yml"
+    prefix: /ckfinder
+

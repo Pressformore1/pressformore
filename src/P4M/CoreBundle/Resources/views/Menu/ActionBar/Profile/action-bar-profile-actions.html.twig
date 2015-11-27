@@ -1,0 +1,126 @@
+<li class="action-bar-section" id="section-infos">
+    <div id="section-cover-block">
+        <header class="cover-block">
+{#            {% if userDisplayed.picture%}#}
+            <img class="cover-pic thumb-align" src="{%if userDisplayed.picture %}{{asset(userDisplayed.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}" alt="{{userDisplayed.username}}" />
+{#            {% endif %}#}
+                    <h1 class="cover-block-title">
+                        <span class="main"><span class="glyphicon user"></span> {{userDisplayed.username}}</span><br />
+                        <span class="sub">{{userDisplayed.name|title}} {{userDisplayed.surname|title}}</span>
+                    </h1>
+        </header>
+    </div>
+
+
+    <div class="action-bar-block">
+        <h4 class="action-bar-small-title"><span class="glyphicon circle_info"></span>Meta of this User</h4>	
+        <ul class="meta-list">
+            <li><span class="glyphicon nameplate"></span>{{userDisplayed.title}}</li>
+            <li><span class="glyphicon building"></span>{{userDisplayed.city}}</li>
+        {% if userDisplayed.website%}
+            <li><span class="glyphicon globe_af"></span><a href="{{userDisplayed.website}}" class="external-link">{{userDisplayed.website}}</a></li>
+        {%endif%}
+            <li>{{userDisplayed.bio}}</li>
+
+        </ul>
+    </div>
+
+
+    <div class="action-bar-block">
+        <h4 class="action-bar-small-title"><span class="glyphicon briefcase"></span>Skills</h4>	
+
+        <ul class="skills-list">
+        {% for skill in userDisplayed.skills%}
+            <li class="skill-item">
+                <span class="skill-text"> {{skill}}</span>
+            </li>
+        {%endfor%}
+        </ul>
+        <div class="clear"></div>
+    </div>
+
+</li>
+
+{% include('P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-walls-action.html.twig')%}
+{% include('P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-community-action.html.twig')%}
+
+
+
+
+
+
+
+    <li class="action-bar-section" id="section-badges">
+        <div class="action-bar-block">
+            <h1 class="action-bar-title"><span class="glyphicon crown"></span> {{userDisplayed.username}}'s reputation</h1>
+            <p>You're using an early access version, be patient!</p>
+        </div>
+    </li>
+
+    {% include('P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-posts-action.html.twig') with {languages : postLanguages} %}
+
+
+
+    <li class="action-bar-section" id="section-stats">
+        <div class="action-bar-block">
+            <h1 class="action-bar-title"><span class="glyphicon charts"></span> {{userDisplayed.username}}'s stats</h1>
+            <p>You're using an early access version, be patient!</p>
+        </div>
+    </li>
+
+<li class="action-bar-section" id="section-report">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon charts"></span> Report user</h1>
+        
+        {% if flagged == true %}
+            <p>You already report this user</p>
+        {%else%}
+            {% if userDisplayed.flag %}
+                    
+                       
+                        
+                        <p>Beware! this user has been reported as <strong>{{userDisplayed.flag.type.name}}</strong>. <br /> What do you think ?</p>
+                               
+                        
+                        <form class="post-form ajax_form" id="commentform" data-action="confirmUserFlag" data-url="{{path('p4m_ajax_action')}}" data-key="{{'confirmUserFlag'|sha512}}" data-target="serialize">
+                             <input type="hidden" id="postId" name="flagId"  value="{{userDisplayed.flag.id}}"/>
+                             <input type="hidden" id="confirmed" name="confirmed"  value="1"/>
+                        <button class="primary action-bar-btn" type="submit">I confirm</button>
+                    </form>
+                    <form class="post-form ajax_form" id="commentform" data-action="confirmUserFlag" data-url="{{path('p4m_ajax_action')}}" data-key="{{'confirmUserFlag'|sha512}}" data-target="serialize">
+                             <input type="hidden" id="postId" name="flagId"  value="{{userDisplayed.flag.id}}"/>
+                             <input type="hidden" id="confirmed" name="confirmed"  value="0"/>
+                        <button class="primary action-bar-btn" type="submit">I don't confirm</button>
+                    </form>
+            {% else %}
+                    <p>You want to report this content, please tell us why:</p>
+                    <form class="post-form ajax_form" id="commentform" data-action="reportUser" data-url="{{path('p4m_ajax_action')}}" data-key="{{'reportUser'|sha512}}" data-target="serialize">
+                        <input type="hidden" id="postId" name="userId"  value="{{userDisplayed.id}}"/>
+                        <div class="modal-body">
+                            <div class="add-post" id="reportPostZone">
+                                <div class="formElement">
+                                    {{form_label(reportForm.type)}}
+                                    {{form_widget(reportForm.type)}}
+                                </div>
+                                
+                                {#<div class="formElement">
+                                    {{form_label(reportForm.description)}}
+                                    {{form_widget(reportForm.description)}}
+                                </div>#}
+                            </div>
+                        </div>
+                        {{form_rest(reportForm)}}
+                        <button class="primary action-bar-btn" type="submit">Report</button>
+                        
+                    </form>
+            {%endif%}
+        {%endif%}
+        
+    </div>
+
+</li>
+
+
+
+
+

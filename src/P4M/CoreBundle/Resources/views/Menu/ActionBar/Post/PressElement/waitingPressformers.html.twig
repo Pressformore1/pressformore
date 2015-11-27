@@ -1,0 +1,32 @@
+<div class="action-bar-block">
+<p class="middle text-center">By helping us to <strong>find the author</strong>, you would help the</p>
+<p class="big text-center" id="pressformersCount">{{post.wantPressforms|length}}</p>
+<p class="middle text-center">other readers who are ready to fund him.</p>
+{% if post.wantPressforms|length%}
+    <ul class="pressformersList list-unstyled">
+    {%set maxPressformers = 4%}
+    {%if post.wantPressforms|length < maxPressformers%}
+    {%set maxPressformers = post.wantPressforms|length%}
+    {%set displayedPressers = []%}
+    {%endif%}
+        {%set colWidth = 60/maxPressformers%}
+        {% for i in 1..maxPressformers%}
+            {%if pressformerIndex is not defined%}
+            {%set pressformerIndex = random(post.wantPressforms|length-1)%}
+                {%if pressformerIndex> post.wantPressforms|length- maxPressformers%}
+                    {%set pressformerIndex = post.wantPressforms|length- maxPressformers%}
+                {%endif%}
+            {%else%}
+                 {%set pressformerIndex = pressformerIndex + 1 %}
+            {%endif%}
+           
+            {%set pressform = post.wantPressforms[pressformerIndex]%}
+            <li class="pressformersListElement col-md-{{colWidth}} col-xs-{{colWidth}} col-sm-{{colWidth}} col-lg-{{colWidth}}"><a href="{{path('p4m_social_profile',{username:pressform.user.username})}}" title="" class="roundedImageLink pressformerLink" data-original-title="View profile">
+                <img alt="{{pressform.user.username}}" src="{{asset(pressform.user.picture.webPath)}}" class="thumb-align resize-test" style="visibility: visible; height: 38px; width: auto; left: 0px; top: 0px;" />
+            </a></li>
+        {%endfor%}
+    
+    </ul>
+{%endif%}
+<div class="clearfix"></div>
+</div>

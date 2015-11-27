@@ -1,0 +1,65 @@
+<div id="content" class="container" role="main">
+    <div class="row-fluid">
+        <div id="secondary" class="widget-area span4 sb4" role="complementary">
+                    {% if user.skills|length %}
+                    <aside class="widget widget_tag_cloud clearfix">
+                        <h3 class="widget-title">Skills</h3>
+                        <div class="tagcloud">
+                            {% for skill in user.skills %}    
+                            <a href='#' class='tag-link' title='1 topic'>{{skill.name}}</a>
+                            {% endfor %}
+                        </div>
+                    </aside>
+                    {% endif %}
+                    {% if user.skills|length %}
+                    <aside class="widget widget_tag_cloud clearfix">
+                            <h3 class="widget-title">Tags</h3>
+                            <div class="tagcloud">
+                                   {% for tag in user.tags %}
+                                    <a href='#' class='tag-link' title='4 topics'>{{tag.name}}</a>
+                                    {% endfor %}
+                            </div>
+                    </aside>
+                    {% endif %}
+                    <aside id="text-2" class="widget widget_text clearfix">
+                            <div class="textwidget">
+                                    <h3 class="widget-title">Categories</h3>
+                                    <ul class="related-posts-single clearfix">
+                                        {% for category in user.categories %}
+                                            <li>
+                                                    <a href="{{path('p4m_core_category',{'categoryName':category.name})}}">
+                                                            {% if category.icon %}<img alt="" class="attachment-thumbnail social-sidebar-thumbnail" src="{{ asset(category.icon.webPath) }}">{%endif%}
+                                                            <span class="social-thumbnail-caption">{{category.name}}</span>
+                                                    </a>
+                                            </li>
+                                        {% endfor %}
+                                    </ul>
+                            </div>
+                    </aside>
+
+
+                    <aside id="text-3" class="widget widget_text clearfix">
+
+                                    <h3 class="widget-title">Communauté</h3>
+                                    <ul class="social-community related-posts-single clearfix">
+                                        {% for link in user.following %}
+                                            <li>
+                                                    <a href="{{ path('p4m_social_profile',{'username':link.following.username})}}">
+                                                            <img alt="" class="social-community-thumb" src="files/Image/profil.jpg">
+                                                            <span class="social-community-name">{{link.following.username}}</span>
+                                                    </a>
+                                            </li>
+                                        {% endfor %}
+                                         
+                                    </ul>
+
+                    </aside>
+                    <!-- .span4 -->
+            </div>
+       <!-- .span12 -->
+    </div>
+    <!-- .row-fluid -->
+ </div>
+ <!-- .content -->
+
+

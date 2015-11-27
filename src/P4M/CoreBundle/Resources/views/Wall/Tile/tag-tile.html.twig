@@ -1,0 +1,27 @@
+<article id="tag_{{tag.id}}" data-brick-type="small-brick" class="masonry-block{% if wall is defined and wall.includedTags.contains(tag) == true  %} hidden{%endif%}">
+    <div class="tile-wrap">
+        <div class="tile">
+            <div class="tile-tag">
+
+                <h2 class="tile-tag-title"><span class="glyphicon tag"></span>{{tag.name}}</h2>
+
+                <div class="tile-hover">
+                   <!--Croix en haut � droite-->
+                    <span class="tile-remove"><span class="glyphicon remove"></span></span>
+
+                    <h2 class="tile-tag-title">
+                        <span class="main"><span class="glyphicon tag"></span>{{tag.name}}</span>
+                    </h2>
+
+                    <p class="tile-tag-add"><span class="glyphicon plus"></span> Ajouter</p>
+
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+</article>

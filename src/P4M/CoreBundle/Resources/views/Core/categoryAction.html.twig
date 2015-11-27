@@ -1,0 +1,9 @@
+<li class="category-item">
+    <a class="add-to-box category-button" {#href="{{path('p4m_core_search')}}?k={{category.name}}&where=post"#}>
+        <img src="{{asset(category.iconColor)}}" class="category-icon" alt="icon of {{category.name|title}} category">
+    </a>
+   {# <div class="add-to-box-contenair">
+        {%include 'P4MCoreBundle:Core/Category:category-popover-container.html.twig'%}
+        
+    </div>#}
+</li>

@@ -1,0 +1,91 @@
+{% extends "P4MBackofficeBundle::back-office.html.twig" %}
+
+{%block page%}
+<h2 class="form-title">Create a new wall</h2>
+<form method="post" enctype="multipart/form-data"  class="form-horizontal" role="form">
+    <div class="explanation-zone"></div>
+
+        <div id="p4m_userbundle_user">
+
+            <div class="form-group">
+                <label class="col-sm-20 control-label form-field-title" for="{{form.name.vars.id}}">Wall name <br /><small class="form-field-explanation">(Title of your wall)</small></label>
+
+                <div class="col-sm-30">
+                    {{form_widget(form.name,{attr:{class:'form-control'} })}}
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="form-group has-success">
+                <label class="col-sm-20 control-label form-field-title required" for="s2id_autogen1">Selected</label>
+                <div class="col-sm-30">
+                   <p class="help-block">Select people, categories, and tags that you want to have on your wall</p>
+                </div>
+            </div>
+
+
+            <div class="form-group  has-success">
+                <label class="col-sm-20 control-label form-field-title required" for="{{form.includedCategories.vars.id}}">Categories</label>
+                <div class="col-sm-30">
+                    {{form_widget(form.includedCategories,{attr:{class:'select-mutli-choices'} })}}
+                   <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="form-group  has-success">
+                <label class="col-sm-20 control-label form-field-title required" for="{{form.includedTags.vars.id}}">tags</label>
+                <div class="col-sm-30">
+                   {{form_widget(form.includedTags,{attr:{class:'select-mutli-choices'} })}}
+                   <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="form-group  has-success">
+                <label class="col-sm-20 control-label form-field-title required" for="{{form.includedPeople.vars.id}}">User</label>
+                <div class="col-sm-30">
+                   {{form_widget(form.includedPeople,{attr:{class:'select-mutli-choices'} })}}
+                   <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="red-zone">
+
+            <div class="form-group has-error">
+                <label class="col-sm-20 control-label form-field-title required" for="s2id_autogen1">Blocked</label>
+                <div class="col-sm-30">
+                   <p class="help-block">Block people, categories, and tags that you don't want to have on your wall</p>
+                </div>
+            </div>
+            <div class="form-group has-error">
+                <label class="col-sm-20 control-label form-field-title required" for="{{form.excludedCategories.vars.id}}">Categories</label>
+                <div class="col-sm-30">
+
+                  {{form_widget(form.excludedCategories,{attr:{class:'select-mutli-choices'} })}}
+                   <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="form-group  has-error">
+                <label class="col-sm-20 control-label form-field-title required" for="{{form.excludedTags.vars.id}}">tags</label>
+                <div class="col-sm-30">
+                   {{form_widget(form.excludedTags,{attr:{class:'select-mutli-choices'} })}}
+                   <div class="clear"></div>
+                </div>
+            </div>
+
+            <div class="form-group  has-error">
+                <label class="col-sm-20 control-label form-field-title required" for="{{form.excludedPeople.vars.id}}">User</label>
+                <div class="col-sm-30">
+                  {{form_widget(form.excludedPeople,{attr:{class:'select-mutli-choices'} })}}
+                   <div class="clear"></div>
+                </div>
+            </div> 
+            </div>
+
+         <button class="primary" type="submit">Send</button>
+         {{form_rest(form)}}
+        </div>
+</form>
+
+{% endblock%}

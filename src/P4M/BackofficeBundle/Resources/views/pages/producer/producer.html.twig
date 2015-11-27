@@ -1,0 +1,68 @@
+{% extends "P4MBackofficeBundle::my-account.html.twig" %}
+
+
+
+ {% block page %}
+<h2 class="form-title">Producing</h2>
+
+{%if user.producerEnabled == false%}
+    <p>Your producer account is not activated. <a href="{{path('p4_m_backoffice_producer_activate')}}">ACTIVATE</a></p>
+{%else%}
+    <p>Your account Key : {{user.producerKey}} <a href="#" data-target="#htmlCode" data-toggle="#htmlCode">get html code</a></p>
+    <p id="htmlCode" class="">Put this code in the head part in the html of your website <br />
+        <input type="text" disabled="disabled" size="100" value="{{'<meta name="pressformore-key" content="'~user.producerKey~'">'}}" /></p>
+    
+    <h3 class="form-title">Your producer wallet : {{wallet.Balance.Amount/100}} {{wallet.Balance.Currency}}</h3>
+    
+    <h3>Your pay-outs</h3>
+    <ul>
+        {%for payout in payouts%}
+            <li>{{payout.Status}} | {{payout.ExecutionDate|date('d-m-Y')}}</li>
+        {%endfor%}
+    </ul>
+    
+    {%if payoutPending%}
+    <div class="explanation-zone">
+        <p>Prior transfer is not complete yet. Please wait until it is fully processed </p>
+    </div>
+    {%elseif wallet.Balance.Amount>=100%}
+    <form method="post" enctype="multipart/form-data"  class="form-horizontal" role="form" action="">
+        <div class="explanation-zone">
+            <p>You can payout from your producer wallet to your registred bank account. <strong>{{wallet.Balance.Amount/100}} {{wallet.Balance.Currency}}</strong> will be transfered to your selected bank account</p>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-20 control-label form-field-title" for="banckAccount">Choose a registred account *</label>
+
+            <div class="col-sm-30">
+                <select name="bankAccount" id="bankAccount" class="form-control" required="required">
+                    <option></option>
+                    {%for account in bankAccounts%}
+                    <option value="{{account.id}}">{%if account.type=='IBAN'%}{{account.iBAN}}{%endif%} {{account.type}}</option>
+                    {%endfor%}
+                </select>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <button class="primary" type="submit">Pay Out</button>
+    </form>
+        
+    {%endif%}
+    
+    
+{%endif%}
+
+
+        
+            
+
+
+
+
+
+{% endblock%}
+
+
+
+
+

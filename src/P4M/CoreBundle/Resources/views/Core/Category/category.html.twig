@@ -1,0 +1,19 @@
+{% extends "P4MCoreBundle::layout.html.twig" %}
+
+{% block welcomeMessage %}
+{% include "P4MCoreBundle:Core/Category:welcomeBox.html.twig" %}
+{% endblock %}
+
+{% block widgetArea %}
+{% endblock %}
+
+{% block content %}
+{% include "P4MCoreBundle:Core/MyWall:wallPost.html.twig" %}
+{% endblock %}
+
+
+{% block pagination %}
+{% include "P4MCoreBundle:Core/Category:pagination.html.twig" %}
+{% endblock %}
+
+

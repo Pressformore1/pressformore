@@ -1,0 +1,79 @@
+parameters:
+#    p4_m_my_elastica.example.class: P4M\MyElasticaBundle\Example
+
+services:
+    #Auto Hydratation
+    p4m.transformers.elastica.post:
+        class : 'P4M\MyElasticaBundle\Transformer\PostToElasticaAutoTransformer'
+        arguments:
+            - @doctrine
+            - 'P4M\CoreBundle\Entity\Post'
+        calls:
+            - [ setPropertyAccessor ,[@fos_elastica.property_accessor]]
+            - [ setIgnoreMissing ,[true]]
+        tags:
+            - {name: 'fos_elastica.elastica_to_model_transformer', type: post, index: prodwebsite}
+            
+#    p4m.elastica.finder.website:
+#        class : 'P4M\MyElasticaBundle\Finder\TransformedFinder'
+#        parent: fos_elastica.finder
+#        calls:
+#            - [addPostTransformer,[@p4m.transformers.elastica.post]]
+        
+    #    Ces service sont la pare qu'il y a un souci de populate à l'update/delete/persist d'entités liées à celles indexées
+    fos_elastica.listener.search_engine.example:
+        class: 'P4M\MyElasticaBundle\Listener\ReadLaterListener'
+        arguments:
+            - '@fos_elastica.object_persister.prodwebsite.post'
+            - ['postPersist', 'postUpdate', 'preRemove']
+            - @fos_elastica.indexable
+            - { indexName: 'id', typeName: 'id'}
+        calls:
+            - [ setContainer, [ '@service_container'  ] ]
+            
+        tags:
+            - { name: 'doctrine.event_subscriber' }
+    fos_elastica.listener.search_engine.history:
+        class: 'P4M\MyElasticaBundle\Listener\PostViewListener'
+        arguments:
+            - '@fos_elastica.object_persister.prodwebsite.post'
+            - ['postPersist', 'postUpdate', 'preRemove']
+            - @fos_elastica.indexable
+            - { indexName: 'id', typeName: 'id'}
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+        tags:
+            - { name: 'doctrine.event_subscriber' }
+    fos_elastica.listener.search_engine.user:
+        class: 'P4M\MyElasticaBundle\Listener\UserListener'
+        arguments:
+            - '@fos_elastica.object_persister.prodwebsite.user'
+            - ['postPersist']
+            - @fos_elastica.indexable
+            - { indexName: 'id', typeName: 'id'}
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+        tags:
+            - { name: 'doctrine.event_subscriber' }
+    fos_elastica.listener.search_engine.follower:
+        class: 'P4M\MyElasticaBundle\Listener\FollowerListener'
+        arguments:
+            - '@fos_elastica.object_persister.prodwebsite.user'
+            - ['postPersist', 'postUpdate', 'preRemove']
+            - @fos_elastica.indexable
+            - { indexName: 'id', typeName: 'id'}
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+        tags:
+            - { name: 'doctrine.event_subscriber' }
+    fos_elastica.listener.search_engine.followed:
+        class: 'P4M\MyElasticaBundle\Listener\FollowedListener'
+        arguments:
+            - '@fos_elastica.object_persister.prodwebsite.user'
+            - ['postPersist', 'postUpdate', 'preRemove']
+            - @fos_elastica.indexable
+            - { indexName: 'id', typeName: 'id'}
+        calls:
+            - [ setContainer, [ '@service_container' ] ]
+        tags:
+            - { name: 'doctrine.event_subscriber' }

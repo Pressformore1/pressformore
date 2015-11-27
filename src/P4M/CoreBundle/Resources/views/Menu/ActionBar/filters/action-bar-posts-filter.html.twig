@@ -1,0 +1,161 @@
+{#            TIME#}
+<div class="filter-wrap-large">
+    <h4 class="action-bar-small-title"><span class="glyphicon clock"></span>Time</h4>	
+    <div class="filter-time"></div>
+
+    <div class="filter-time-form">
+        <input type="hidden" class="filter-time-start" name="time-to" value="0"/>
+
+        <span class="filter-time-end-text filter-time-val"></span>
+        <span class="filter-time-explanation">till</span>
+        <span class="filter-time-start-text filter-time-val"></span>
+
+        <input type="hidden" class="filter-time-end" name="time-from" value="8" />
+
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+{#            ------RANK#}
+<div class="filter-wrap-large">
+        <h4 class="action-bar-small-title"><span class="glyphicon star"></span>Rank</h4>	
+        <ul class="filter-type-radio">
+               {# <li class="filter-radio">
+                    <img alt="" data-unselected="{{asset('images/design/icons/p4m-gray-color.png')}}" data-selected="{{asset('images/design/icons/p4m-full-color.png')}}" src="{{asset('images/design/icons/p4m-gray-color.png')}}" />
+                    <span class="filter-label">Press</span>
+                    <input type="radio"  name="filter-rank" value="press" />   
+                </li> #}
+            {%if userDisplayed is defined%}
+                <li class="filter-radio selected">
+                    <img alt="" data-unselected="{{asset('images/design/icons/clock-gray-color.png')}}" data-selected="{{asset('images/design/icons/clock-full-color.png')}}" src="{{asset('images/design/icons/clock-full-color.png')}}" />
+                    <span class="filter-label">Time</span>
+                    <input type="radio" name="rank" value="time" checked="checked" />   
+                </li> 
+            {%endif%}
+                <li class="filter-radio{%if userDisplayed is not defined%} selected{%endif%}">
+                    <img alt="" data-unselected="{{asset('images/design/icons/star-gray-color.png')}}" data-selected="{{asset('images/design/icons/star-full-color.png')}}" src="{{asset('images/design/icons/star-full-color.png')}}" />
+                    <span class="filter-label">Quality</span>
+                    <input type="radio" name="rank" value="quality" {%if userDisplayed is not defined%}checked="checked"{%endif%} />   
+                </li> 
+                {#<li class="filter-radio">
+                    <img alt="" data-unselected="{{asset('images/design/icons/trophy-gray-color.png')}}" data-selected="{{asset('images/design/icons/trophy-full-color.png')}}" src="{{asset('images/design/icons/trophy-gray-color.png')}}" />
+                    <span class="filter-label">Like</span>
+                    <input type="radio" name="rank" value="like" />   
+                </li> #}
+                <li class="filter-radio">
+                    <img alt="" data-unselected="{{asset('images/design/icons/chat-gray-color.png')}}" data-selected="{{asset('images/design/icons/chat-full-color.png')}}" src="{{asset('images/design/icons/chat-gray-color.png')}}" />
+                    <span class="filter-label">Comments</span>
+                    <input type="radio" name="rank" value="comments" />   
+                </li> 
+                <li class="filter-radio">
+                    <img alt="" data-unselected="{{asset('images/design/icons/eye-gray-color.png')}}" data-selected="{{asset('images/design/icons/eye-full-color.png')}}" src="{{asset('images/design/icons/eye-gray-color.png')}}" />
+                    <span class="filter-label">View</span>
+                    <input type="radio"  name="rank" value="views" />   
+                </li> 
+                {# <li class="filter-radio">
+                    <img alt="" data-unselected="{{asset('images/design/icons/upload-gray-color.png')}}" data-selected="{{asset('images/design/icons/upload-full-color.png')}}" src="{{asset('images/design/icons/upload-gray-color.png')}}" />
+                    <span class="filter-label">share</span>
+                    <input type="radio"  name="filter-rank" value="upload" />   
+                </li> #}
+
+        </ul>
+        <div class="clear"></div>
+</div>
+
+<div class="clear"></div>
+
+<div class="filter-wrap-large">
+       <h4 class="action-bar-small-title"><span class="glyphicon file"></span>Type</h4>	
+       <ul class="filter-type-checkbox">
+       {% for type in postTypes%}
+           <li class="filter-checkbox selected">
+               {% if type.iconColor%}
+               <img alt="" data-unselected="{{asset(type.iconGrey)}}" data-selected="{{asset(type.iconColor)}}" src="{{asset(type.iconColor)}}" />
+               {% endif%}
+               <span class="filter-label">{{type.name}}</span>
+               <input type="checkbox" value="{{type.id}}" name="type[]" checked="checked"> 
+           </li>
+       {%endfor%}
+       </ul>
+       <div class="clear"></div>
+</div>
+
+{#<div class="clear"></div>
+<div class="filter-wrap-large">
+       <h4 class="action-bar-small-title"><span class="glyphicon global"></span>Language</h4>	
+       <ul class="filter-type-checkbox">
+       {% for language in languages%}
+           <li class="filter-checkbox selected">
+               {% if language.iconColor and language.iconGrey %}
+               <img alt="" data-unselected="{{asset(type.iconGrey)}}" data-selected="{{asset(type.iconColor)}}" src="{{asset(type.iconColor)}}" />
+               {% endif %}
+               <span class="filter-label">{{language.code|capitalize}}</span>
+               <input type="checkbox"  name="language[]" value="{{language.id}}" checked="checked" />   
+           </li> 
+       {% endfor%}
+
+       </ul>
+       <div class="clear"></div>
+</div>#}
+
+<div class="clear"></div>
+
+
+{% if userDisplayed is defined%}
+<div class="filter-wrap-large">
+        <h4 class="action-bar-small-title"><span class="glyphicon file"></span>Action Type</h4>	
+        <ul class="filter-type-checkbox">
+                {#<li class="filter-checkbox selected">
+                    <img alt="" data-unselected="images/design/icons/p4m-gray-color.png" data-selected="images/design/icons/p4m-full-color.png" src="images/design/icons/p4m-full-color.png" />
+                    <span class="filter-label">Press</span>
+                    <input type="checkbox"  name="activities[]" value="" />   
+                </li> #}
+                <li class="filter-checkbox selected">
+                    <img alt="" data-unselected="{{asset('images/design/icons/traffic-gray-color.png')}}" data-selected="{{asset('images/design/icons/traffic-full-color.png')}}" src="{{asset('images/design/icons/traffic-gray-color.png')}}" />
+                    <span class="filter-label">Evaluate</span>
+                    <input type="checkbox"  name="activities[]" value="post_voted" checked="checked"/>   
+                </li> 
+                <li class="filter-checkbox selected">
+                    <img alt="" data-unselected="{{asset('images/design/icons/chat-gray-color.png')}}" data-selected="{{asset('images/design/icons/chat-full-color.png')}}" src="{{asset('images/design/icons/chat-gray-color.png')}}" />
+                    <span class="filter-label">Comment</span>
+                    <input type="checkbox"  name="activities[]" value="post_commented" checked="checked"/>   
+                </li> 
+                {#<li class="filter-checkbox">
+                    <img alt="" data-unselected="images/design/icons/upload-gray-color.png" data-selected="images/design/icons/upload-full-color.png" src="images/design/icons/upload-gray-color.png" />
+                    <span class="filter-label">share</span>
+                    <input type="checkbox"  name="activities[]" value="" />   
+                </li> #}
+                <li class="filter-checkbox selected">
+                    <img alt="" data-unselected="{{asset('images/design/icons/compose-gray-color.png')}}" data-selected="{{asset('images/design/icons/compose-full-color.png')}}" src="{{asset('images/design/icons/compose-gray-color.png')}}" />
+                    <span class="filter-label">Add</span>
+                    <input type="checkbox"  name="activities[]" value="post_added" checked="checked"/>   
+                </li> 
+
+        </ul>
+        <div class="clear"></div>
+</div>
+{%endif%}
+
+<div class="filter-wrap-large">
+       <h4 class="action-bar-small-title"><span class="glyphicon book"></span>Categories</h4>	
+       <ul class="filter-type-checkbox">
+           {% for category in categories%}
+{#                {% include 'P4MCoreBundle:Core:categoryAction.html.twig' %}#}
+           <li class="filter-checkbox selected">
+                <img alt="" data-unselected="{{asset(category.iconGrey)}}" data-selected="{{asset(category.iconColor)}}" src="{{asset(category.iconColor)}}" />
+               <span class="filter-label">{{category.name}}</span>
+               <input type="checkbox"  name="categories[]" value="{{category.id}}"  checked="checked"/>
+
+           </li>
+       {%endfor%}
+           <li class="clear"></li>
+
+
+       </ul>
+       <div class="clear"></div>
+</div>
+
+
+
+<div class="clear"></div>

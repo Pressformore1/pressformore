@@ -1,0 +1,78 @@
+<li class="action-bar-section" id="section-community">
+    <form data-target="serialize" data-url="{{path('p4m_ajax_action')}}" id="profile-community-form" data-action="loadUserCommunity" data-key="{{'loadUserCommunity'|sha512}}" method="post" class="ajax_form">
+        <input type="hidden" name="userId" value="{{userDisplayed.id}}" />
+        <input type="hidden" name="callBack" value="backToPostsListener" />
+        
+        <div class="action-bar-block">
+            <h1 class="action-bar-title"><span class="glyphicon group"></span> {{userDisplayed.username}}'s community</h1>
+            <p>Explore the community of {{userDisplayed.username}}</p>
+        </div>    
+     
+        <div id="section-community-followers">
+            <p>
+                <span class="community-title-count">{{userDisplayed.followers|length}}</span><br />
+            </p>
+        </div>
+
+        <div id="section-community-following">
+            <p>
+                <span class="community-title-count">{{userDisplayed.following|length}}</span><br />
+            </p>
+        </div>
+        
+{#        <input type="checkbox" checked="checked" name="callBack2[]" value="backToPostsListener" />#}
+        
+        <div id="section-community-filters" class="action-bar-block">
+            <div id="action-bar-wall-community-type">
+                <ul id="wall-community-type" class="filter-type-checkbox">
+                    <li class="wall-community-type filter-checkbox selected" id="community-followers">
+                        <img alt="" data-unselected="{{asset('images/design/icons/running-gray-color.png')}}" data-selected="{{asset('images/design/icons/running-full-color.png')}}" src="{{asset('images/design/icons/running-full-color.png')}}" />
+                        <span class="filter-label">Followers</span>
+                        <input type="checkbox" checked="checked" name="dcommunity[]" value="followers" />  
+                    </li>
+                    <li class="wall-community-type filter-checkbox" id="community-members">
+                        <img alt="" data-unselected="{{asset('images/design/icons/running-back-gray-color.png')}}" data-selected="{{asset('images/design/icons/running-back-full-color.png')}}" src="{{asset('images/design/icons/running-back-gray-color.png')}}" />
+                        <span class="filter-label">Following</span>
+                        <input type="checkbox"  name="dcommunity[]" value="followed" />   
+                    </li>
+
+                </ul>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+       
+
+        <div class="filter-wrap-large">
+             <h4 class="action-bar-small-title"><span class="glyphicon star"></span>Rank</h4>	
+             <ul class="filter-type-radio">
+                      {#<li class="filter-radio selected">
+                         <span class="filter-label">Reputation</span>
+                         <input type="radio" name="rank" value="comments" checked="checked" />   
+                     </li> #}
+                     <li class="filter-radio">
+                         <span class="filter-label">Strews</span>
+                         <input type="radio"  name="rank" value="stews" />   
+                     </li> 
+                     {#<li class="filter-radio">
+                         <span class="filter-label">Load</span>
+                         <input type="radio" name="rank" value="like" />   
+                     </li> #}
+
+                    {# <li class="filter-radio">
+                         <span class="filter-label">badges</span>
+                         <input type="radio"  name="rank" value="view" />   
+                     </li> #}
+                      <li class="filter-radio">
+                         <span class="filter-label">Content add</span>
+                         <input type="radio"  name="rank" value="contentAdd" />   
+                     </li> 
+
+             </ul>
+             <div class="clear"></div>
+         </div>
+{#         <input type="checkbox" name="callBack2[]" value="backToPostsListenesr" />#}
+
+
+    </form>
+</li>

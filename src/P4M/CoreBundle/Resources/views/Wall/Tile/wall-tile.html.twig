@@ -1,0 +1,116 @@
+<article data-brick-type="small-brick" id="wall_{{wall.id}}" class="masonry-block is-hidden">
+    <div class="tile-wrap">
+        <div class="tile">
+            <div class="tile-wall">
+                <header class="tile-header">
+                {%if showAction is defined and showAction%}
+                    <span class="tile-header-action">
+                    {%set actions = getWallAction(wall,userDisplayed)%}
+                    {% if 'wall_voted' in actions%}
+                        <img class="tile-icon" src="{{asset('images/uploads/images/notifications/glyphicons_019_heart_empty.png')}}">
+                    {%endif%}
+                    {% if 'wall_created' in actions%}
+                        <img class="tile-icon" src="{{asset('images/uploads/images/notifications/glyphicons_131_inbox_plus.png')}}">
+                    {%endif%}
+                    {% if 'wall_commented' in actions%}
+                        <img class="tile-icon" src="{{asset('images/uploads/images/notifications/glyphicons_235_pen.png')}}">
+                    {%endif%}
+                    </span>
+                {%endif%}
+                        
+                    <h2 class="tile-header-title">
+                        <span class="main"><span class="icon-strew"></span> {{wall.name}}</span><br />
+                        <span class="sub">{#{{wall.user.firstName|title}}#} {{wall.user.username|capitalize}}</span>
+                    </h2>
+                    <div class="tile-header-thumb">
+                    {%if wall.picture%}
+                         <img class="thumb-align" src="{{asset(wall.picture.webPath)}}" alt="">
+                    {%endif%}
+                    </div>
+
+                </header>
+
+
+                <div class="tile-hover">
+                    <!--Contenu titre et description-->
+                    {%set wallLink = path('p4m_core_showWall',{wallSlug:wall.slug})%}
+                        
+                    {% if tilesEdit is defined%}  
+                        <span class="tile-remove" class=""><span class="glyphicon remove confirm_ajax_action" data-confirm-text="Do you really want to remove this strew?" data-url="{{path('p4m_ajax_action')}}" data-params="{{{'wallId':wall.id}|json_encode()}}" data-action="deleteWall" data-key="{{{'wallId':wall.id}|json_encode()|sha512}}"></span></span>
+                    {% endif %}
+                    {#{% if tilesEdit is defined%}
+                        {%set wallLink = path('p4m_backoffice_wall_edit',{wallSlug:wall.slug})%}
+                    {% endif %}#}
+                        <h2 class="tile-hover-title">
+                            <a href="{{wallLink}}">
+                                <span class="main"><span class="icon-strew"></span> {{wall.name}}</span>
+                            </a>
+                        </h2>
+
+                        <p class="tile-hover-description"><a href="{{wallLink}}">{{wall.description}}</a></p>
+
+                       <footer class="tile-hover-footer">
+                            <!--Meta source/author/reach-->
+                            <div class="tile-hover-footer-meta">
+                                    <a class="tile-hover-meta" href="{{path('p4m_social_profile',{'username':wall.user.username})}}"><span class="glyphicon globe"></span> {{wall.user.username}}</a>&nbsp;
+                                    <a class="tile-hover-meta" href="author.html"><span class="glyphicon server_plus"></span>{{wall.followers|length}} </a>                                                
+                            </div>
+                            <div class="clear"></div>
+
+                            <!--Categories-->
+                            {%if wall.includedCategories is defined%}
+                                <div class="tile-post-categories">
+                                    <ul class="categories-list">
+                                    {%set i = 0%}
+                                    {% for category in wall.includedCategories%}
+                                        {#Limite le nombre de catégorie affiché à 6#}
+                                        {% if i < 6%}
+                                            {% include 'P4MCoreBundle:Core:categoryAction.html.twig'%}
+                                        {% endif %}
+                                        {%set i = i +1%}
+                                    {% endfor %}
+
+                                    </ul>
+                                </div>
+                            {%endif%}
+                                        
+                            <!--Like bar-->
+                            <div class="rating-horizontal-bar{%if wall.votes|length ==0%} hidden{%endif%}">
+                                <span class="rating-horizontal-bar-plus" style="width:{{wall.positiveVoteNumber|percentVote(wall.votes|length)}}%;"></span>
+                                <span class="rating-horizontal-bar-less" style="width:{{wall.negativeVoteNumber|percentVote(wall.votes|length)}}%;"></span>
+                            </div>
+                        </footer>
+
+                </div>
+            </div>
+        {% if tilesEdit is defined%}
+            <form action="{{path('p4m_backoffice_wall_edit',{wallSlug:wall.slug})}}">
+                <button class="tile-follow-btn" type="submit">
+                    <span class="glyphicon edit"></span> Edit
+                    <!--<span class="text">Follow</span>-->
+                </button>
+            </form>
+        {% else %}
+            {%if user is not defined or user is null%}
+                 <button class="followWall tile-follow-btn" data-toggle="modal" data-target="#modal-register" >
+                   <span class="icon-strew-follow"></span> 
+                   <!--<span class="text">Follow</span>-->
+               </button>
+            {%else%}
+                {%set following = wall.hasFollower(user)%} 
+                <button class="followWall tile-follow-btn ajax_action{%if following == true %} hidden{%endif%}" data-url="{{path('p4m_ajax_action')}}" data-action="followWall" data-params="{{{wallId:wall.id,callBack:'followWallFromTile',listener:''}|json_encode() }}" data-key="{{{wallId:wall.id,callBack:'followWallFromTile',listener:''}|json_encode()|sha512() }}" data-loader="none" data-callBack="followWallFromTile">
+                   <span class="icon-strew-follow"></span> 
+                   <!--<span class="text">Follow</span>-->
+               </button>
+
+
+                <button class="unfollowWall tile-follow-btn ajax_action{%if following == false %} hidden{%endif%}" data-url="{{path('p4m_ajax_action')}}" data-action="unfollowWall" data-params="{{{wallId:wall.id,callBack:'followWallFromTile',listener:''}|json_encode() }}" data-key="{{{wallId:wall.id,callBack:'followWallFromTile',listener:''}|json_encode()|sha512() }}" data-loader="none" data-callBack="followWallFromTile">
+                   <span class="icon-strew-unfollow red"></span> 
+                   <!--<span class="text">Follow</span>-->
+               </button>
+            {%endif%}
+        {%endif%}
+        </div>
+    </div>
+</article>
+

@@ -1,0 +1,798 @@
+<!-- Bar avec quelques infos : ce qu'il lui reste d'argent pour pressÃ© avec le dÃ©compte par jour, ensuite le nombre de press par jour-->
+<div class="row">
+	
+    <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark"><i class="fa fa-bar-chart-o fa-fw "></i> Your stats</h1>
+            </div>
+
+    <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+        <ul id="sparks" class="">
+            <li class="sparks-info">
+                <h5> My wallet <span class="txt-color-blue">â‚¬5.00</span></h5>
+                <div class="sparkline txt-color-blue hidden-mobile hidden-md hidden-sm">
+                        50,49,30,20,10,7,6,5
+                </div>
+            </li>
+            <li class="sparks-info">
+                <h5> My press <span class="txt-color-purple"><i class="fa fa-arrow-circle-up" data-rel="bootstrap-tooltip" title="Increased"></i>&nbsp;21</span></h5>
+                <div class="sparkline txt-color-purple hidden-mobile hidden-md hidden-sm">
+                        1,1,10,5,2,1,1,2
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- widget grid -->
+<section id="widget-grid" class="">
+<!-- row -->
+    <div class="row">
+
+        <!-- NEW WIDGET START -->
+        <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+
+            <!-- Widget ID (each widget will need unique ID)-->
+            <div class="jarviswidget" id="wid-id-7" data-widget-editbutton="false" data-widget-deletebutton="false" data-widget-colorbutton="false">
+
+                <header>
+                    <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                    <h2>Global stats</h2>				
+
+                </header>
+                <!-- widget div-->
+                <div>
+                    <!-- widget content -->
+                    <div class="widget-body no-padding">
+
+                        <div class="widget-body-toolbar bg-color-white smart-form" id="rev-toggles">
+
+                                <div class="inline-group">
+
+                                    <label for="gra-0" class="checkbox">
+                                        <input type="checkbox" name="gra-0" id="gra-0" checked="checked">
+                                        <i></i> Article viewed </label>
+                                    <label for="gra-1" class="checkbox">
+                                        <input type="checkbox" name="gra-1" id="gra-1" checked="checked">
+                                        <i></i> Share  </label>
+                                    <label for="gra-2" class="checkbox">
+                                        <input type="checkbox" name="gra-2" id="gra-2" checked="checked">
+                                        <i></i> Like </label>
+                                    <label for="gra-3" class="checkbox">
+                                        <input type="checkbox" name="gra-3" id="gra-3" checked="checked">
+                                        <i></i> Dilike </label>
+                                    <label for="gra-4" class="checkbox">
+                                        <input type="checkbox" name="gra-4" id="gra-4" checked="checked">
+                                        <i></i> Comment </label>
+                                    <label for="gra-5" class="checkbox">
+                                        <input type="checkbox" name="gra-5" id="gra-5" checked="checked">
+                                        <i></i> Press </label>
+                                </div>
+                        </div>
+                        <div class="padding-10">
+                            <div id="flotcontainer" class="chart-large has-legend-unique"></div>
+                        </div>
+                    </div>
+                    <!-- end widget content -->
+                </div>
+                <!-- end widget div -->
+            </div>
+            <!-- end widget -->
+        </article>
+            <!-- WIDGET END -->
+    </div>
+
+    <!-- end row -->
+
+
+
+    <!-- row -->
+    <div class="row">
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                <div class="jarviswidget" id="wid-id-8" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                        <h2>Total by Category :</h2>				
+                    </header>
+
+                    <div id="tabs">
+                            <ul>
+                                    <li>
+                                            <a href="#tabs-a">Views</a>
+                                    </li>
+                                    <li>
+                                            <a href="#tabs-b">Share</a>
+                                    </li>
+                                    <li>
+                                            <a href="#tabs-c">Like</a>
+                                    </li>
+                                    <li>
+                                            <a href="#tabs-d">Press</a>
+                                    </li>
+                            </ul>
+                            <div id="tabs-a">
+                                                            <div class="widget-body no-padding">
+
+                                                                    <div id="pie-chart-view" class="chart"></div>
+
+                                                            </div>
+
+                            </div>
+                            <div id="tabs-b">
+                                                                            <div class="widget-body no-padding">
+
+                                                                                    <div id="pie-chart-share" class="chart"></div>
+
+                                                                            </div>
+
+                            </div>
+                            <div id="tabs-c">
+
+                                                                            <div class="widget-body no-padding">
+
+                                                                                    <div id="pie-chart-like" class="chart"></div>
+
+                                                                            </div>
+
+                            </div>
+                            <div id="tabs-d">
+                                                                            <div class="widget-body no-padding">
+
+                                                                                    <div id="pie-chart-press" class="chart"></div>
+
+                                                                            </div>		
+                            </div>
+                    </div>
+
+
+
+
+            </article>
+            <!-- WIDGET END -->
+
+            <!-- Widget top -->
+            <article class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="jarviswidget" id="wid-id-18" data-widget-editbutton="false" data-widget-colorbutton="false" data-widget-deletebutton="false">
+                                                    <header>
+                                                    <span class="widget-icon"> <i class="fa fa-bar-chart-o"></i> </span>
+                                                            <h2>Your activity :</h2>				
+                                                    </header>
+
+                    <div id="tabs2">
+                            <ul>
+                                    <li>
+                                            <a href="#tabs-e">Last views</a>
+                                    </li>
+                                    <li>
+                                            <a href="#tabs-f">Last Share</a>
+                                    </li>
+                                    <li>
+                                            <a href="#tabs-g">Last Like</a>
+                                    </li>
+                                    <li>
+                                            <a href="#tabs-h">Last Press</a>
+                                    </li>
+                            </ul>
+                            <div id="tabs-e">
+                                                            <div class="widget-body no-padding">
+                                                                    <table class="table table-hover table-bordered table-striped">
+                                                                            <thead>
+                                                                                    <th>
+                                                                                            <tr>
+                                                                                                    <td>Title</td>
+                                                                                                    <td>Date</td>
+                                                                                            </tr>
+                                                                                    </th>
+
+                                                                            </thead>
+
+                                                                            <tbody>
+                                                                                    <tr>
+                                                                                            <td>L'antartique se trouve au pÃ´le nord selon les amÃ©ricains</td>
+                                                                                            <td>21/12/2012</td>
+                                                                                    </tr>
+                                                                                    <tr>
+                                                                                            <td>Microsoft rachÃ¨te google et lance son iWindows 3</td>
+                                                                                            <td>31/06/2014</td>
+                                                                                    </tr>
+
+
+                                                                            </tbody>
+
+
+
+                                                                    </table>
+                                                            </div>
+
+                            </div>
+                            <div id="tabs-f">
+                                                                            <div class="widget-body no-padding">
+                                                                                    <table class="table table-hover table-bordered table-striped">
+                                                                                            <thead>
+                                                                                                    <th>
+                                                                                                            <tr>
+                                                                                                                    <td>Title</td>
+                                                                                                                    <td>Date</td>
+                                                                                                            </tr>
+                                                                                                    </th>
+
+                                                                                            </thead>
+
+                                                                                    <tbody>
+                                                                                            <tr>
+                                                                                                    <td>Il est prouvÃ© que les duckface sont nocif pour la santÃ©</td>
+                                                                                                    <td>21/12/2012</td>
+                                                                                            </tr>
+                                                                                            <tr>
+                                                                                                    <td>Un carolo aurait atteint le Qi de 60 !!!</td>
+                                                                                                    <td>31/06/2014</td>
+                                                                                            </tr>
+
+
+                                                                                    </tbody>
+                                                                    </table>
+
+                                                                            </div>
+
+                            </div>
+                            <div id="tabs-g">
+
+                                                                            <div class="widget-body no-padding">
+                                                                                    <table class="table table-hover table-bordered table-striped">
+                                                                                            <thead>
+                                                                                                    <th>
+                                                                                                            <tr>
+                                                                                                                    <td>Title</td>
+                                                                                                                    <td>Date</td>
+                                                                                                            </tr>
+                                                                                                    </th>
+
+                                                                                            </thead>
+
+                                                                                            <tbody>
+                                                                                                    <tr>
+                                                                                                            <td>Jean dupont a perdu son chat</td>
+                                                                                                            <td>21/12/2012</td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                            <td>Pressformore rÃ©volutionne le web !</td>
+                                                                                                            <td>1/03/2014</td>
+                                                                                                    </tr>
+
+
+                                                                                            </tbody>
+
+
+
+                                                                    </table>
+                                                                            </div>
+
+                            </div>
+                            <div id="tabs-h">
+                                                                            <div class="widget-body no-padding">
+                                                                                    <table class="table table-hover table-bordered table-striped">
+                                                                                            <thead>
+                                                                                                    <th>
+                                                                                                            <tr>
+                                                                                                                    <td>Title</td>
+                                                                                                                    <td>Date</td>
+                                                                                                            </tr>
+                                                                                                    </th>
+
+                                                                                            </thead>
+
+                                                                                            <tbody>
+                                                                                                    <tr>
+                                                                                                            <td>"Mmmm , le caca c'est dÃ©licieux" rentre dans le larousse</td>
+                                                                                                            <td>21/12/2012</td>
+                                                                                                    </tr>
+                                                                                                    <tr>
+                                                                                                            <td>Guillaume zgrynev affirme que vos sims sont en bonne santÃ©</td>
+                                                                                                            <td>31/06/2014</td>
+                                                                                                    </tr>
+
+
+                                                                                            </tbody>
+                                                                            </table>	
+
+                                                                            </div>		
+                            </div>
+                    </div>
+
+
+
+
+            </article>
+
+    </div>
+
+	<!-- end row -->
+
+	
+	
+</section>
+<!-- end widget grid -->
+
+<script type="text/javascript">
+	
+	// DO NOT REMOVE : GLOBAL FUNCTIONS!
+	pageSetUp();
+	
+
+	// PAGE RELATED SCRIPTS
+
+	/*
+	 * LOAD ALL FLOT DEPENDENCIES
+	 */
+
+	loadScript("{{asset("bundles/p4mbackoffice/js/plugin/flot/jquery.flot.cust.js")}}", loadFlotResize);
+	
+	function loadFlotResize() {
+		loadScript("{{asset("bundles/p4mbackoffice/js/plugin/flot/jquery.flot.resize.js")}}", loadFlotFillbetween);
+	}
+	function loadFlotFillbetween() {
+		loadScript("{{asset("bundles/p4mbackoffice/js/plugin/flot/jquery.flot.fillbetween.js")}}", loadFlotOrderBar);
+	}
+	function loadFlotOrderBar() {
+		loadScript("{{asset("bundles/p4mbackoffice/js/plugin/flot/jquery.flot.orderBar.js")}}", loadFlotPie);
+	}	
+	function loadFlotPie() {
+		loadScript("{{asset("bundles/p4mbackoffice/js/plugin/flot/jquery.flot.pie.js")}}", loadFlotToolTip);
+	}
+	function loadFlotToolTip() {
+		loadScript("{{asset("bundles/p4mbackoffice/js/plugin/flot/jquery.flot.tooltip.js")}}", generateAllFlotCharts);
+	}
+
+	/* chart colors default */
+	var $chrt_border_color = "#efefef";
+	var $chrt_grid_color = "#DDD"
+	var $chrt_main = "#E24913";			/* red       */
+	var $chrt_second = "#6595b4";		/* blue      */
+	var $chrt_third = "#FF9F01";		/* orange    */
+	var $chrt_fourth = "#7e9d3a";		/* green     */
+	var $chrt_fifth = "#BD362F";		/* dark red  */
+	var $chrt_mono = "#000";
+		/*
+	 * Just Tabs
+	 */
+
+	
+	function generateAllFlotCharts() {
+		
+		/* pie chart */
+		/*
+		 * Pie chart pour les view
+		 * 
+		 */
+	
+		if ($('#pie-chart-view').length) {
+
+				var data_pie = [];
+				var series = 4;// <--- le nombre de catÃ©gorie a prendre en compte
+				
+				data_pie[0] = {
+						label : "Sex",
+						data :69
+				};
+				data_pie[1] = {
+						label : "Capitalism",
+						data :70
+				};
+				data_pie[2] = {
+						label : "Dalmatiens",
+						data :101
+				};
+				data_pie[3] = {
+						label : "plop",
+						data :10
+				};
+				$.plot($("#pie-chart-view"), data_pie, {
+					series : {
+						pie : {
+							show : true,
+							innerRadius : 0.5,
+							radius : 1,
+							label : {
+								show : true,
+								radius : 2 / 3,
+								formatter : function(label, series) {
+									return '<div style="font-size:11px;text-align:center;padding:4px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+								},
+								threshold : 0.1
+							}
+						}
+					},
+					legend : {
+						show : true,
+						noColumns : 1, // number of colums in legend table
+						labelFormatter : null, // fn: string -> string
+						labelBoxBorderColor : "#000", // border color for the little label boxes
+						container : null, // container (as jQuery object) to put legend in, null means default on top of graph
+						position : "ne", // position of default legend container within plot
+						margin : [5, 10], // distance from grid edge to default legend container within plot
+						backgroundColor : "#efefef", // null means auto-detect
+						backgroundOpacity : 1 // set to 0 to avoid background
+					},
+					grid : {
+						hoverable : true,
+						clickable : true
+					},
+				});
+				
+				
+	
+		}
+		
+		/* end pie chart */
+		
+		/*
+		 * Pie chart pour les share
+		 * 
+		 * 
+		 */
+		
+			if ($('#pie-chart-share').length) {
+
+				var data_pie = [];
+				var series = 4;// <--- le nombre de catÃ©gorie a prendre en compte
+				
+				data_pie[0] = {
+						label : "Sex",
+						data :69
+				};
+				data_pie[1] = {
+						label : "Capitalism",
+						data :100
+				};
+				data_pie[2] = {
+						label : "Dalmatiens",
+						data :20
+				};
+				data_pie[3] = {
+						label : "Scatophilie",
+						data :30
+				};
+				$.plot($("#pie-chart-share"), data_pie, {
+					series : {
+						pie : {
+							show : true,
+							innerRadius : 0.5,
+							radius : 1,
+							label : {
+								show : true,
+								radius : 2 / 3,
+								formatter : function(label, series) {
+									return '<div style="font-size:11px;text-align:center;padding:4px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+								},
+								threshold : 0.1
+							}
+						}
+					},
+					legend : {
+						show : true,
+						noColumns : 1, // number of colums in legend table
+						labelFormatter : null, // fn: string -> string
+						labelBoxBorderColor : "#000", // border color for the little label boxes
+						container : null, // container (as jQuery object) to put legend in, null means default on top of graph
+						position : "ne", // position of default legend container within plot
+						margin : [5, 10], // distance from grid edge to default legend container within plot
+						backgroundColor : "#efefef", // null means auto-detect
+						backgroundOpacity : 1 // set to 0 to avoid background
+					},
+					grid : {
+						hoverable : true,
+						clickable : true
+					},
+				});
+				
+				
+	
+		}
+		
+		/*
+		 * Pie chart pour les like
+		 * 
+		 */
+		if ($('#pie-chart-like').length) {
+
+				var data_pie = [];
+				var series = 4;// <--- le nombre de catÃ©gorie a prendre en compte
+				
+				data_pie[0] = {
+						label : "Sex",
+						data :69
+				};
+				data_pie[1] = {
+						label : "Capitalism",
+						data :70
+				};
+				data_pie[2] = {
+						label : "Dalmatiens",
+						data :101
+				};
+				data_pie[3] = {
+						label : "plop",
+						data :10
+				};
+				$.plot($("#pie-chart-like"), data_pie, {
+					series : {
+						pie : {
+							show : true,
+							innerRadius : 0.5,
+							radius : 1,
+							label : {
+								show : true,
+								radius : 2 / 3,
+								formatter : function(label, series) {
+									return '<div style="font-size:11px;text-align:center;padding:4px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+								},
+								threshold : 0.1
+							}
+						}
+					},
+					legend : {
+						show : true,
+						noColumns : 1, // number of colums in legend table
+						labelFormatter : null, // fn: string -> string
+						labelBoxBorderColor : "#000", // border color for the little label boxes
+						container : null, // container (as jQuery object) to put legend in, null means default on top of graph
+						position : "ne", // position of default legend container within plot
+						margin : [5, 10], // distance from grid edge to default legend container within plot
+						backgroundColor : "#efefef", // null means auto-detect
+						backgroundOpacity : 1 // set to 0 to avoid background
+					},
+					grid : {
+						hoverable : true,
+						clickable : true
+					},
+				});
+				
+				
+	
+		}
+		/*
+		 * Pie chart pour les press
+		 * 
+		 */
+		if ($('#pie-chart-press').length) {
+
+				var data_pie = [];
+				var series = 4;// <--- le nombre de catÃ©gorie a prendre en compte
+				
+				data_pie[0] = {
+						label : "Sex",
+						data :69
+				};
+				data_pie[1] = {
+						label : "Capitalism",
+						data :70
+				};
+				data_pie[2] = {
+						label : "Dalmatiens",
+						data :101
+				};
+				data_pie[3] = {
+						label : "plop",
+						data :10
+				};
+				$.plot($("#pie-chart-press"), data_pie, {
+					series : {
+						pie : {
+							show : true,
+							innerRadius : 0.5,
+							radius : 1,
+							label : {
+								show : true,
+								radius : 2 / 3,
+								formatter : function(label, series) {
+									return '<div style="font-size:11px;text-align:center;padding:4px;color:white;">' + label + '<br/>' + Math.round(series.percent) + '%</div>';
+								},
+								threshold : 0.1
+							}
+						}
+					},
+					legend : {
+						show : true,
+						noColumns : 1, // number of colums in legend table
+						labelFormatter : null, // fn: string -> string
+						labelBoxBorderColor : "#000", // border color for the little label boxes
+						container : null, // container (as jQuery object) to put legend in, null means default on top of graph
+						position : "ne", // position of default legend container within plot
+						margin : [5, 10], // distance from grid edge to default legend container within plot
+						backgroundColor : "#efefef", // null means auto-detect
+						backgroundOpacity : 1 // set to 0 to avoid background
+					},
+					grid : {
+						hoverable : true,
+						clickable : true
+					},
+				});
+				
+				
+	
+		}
+		
+		
+			    /* TAB 3: Revenew  */
+	
+	    $(function () {
+	    	var t = new Date();
+	    	time = t.getTime(); // les temps peuvent Ãªtre donnÃ© selon time() mais en milliseconde (time de php * 1000 je pense);
+	    	value = 42;
+	    
+	    	 
+	    	var article = [
+	    		[time,value],
+	    		[time-86400000,value+10],
+	    		[time-86400000*2,value*2],
+	    		[time-86400000*3,value/2]
+	    	];
+	    	
+	    	var share = [
+	    		[time,value],
+	    		[time+86400000,value+20],
+	    		[time-86400000*2,value+40],
+	    		[time-86400000*3,value-10]
+	    	];
+	    	
+	    	var like = [
+	    		  [time,value],
+	    		[time-86400000,value+30],
+	    		[time-86400000*2,value*5],
+	    		[time-86400000*3,value+40]
+	    	];
+	    	
+	    	var dislike = [
+	    		[time,value],
+	    		[time+86400000,value+5],
+	    		[time-86400000*2,value+30],
+	    		[time-86400000*3,value+19]
+	    	];
+	    	
+	    	var comment = [
+	    		[time,value],
+	    		[time-86400000,value],
+	    		[time-86400000*2,value-100],
+	    		[time-86400000*3,value*10]
+	    	];
+	    	
+	    	var press = [
+	    		[time,value],
+	    		[time+86400000,value+100],
+	    		[time-86400000*2,value-1],
+	    		[time-86400000*3,value+15]
+	    	];
+	
+
+	       
+	            toggles = $("#rev-toggles"),
+	            target = $("#flotcontainer");
+	
+	        var data = [{
+	            label: "Article Read / day",
+	            data: article,
+	            color: 'AD4F09',
+	            lines: {
+	                show: true,
+	                lineWidth: 4
+	            },
+	            points: {
+	                show: true
+	            }
+	        }, {
+	            label: "Share / day",
+	            data: share,
+	            color: '#3276B1',
+	            lines: {
+	                show: true,
+	                lineWidth: 3
+	            },
+	            points: {
+	                show: true
+	            }
+	        }, {
+	            label: "Like / day",
+	            data: like,
+	            color: '#F400A1',
+	            lines: {
+	                show: true,
+	                lineWidth: 2
+	            },
+	            points: {
+	                show: true
+	            }
+	        },{
+	            label: "Dislike / day",
+	            data: dislike,
+	            color: '#71843F',
+	            lines: {
+	                show: true,
+	                lineWidth: 1
+	            },
+	            points: {
+	                show: true
+	            }
+	        },{
+	            label: "Comment / day",
+	            data: comment,
+	            color: '#16B84E',
+	            lines: {
+	                show: true,
+	                lineWidth: 5
+	            },
+	            points: {
+	                show: true
+	            }
+	        },{
+	            label: "Press / day",
+	            data: press,
+	            color: '#1E7FCB',
+	            lines: {
+	                show: true,
+	                lineWidth: 6
+	            },
+	            points: {
+	                show: true
+	            }
+	        }];
+	
+	        var options = {
+	            grid: {
+	                hoverable: true
+	            },
+	            tooltip: true,
+	            tooltipOpts: {
+	                //content: '%x - %y',
+	                //dateFormat: '%b %y',
+	                defaultTheme: false
+	            },
+	            xaxis: {
+	                mode: "time"
+	            },
+	            yaxes: {
+	                tickFormatter: function (val, axis) {
+	                    return "$" + val;
+	                },
+	                max: 1200
+	            }
+	
+	        };
+	
+	        plot2 = null;
+	
+	        function plotNow() {
+	            var d = [];
+	            toggles.find(':checkbox').each(function () {
+	                if ($(this).is(':checked')) {
+	                    d.push(data[$(this).attr("name").substr(4, 1)]);
+	                }
+	            });
+	            if (d.length > 0) {
+	                if (plot2) {
+	                    plot2.setData(d);
+	                    plot2.draw();
+	                } else {
+	                    plot2 = $.plot(target, d, options);
+	                }
+	            }
+	
+	        };
+	
+	        toggles.find(':checkbox').on('change', function () {
+	            plotNow();
+	        });
+	        plotNow();
+	
+	    });
+	
+	
+		/* end site stats */
+		$('#tabs').tabs();
+		$('#tabs2').tabs();
+	
+	}
+	
+	/* end flot charts */	
+	
+</script>
+{# empty Twig template #}

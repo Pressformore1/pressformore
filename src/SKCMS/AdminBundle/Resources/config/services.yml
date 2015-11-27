@@ -1,0 +1,313 @@
+parameters:
+    skcms_admin.menuGroups:
+        group1:
+            id: 1
+            name: 'Main'
+        group2:
+            id: 2
+            name: 'Posts'
+        group3:
+            id: 3
+            name: 'Flags'
+        group4:
+            id: 4
+            name: 'Money'
+        
+            
+    skcms_admin.entities:
+        
+        Pressform:
+            name: "Pressform"
+            beautyName: 'Pressform'
+            menuGroup: 4
+            bundle: 'P4MCore'
+            class: \P4M\CoreBundle\Entity\Pressform
+            form: \P4M\CoreBundle\Form\WallAutoFollowType
+            listProperties:
+                date:
+                    dataName: 'date'
+                    beautyName: 'date'
+                    type: 'date'
+                sender:
+                    dataName: 'sender'
+                    beautyName: 'Created by'
+                    type: 'string'
+                post:
+                    dataName: 'post'
+                    beautyName: 'Post'
+                    type: 'string'
+                payed:
+                    dataName: 'payed'
+                    beautyName: 'Paid'
+                    type: 'string'
+                    
+        WalletFill:
+            name: "WalletFill"
+            beautyName: 'Wallets fills'
+            menuGroup: 4
+            bundle: 'P4MMangoPay'
+            class: \P4M\MangoPayBundle\Entity\WalletFill
+            form: \P4M\CoreBundle\Form\WallAutoFollowType
+            listProperties: 
+#                id:
+#                    dataName: 'id'
+#                    beautyName: 'ID'
+#                    type: 'string'
+                user:
+                    dataName: 'user'
+                    beautyName: 'User'
+                    type: 'string'
+                
+                date:
+                    dataName: 'date'
+                    beautyName: 'Creation Date'
+                    type: 'date'
+                dateFill:
+                    dataName: 'dateFill'
+                    beautyName: 'Last refill Date'
+                    type: 'date'
+                recurrent:
+                    dataName: 'recurrent'
+                    beautyName: 'recurrent'
+                    type: 'string'
+                amount:
+                    dataName: 'amount'
+                    beautyName: 'amount (*100)'
+                    type: 'string'
+                expired:
+                    dataName: 'expired'
+                    beautyName: 'expired'
+                    type: 'string'
+        WallAutoFollow:
+            name: "WallAutoFollow"
+            beautyName: 'Strews that everyone follows'
+            menuGroup: 1
+            bundle: 'P4MCore'
+            class: \P4M\CoreBundle\Entity\WallAutoFollow
+            form: \P4M\CoreBundle\Form\WallAutoFollowType
+            listProperties: 
+                id:
+                    dataName: 'id'
+                    beautyName: 'ID'
+                    type: 'string'
+                name:
+                    dataName: 'wall'
+                    beautyName: 'Strews'
+                    type: 'string'
+                                
+        UnpressformType:
+            name: "UnpressformType"
+            beautyName: 'Unpressform Type'
+            menuGroup: 1
+            bundle: 'P4MCore'
+            class: \P4M\CoreBundle\Entity\UnpressformType
+            form: \P4M\CoreBundle\Form\UnpressformTypeType
+            listProperties: 
+                id:
+                    dataName: 'id'
+                    beautyName: 'ID'
+                    type: 'string'
+                type:
+                    dataName: 'type'
+                    beautyName: 'Type'
+                    type: 'string'
+                                
+        User:
+            name: "User"
+            beautyName: 'User'
+            menuGroup: 1
+            bundle: 'P4MUser'
+            class: \P4M\UserBundle\Entity\User
+            form: \P4M\AdminBundle\Form\Type\AdminUserType
+            formParams:
+                user: 'current'
+            listProperties: 
+                id:
+                    dataName: 'id'
+                    beautyName: 'ID'
+                    type: 'string'
+                username:
+                    dataName: 'username'
+                    beautyName: 'User name'
+                    type: 'string'
+                name:
+                    dataName: 'name'
+                    beautyName: 'First Name'
+                    type: 'string'
+                surName:
+                    dataName: 'surName'
+                    beautyName: 'Last Name'
+                    type: 'string'
+                
+                
+        Tag:
+            name: "Tag"
+            beautyName: 'Tags'
+            menuGroup: 1
+            bundle: 'P4MCore'
+            class: \P4M\CoreBundle\Entity\Tag
+            form: \P4M\CoreBundle\Form\TagType
+            formParams:
+                user: 'current'
+            listProperties: 
+                name:
+                    dataName: 'name'
+                    beautyName: 'Name'
+                    type: 'string'
+                
+        
+        Category:
+            name: "Category"
+            beautyName: 'Categorie'
+            menuGroup: 1
+            bundle: 'P4MCore'
+            class: \P4M\CoreBundle\Entity\Category
+            form: \P4M\AdminBundle\Form\Type\AdminCategoryType
+            formParams:
+                user: 'current'
+            listProperties: 
+                name:
+                    dataName: 'name'
+                    beautyName: 'Name'
+                    type: 'string'
+                iconColor:
+                    dataName: 'iconColor'
+                    beautyName: 'Icon'
+                    type: 'image'
+                
+        FlagType:
+            name: "FlagType"
+            beautyName: 'Post Flag Type'
+            menuGroup: 3
+            bundle: 'P4MModeration'
+            class: \P4M\ModerationBundle\Entity\FlagType
+            form: \P4M\ModerationBundle\Form\FlagTypeType
+            listProperties: 
+                name:
+                    dataName: 'name'
+                    beautyName: 'Name'
+                    type: 'string'
+               
+                
+        WallFlagType:
+            name: "WallFlagType"
+            beautyName: 'Wall Flag Type'
+            menuGroup: 3
+            bundle: 'P4MModeration'
+            class: \P4M\ModerationBundle\Entity\WallFlagType
+            form: \P4M\ModerationBundle\Form\WallFlagTypeType
+            listProperties: 
+                name:
+                    dataName: 'name'
+                    beautyName: 'Name'
+                    type: 'string'
+        UserFlagType:
+            name: "UserFlagType"
+            beautyName: 'User Flag Type'
+            menuGroup: 3
+            bundle: 'P4MModeration'
+            class: \P4M\ModerationBundle\Entity\UserFlagType
+            form: \P4M\ModerationBundle\Form\UserFlagTypeType
+            listProperties: 
+                name:
+                    dataName: 'name'
+                    beautyName: 'Name'
+                    type: 'string'
+                
+        PostType:
+            name: "PostType"
+            beautyName: 'Post Type'
+            menuGroup: 2
+            bundle: 'P4MCore'
+            class: \P4M\CoreBundle\Entity\PostType
+            form: \P4M\CoreBundle\Form\PostTypeType
+            listProperties: 
+                name:
+                    dataName: 'name'
+                    beautyName: 'Name'
+                    type: 'string'
+                iconColor:
+                    dataName: 'iconColor'
+                    beautyName: 'Icon'
+                    type: 'image'
+        Post:
+            name: "Post"
+            beautyName: 'Post'
+            menuGroup: 2
+            bundle: 'P4MCore'
+            class: \P4M\CoreBundle\Entity\Post
+            form: \P4M\CoreBundle\Form\PostAdminType
+            listProperties: 
+                name:
+                    dataName: 'title'
+                    beautyName: 'Title'
+                    type: 'string'
+                
+                iframeAllowed:
+                    dataName: 'iframeAllowed'
+                    beautyName: 'Iframe allowed'
+                    type: 'string'
+                quarantaine:
+                    dataName: 'quarantaine'
+                    beautyName: 'quarantaine'
+                    type: 'string'
+                sourceUrl:
+                    dataName: 'sourceUrl'
+                    beautyName: 'Source'
+                    type: 'string'
+                embed:
+                    dataName: 'embed'
+                    beautyName: 'embedable'
+                    type: 'string'
+        TrustedSource:
+            name: "TrustedSource"
+            beautyName: 'Source de confiance'
+            menuGroup: 2
+            bundle: 'P4MCore'
+            class: \P4M\CoreBundle\Entity\TrustedSource
+            form: \P4M\CoreBundle\Form\TrustedSourceType
+            listProperties: 
+                name:
+                    dataName: 'name'
+                    beautyName: 'name'
+                    type: 'string'
+                
+                domain:
+                    dataName: 'domain'
+                    beautyName: 'domain'
+                    type: 'string'
+                date:
+                    dataName: 'date'
+                    beautyName: 'date'
+                    type: 'date'
+                
+                
+                
+        
+        NotificationType:
+            name: "NotificationType"
+            beautyName: 'Notification Type'
+            menuGroup: 1
+            bundle: 'P4MNotification'
+            class: \P4M\NotificationBundle\Entity\NotificationType
+            form: \P4M\NotificationBundle\Form\NotificationTypeType
+            formParams:
+                class: \P4M\TrackingBundle\Entity\UserActivity
+                method: getTypeAllowed
+            listProperties: 
+                name:
+                    dataName: 'name'
+                    beautyName: 'Name'
+                    type: 'string'
+                typeLink:
+                    dataName: 'typeLink'
+                    beautyName: 'Type'
+                    type: 'string'
+                
+                
+            
+
+services:
+#    sk_admin.example:
+#        class: %sk_admin.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

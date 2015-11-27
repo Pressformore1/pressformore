@@ -1,0 +1,7 @@
+parameters:
+#    p4_m_console.example.class: P4M\ConsoleBundle\Example
+
+services:
+#    p4_m_console.example:
+#        class: %p4_m_console.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

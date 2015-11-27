@@ -1,0 +1,37 @@
+parameters:
+#    p4_m_core.example.class: P4M\CoreBundle\Example
+
+services:
+    P4M_Core.twigExtension:
+        class: P4M\CoreBundle\Twig\CoreExtension
+        arguments: [%ajax_salt%,@doctrine.orm.entity_manager,@service_container]
+        tags:
+            - { name: twig.extension }
+    p4mCore.encoding:
+        class: P4M\CoreBundle\Service\Encoding
+    p4mCore.post_analyser:
+        class: P4M\CoreBundle\Service\PostSourceAnalyser
+        arguments: [@kayue_essence]
+    p4mCore.post_utils:
+        class: P4M\CoreBundle\Service\PostUtils
+        arguments: [@p4mCore.post_analyser,@service_container]
+    form.type.post_categories:
+        class: P4M\CoreBundle\Form\Type\CategoryPostType
+        arguments:
+            arguments:  @doctrine.orm.entity_manager 
+        tags:
+            - { name: form.type, alias: post_categories }
+    P4M_Core.type.tag_selector:
+        class: P4M\CoreBundle\Form\Type\TagPostType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: posttags }
+    P4M_Core.type.skill_selector:
+        class: P4M\CoreBundle\Form\Type\UserSkillType
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: form.type, alias: userskills }
+
+#    p4_m_core.example:
+#        class: %p4_m_core.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

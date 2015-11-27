@@ -1,0 +1,51 @@
+{# On étend notre layout #}
+{% extends "P4MAdminBundle::admin.html.twig" %}
+
+{% if notificationType.id %}
+{% set pageTitle= 'Edit NotificationType'%}
+{% else%}
+{% set pageTitle= 'Create NotificationType'%}
+{%endif%}
+{% block pageTitle%}{{pageTitle}}{% endblock %}
+{% block pageSubTitle%}<h3 class="entry-title"><a href="{{path('p4m_admin_notificationTypeList')}}">Back to notification types list</a></h3>{% endblock %}
+{# Dans notre layout, il faut définir le block body #}
+{% block leftCol %}
+{{parent()}}
+
+        <fieldset class="info_fieldset">
+            
+            <div id="note">
+            
+            </div>
+            <div id="contacts-form">
+                <form method="post" {{ form_enctype(form) }}>
+                                   
+                    {{form_rest(form)}}
+                    <div class="formElement">
+                        <input type="submit" class="btn btn-primary" />
+                    </div>
+              </form>
+            </div>
+            <div class="clear"></div>
+            {% if notificationType.id %}
+            {#<div class="clear text-right edit-actions">
+                <a href="{{path('p4m_admin_deleteNotificationType',{'notificationTypeId':notificationType.id})}}" class="btn btn-danger">DELETE POST TYPE</a>
+            </div>#}
+            {%endif%}
+                                  <!-- end #contact-form -->
+        </fieldset>
+
+
+                        
+{% endblock %}{# empty Twig template #}
+
+
+{%block scriptPlugins %}
+{{parent()}}
+<script type="text/javascript" src="{{ asset('bundles/jonlilckfinder/ckfinder.js') }}"></script>
+{% endblock %}
+
+{% block scriptCustom %}
+{{parent()}}
+<script type="text/javascript" src="{{asset('js/scripts/admin/script-admin.js')}}"></script>
+{%endblock%}{# empty Twig template #}

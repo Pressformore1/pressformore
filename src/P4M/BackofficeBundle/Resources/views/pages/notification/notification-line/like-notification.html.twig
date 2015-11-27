@@ -1,0 +1,17 @@
+{% extends "P4MBackofficeBundle:pages/notification/notification-line:notification-line.html.twig" %}
+
+
+{%block text%}
+{%if notification.vote.post%}
+<a href="{{path('p4m_social_profile',{username:notification.vote.user.username})}}">{{notification.vote.user.username }}</a> {% if notification.vote.score >0%}liked{%else%}unliked{%endif%} your <a href="{{path('p4m_core_post',{postSlug:notification.vote.post.slug})}}">post</a>
+{%elseif notification.vote.comment%}
+<a href="{{path('p4m_social_profile',{username:notification.vote.user.username})}}">{{notification.vote.user.username }}</a> {% if notification.vote.score >0%}liked{%else%}unliked{%endif%} your comment on this <a href="{{path('p4m_core_post',{postSlug:notification.vote.post.slug})}}">post</a>
+{%else%}
+<a href="{{path('p4m_social_profile',{username:notification.vote.user.username})}}">{{notification.vote.user.username }}</a> {% if notification.vote.score >0%}liked{%else%}unliked{%endif%} your stream <a href="{{path('p4m_core_showWall',{wallSlug:notification.vote.wall.slug})}}">notification.vote.wall.name</a>
+{%endif%}
+        
+        
+
+
+
+{%endblock%}

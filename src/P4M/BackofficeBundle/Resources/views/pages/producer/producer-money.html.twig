@@ -1,0 +1,91 @@
+{% extends "P4MBackofficeBundle::my-account.html.twig" %}
+
+
+
+ {% block page %}
+<h2 class="form-title">Your pay-outs</h2>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Creation Date</th>
+          <th>Executed Date</th>
+          <th>Credited Funds</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        {%for payout in payouts%}
+            <tr>
+                <th>{{payout.CreationDate|date('d-m-Y')}}</th>
+                <td>{{payout.ExecutionDate|date('d-m-Y')}}</td>
+                <td>{{payout.CreditedFunds.Amount / 100}} {{payout.CreditedFunds.Currency}}</td>
+                <td>{{payout.Status}}</td>
+            </tr>
+           
+        {%endfor%}
+    
+     
+      </tbody>
+    </table>
+    
+    
+{%if payoutPending%}
+    <div class="explanation-zone">
+        <p>Prior transfer is not complete yet. Please wait until it is fully processed </p>
+    </div>
+{%elseif wallet is null%}
+        <div class="explanation-zone">
+            <p>Please <a href="{{path('p4_m_backoffice_producer_key')}}">activate your producer account.</a> </p>
+        </div>
+{%elseif wallet.Balance.Amount>=100%}
+    {%if bankAccounts|length%}
+    <form method="post" enctype="multipart/form-data"  class="form-horizontal" role="form" action="">
+        <div class="explanation-zone">
+            <p>You can payout from your producer wallet to your registred bank account. <strong>{{wallet.Balance.Amount/100}} {{wallet.Balance.Currency}}</strong> will be transfered to your selected bank account</p>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-20 control-label form-field-title" for="banckAccount">Choose a registred account *</label>
+
+            <div class="col-sm-30">
+                <select name="bankAccount" id="bankAccount" class="form-control" required="required">
+                    <option></option>
+                    {%for account in bankAccounts%}
+                    <option value="{{account.Id}}">{%if account.Type=='IBAN'%}{{account.Details.IBAN}}{%endif%} {{account.Type}}</option>
+                    {%endfor%}
+                </select>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <button class="primary" type="submit">Pay Out</button>
+    </form>
+    {%else%}
+    <div class="explanation-zone">
+        <p>Please register a bank account in order to transfer the money.</p>
+    </div>
+    {
+    {%endif%}
+{%elseif wallet.Balance.Amount<100%}
+       <div class="explanation-zone">
+            <p>To be able to wire the money to your external bank account, you need to have more than 1€ in your wallet. You actually have <strong>{{wallet.Balance.Amount/100}} {{wallet.Balance.Currency}}</strong></p>
+        </div> 
+        
+  
+    
+    
+{%endif%}
+
+
+        
+            
+
+
+
+
+
+{% endblock%}
+
+
+
+
+

@@ -1,0 +1,14 @@
+ <h3 class="widget-title">Manage your account</h3>
+<ul class="account-menu unstyled">
+    
+    {%for link in menu%}
+    {%set selected = ''%}
+    {% if route == link.path %}
+        {%set selected = ' selected'%}
+   {% endif %}
+        <li>
+                <a href='{{path(link.path)}}' class="account-menu-link{{selected}}"><i class="icon-chevron-right"></i>{{link.name}}</a>
+        </li>
+    {%endfor%}
+       
+</ul>

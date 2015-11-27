@@ -1,0 +1,40 @@
+{% extends "P4MCoreBundle:Core/Template:wall-template.html.twig" %}
+
+{% block headTitle %}{{parent()}} {% if wall is defined %}{{wall.name}}{% endif%}{%endblock%}
+
+{% block meta %}
+    {{parent()}}
+    {% if wall is defined %}
+    <meta property="og:url" content="{{url('p4m_core_showWall',{wallSlug : wall.slug})}}" />
+    <meta property="og:title" content="{{wall.name}}" />
+    <meta name="keywords" content="{{wall.includedTags|join(',')}}" >
+    <meta name="description" content="{{wall.description}}">
+    <meta name="og:description" content="{{wall.description}}">
+    <meta name="og:image" content="{{app.request.getSchemeAndHttpHost() ~asset(wall.picture.webPath)}}">
+    {%endif%}
+{%endblock%}
+
+{% block actionBarMenu %}
+{%if user%}
+{% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-wall-menu.html.twig"%}
+{%else%}
+{% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-wall-menu-nolog.html.twig"%}
+{%endif%}
+{%endblock%}
+
+{% block actionBarAction %}
+{%if user%}
+{% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-wall-actions.html.twig"%}
+{%else%}
+{% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-wall-actions-nolog.html.twig"%}
+{%endif%}
+
+{% endblock%}
+
+
+
+
+
+
+
+

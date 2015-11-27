@@ -1,0 +1,15 @@
+<article id="content-wrap" {%if isMobile()%}class="mobile"{%endif%} data-viewid="{{viewId}}">
+        <!--<img src="files/design/loader.gif" id="post_iframe_loader" />-->
+        {%if post.embed != null  and post.embed|length %}
+        {{post.embed|raw}}
+        {%else%}
+        <iframe id="post_iframe" src="{%if post.embed != null  and post.embed|length %}{%else%}{{post.sourceUrl|filterIframeUrl()}}{%endif%}" {% if post.sourceUrl|isTrustedSource == false%} sandbox="allow-forms allow-scripts" {%endif%} ></iframe>
+{#        <iframe id="post_iframe" src="{%if post.embed != null  and post.embed|length %}{%else%}{{post.sourceUrl|filterIframeUrl()}}{%endif%}" sandbox="allow-forms allow-scripts"></iframe>#}
+        {%endif%}
+</article>
+
+
+
+
+
+

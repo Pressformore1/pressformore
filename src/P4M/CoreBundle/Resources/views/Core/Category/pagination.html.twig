@@ -1,0 +1,9 @@
+<div style="display: none;" class="pagination" role="navigation">
+ <span>Page 1 of {{nombrePages}}</span><span class="current">1</span>  
+{# {%set i=1 %}#}
+{% for i in 2..nombrePages %}
+   
+    <a href="{{path('p4m_core_category', { 'page': i,'categoryName':category.name})}}" class="inactive">{{i}}</a>
+    
+{% endfor %}
+</div>

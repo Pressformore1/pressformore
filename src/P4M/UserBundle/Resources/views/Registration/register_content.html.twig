@@ -1,0 +1,91 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+
+{#    <div class="span12">#}
+       {# <div class="col-md-50 col-lg-50 col-sm-50 col-xs-60 col-lg-offset-5 col-md-offset-5 col-sm-offset-5">
+            <h1 class="page-align-center-title">Request an access</h1>#}
+            <p class="page-align-center-content">You already get an account <a href="{{ path('fos_user_security_login') }}">sign in</a></p>
+
+            {%if form_errors(form)|length %}
+        <p><i class="icon-info-sign"></i>{{ form_errors(form) }}</p>
+            {%endif%}
+            
+                           <form action="{{ path('fos_user_registration_register') }}" {{ form_enctype(form) }} method="POST" class="fos_user_registration_register">
+                <div class="login-illu col-lg-17 col-md-17 hidden-sm hidden-xs">
+                                    <img class="register-email-illu" src="{{asset('images/design/icon-email.png')}}" alt="" />
+                </div>
+                <div class="form-blocks  col-lg-43 col-md-43 col-sm-43 col-xs-60">
+                                    {{form_errors(form)}}
+                                    <div class="form-blocks">
+                                            <div class="form-line">
+                                     <div class="form-field col-lg-30 colcol-md-35 col-sm-35 col-xs-60">
+                                                        {{ form_errors(form.username) }}
+                                                        <label for="{{form.username.vars.id}}" class="form-field-title">Username <small class="form-field-explanation">(Title of your profile)</small></label>
+                                                           {{form_widget(form.username,{ 'attr': {'class': 'form-field-input'} })}} 
+                                                    </div>
+                                     <div class="form-field col-lg-30 colcol-md-35 col-sm-35 col-xs-60">
+                                                        {{ form_errors(form.email) }}
+                                                        <label for="{{form.email.vars.id}}" class="form-field-title">Email</label>
+                                                           {{form_widget(form.email,{ 'attr': {'class': 'form-field-input'} })}}
+                                                            
+                                                    </div>
+                                                    <div class="clear"></div>
+                                            </div>
+                                            <div class="form-line">
+                                     <div class="form-field col-lg-30 colcol-md-35 col-sm-35 col-xs-60">
+                                                        {{ form_errors(form.firstName) }}
+                                                            {{ form_label(form.firstName, 'First name',{ 'label_attr': {'class': 'required form-field-title'} }) }}
+                                                            {{form_widget(form.firstName,{ 'attr': {'class': 'form-field-input'} })}}
+                                                    </div>
+                                     <div class="form-field col-lg-30 colcol-md-35 col-sm-35 col-xs-60">
+                                                        {{ form_errors(form.lastName) }}
+                                                           {{ form_label(form.lastName, 'Last name',{ 'label_attr': {'class': 'required form-field-title'} }) }}
+                                                           {{form_widget(form.lastName,{ 'attr': {'class': 'form-field-input'} })}}
+                                                    </div>
+                                                    <div class="clear"></div>
+                                            </div>
+                                            <div class="form-line">
+                                     <div class="form-field col-lg-30 colcol-md-35 col-sm-35 col-xs-60">
+                                                        {{ form_errors(form.plainPassword) }}
+                                                              {{ form_label(form.plainPassword.first, 'Password',{ 'label_attr': {'class': 'required form-field-title'} }) }}
+                                                            {{form_widget(form.plainPassword.first,{ 'attr': {'class': 'form-field-input'} })}}
+                                                    </div>
+                                     <div class="form-field col-lg-30 colcol-md-35 col-sm-35 col-xs-60">
+                                                        {{ form_errors(form.plainPassword) }}
+                                                         {{ form_label(form.plainPassword.second, 'Confirm your password',{ 'label_attr': {'class': 'required form-field-title'} }) }}
+                                                            {{form_widget(form.plainPassword.second,{ 'attr': {'class': 'form-field-input'} })}}
+                                                        <br />
+                                                            <p id="password-match" class="hidden-soft"><small>Password are similar</small></p>
+                                                            <p id="password-no-match" class="hidden-soft"><small>Password are not similar</small></p>
+                                                    </div>
+                                                    <div class="clear"></div>
+                                            </div>
+                                            {#<div class="form-line">
+                                     <div class="form-field col-lg-30 colcol-md-35 col-sm-35 col-xs-60">
+                                                        
+                                                        <label for="invitationCode" class="form-field-title">Your invitation code <small class="form-field-explanation"></small> <a data-target="#modal-join-us" data-toggle="modal" href="#beta-coming-soon" class="">Get one</a></label>
+                                                           <input type="text" class="form-field-input" name="invitationCode" id="invitationCode" value="{{ app.request.query.get('token') }}" />
+                                                    </div>
+                                                    <div class="clear"></div>
+                                            </div>#}
+                                            </div>
+                    </div>
+                                    <div class="clear"></div>
+                                    <footer class="form-footer">
+                                            <div class="form-condition">
+                                                {{ form_errors(form.termsAccepted) }}
+                                                    {{form_widget(form.termsAccepted)}}
+                                                    <label for="{{form.termsAccepted.vars.id}}">I acknowledge that I have read and accept the <a target="_blank" href="{{ path('p4m_core_home') }}#legal-mention">Terms of Use Agreement</a>.</label>
+                                            </div>
+                                            <button class="primary" type="submit">Create Account</button>
+                                            <div class="clear"></div>
+                                    </footer>
+                                    
+                                    {{form_rest(form)}}
+                            </form>
+
+
+                            <div class="clear"></div>
+                   {# </div>
+            <div class="clear"></div>#}
+{#        </div>#}

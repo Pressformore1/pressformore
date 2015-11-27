@@ -1,0 +1,58 @@
+<li id="action-bar-follow">
+    {%if userDisplayed.id == user.id%}
+        <a class="action-bar-link " data-ajaxTarget="profile-wall-form" href="{{path('p4_m_backoffice_profile_infos')}}" title="Manage your account">
+            <span class="action-bar-icon glyphicon cogwheel"></span>
+        </a>
+    {%else%}
+        <a class="to-follow action-bar-link ajax_action{%if following == true%} hidden{%endif%}" href="#" title="Follow {{userDisplayed.username}}" data-url="{{url('p4m_ajax_action')}}" data-action="follow" data-params="{{{'user':userDisplayed.id,callBack:'follow-action'}|json_encode()}}" data-key="{{{'user':userDisplayed.id,callBack:'follow-action'}|json_encode()|sha512}}">
+            <span class="action-bar-icon glyphicon user_add"></span>
+        </a>
+        <a class="followed action-bar-link ajax_action{%if following == false%} hidden{%endif%}" href="#" title="Unfollow {{userDisplayed.username}}" data-url='{{url('p4m_ajax_action')}}' data-action='unfollow' data-params='{{{'user':userDisplayed.id,callBack:'follow-action'}|json_encode()}}' data-key='{{{'user':userDisplayed.id,callBack:'follow-action'}|json_encode()|sha512}}'>
+            <span class="action-bar-icon glyphicon user_remove"></span>
+        </a>
+    {%endif%}
+</li>
+<li class="action-bar-item">
+    <a class="action-bar-link content-modifier ajax_form_force" data-ajaxTarget="profile-wall-form" data-toggle="action-bar" data-target="#section-strews" href="#strews" title="{{userDisplayed.username}}'s strews">
+        <span class="action-bar-icon icon-strew"></span>
+    </a>
+</li>
+
+
+<li class="action-bar-item">
+    <a class="action-bar-link content-modifier ajax_form_force"  data-ajaxTarget="profile-community-form" data-toggle="action-bar" data-target="#section-community" href="#community" title="{{userDisplayed.username}}'s community">
+        <span class="action-bar-icon glyphicon group">
+        </span>
+    </a>
+</li>
+
+{#<li class="action-bar-item">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-badges" href="#badges" title="{{userDisplayed.username}}'s reputation">
+        <span class="action-bar-icon glyphicon crown"></span>
+    </a>
+</li>#}
+
+<li class="action-bar-item">
+    <a class="action-bar-link content-modifier ajax_form_force" data-toggle="action-bar" data-target="#section-posts" data-ajaxTarget="action-bar-filters-posts" href="#posts" title="{{userDisplayed.username}}'s activity">
+        <span class="action-bar-icon glyphicon cardio"></span>
+    </a>
+</li>
+
+{#<li class="action-bar-item">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-stats" href="#stats" title="{{userDisplayed.username}}'s stats">
+        <span class="action-bar-icon glyphicon charts"></span>
+    </a>
+</li>#}
+
+<li class="action-bar-item content-modifier">
+    <a class="action-bar-link{% if userDisplayed.flag is null or flagged == true%} current-action-bar-item{%endif%}" data-toggle="action-bar" data-target="#section-infos" href="#infos"  title="About {{userDisplayed.username}}">
+        <span class="action-bar-icon glyphicon circle_info"></span>
+    </a>
+</li>
+
+
+<li class="action-bar-item" id="action-bar-report">
+    <a class="action-bar-link{% if userDisplayed.flag and flagged == false%} current-action-bar-item{%endif%}" data-toggle="action-bar" data-target="#section-report" href="#report" title="Report user">
+        <span class="glyphicon flag"></span>
+    </a>
+</li>

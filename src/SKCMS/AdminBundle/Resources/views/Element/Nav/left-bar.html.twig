@@ -1,0 +1,27 @@
+<!-- left menu starts -->
+<div class="span2 main-menu-span">
+        <div class="well nav-collapse sidebar-nav">
+                <ul class="nav nav-tabs nav-stacked main-menu">
+                {% for group in menuGroups%}
+                     <li class="nav-header hidden-tablet">{{group.name}}</li>
+                    {% for elementType in entititesType%}
+                        {% if elementType.menuGroup == group.id%}
+                            <li><a class="ajax-link" href="{{path('sk_admin_list',{'entity':elementType.name})}}"><i class="icon-eye-open"></i><span class="hidden-tablet"> {{elementType.beautyName|title}}</span></a></li>
+                        {%endif%}
+                    {%endfor%}
+                {%endfor%}
+                       <li class="nav-header hidden-tablet">Wallets</li>
+                       <li><a class="ajax-link" href="{{path('sk_admin_charge_wallet')}}"><i class="icon-eye-open"></i><span class="hidden-tablet"> Charge wallets</span></a></li>
+                       <li class="nav-header hidden-tablet">Authors</li>
+                       <li><a class="ajax-link" href="{{path('sk_admin_wanted_pressforms')}}"><i class="icon-eye-open"></i><span class="hidden-tablet"> Wanted pressform</span></a></li>
+                       <li class="nav-header hidden-tablet">Users</li>
+                       <li><a class="ajax-link" href="{{path('sk_admin_user_list')}}"><i class="icon-eye-open"></i><span class="hidden-tablet"> Users</span></a></li>
+                        {#<li><a class="ajax-link" href="{{path('sk_admin_homepage')}}"><i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span></a></li>
+                        {% for elementType in entititesType%}
+                        <li><a class="ajax-link" href="{{path('sk_admin_list',{'entity':elementType.name})}}"><i class="icon-eye-open"></i><span class="hidden-tablet"> {{elementType.beautyName|title}}</span></a></li>
+                        {% endfor%}#}
+                </ul>
+{#                <label id="for-is-ajax" class="hidden-tablet" for="is-ajax"><input id="is-ajax" type="checkbox"> Ajax on menu</label>#}
+        </div><!--/.well -->
+</div><!--/span-->
+<!-- left menu ends -->

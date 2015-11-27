@@ -1,0 +1,6 @@
+p4_m_contact_homepage:
+    pattern:  /
+    defaults: { _controller: P4MContactBundle:Contact:index }
+p4_m_contact_submit:
+    pattern:  /submit
+    defaults: { _controller: P4MContactBundle:Contact:submit }

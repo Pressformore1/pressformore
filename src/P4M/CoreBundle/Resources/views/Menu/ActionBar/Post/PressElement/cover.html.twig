@@ -1,0 +1,12 @@
+<div id="section-cover-block">
+<header class="cover-block press-cover">
+
+    <img class="cover-pic thumb-align" src="{%if post.author.picture %}{{asset(post.author.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}" alt="{{post.author.username}}" />
+    <a href="{{path('p4m_social_profile',{username:post.author.username})}}" class="cover-cover-link"><i class="glyphicon search"></i></a>
+
+    <h1 class="cover-block-title">
+        <span class="main"><span class="glyphicon pen"></span> {{post.author.username}}</span><br />
+        <span class="sub">{{post.author.name|title}} {{post.author.surname|title}}</span>
+    </h1>
+</header>
+</div>

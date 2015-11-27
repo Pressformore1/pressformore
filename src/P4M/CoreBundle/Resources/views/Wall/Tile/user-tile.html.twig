@@ -1,0 +1,56 @@
+<article data-brick-type="small-brick" class="masonry-block is-hidden" id="user_{{result.id}}">
+    <div class="tile-wrap">
+        <div class="tile">
+            <div class="tile-user">
+                <header class="tile-header">
+                    <h2 class="tile-header-title">
+                        <span class="main"><span class="glyphicon user"></span> {{result.username}}</span><br />
+                        <span class="sub">{{result.name|title}} {{result.surname|capitalize}}</span>
+                    </h2>
+                    <div class="tile-header-thumb">
+{#                    {% if result.picture.webPath is defined%}#}
+                        <img class="thumb-align" src="{%if result.picture %}{{asset(result.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}{#{{asset(result.picture.webPath)}}#}" alt="">
+{#                    {% endif %}#}
+                    </div>
+
+                </header>
+
+                <div class="tile-hover">
+                    <h2 class="tile-hover-title">
+                        <a href="{{path('p4m_social_profile',{'username':result.username})}}">
+                        <span class="main"><span class="glyphicon show_big_thumbnails"></span> {{result.username}}</span>
+                        </a>
+                    </h2>
+                    <h2 class="user-content-activity">{{result.title}}</h2>
+                    <p class="user-content-city">{{result.city}}</p>
+                    <p class="tile-hover-description"><a href="{{path('p4m_social_profile',{'username':result.username})}}">{{result.bio}}</a></p>
+
+                    <footer class="tile-hover-footer">
+                            <!--Meta source/author/reach-->
+                            <div class="tile-hover-footer-meta">
+                                    <a class="tile-hover-meta" href="{{path('p4m_social_profile',{'username':result.username})}}">{{result.followers|length}} <span class="glyphicon user_add"></span> </a>                                                
+                            </div>
+                            <div class="clear"></div>
+
+                    </footer>
+                </div>
+            </div>
+            {%if user is defined and user%}
+            <button class="tile-follow-btn ajax_action{%if user|followUser(result) == true%} hidden{%endif%}" data-url="{{path('p4m_ajax_action')}}" data-action="follow" data-params="{{{user:result.id,callBack:'followUserFromTile',listener:''}|json_encode() }}" data-key="{{{user:result.id,callBack:'followUserFromTile',listener:''}|json_encode()|sha512() }}" data-loader="none">
+               <span class="glyphicon user_add"></span> 
+               <!--<span class="text">Follow</span>-->
+           </button>
+            <button class="tile-follow-btn red ajax_action{%if user|followUser(result) == false%} hidden{%endif%}" data-url="{{path('p4m_ajax_action')}}" data-action="unfollow" data-params="{{{user:result.id,callBack:'followUserFromTile',listener:''}|json_encode() }}" data-key="{{{user:result.id,callBack:'followUserFromTile',listener:''}|json_encode()|sha512() }}" data-loader="none">
+               <span class="glyphicon user_remove"></span> 
+               <!--<span class="text">Follow</span>-->
+           </button>
+            {%else%}
+            <button class="tile-follow-btn " data-toggle="modal" data-target="#modal-register" >
+               <span class="glyphicon user_add"></span> 
+               <!--<span class="text">Follow</span>-->
+           </button>
+            {%endif%}
+
+        </div>
+    </div>
+    </article>

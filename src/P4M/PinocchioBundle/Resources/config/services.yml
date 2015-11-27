@@ -1,0 +1,18 @@
+parameters:
+    p4_m_pinocchio.score.LVL1 : 1.2
+    p4_m_pinocchio.score.LVL2 : 1.5
+    p4_m_pinocchio.score.LVL3 : 2
+    p4_m_pinocchio.score.LVL4 : 2.5
+    p4_m_pinocchio.score.LVL5 : 3
+
+    p4_m_pinocchio.score.NIV1 : 3
+    p4_m_pinocchio.score.NIV2 : 2
+    p4_m_pinocchio.score.NIV3 : 1
+#    p4_m_pinocchio.example.class: P4M\PinocchioBundle\Example
+
+services:
+    p4_m_pinocchio.postActivity_listener:
+        class: P4M\PinocchioBundle\Event\PostActivityListener
+        arguments: ["@doctrine.orm.entity_manager"]
+        tags:
+            - { name: kernel.event_listener, event: p4mpinocchio.post_activity, method: onPostActivity }

@@ -1,0 +1,33 @@
+ <li class="tag-item">
+
+    <a class="add-to-box tag-button" href="{{path('p4m_core_search')}}?k={{tag.name}}&where=post">
+       {{tag.name|capitalize}}
+    </a>
+
+    {#<div class="add-to-box-contenair">
+       <h4 class="add-to-box-title"><span class="glyphicon tag"></span> {{tag.name|title}} </h4>
+#}
+       {#<p class="add-to-box-description">A short description of this category, isn'it awesome? </p>#}
+    {#{%if user and user != "anon."%}
+       <span class="add-to-box-link">Add/remove to <span class="glyphicon chevron-right"></span></span>
+
+       <ul class="add-to-box-strew-list">
+        {%for wall in user.walls%}
+            <li>
+                <form method="post" class="ajax_form" data-action="tagToWall" data-url="{{path('p4m_ajax_action')}}" data-key="{{'tagToWall'|sha512}}" data-target="serialize" >
+                    <input type="hidden" name="tagId" value="{{tag.id}}" />
+                    <input type="hidden" name="wallId" value="{{wall.id}}" />
+                    <input type="hidden" name="remove" id="tag{{tag.id}}_wall{{wall.id}}" value="{% if wall.includedTags.contains(tag) %}0{%else%}1{% endif %}" />
+                    <input type="checkbox" data-linked="tag{{tag.id}}_wall{{wall.id}}" class="addToWallCheckbox checkbox" name="add" id="wall_{{wall.id}}-tag_{{tag.id}}" {% if wall.includedTags.contains(tag) %}checked="checked"{%endif%}/><label for="wall_{{wall.id}}-tag_{{tag.id}}">{{wall.name}}</label></a>
+                </form>
+            </li>
+       {%endfor%}
+       </ul>
+    {%endif%}
+   </div>#}
+</li>
+
+
+                       
+                       
+ 

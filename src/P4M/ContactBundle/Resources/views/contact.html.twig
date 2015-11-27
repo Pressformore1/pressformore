@@ -1,0 +1,87 @@
+<div class="row-fluid">
+    <div class="span12">
+        <div class="page-align-center">
+            <h1 class="page-align-center-title">Contact US</h1>
+            
+           
+            
+        {%if flashMessage is defined%}
+            <p class="page-align-center-content">{{ flashMessage }}</p>
+        
+        {%elseif app.session.flashbag.get('error')|length or app.session.flashbag.get('success')|length%}
+                     
+           
+           {% for flashMessage in app.session.flashbag.get('error') %}
+               <div class="alert alert-error">
+                   <button type="button" class="close" data-dismiss="alert">&times;</button>
+                   {{ flashMessage }}
+               </div>
+           {% endfor %}
+           
+           {% for flashMessage in app.session.flashbag.get('success') %}
+               <div class="alert alert-success">
+                   <button type="button" class="close" data-dismiss="alert">&times;</button>
+                   {{ flashMessage }}
+               </div>
+           {% endfor %}
+            
+            <p class="page-align-center-content">{{ form_errors(form) }}</p>
+        
+        {%else%}
+            
+            <p class="page-align-center-content">Let us know what you think about PFM...</p>
+            <form method="post" {{ form_enctype(form) }} class="form-horizontal ajax_form" role="form" id="contact_form" data-target="serialize" data-url="{{path('p4_m_contact_submit')}}" >
+            
+                <div class="explanation-zone"></div>
+
+                <div id="p4m_userbundle_user">
+
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label form-field-title" for="{{form.name.vars.id}}">Your name</label>
+
+                        <div class="col-sm-30">
+                            {{form_widget(form.name,{attr:{class:'form-control'} })}}
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+
+                 <div id="p4m_userbundle_user">
+
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label form-field-title" for="{{form.email.vars.id}}">Your email</label>
+
+                        <div class="col-sm-30">
+                            {{form_widget(form.email,{attr:{class:'form-control'} })}}
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+
+                 <div id="p4m_userbundle_user">
+
+                    <div class="form-group">
+                        <label class="col-sm-8 control-label form-field-title" for="{{form.message.vars.id}}">Message</label>
+
+                        <div class="col-sm-30">
+                            {{form_widget(form.message,{attr:{class:'form-control'} })}}
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+                {{form_rest(form)}}
+
+                <button class="primary" type="submit">Send</button>
+           </form>
+            {%endif%}
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

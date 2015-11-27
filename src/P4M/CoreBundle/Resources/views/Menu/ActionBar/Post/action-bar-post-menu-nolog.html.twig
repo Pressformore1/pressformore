@@ -1,0 +1,78 @@
+<li id="action-bar-pfm" class="action-bar-item">
+    <a id="pfm-button" class="action-bar-link action-bar-autostart" data-delay="10" data-toggle="action-bar" data-target="#section-press" href="#press"  title="Discover how to contribute."><span class="action-bar-icon icon-logo"></span></a> 
+
+</li>
+
+{#{% set voteScore = user.id|postVoteScore(post.id)%}#}
+<li id="action-bar-rate">
+        <div id="action-bar-ratio-wrap">
+                <span class="ratio-plus-number">{{positiveVotesNumber}}</span>
+
+                <div id="action-bar-ratio">
+                        <div class="ratio-plus"></div>
+                        <div class="ratio-less"></div>
+                </div>	
+                <span class="ratio-less-number">{{negativeVotesNumber}}</span>	
+        </div>
+
+        <div id="action-bar-vote-wrap">
+                <a data-vote-number="{{positiveVotesNumber}}" id="rating_more"  class="action-bar-link action-bar-rate-button" data-toggle="modal" data-target="#modal-register" href="#" title="Vote up !" >
+                        <span class="action-bar-icon glyphicon plus"></span>
+                </a>
+
+                <a data-vote-number="{{negativeVotesNumber}}" id="rating_less" class="action-bar-link action-bar-rate-button" data-toggle="modal" data-target="#modal-register" href="#" title="Vote down !" >
+                        <span class="action-bar-icon glyphicon minus"></span>
+                </a>
+        </div>
+
+</li>
+
+
+
+
+<li class="action-bar-item">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-comments" href="#comments" title="See the comments or add one!">
+        <span class="action-bar-icon glyphicon comments">
+            <span class="action-bar-text">{{post.comments|length}}</span>
+        </span>
+    </a>
+</li>
+
+{#<li class="action-bar-item">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-stats" href="#stats" title="Stats of this content">
+        <span class="action-bar-icon glyphicon charts"></span>
+    </a>
+</li>#}
+<li class="action-bar-item">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-meta" href="#meta" title="About this content">
+        <span class="action-bar-icon glyphicon circle_info"></span>
+    </a>
+</li>
+
+{#
+<li id="action-bar-report">
+    <a class="action-bar-link" data-toggle="action-bar" href="#report" data-target="#section-report"  title="Report an error">
+        <span class="glyphicon flag"></span>
+    </a>
+</li>#}
+
+
+
+
+
+
+
+
+
+
+
+
+{#<li id="action-bar-report" class="action-bar-item">#}
+{#{% if post.flags|length %}
+    <a class="action-bar-link ajax_action" data-url="{{path('p4m_ajax_action')}}" data-action="flaggedPost" data-params="{{{'postId':post.id}|json_encode()}}" data-key="{{{'postId':post.id}|json_encode()|sha512}}"  title="Report this post">
+{% else %}#}
+{#    <a class="action-bar-link" href="#" data-target="#modal-reportPost" data-toggle="modal"  title="Report this post">#}
+{#{%endif%}#}
+{#        <span class="action-bar-icon glyphicon glyphicon-flag"></span>#}
+{#    </a>#}
+{#</li>#}

@@ -1,0 +1,82 @@
+{# On étend notre layout #}
+{% extends "P4MAdminBundle::admin.html.twig" %}
+
+{% block pageTitle%}Edit Category {{category.name}}{% endblock %}
+{% block pageSubTitle%}<h3 class="entry-title"><a href="{{path('p4m_admin_categorylist')}}">Back to category list</a></h3>{% endblock %}
+{# Dans notre layout, il faut définir le block body #}
+{% block leftCol %}
+{{parent()}}
+
+        <fieldset class="info_fieldset">
+            
+            <div id="note">
+            
+            </div>
+            <div id="contacts-form">
+                <form method="post" {{ form_enctype(form) }}>
+                    <div class="formElement">
+                        {{ form_errors(form.name) }}
+                        {{ form_label(form.name, 'Category Name :') }}
+                        {{ form_widget(form.name) }}  
+                    </div>
+                    <div class="formElement">
+                        {{ form_errors(form.description) }}
+                        {{ form_label(form.description, 'Category description :') }}
+                        {{ form_widget(form.description) }}  
+                    </div>
+                    
+                    <div class="formElement">
+                    {{ form_errors(form.iconColor) }}                        
+                        {%if category.iconColor%}
+                        
+                        <img src="{{asset(category.iconColor)}}"  width="50" alt="" />
+                        {%endif%}
+                        {{ form_label(form.iconColor, 'Category Icon Color:') }}
+                        {{ form_widget(form.iconColor) }}  
+                    </div>
+                    <div class="formElement">
+                    {{ form_errors(form.iconGrey) }}                        
+                        {%if category.iconGrey%}
+                        
+                        <img src="{{asset(category.iconGrey)}}"  width="50" alt="" />
+                        {%endif%}
+                        {{ form_label(form.iconGrey, 'Category Icon Grey:') }}
+                        {{ form_widget(form.iconGrey) }}  
+                    </div>
+                    <div class="formElement">
+                        {{ form_errors(form.draft) }}
+                        <label class="checkbox">
+                            {{ form_widget(form.draft) }}  
+                            is Draft
+                          </label>
+                        
+                        </div>
+                    {{form_rest(form)}}
+                    <div class="formElement">
+                        <input type="submit" class="btn btn-primary" />
+                    </div>
+              </form>
+            </div>
+            <div class="clear"></div>
+            {% if category.id %}
+            <div class="clear text-right edit-actions">
+                <a href="{{path('p4m_admin_deletecategory',{'categoryId':category.id})}}" class="btn btn-danger">DELETE CATEGORY</a>
+            </div>
+            {%endif%}
+                                  <!-- end #contact-form -->
+        </fieldset>
+
+
+                        
+{% endblock %}{# empty Twig template #}
+
+
+{%block scriptPlugins %}
+{{parent()}}
+<script type="text/javascript" src="{{ asset('bundles/jonlilckfinder/ckfinder.js') }}"></script>
+{% endblock %}
+
+{% block scriptCustom %}
+{{parent()}}
+<script type="text/javascript" src="{{asset('js/scripts/admin/script-admin.js')}}"></script>
+{%endblock%}{# empty Twig template #}

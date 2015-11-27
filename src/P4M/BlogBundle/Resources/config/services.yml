@@ -1,0 +1,7 @@
+parameters:
+#    p4_m_blog.example.class: P4M\BlogBundle\Example
+
+services:
+#    p4_m_blog.example:
+#        class: %p4_m_blog.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

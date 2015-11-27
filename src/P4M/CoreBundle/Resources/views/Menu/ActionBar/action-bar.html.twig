@@ -1,0 +1,215 @@
+{%set route = app.request.get('_route')%}
+
+<div id="action-bar-wrap">
+{#  *
+*
+*   MENU
+*
+#}
+    
+    <ul id="action-bar">
+    {%if route == 'p4m_core_showWall' or route == 'p4m_core_showHistory' or route == 'p4m_core_showReadLater' %}
+        
+        {% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-wall-menu.html.twig"%}
+    
+    {% elseif route == "p4m_core_post"%}
+        {%if user is not null%}
+            {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-menu.html.twig"%}
+        {%else%}
+            {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-menu-nolog.html.twig"%}
+        {%endif%}
+    {% elseif route == "p4m_social_profile"%}
+        {%if user is not null%}
+        {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-menu.html.twig"%}
+        {%else%}
+        {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-menu-nolog.html.twig"%}
+        {%endif%}
+    {%endif%}
+    </ul>
+{#  *
+*
+*   SECTIONS
+*
+#}
+    <div id="action-bar-sections-wrap">
+        <a id="action-bar-remove" href="#closeSections"><i class="icon-remove"></i></a>
+        <div id="action-bar-sections-slider">
+            <ul id="action-bar-sections">
+                {%if route == 'p4m_core_showWall'%}
+                    {% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-wall-actions.html.twig"%}
+                {#{% elseif route == 'p4m_core_showHistory' %}
+                    {% include "P4MCoreBundle:Menu/ActionBar/Wall:history-filters.html.twig"%}#}
+                {% elseif  route == 'p4m_core_showHistory'  or route == 'p4m_core_showReadLater'%}
+                    {% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-filters-action.html.twig"%}
+                {% elseif route == "p4m_core_post"%}
+                    {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-actions.html.twig"%}
+                {% elseif route == "p4m_social_profile"%}
+                    {%if user is not null%}
+                    {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-actions.html.twig"%}
+                    {%else%}
+                    {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-actions-nolog.html.twig"%}
+                    {%endif%}
+                {%endif%}
+            </ul>
+        </div>
+    </div>
+    
+    
+    
+</div>
+
+{#
+
+{% set post = postvars.post %}
+{% set negativeVotesNumber = postvars.negativeVotesNumber %}
+{% set positiveVotesNumber = postvars.positiveVotesNumber %}
+
+<div id="post-menu-wrap">
+        <ul id="post-menu">
+                <li class="post-menu-item">
+                        <a class="post-menu-link" data-target="#section-meta" href="#meta"  title="About this post!">
+                                <i class="post-menu-icon icon-info-sign"></i>
+                        </a>
+                </li>
+                <li class="post-menu-item">
+                        <a class="post-menu-link" data-target="#section-comments" href="#comments" title="See the comments or add one!">
+                                <i class="post-menu-icon icon-comments"></i>
+                        </a>
+                </li>
+                <li class="post-menu-item">
+                        <a class="post-menu-link" data-target="#section-pressform" href="#user"  title="About the author!">
+                                <i class="post-menu-icon icon-pressformore-white"></i>
+                        </a>
+                </li>
+
+                <li class="post-menu-item" id="post-menu-rating-item">
+                        <div id="post-menu-rating">
+                            <button data-vote-number="{{positiveVotesNumber}}" id="rating_less" class="ajax_action" data-url="{{path('p4m_ajax_action')}}" data-params="{{{'score':-1,'postId':post.id}|json_encode()}}" data-action="vote" data-key="{{{'score':-1,'postId':post.id}|json_encode()|sha512}}">
+                                        <i class="icon-minus"></i>
+                                        <span class="vote-number">{{positiveVotesNumber}}</span>
+                                </button>
+
+                                <button data-vote-number="{{negativeVotesNumber}}" id="rating_more" class="ajax_action" data-url="{{path('p4m_ajax_action')}}" data-params="{{{'score':1,'postId':post.id}|json_encode()}}" data-action="vote" data-key="{{{'score':1,'postId':post.id}|json_encode()|sha512}}">
+                                        <i class="icon-plus"></i>
+                                        <span class="vote-number">{{negativeVotesNumber}}</span>
+                                </button>
+                        </div>
+                        <!--<span id="global-rate">-->
+                                <!--	<span class="score">7/10</span>-->
+                                <!--</span>-->
+                                <!--<div id="post-menu-rates-infos">-->
+                                <!--	<span id="total-rate"><i class="icon-star"></i>1200 votes</span>-->
+                                <!--</div>-->
+                </li>
+        </ul>
+
+
+        <div id="post-menu-sections-wrap">
+                <a id="post-menu-remove" href="#closeSections"><i class="icon-arrow-right"></i></a>
+                <div id="post-menu-sections-slider">
+
+                        <ul id="post-menu-sections">
+                                <li class="post-menu-section" id="section-meta">
+                                        <div class="entry-meta">
+                                                <h1 class="post-menu-title">{{post.title}}</h1>
+
+                                                <!--Category-->
+                                                <ul class="post-menu-categories">
+                                                    
+                                                    {% for category in post.categories %}
+                                                        <li class="post-menu-category">
+                                                                <a href="{{path('p4m_core_category',{'categoryName':category.name})}}">
+                                                                        {%if category.icon%}<img alt="" class="post-menu-category-thumbnail" src="{{asset(category.icon.webPath)}}">{%endif%}
+                                                                        <span class="post-menu-category-name"> {{category.name}}</span>
+                                                                </a>
+                                                        </li>
+                                                        {% endfor %}
+                                                </ul>
+
+                                                <!--Tags-->
+                                                
+                                                
+{#                                               
+                                                <p>
+                                                        <i class="icon-tags"></i>
+                                                        {% for tag in post.tags %}
+                                                        <a href="#" title="View all posts in {{tag.name}}" >{{tag.name|title}}</a>{% if loop.last == false %}, {% endif %}
+                                                        {% endfor %}
+                                                </p>
+{#                                               
+
+
+                                                <!--Date-->
+                                                <p><i class="icon-calendar"></i>{{post.dateAdded|date('F n Y G:i')}}</p>
+
+                                                <!--Curateur-->
+                                                <p><a href=""><i class="icon-user"></i>{{post.user.username}}</a></p>
+
+
+                                                <!--Link of the post-->
+                                                <p><a href="http://unmecduweb.com"><i class="icon-globe"></i>{{post.sourceUrl}}</a></p>
+
+                                                <!--Nombre vue-->
+                                                <p><i class="icon-eye-open"></i>{{post.views|length}}</p>
+
+
+                                                <p class="post-menu-edit"><a href="" class="ajax_action" data-url="{{path('p4m_ajax_action')}}" data-action="editPost" data-params="{{{'postId':post.id}|json_encode()}}" data-key="{{{'postId':post.id}|json_encode()|sha512}}"><i class="icon-edit"></i>Edit those info</a></p>
+
+                                                <div class="shareIt">
+                                                        <h3><i class="icon-share"></i>Share this post</a></h3>
+                                                        <span class='st_facebook_large' displayText='Facebook'></span>
+                                                        <span class='st_twitter_large' displayText='Tweet'></span>
+                                                        <span class='st_linkedin_large' displayText='LinkedIn'></span>
+                                                        <span class='st_pinterest_large' displayText='Pinterest'></span>
+                                                        <span class='st_email_large' displayText='Email'></span>
+                                                        <span class='st_googleplus_large' displayText='Google +'></span>
+                                                </div>
+
+                                                <p><i class="icon-warning-sign"></i><a data-target="#modal-reportPost" data-toggle="modal" href=#Alert"">Report post</a></p>
+
+                                                <div class="clear"></div>
+                                        </div>
+
+
+
+                                </li>
+                                <li class="post-menu-section" id="section-comments">
+                                        <div class="comments-area" id="comments">
+
+                                                <div class="entry-meta">
+                                                        <h1 class="post-menu-title">{{post.title}}</h1>
+                                                </div>
+                                                <h2 class="comments-title">{{post.comments|length}} comments - <a href="#leaveComment" data-target="#modal-addComment" data-toggle="modal"  class="leave-comment">Leave a comment</a></h2>
+
+                                                <ol class="commentlist">
+                                                    {% for comment in post.comments %}
+                                                        <!-- #comment-## -->
+                                                        {%include "P4MCoreBundle:Core/Post:post-comment.html.twig" with {'comment' : comment} %}
+                                                    {% endfor %}
+                                                </ol><!-- .commentlist -->
+                                        </div>
+
+                                </li>
+                                <li class="post-menu-section" id="section-pressform">
+                                        <div class="entry-meta">
+
+                                                <!--<h5 class="widget-title">About the author</h5>-->
+                                                <h3><i class="icon-pressformore-white"></i>Pressform</a></h3>
+                                                <p>A short and good explanation!</p>
+                                                <p>Coming soon</p>
+                                                <!--<form id="pressform">-->
+                                                <!--	<label>How much would you like to give?</label>-->
+                                                <!--	<input class="pressform-amount" type="text" name="amount" value="0.50" />-->
+                                                <!--	<button class="pressform-submit"></button>-->
+                                                <!--</form>-->
+
+                                        </div>
+
+                                </li>
+                                <li class="post-menu-section" id="section-pressformore">
+
+                                </li>
+                        </ul>
+                </div>
+        </div>
+</div>#}

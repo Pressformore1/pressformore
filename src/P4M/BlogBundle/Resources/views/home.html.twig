@@ -1,0 +1,56 @@
+{% extends "P4MCoreBundle:Core/Template:wall-template.html.twig" %}
+
+
+{% block headTitle %}{{parent()}} Home {%endblock%}
+
+
+{% block bodyClass%}
+{{parent()}}
+post-page home
+{% endblock%}
+
+{% block actionBarMenu %}{% include "P4MCoreBundle:Menu/ActionBar/Blog:action-bar-blog-menu.html.twig"%}{% endblock%}
+{% block actionBarAction %}{% include "P4MCoreBundle:Menu/ActionBar/Blog:action-bar-blog-actions.html.twig"%}{% endblock%}
+
+{% block content %}
+<div id="content-wrap">
+        <!--<img src="files/design/loader.gif" id="post_iframe_loader" />-->
+{#        <iframe id="post_iframe" src="https://pressformore.creatavist.com/info" ></iframe>#}
+        <iframe id="post_iframe" src="http://blog.pressformore.com/home/index.html" ></iframe>
+</div>
+
+{% endblock %}
+
+
+
+{% block pagination %}
+{% endblock %}
+
+
+
+
+{#{% block scripts %}
+{% include "P4MCoreBundle:Core:scripts.html.twig" %}
+{% endblock %}#}
+
+{% block scriptPlugin %}
+{{parent()}}
+{% javascripts 'js/plugin/post/*.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{%endblock%}
+
+{% block scriptCustom %}
+{{parent()}}
+{% javascripts 'js/scripts/post/*.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{%endblock%}
+    
+{%block stylesheets%}
+    {{parent()}}
+    {% stylesheets 'css/post/*.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+
+{%endblock%}

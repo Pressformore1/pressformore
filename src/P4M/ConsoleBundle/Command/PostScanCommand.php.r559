@@ -1,0 +1,268 @@
+<?php
+
+namespace P4M\ConsoleBundle\Command;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class PostScanCommand extends ContainerAwareCommand
+{
+    protected function configure()
+    {
+        $this
+            ->setName('post:scan')
+            ->setDescription('Rescanne les posts pour mettre à jour l\'auteur')
+            ->addOption(
+               'tag',
+               null,
+               InputOption::VALUE_NONE,
+               'Si défini, on fait les tags'
+            )
+            ->addOption(
+               'embed',
+               null,
+               InputOption::VALUE_NONE,
+               'Si défini, on fait l\'embed'
+            )
+            ->addOption(
+               'title',
+               null,
+               InputOption::VALUE_NONE,
+               'Si défini, on fait l\'embed'
+            )
+            ->addOption(
+               'picture',
+               null,
+               InputOption::VALUE_NONE,
+               'Si défini, on fait l\'image'
+            )
+            ->addOption(
+               'description',
+               null,
+               InputOption::VALUE_NONE,
+               'Si défini, on fait l\'image'
+            )
+            ->addOption(
+               'youtube-fix',
+               null,
+               InputOption::VALUE_NONE,
+               'Si défini, on fait l\'image'
+            )
+            ->addOption(
+               'fix',
+               null,
+               InputOption::VALUE_NONE,
+               'Si défini, on fait l\'image'
+            )
+//            ->addOption(
+//               'force',
+//               null,
+//               InputOption::VALUE_NONE,
+//               'Si défini, On fait plus que la clé'
+//            )
+            ->addArgument('id', InputArgument::OPTIONAL, 'Quel post voulez vous forcer')
+//            ->addOption('yell', null, InputOption::VALUE_NONE, 'Si définie, la tâche criera en majuscules')
+        ;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        
+        $container = $this->getContainer();
+        
+        
+        $postUtils = $container->get('p4mCore.post_utils');
+        $postAnalyser = $container->get('p4mCore.post_analyser');
+        
+        $doctrine = $container->get('doctrine');
+        $em = $doctrine->getManager();
+        
+        $userRepo = $em->getRepository('P4MUserBundle:User');
+        $postRepo = $em->getRepository('P4MCoreBundle:Post');
+        
+        if ($input->getArgument('id')) {
+            $id= explode(',',$input->getArgument('id'));
+            $posts = $postRepo->findBy(['id'=>$id]);
+        }
+        else if ($input->getOption('youtube-fix'))
+        {
+            $criteria = new \Doctrine\Common\Collections\Criteria();
+            $criteria->where($criteria->expr()->eq('title', 'YouTube'));
+            $criteria->orderBy(['lastScanned'=>'ASC']);
+            $criteria->setMaxResults(100);
+            $posts = $postRepo->matching($criteria);
+        }
+        else if ($input->getOption('fix'))
+        {
+            $criteria = new \Doctrine\Common\Collections\Criteria();
+            $criteria->where($criteria->expr()->eq('title', ''));
+            $criteria->orderBy(['lastScanned'=>'ASC']);
+            $criteria->setMaxResults(200);
+            $posts = $postRepo->matching($criteria);
+        }
+        else
+        {
+            $criteria = new \Doctrine\Common\Collections\Criteria();
+            $criteria->where($criteria->expr()->lt('lastScanned', new \DateTime()));
+            $criteria->orderBy(['lastScanned'=>'ASC']);
+            $criteria->setMaxResults(50);
+            $posts = $postRepo->matching($criteria);
+        }
+        
+        
+        
+        
+        $updated = 0;
+        $scanned = 0;
+        foreach ($posts as $post)
+        {
+            $output->writeln('scan post '.$post->getId());
+//            die('title'.count($posts));
+            $postInfos = $postAnalyser->load($post->getSourceUrl());
+            $key = $postAnalyser->getKey();
+            $scanned ++;
+//            echo $post->getSourceUrl();
+//            die('key'.$postAnalyser->getResponseHTTPCode());
+            
+            if($postAnalyser->getResponseHTTPCode() !== 200)// 404
+            {
+                 $post->setQuarantaine(true);
+            }
+            else
+            {
+                $post->setQuarantaine(false);
+                if ($key !== null && ($post->getAuthor() === null || $key != $post->getAuthor()->getProducerKey()))
+                {
+                    $orginalAuthor = $post->getAuthor();
+                    $author = $userRepo->findOneBy(['producerKey'=>$key]);
+
+
+                    if (null !== $author)
+                    {
+                        $post->setAuthor($author);
+                        $updated ++;
+
+                        // Devrait être dans P4M\TrackingBundle\Listener\PostAuthorChangeCheck, mais en attendant de trouver comment 
+                        //persister dans un preUpdate ou une solution alternative se trouve ici. 
+                        $activity = new \P4M\TrackingBundle\Entity\UserActivity();
+                        $activity->setPost($post);
+                        $activity->setType(\P4M\TrackingBundle\Entity\UserActivity::TYPE_POST_AUTHOR_IDENTIFIED);
+                        $activity->setUser($author);
+                        $em->persist($activity);
+
+                        if ($orginalAuthor !== null)
+                        {
+                            $activity2 = new \P4M\TrackingBundle\Entity\UserActivity();
+                            $activity2->setPost($post);
+                            $activity2->setType(\P4M\TrackingBundle\Entity\UserActivity::TYPE_POST_AUTHOR_CHANGED);
+                            $activity2->setUser($orginalAuthor);
+                            $em->persist($activity2);
+                        }
+
+
+                    }
+
+                }
+                
+                if ($input->getOption('embed')) 
+                {
+                    $embed = $postAnalyser->getEmbed();
+                    if (null != $embed)
+                    {
+                        $post->setEmbed($embed);
+                        $post->setIframeAllowed(true);
+                    }
+                    
+                    if ($post->getEmbed() === null)
+                    {
+                        $allowed = $postAnalyser->isIframeAllowed();
+
+                        if ($allowed != $post->getIframeAllowed())
+                        {
+                            $updated ++;
+                            $post->setIframeAllowed($allowed);
+
+                        }
+                    }
+                }
+                if ($input->getOption('description')&& $postAnalyser->getDescription() != null) 
+                {
+                    $post->setContent($postAnalyser->getDescription());
+                    $output->writeln('description '.$postAnalyser->getDescription());
+                }
+                if ($input->getOption('picture')&& $postAnalyser->getPicture() != null) 
+                {
+                    $post->setPicture($postAnalyser->getPicture());
+                }
+                
+                if ($input->getOption('picture')&& $postAnalyser->getPictureList() != null) 
+                {
+                    $post->setPictureList($postAnalyser->getPictureList());
+                }
+                
+//                if ($input->getOption('tags')&& $postAnalyser->getTags() != null) 
+//                {
+//                    $post->setT(utf8_decode($postAnalyser->getTags()));
+//                }
+                    
+                    
+            
+//                    $post->setPicture(utf8_decode($postAnalyser->getPicture()));
+//                if ($postAnalyser->getTitle() !== null)
+                if ($input->getOption('title')&& $postAnalyser->getTitle() !== null)
+                {
+                    if ($postAnalyser->getTitle() == 'YouTube' )
+                    {
+                        $post->setQuarantaine(true);
+                    }
+                    $post->setTitle($postAnalyser->getTitle());
+                    $output->writeln('title '.$postAnalyser->getTitle());
+                    
+                }
+                
+//                $youtubePattern = '#^http(s)?://(www.)?youtube.com#';
+//                $youtubePattern2 = '#^http(s)?://youtu.be#';
+                
+//                if ((preg_match($youtubePattern, $post->getSourceUrl()) || preg_match($youtubePattern2, $post->getSourceUrl())) && preg_match('#^youtube#' ,strtolower($post->getTitle())))
+//                {
+//                    $output->writeln('youtube post');
+//                    $output->writeln($postAnalyser->getTitle());
+//                    if ($postAnalyser->getTitle() != 'YouTube')
+//                    {
+//                        $post->setTitle($postAnalyser->getTitle());
+//                        $post->setContent($postAnalyser->getDescription());
+//                    }
+//                    
+//                }
+//                if ($postAnalyser->getPicture() != null) 
+//                {
+//                    $post->setPicture(utf8_decode($postAnalyser->getPicture()));
+//                }
+                    
+                    
+//                }
+                
+                
+                
+                
+            }
+            
+           
+            
+            
+           
+            $post->setLastScanned(new \DateTime());
+            $em->persist($post);
+        }
+        
+        $em->flush();
+        
+        
+
+        $output->writeln($scanned . ' scanned with success '.$updated.' postUpdated');
+        exit();
+    }
+}

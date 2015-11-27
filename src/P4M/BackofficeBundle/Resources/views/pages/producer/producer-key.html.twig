@@ -1,0 +1,38 @@
+{% extends "P4MBackofficeBundle::my-account.html.twig" %}
+
+
+
+ {% block page %}
+<h2 class="form-title">Producing</h2>
+
+{% if available == false%}
+    <p>Unfortunatly, mandatory information about your account is missing. </p>
+       
+       <a href="{{path('p4_m_backoffice_profile_infos')}}" class="main-button-link"> Complete my account informations</a>
+{%elseif user.producerEnabled == false%}
+    <p>Your producer account is not activated. <a href="{{path('p4_m_backoffice_producer_activate')}}">ACTIVATE</a></p>
+{%else%}
+    <p>Your account Key : {{user.producerKey}} <a href="#" data-target="#htmlCode" data-toggle="#htmlCode">get html code</a></p>
+    <p id="htmlCode" class="">Put this code in the head part in the html of your website <br />
+        <input type="text" readonly size="100" value="{{'<meta name="pressformore-key" content="'~user.producerKey~'">'}}" /></p>
+    <p>If you are the owner of content on Youtube, Vimeo, Dailymotion or Soundcloud and you want to link these to your wallet, please enter this key as a tag : <strong>pfm-{{user.producerKey}}</strong> <a href="{{path("p4m_core_home")}}#blog" class="faq-link external-link"><i class="glyphicon circle_question_mark"></i></a>. </p>
+    
+   
+    
+    
+{%endif%}
+
+
+        
+            
+
+
+
+
+
+{% endblock%}
+
+
+
+
+

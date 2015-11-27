@@ -1,0 +1,37 @@
+{% extends "P4MCoreBundle::layout.html.twig" %}
+
+{% block headTitle %}{{parent()}} - Sign In{%endblock%}
+
+{% block content %}
+<div role="main" class="container" id="content">
+
+    <div class="row-fluid">
+        <div class="col-md-60 col-lg-60 col-sm-60 col-xs-60">
+            <div class="col-md-50 col-lg-50 col-sm-50 col-xs-60 col-lg-offset-5 col-md-offset-5 col-sm-offset-5" id="sign-in-block">
+                    <h1 class="page-align-center-title">Sign in</h1>
+                    
+                    {#<ul id="connect-choices">
+                        <li class="connect-choice-item">
+                            <a id="facebook-register" href=""><img src="images/design/icon-facebook.png" alt="" /><span>Facebook</span> </a>
+                        </li>	
+                        <li class="connect-choice-item">
+                            <a id="twitter-register" href=""><img src="images/design/icon-twitter.png" alt="" /><span>Twitter</span></a>
+                        </li>
+                        <li class="connect-choice-item">
+                            <a id="google-register" href=""><img src="images/design/icon-google.png" alt="" /><span>Google</span></a>
+                        </li>
+                    </ul>#}
+                    
+                    {% block fos_user_content %}
+                    
+                    {% endblock fos_user_content %}
+
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    </div>
+{% endblock %}
+
+    
+           

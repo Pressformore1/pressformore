@@ -1,0 +1,68 @@
+{#<li class="action-bar-section" id="section-success-story">
+    <div class="action-bar-block">
+        <h1>Our success stroy</h1>
+        <p>A short description text</p>
+        
+    </div>
+</li>
+
+<li class="action-bar-section" id="section-blog">
+    <div class="action-bar-block">
+        <h1>Pressfomore Blog</h1>
+        <p>A short description text</p>
+
+        <p>JONA : Affiche une liste de tiles du type article qui sera reprise de la catégorie blog de la rédac, i think</p>
+    </div>
+</li>#}
+{#
+<li class="action-bar-section" id="section-legal-mention">
+    <div class="action-bar-block">
+        <h1>Learn more about Pressformore</h1>
+        <p>A short description text</p>
+        <ul class="link-iframe-list">
+            <li><a class="link-iframe" href="#chapter-91931">Lien point 1</a></li>
+            <li><a class="link-iframe" href="#chapter-92039">Lien point 2</a></li>
+            <li><a class="link-iframe" href="#chapter-92308">Lien point 3</a></li>
+            <li><a class="link-iframe" href="#chapter-91793">Lien point 4</a></li>
+            <li><a class="link-iframe" href="#chapter-92288">Lien point 5</a></li>
+
+
+        </ul>
+    </div>
+</li>#}
+
+<li class="action-bar-section" id="section-presentation">
+    <div class="action-bar-block">
+        <h1>Welcome on Pressformore</h1>
+
+        <p>The first crowd-shaped media, we're running an early access version.</p>
+        
+        {#{%if user is null%}
+        <a class="main-button-link"  href="{{path('fos_user_security_login')}}">Log in</a>
+        <a class="main-button-link" id="join-beta" href="#beta-coming-soon"  data-toggle="modal" data-target="#modal-join-us">Request an access!</a>
+        {%endif%}#}
+        
+    </div>
+    
+</li>
+
+{#{% set dataUrl = path('p4m_core_showFeaturedContent')  %}
+
+<li class="action-bar-section" id="section-featured-content">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon file"></span> Featured Content</h1>
+
+    </div>    
+    <form data-target="serialize" data-url="{{dataUrl}}" id="action-bar-filters-form" method="post" class="ajax_form">
+        <input type="hidden" name="callBack" value="backToPostsListener" />
+        {% set languages = getLanguages(posts)%}
+
+        {% include 'P4MCoreBundle:Menu/ActionBar/filters:action-bar-posts-filter.html.twig'%}
+    </form>
+</li>#}
+
+{#<li class="action-bar-section" id="section-contact">
+    <div class="action-bar-block">
+        Home-contact.html
+    </div>
+</li>#}

@@ -1,0 +1,133 @@
+p4m_admin_home:
+    pattern:  /
+    defaults: { _controller: P4MAdminBundle:Admin:index }
+
+#USER
+p4m_admin_userlist:
+    pattern:  /users
+    defaults: { _controller: P4MAdminBundle:AdminUser:users }
+
+p4m_admin_useredit:
+    pattern:  /user/{username}
+    defaults: { _controller: P4MAdminBundle:AdminUser:userEdit }
+
+p4m_admin_resendactivation:
+    pattern:  /resend-activation
+    defaults: { _controller: P4MAdminBundle:AdminUser:resendActivation}
+#CATEGORY
+p4m_admin_categorylist:
+    pattern:  /categories
+    defaults: { _controller: P4MAdminBundle:AdminCategories:categories }
+
+p4m_admin_categoryedit:
+    pattern:  /category/{categoryId}
+    defaults: { _controller: P4MAdminBundle:AdminCategories:categoryEdit }
+    
+p4m_admin_deletecategory:
+    pattern:  /deleteCategory/{categoryId}
+    defaults: { _controller: P4MAdminBundle:AdminCategories:categoryDelete }
+
+p4m_admin_createcategory:
+    pattern:  /createCategory
+    defaults: { _controller: P4MAdminBundle:AdminCategories:categoryCreate }
+#WP Blog Post
+p4m_admin_wpPostlist:
+    pattern:  /wpBlogPost
+    defaults: { _controller: P4MAdminBundle:AdminWPBlogPost:wpBlogPosts }
+
+p4m_admin_wpPostedit:
+    pattern:  /wpBlogPost/{wpPostId}
+    defaults: { _controller: P4MAdminBundle:AdminWPBlogPost:wpBlogPostEdit }
+    
+p4m_admin_deletewpPost:
+    pattern:  /deleteWpBlogPost/{wpPostId}
+    defaults: { _controller: P4MAdminBundle:AdminWPBlogPost:wpBlogPostDelete }
+
+p4m_admin_createwpPost:
+    pattern:  /createWpBlogPost
+    defaults: { _controller: P4MAdminBundle:AdminWPBlogPost:wpBlogPostCreate }
+    
+#FLAGS
+p4m_admin_flagList:
+    pattern:  /flags
+    defaults: { _controller: P4MAdminBundle:AdminFlags:flags}
+    
+p4m_admin_flagedit:
+    pattern:  /flag/{flagId}
+    defaults: { _controller: P4MAdminBundle:AdminFlags:flagEdit }
+    
+p4m_admin_deleteFlag:
+    pattern:  /deleteFlag/{flagId}
+    defaults: { _controller: P4MAdminBundle:AdminFlags:flagDelete }
+
+p4m_admin_createFlag:
+    pattern:  /createFlag
+    defaults: { _controller: P4MAdminBundle:AdminFlags:flagCreate }
+#FLAGS
+p4m_admin_wallFlagList:
+    pattern:  /flags
+    defaults: { _controller: P4MAdminBundle:AdminWallFlags:flags}
+    
+p4m_admin_WallFlagedit:
+    pattern:  /flag/{flagId}
+    defaults: { _controller: P4MAdminBundle:AdminWallFlags:flagEdit }
+    
+p4m_admin_deleteWallFlag:
+    pattern:  /deleteFlag/{flagId}
+    defaults: { _controller: P4MAdminBundle:AdminWallFlags:flagDelete }
+
+p4m_admin_createWallFlag:
+    pattern:  /createFlag
+    defaults: { _controller: P4MAdminBundle:AdminWallFlags:flagCreate }
+
+
+#FLAGGED POSTS
+p4m_admin_flaggedPostList:
+    pattern:  /flaggedPosts
+    defaults: { _controller: P4MAdminBundle:AdminPostFlags:postFlags }
+    
+    
+#INVIATION
+p4m_admin_invitationList:
+    pattern:  /invitations
+    defaults: { _controller: P4MAdminBundle:AdminInvitations:invitationsList }
+p4m_admin_createInvitation:
+    pattern:  /createInvitation
+    defaults: { _controller: P4MAdminBundle:AdminInvitations:invitationCreate }    
+p4m_admin_editInvitation:
+    pattern:  /editInvitation/{invitationId}
+    defaults: { _controller: P4MAdminBundle:AdminInvitations:invitationEdit }    
+p4m_admin_sendInvitations:
+    pattern:  /sendInvitations
+    defaults: { _controller: P4MAdminBundle:AdminInvitations:invitationSendForm }    
+p4m_admin_deleteInvitation:
+    pattern:  /deleteInvitation/{invitationId}
+    defaults: { _controller: P4MAdminBundle:AdminInvitations:invitationDelete }
+    
+#POST TYPE
+p4m_admin_postTypeList:
+    pattern:  /postType
+    defaults: { _controller: P4MAdminBundle:AdminPostType:postTypeList }
+p4m_admin_createPostType:
+    pattern:  /createPostType
+    defaults: { _controller: P4MAdminBundle:AdminPostType:postTypeCreate }    
+p4m_admin_editPostType:
+    pattern:  /editPostType/{postTypeId}
+    defaults: { _controller: P4MAdminBundle:AdminPostType:postTypeEdit }    
+p4m_admin_deletePostType:
+    pattern:  /deletePostType/{postTypeId}
+    defaults: { _controller: P4MAdminBundle:AdminPostType:postTypeDelete }
+
+#POST TYPE
+p4m_admin_notificationTypeList:
+    pattern:  /notificationType
+    defaults: { _controller: P4MAdminBundle:AdminNotificationType:notificationTypeList }
+p4m_admin_createNotificationType:
+    pattern:  /createNotificationType
+    defaults: { _controller: P4MAdminBundle:AdminNotificationType:notificationTypeCreate }    
+p4m_admin_editNotificationType:
+    pattern:  /editNotificationType/{notificationTypeId}
+    defaults: { _controller: P4MAdminBundle:AdminNotificationType:notificationTypeEdit }    
+p4m_admin_deleteNotificationType:
+    pattern:  /deleteNotificationType/{notificationTypeId}
+    defaults: { _controller: P4MAdminBundle:AdminNotificationType:notificationTypeDelete }

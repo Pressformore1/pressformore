@@ -1,0 +1,45 @@
+{# On étend notre layout #}
+{% extends "P4MAdminBundle::admin.html.twig" %}
+
+{% block pageTitle%}Flagged Post List{% endblock %}
+
+
+{# Dans notre layout, il faut définir le block body #}
+
+{%block adminActions%}
+
+{%endblock%}
+
+{% block leftCol %}
+{{parent()}}
+        <table class="table table-striped table-sortable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Post Title</th>
+                    <th>Flag Type</th>
+                    <th>Post Link</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+            {% for flag in postFlags %} 
+                
+            <tr class="">
+                <td>{{flag.id}}</td>
+                <td>{{flag.post.title}}</td>
+                <td>{{flag.post.title}}</td>
+                <td>{{flag.type.name}}</td>
+                <td><a href="{{path('p4m_core_post',{'postSlug':flag.post.slug})}}">Go To Post</a></td>
+                <td></td>
+                
+            </tr>
+
+            {% endfor %}
+
+
+            </tbody>
+          </table>
+
+                        
+{% endblock %}{# empty Twig template #}

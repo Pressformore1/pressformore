@@ -1,0 +1,239 @@
+<li class="action-bar-section" id="section-create-wall-first">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title">Create your own strew</h1>
+
+        <p>You are about to create a new strew (news feed on Pressformore), if you need some help, have a look at our <a href="{{path('p4m_core_home')}}#blog">FAQ</a>
+        </p>
+
+
+    </div>
+
+    <div class="clear"></div>
+        <button type="button" class="primary action-bar-btn" data-toggle="action-bar" data-target="#section-create-wall-categories">
+            Next step
+        </button>
+</li>
+
+
+<li class="action-bar-section" id="section-create-wall-categories">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title">Create your own strew</h1>
+
+        <p>Note: You can blocks<br />cats or tags by clicking on the right upper corner of the tile. </p>
+
+    </div>
+    
+        
+       <div class="action-bar-block">
+        <h4 class="action-bar-small-title"><span class="glyphicon ok"></span>Picked Categories</h4>	
+            {{form_widget(form.includedCategories,{attr:{class:'categories-list'} })}}
+    </div>
+    <div class="clear"></div>
+
+    <div class="action-bar-block" >
+        <h4 class="action-bar-small-title"><span class="glyphicon remove"></span>Banned Categories</h4>	
+            {{form_widget(form.excludedCategories,{attr:{class:'categories-list'} })}}
+
+    </div>
+
+
+
+        <div class="clear"></div>
+        <button type="button" class="primary action-bar-btn" data-toggle="action-bar" data-target="#section-create-wall-tags">
+            Select Tags
+        </button>
+        <button type="button" class="primary action-bar-btn" data-toggle="action-bar" data-target="#section-create-wall-resume">
+            Resume
+        </button>
+    </form>
+
+</li>
+<li class="action-bar-section" id="section-create-wall-tags">
+    <div class="action-bar-block">
+        <h1 class="action-bar-title">Create your own strew</h1>
+
+        <p>Note: You can blocks<br />cats or tags by clicking on the right upper corner of the tile. </p>
+
+    </div>
+        <div class="action-bar-block">
+            <h4 class="action-bar-small-title"><span class="glyphicon ok"></span>Picked tags</h4>	
+            {{form_widget(form.includedTags,{attr:{class:'categories-list'} })}}
+        </div>
+        <div class="clear"></div>
+
+        <div class="action-bar-block" >
+            <h4 class="action-bar-small-title"><span class="glyphicon remove"></span>Banned tags</h4>	
+            {{form_widget(form.excludedTags,{attr:{class:'categories-list'} })}}
+
+        </div>
+        <div class="clear"></div>
+        <button type="button" class="primary action-bar-btn" data-toggle="action-bar" data-target="#section-create-wall-resume">
+            Next step
+        </button>
+
+
+</li>
+
+<li class="action-bar-section" id="section-create-wall-resume">
+                        
+    
+        <div class="action-bar-block">
+            <h1 class="action-bar-title">Create your own strew</h1>
+            <div class="form-group">
+{#                {{ form_errors(form) }}#}
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-20">
+                <label for="currentPassword" class="{#col-sm-20#} control-label form-field-title required">Title of your wall</label>
+                </div>
+                <div class="col-sm-40">
+                     <div class="form_error pfm-red">{{form_errors(form.name)}}</div>
+                    {{form_widget(form.name,{attr:{class:'form-control field-input'} })}}
+                   
+                        <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="form-group">
+                <label for="currentPassword" class="col-sm-20 control-label form-field-title required">Description of your wall</label>
+
+                <div class="col-sm-40">
+                    {{form_widget(form.description,{attr:{class:'form-control field-input'} })}}
+                        <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-20">
+                <label for="currentPassword" class="{#col-sm-20#} control-label form-field-title{% if wall.picture.id|length == 0%} required{%endif%}">Choose a pic <span class="form-error">{{ form_errors(form.picture) }}</span></label>
+                    
+                </div>
+{#                {{dump(form.picture)}}#}
+                <div class="col-sm-40">
+                    {%set error = form_errors(form.picture.file)%}
+                    <div class="form_error pfm-red">{{error|raw}}</div>
+                    {%set pictureField = form_widget(form.picture.file)%}
+{#                    {{wall.picture.id}}#}
+                    {%if wall.picture and wall.picture.id|length and error|length == 0%}
+                        <div id="changePicture" data-prototype='{{pictureField}} <br /> <button id="changePictureCancel">Cancel</button>'>
+                        <div id="changePictureWrapper">
+                        <img src="{{asset(wall.picture.webPath)}}" class="edit-wall-picture" alt="picture of{{wall.name}}" />
+                        <div class="overlay hidden-soft">Change Picture</div>
+                        </div>
+                        </div>
+                        <div class="clear"></div>
+                    {%else%}
+                        {{pictureField|raw}}
+                    {%endif%}
+{#                    <input type="file" id="{{form.picture.vars.id}}" name="{{form.picture.vars.name}}"/>#}
+{#                    {{ form_errors(form.picture) }}#}
+{#                    <input type="file" {%if wall.picture == null or wall.picture.id == null %} required="required" {%endif%} name="{{form.picture.vars.full_name}}" id="{{form.picture.vars.id}}">#}
+                    
+                        <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+            </div>
+
+
+
+        </div>
+
+        <div class="action-bar-block" >
+            <h4 class="action-bar-small-title"><span class="glyphicon ok"></span>Categories picked in your strew</h4>	
+            <ul class="categories-list" id="picked-categories" data-prototype='<li class="category-item non-form-item " data-tileId="category_%_elementId_%">
+                    <button title="%_elementName_%" type="button" class="category-button">
+                        <img src="%_elementIcon_%" class="category-icon" alt="%_elementName_%">
+                    </button>
+                </li>'>
+            {% for category in wall.includedCategories%}
+                <li class="category-item non-form-item {% if wall is not defined or wall.includedCategories.contains(category) == false  %} hidden{%endif%}" data-tileId="category_{{category.id}}">
+                    <button title="{{category.name}}" type="button" class="category-button">
+                        <img src="{{asset(category.iconColor)}}" class="category-icon" alt="{{category.name}}">
+                    </button>
+                </li>
+            {%endfor%}                
+            </ul>
+        </div>
+        <div class="clear"></div>
+
+        <div class="action-bar-block" >
+            <h4 class="action-bar-small-title"><span class="glyphicon remove"></span>Categories banned in your strew</h4>	
+
+            <ul class="categories-list" id="banned-categories" data-prototype='<li class="category-item non-form-item " data-tileId="category_%_elementId_%">
+                    <button title="%_elementName_%" type="button" class="category-button">
+                        <img src="%_elementIcon_%" class="category-icon" alt="%_elementName_%">
+                    </button>
+                </li>'>
+            {% for category in wall.excludedCategories%}
+                <li class="category-item non-form-item {% if wall is not defined or wall.excludedCategories.contains(category) == false  %} hidden{%endif%}" data-tileId="category_{{category.id}}">
+                    <button title="{{category.name}}" type="button" class="category-button">
+                        <img src="{{asset(category.iconColor)}}" class="category-icon" alt="{{category.name}}">
+                    </button>
+                </li>
+            {%endfor%}
+            </ul>
+        </div>
+
+        <div class="clear"></div>
+        <div class="action-bar-block">
+            <h4 class="action-bar-small-title"><span class="glyphicon ok"></span>Tags picked in your strew</h4>	
+
+            <ul class="tags-list" id="picked-tags" data-prototype='<li class="tag-item non-form-item" data-tileId="tag_%_elementId_%" >
+                    <button title="%_elementName_%" type="button" class="tag-button">
+                        <span class="glyphicon tag"></span> %_elementName_%
+                    </button>
+                </li>'>
+            {% for tag in wall.includedTags%}
+                <li class="tag-item non-form-item" data-tileId="tag_{{tag.id}}" >
+                    <button title="{{tag.name}}" type="button" class="tag-button">
+                        <span class="glyphicon tag"></span> {{tag.name}}
+                    </button>
+                </li>
+            {%endfor%}
+            {#{% for tag in tags%}
+                <li class="tag-item non-form-item  {% if wall is not defined or wall.includedTags.contains(tag) == false  %} hidden{%endif%}" data-tileId="tag_{{tag.id}}" >
+                    <button title="{{tag.name}}" type="button" class="tag-button">
+                        <span class="glyphicon tag"></span> {{tag.name}}
+                    </button>
+                </li>
+            {%endfor%}#}
+            </ul>
+        </div>
+        <div class="clear"></div>
+        <div class="action-bar-block">
+            <h4 class="action-bar-small-title"><span class="glyphicon remove"></span>Tags banned in your strew</h4>	
+
+            <ul class="tags-list" id="banned-tags" data-prototype='<li class="tag-item non-form-item" data-tileId="tag_%_elementId_%" >
+                    <button title="%_elementName_%" type="button" class="tag-button">
+                        <span class="glyphicon tag"></span> %_elementName_%
+                    </button>
+                </li>'>
+            {% for tag in wall.excludedTags%}
+                <li class="tag-item non-form-item"  data-tileId="tag_{{tag.id}}">
+                    <button title="{{tag.name}}" type="button" class="tag-button">
+                        <span class="glyphicon tag"></span> {{tag.name}}
+                    </button>
+                </li>
+            {%endfor%}
+            </ul>
+        </div>
+        {{form_rest(form)}}
+         
+      
+      
+        
+        <div class="clear"></div>
+        <button type="submit" class="primary action-bar-btn">
+            See it!
+        </button>
+         
+        <div class="clear"></div>
+         
+
+        
+       
+
+         
+</li>

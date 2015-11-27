@@ -1,0 +1,7 @@
+parameters:
+#    p4_m_contact.example.class: P4M\ContactBundle\Example
+
+services:
+#    p4_m_contact.example:
+#        class: %p4_m_contact.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]

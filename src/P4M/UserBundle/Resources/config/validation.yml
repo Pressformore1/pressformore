@@ -1,0 +1,6 @@
+## YAML Template.
+P4M\UserBundle\Entity\User:
+    properties:
+        username:
+            - NotBlank: ~
+            - P4M\UserBundle\Validator\Constraints\ValidUsername: ~

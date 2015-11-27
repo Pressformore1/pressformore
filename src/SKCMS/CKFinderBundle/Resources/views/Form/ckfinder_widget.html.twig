@@ -1,0 +1,42 @@
+{% form_theme form _self %}
+
+{% block ckfinder_widget %}
+
+    {% spaceless %}
+        <textarea {{ block('widget_attributes') }}>{{ value }}</textarea>
+        <iframe src="{{ asset(base_path) }}" width="0" height="0" frameborder="0" scrolling="no"></iframe>
+
+        <script type="text/javascript">
+            var CKEDITOR_BASEPATH = '{{ asset(base_path) }}';
+        </script>
+
+        <script type="text/javascript" src="{{ asset(js_path) }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jonlilckfinder/ckfinder.js') }}"></script>
+
+        <script type="text/javascript">
+            var instance = CKEDITOR.instances['{{ id }}'];
+            if (instance) {
+                instance.destroy(true);
+            }
+
+            {% for pluginName, plugin in plugins %}
+                CKEDITOR.plugins.addExternal('{{ pluginName }}', '{{ asset(plugin.path) }}', '{{ plugin.filename }}');
+            {% endfor %}
+
+            var editor = CKEDITOR.replace( "{{ id }}"{% if config is not empty %}, {{ config|json_encode|raw }}{% endif %});
+
+        </script>
+    {% endspaceless %}
+{% endblock %}
+{% block ckfinderpopup_widget %}
+
+    {% spaceless %}
+        <input type="text" {{ block('widget_attributes') }} value="{{ value }}"/>
+        <input id="browseServer" class="ckBrowser" type="button" value="Browse Server" data-basePath="{{asset('images/uploads')}}" data-connectorPath="{{ url('ckfinder_init', {'service': 'php'}) }}">
+
+        <script type="text/javascript" src="{{ asset(js_path) }}"></script>
+        <script type="text/javascript" src="{{ asset('bundles/jonlilckfinder/ckfinder.js') }}"></script>
+{#        <script type="text/javascript">#}
+       
+    {% endspaceless %}
+{% endblock %}

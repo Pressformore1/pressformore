@@ -1,0 +1,136 @@
+<li class="action-bar-section" id="section-press">
+    {%if post.author %}
+        {%include 'P4MCoreBundle:Menu/ActionBar/Post/PressElement:cover.html.twig'%}
+        {%if walletFill%}
+        <div class="action-bar-block">
+
+{#            <h1 class="action-bar-title">Press</h1>#}
+            <h1 class="action-bar-title text-center unpressformTitle" {% if unpressform %}style="display:block;" {%else%} style="display:none;" {%endif%}>You decided not to reward this author.</h2>
+            <div class="pressformTitle" {% if unpressform or pressformed == false%}style="display:none;" {%endif%}>
+{#                {%if pressformed %}#}
+                    <h1 class="action-bar-title text-center">Thank you! </h1>
+                    <h2 class="text-center">You just rewarded this author</h2>
+            </div>
+            <div class="pressformTitleFuture" {% if unpressform or pressformed%}style="display:none;" {%endif%}>
+{#                {%else%}#}
+                    <h1 class="action-bar-title text-center">You are about to reward this content <a href="{{path("p4m_core_home")}}#blog" class="faq-link external-link"><i class="glyphicon circle_question_mark"></i></a></h1>
+{#                {%endif%}#}
+            </div>
+            <div id="action-bar-press">
+                <span id="pfm-press" class="icon-logo ajax_action{%if pressformed %} pressed{%endif%}" data-loader="none" data-url="{{path('p4m_ajax_action')}}" data-action="{%if pressformed%}unpressform{%else%}pressform{%endif%}" data-params="{{ {postId:post.id,callBack:'pressformed'}|json_encode() }}" data-key="{{{postId:post.id,callBack:'pressformed'}|json_encode()|sha512()}}"></span>
+            </div>
+                
+                
+{#            <p>Want to know more about how we determine that value and or retribution system? Click here</p>#}
+
+        </div>
+
+        <form id="pfm-unpress-explain" class="action-bar-block" {% if unpressform %}style="display:block;" {%endif%}>
+            <h4 class="action-bar-small-title">You've chosen not to reward this content. May we know why?</h4>	
+            <p class="" style="display:none;" id="feedback-unpress">Thanks for your feedback, we are working hard to provide you quality news.</p>
+            <div>
+            {% for unpressformType in unpressformTypes %}
+                {%set surClass=''%}
+                {% if unpressform %}
+                    {%set surClass=' pfm-grey-button'%}
+                    {% if unpressform.type == unpressformType %}
+                    {%set surClass=" current" %}
+                    {% endif %}
+                {% endif %}
+                <button class="primary press-feedback ajax_action{{ surClass}}" data-loader="none" id="unpressformType_{{unpressformType.id}}" data-url="{{path('p4m_ajax_action')}}" data-action="unpressformType" data-params="{{ {postId:post.id,typeId:unpressformType.id,callBack:'unpressformType'}|json_encode() }}" data-key="{{{postId:post.id,typeId:unpressformType.id,callBack:'unpressformType'}|json_encode()|sha512()}}">{{unpressformType.description}}</button>
+            {%endfor%}
+            <div class="clearfix"></div>
+            </div>
+        </form>
+            
+            
+        {%elseif user.mangoUserNatural is not null%}
+        <div class="action-bar-block">
+            <h1 class="action-bar-title text-center">It seems like this content was well worth the read! </h1>
+            <p class="middle text-center">
+                {{post.author.username}} is the author. Perhaps it's time to reward him for his duty work. <a href="{{path("p4m_core_home")}}#blog" class="faq-link external-link"><i class="glyphicon circle_question_mark"></i></a>
+            </p>
+            {#<form action="" class="ajax_form" data-target="serialize" data-action="alertWalletEmpty" data-loader="none" data-key="{{'alertWalletEmpty'|sha512}}" data-url="{{path('p4m_ajax_action')}}">
+                <input type="checkbox" class="submitOnChange" name="alertEmptyWallet" id="alertEmptyWallet" /><label for="alertEmptyWallet"> Don't show me this message again</label></form>#}
+            <a class="main-button-link align-center" href="{{path('p4_m_backoffice_homepage')}}#wallet">Load your wallet with the amount of your choice</a>
+{#            <a class="main-button-link pfm-grey-button teleclick" href="#" data-target="pfm-button" >Close</a>#}
+            <div class="clearfix"></div>
+            
+        </div>
+        {%else%}
+        <div class="action-bar-block">
+            <h1 class="action-bar-title text-center">It seems like this content was well worth the read!</h1>
+            <p>To retribute your favorite authors, we need to have more information about you. Your privacy will always matter to us.</p>
+            <p>Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded. <a href="{{path("p4m_core_home")}}#blog" class="faq-link external-link"><i class="glyphicon circle_question_mark"></i></a></p>
+            <a class="main-button-link" href="{{path('p4_m_backoffice_profile_infos')}}?goBack={{url(app.request.attributes.get('_route'), app.request.attributes.get('_route_params'))}}#contribute">Fill Information</a>
+            <div class="clearfix"></div>
+        </div>
+        {%endif%}
+        {%include 'P4MCoreBundle:Menu/ActionBar/Post/PressElement:pressformers.html.twig'%}
+    {# ----------------------     
+        PAs d'auteur 
+    -------------------------#}
+    {%else%} 
+        <div class="action-bar-block">
+            {%include 'P4MCoreBundle:Menu/ActionBar/Post/PressElement:cover-no-author.html.twig'%}
+            {%if wantPressform is null %}
+            <h1 class="action-bar-title text-center" id="wantPressformTitle">It seems like this content was well worth the read!</h1>
+            {%endif%}
+            {%set showForm = true%}
+            {%set showThanks = true%}
+            {% if wantPressform == null%}
+                <a class="main-button-link ajax_action" id="wantPressformLink" data-url="{{path('p4m_ajax_action')}}" data-loader="none" data-action="wantPressform" data-params="{{{postId:post.id,callBack:'wantPressformed'}|json_encode() }}" data-key="{{'wantPressform'|sha512()}}" href="#">You liked this content and want to retribute the author? <br /> Let us know!</a>
+                {%set showForm = false%}
+                {%set showThanks = false%}
+            
+            {%elseif wantPressform.twitter == null and wantPressform.email == null%}
+                {%set showThanks = false%}
+            {%elseif wantPressform.twitter is not null or wantPressform.email is not null%}
+                {%set showForm = false%}
+            {%endif%}
+            
+            {%if post.tempAuthor != null and  post.tempAuthor.twitter != null%}
+                {%set showThanks = false%}
+                {%set showForm = false%}
+                <p class=" middle text-center">Tell this author you want to reward him</p>
+                <a class="twitter-share-button" href="https://twitter.com/share"
+                    data-related="Pressformore_ ,{{post.tempAuthor.twitter}} "
+                    data-text="Hi {{post.tempAuthor.twitter}}, I would love to reward your work on @Pressformore_ #joinpfm"
+                    data-size="large"
+                    data-count="none">
+                  Tell the author
+                  </a>
+                  <script>
+                  window.twttr=(function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],t=window.twttr||{};if(d.getElementById(id))return;js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);t._e=[];t.ready=function(f){t._e.push(f);};return t;}(document,"script","twitter-wjs"));
+                  </script>
+            {%endif%}
+            
+                <form action="" id="wantPressformForm" class="ajax_form {%if showForm == false%}hidden{%endif%}" data-loader="none" data-url="{{path('p4m_ajax_action')}}" data-action="wantPressformInfos" data-target="serialize" data-key="{{'wantPressformInfos'|sha512()}}">
+                    <p class=" middle text-center pfm-red">Thank you! We ’ll make our best to contact the author(s)</p>
+                    <small class="text-center">Maybe you want to help us further? <strong>*facultative</strong></small>
+
+                    <input type="hidden" id="callBack" name="callBack"  value="wantPressformedInfo"/>
+                    <input type="hidden" id="postId" name="postId"  value="{{post.id}}"/>
+                    <div class="form-line">
+                        <label for="twitter" class="form-field-title">Author twitter account</label>
+                        <input type="text" id="twitter" name="twitter" value="" class="col-sm-60">
+                    </div>
+                    <div class="form-line">
+                        <label for="email" class="form-field-title">Author email</label>
+                        <input type="email" id="email" name="email" value="" class="col-sm-60">
+                    </div>
+                            <button class="primary action-bar-btn" type="submit">Send informations</button>
+
+                
+                </form>
+                   <div class="clearfix"></div> 
+                <p id="wantPressformThanks" class=" middle text-center pfm-red {%if showThanks == false%}hidden{%endif%}">Thank you! We'll make our best to contact the author as fast as possible. Your contribution is precious and will be rewarded in the future.</p>
+             </div>
+                {%include 'P4MCoreBundle:Menu/ActionBar/Post/PressElement:waitingPressformers.html.twig'%}
+            
+            
+       
+    {%endif%}
+
+
+</li>

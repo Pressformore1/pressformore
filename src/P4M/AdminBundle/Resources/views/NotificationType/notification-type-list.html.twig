@@ -1,0 +1,49 @@
+{# On étend notre layout #}
+{% extends "P4MAdminBundle::admin.html.twig" %}
+
+{% block pageTitle%}Notifications Type List{% endblock %}
+
+
+{# Dans notre layout, il faut définir le block body #}
+
+{%block adminActions%}
+<a href="{{path('p4m_admin_createNotificationType')}}" class="btn btn-info">CREATE NOTIFICATION TYPE</a>
+{%endblock%}
+
+{% block leftCol %}
+{{parent()}}
+        <table class="table table-striped table-sortable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Added By</th>
+                <th>Date Added</th>
+                <th>LINK</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for type in notificationTypes %} 
+                {% set trClass='' %}
+                {#{% if invitation.draft == 1%}
+                    {%set trClass='warning'%}
+                {%endif%}#}
+            <tr class="{{trClass}}">
+                <td>{{type.id}}</td>
+                <td>{{type.name}}</td>
+                <td>{% if type.user %}{{type.user.username}}{%endif%}</td>
+                <td>{{type.dateAdded|date('d/m/Y')}}</td>
+                <td>{{type.typeLink}}</td>
+                <td><a href="{{path('p4m_admin_editNotificationType',{notificationTypeId:type.id})}}">Edit / Delete </a></td>
+                
+              </tr>
+
+            {% endfor %}
+
+
+            </tbody>
+          </table>
+
+                        
+{% endblock %}{# empty Twig template #}

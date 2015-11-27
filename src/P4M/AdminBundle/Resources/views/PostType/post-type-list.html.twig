@@ -1,0 +1,49 @@
+{# On étend notre layout #}
+{% extends "P4MAdminBundle::admin.html.twig" %}
+
+{% block pageTitle%}Post Type List{% endblock %}
+
+
+{# Dans notre layout, il faut définir le block body #}
+
+{%block adminActions%}
+<a href="{{path('p4m_admin_createPostType')}}" class="btn btn-info">CREATE POST TYPE</a>
+{%endblock%}
+
+{% block leftCol %}
+{{parent()}}
+        <table class="table table-striped table-sortable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Added By</th>
+                <th>Date Added</th>
+                <th>Icon</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for type in postTypes %} 
+                {% set trClass='' %}
+                {#{% if invitation.draft == 1%}
+                    {%set trClass='warning'%}
+                {%endif%}#}
+            <tr class="{{trClass}}">
+                <td>{{type.id}}</td>
+                <td>{{type.name}}</td>
+                <td>{% if type.user %}{{type.user.username}}{%endif%}</td>
+                <td>{{type.dateAdded|date('d/m/Y')}}</td>
+                <td><img src="{{asset(type.iconColor)}}" alt="" /></td>
+                <td><a href="{{path('p4m_admin_editPostType',{postTypeId:type.id})}}">Edit / Delete </a></td>
+                
+              </tr>
+
+            {% endfor %}
+
+
+            </tbody>
+          </table>
+
+                        
+{% endblock %}{# empty Twig template #}

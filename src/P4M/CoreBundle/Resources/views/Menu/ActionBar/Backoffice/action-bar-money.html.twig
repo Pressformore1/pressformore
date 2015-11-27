@@ -1,0 +1,181 @@
+<li class="action-bar-section" id="section-wallet">
+
+{% if wallet is not defined %}
+    <div class="action-bar-block">
+       <h1 class="action-bar-title">Financial Info</h1>
+       <p>Unfortunatly, mandatory information about your account is missing. </p>
+       
+       <a href="{{path('p4_m_backoffice_profile_infos')}}?goBack={{url('p4_m_backoffice_homepage')}}#wallet" class="main-button-link"> Complete my account informations</a>
+    </div>
+
+{% else %}
+
+
+
+   
+
+
+    
+            <div class="action-bar-block">
+                <h1 class="action-bar-title">Financial Info</h1>
+
+                <h4 class="bigCenterTitle">{{wallet.Balance.Amount / 100}} € </h4>
+                {#{% if wallet.Balance.Amount == 0%}
+                
+                <button data-toggle="action-bar" data-target="#section-wallet-charge" class="action-bar-btn">Your wallet is empty. Charge.</button>
+                {%endif%}#}
+            {%if walletFill%}
+                <p class="clear text-center">{{walletFill.dateFill.format('d F')}} to {{walletFill.dateExpire.format('d F')}} <span class="glyphicon refresh {%if walletFill.recurrent%}red{%endif%}"></span></p>
+            {%endif%}
+                
+                <button class="main-button-link action-bar-btn" data-toggle="action-bar" data-target="#section-wallet-charge">Wallet Settings</button>
+                <div class="clear"></div>
+            {% if transactions|length>0%}
+{#            {% if wallet.Balance.Amount > 0%}#}
+                
+                
+                <h4 class="action-bar-small-title">History</h4>
+                
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="active"><a href="#all" role="tab" data-toggle="tab">All</a></li>
+                    <li><a href="#in" role="tab" data-toggle="tab">In</a></li>
+                    <li><a href="#out" role="tab" data-toggle="tab">Out</a></li>
+                    
+                </ul>
+
+                  <!-- Tab panes -->
+                <div class="tab-content">
+                    <div class="tab-pane active" id="all">
+                        <ul class="list-unstyled">
+                        {%for transaction in transactions%}
+                            <li class="payment-history">
+                                {%if transaction.type=='PAYIN'%}
+                                    {%set icon = '<span class="glyphicon right_arrow green"></span>'%}
+                                {%else%}
+                                    {%set icon = '<span class="glyphicon left_arrow red"></span>'%}
+                                {%endif%}
+                                 {{icon|raw}} - <span class="payment-history-date">{{transaction.ammount}}€</span> <span class="payment-history-date">{{transaction.date|date('F d,Y')}}</span> {#<a href="{{path('p4_m_mango_pay_wallet_charge',{'cardId':card.Id})}}"> charge Wallet</a>#}
+                            </li>
+                        {%endfor%}
+                       </ul>
+                    </div>
+                    <div class="tab-pane" id="in">
+                        <ul class="list-unstyled">
+                        {%for transaction in transactions%}
+                            <li class="payment-history">
+                                {%if transaction.type=='PAYIN'%}
+                                    {%set icon = '<span class="glyphicon left_arrow green"></span>'%}
+                                {{icon|raw}} - <span class="payment-history-date">{{transaction.ammount}}€</span> <span class="payment-history-date">{{transaction.date|date('F d,Y')}}</span> {#<a href="{{path('p4_m_mango_pay_wallet_charge',{'cardId':card.Id})}}"> charge Wallet</a>#}
+                                {%endif%}
+                                 
+                            </li>
+                        {%endfor%}
+                       </ul>
+                    </div>
+                    <div class="tab-pane" id="out">
+                        <ul class="list-unstyled">
+                        {%for transaction in transactions%}
+                            <li class="payment-history">
+                                {%if transaction.type!='PAYIN' and transaction.type!='PAYOUT'%}
+                                    {%set icon = '<span class="glyphicon right_arrow red"></span>'%}
+                                    {{icon|raw}} <span class="payment-history-date">{{transaction.ammount}}€</span> <span class="payment-history-date">{{transaction.date|date('F d,Y')}}</span> {#<a href="{{path('p4_m_mango_pay_wallet_charge',{'cardId':card.Id})}}"> charge Wallet</a>#}
+                                {%endif%}
+                                 
+                            </li>
+                        {%endfor%}
+                        </ul>
+                    </div>
+                    
+                </div>
+            {%endif%}
+                
+            </div>
+     
+     <div class="action-bar-block">
+         
+         {%if cardForm|length%}
+{#         {{dump(cardForm.vars)}}#}
+         {#<form action="{{cardForm.vars.value.actionURL}}" method="post">
+            <input type="hidden" name="data" value="{{cardForm.vars.value.data}}" />
+            <input type="hidden" name="accessKeyRef" value="{{cardForm.vars.value.accessKeyRef}}" />
+            <input type="hidden" name="returnURL" value="{{cardForm.vars.value.returnURL}}" />
+
+            <label for="cardNumber">Card Number</label>
+            <input type="text" name="cardNumber" value="" />
+
+            <label for="cardExpirationDate">Expiration Date</label>
+            <input type="text" name="cardExpirationDate" value="" />
+
+            <label for="cardCvx">CVV</label>
+            <input type="text" name="cardCvx" value="" />
+     
+
+            <input type="submit" value="Pay" />
+        </form>#}
+         {%else%}
+         <h1 class="action-bar-title toggler" data-toggle="createIban">CREATE IBAN</h1>
+         <div id="createIban" class="hidden">
+            <form method="post" enctype="multipart/form-data"  class="form-horizontal" role="form" action="">
+                <div class="explanation-zone"></div>
+
+               <div id="p4m_userbundle_user">
+
+               <div class="form-group">
+                   <label for="currentPassword" class="col-sm-20 control-label form-field-title required">Account Type</label>
+
+                   <div class="col-sm-30">
+                      {{form_rest(form)}}
+                   </div>
+                   <div class="clear"></div>
+               </div>
+
+              {# <div class="form-group">
+                   <label for="{{form.plainPassword.first.vars.id}}"  class="col-sm-20 control-label required  form-field-title">New password</label>
+
+                   <div class="col-sm-30">
+                       {{form_widget(form.plainPassword.first,{attr : {class:'form-control'} })}}<br />
+                       {{form_widget(form.plainPassword.second,{attr : {class:'form-control'} })}}<br />
+                       <p id="password-match"><small>Password are similar</small></p>
+                       <p id="password-no-match"><small>Password are not similar</small></p>
+                       <div class="clear"></div>
+                   </div>
+               </div>#}
+               <button class="primary" type="submit">Send</button>
+
+                    </div>
+            </form>
+        </div>
+         
+          <h1 class="action-bar-title toggler" data-toggle="registerCard">Register Card</h1>
+          <div id="registerCard" class="hidden">
+              <form method="post" enctype="multipart/form-data"  class="form-horizontal" role="form" action="">
+                    <div class="explanation-zone"></div>
+
+                   <div id="p4m_userbundle_user">
+
+                   <div class="form-group">
+
+                          {{form_rest(registerCardForm)}}
+
+                   <button class="primary" type="submit">Send</button>
+
+                        </div>
+                
+
+              </div>
+                    </form>
+         </div>
+          
+          {%endif%}
+     </div>
+{%endif%}
+
+
+
+    
+     
+     {#<div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon coins"></span>  Your wallet</h1>
+        <p>You're using an early access version, be patient!</p>
+    </div>#}
+</li>

@@ -1,0 +1,22 @@
+<div class="modal fade pfm-modal" id="modal-editPostConfirm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Post Added</h4>
+            </div>
+            
+                <div class="modal-body">
+                        Post "{{post.title}}" has been edited.
+                </div>
+
+                <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
+{#                        <a class="btn btn-default" href="{{path('p4m_core_post',{postSlug:post.slug})}}" id="modal-view-post">View post</a>#}
+{#                        <button type="button" class="btn btn-default ajax_action" data-action="deletePost" data-params="{{ {'postId':post.id}|json_encode() }}" data-url="{{path('p4m_ajax_action')}}" data-key="{{{'postId':post.id}|json_encode()|sha512}}" >Cancel</button>#}
+                        
+                </div>
+            
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

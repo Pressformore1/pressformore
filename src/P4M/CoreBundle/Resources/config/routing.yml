@@ -1,0 +1,116 @@
+p4m_core_home:
+    pattern:  /
+    defaults: { _controller: P4MCoreBundle:Core:index }
+
+
+#CLASSIC WALL
+#Obsolete Mais encore utilisé pour rediriger vers le premier wall de l'user
+p4m_core_wall:
+    pattern:  /my-wall/{page}
+    defaults: { _controller: P4MCoreBundle:Core:wall ,page:1}
+    requirements:
+        page:  \d+
+#/Obsolete
+p4m_core_showWall:
+    pattern:  /strew/{wallSlug}/{page}
+    defaults: { _controller: P4MCoreBundle:Wall:wall ,page:1}
+    requirements:
+        page:  \d+
+        wallSlug: ([0-9\w@. -]+[/]?([a-zA-Z@0-9-]+[0-9]*))
+#        wallSlug: ([\w-]+[/]?[\D-]+)
+        
+p4m_core_showWallPosts:
+    pattern:  /wall-posts/{wallSlug}/{page}
+    defaults: { _controller: P4MCoreBundle:Wall:wallPosts ,page:1}
+    requirements:
+        page:  \d+
+        wallSlug: ([\w@. -]+[/]?([a-zA-Z@-]+[0-9]*))
+        
+#TRENDY
+p4m_core_trendyPosts:
+    pattern:  /trendy/{page}
+    defaults: { _controller: P4MCoreBundle:Wall:trendyPosts ,page:1}
+    requirements:
+        page:  \d+
+       
+
+        
+#SEARCH
+p4m_core_search:
+    pattern:  /search
+    defaults: { _controller: P4MCoreBundle:Search:search }     
+p4m_core_search_ajax:
+    pattern:  /search-ajax/{page}
+    defaults: { _controller: P4MCoreBundle:Search:searchAjax,page:1 }     
+    requirements:
+        page:  \d+
+        
+#HISTORY
+p4m_core_showHistory:
+    pattern:  /history/{page}
+    defaults: { _controller: P4MCoreBundle:Wall:historyWall,page:1 }
+    requirements:
+        page:  \d+
+    
+p4m_core_showHistoryPosts:
+    pattern:  /history-posts/{page}
+    defaults: { _controller: P4MCoreBundle:Wall:historyPosts ,page:1}
+    requirements:
+        page:  \d+
+
+#READLATER
+p4m_core_showFeaturedContent:
+    pattern:  /featured-content/{page}
+    defaults: { _controller: P4MCoreBundle:Wall:featuredContent,page:1 }
+    requirements:
+        page:  \d+
+
+p4m_core_showReadLater:
+    pattern:  /later-its-now/{page}
+    defaults: { _controller: P4MCoreBundle:Wall:readLaterWall,page:1 }
+    requirements:
+        page:  \d+
+    
+p4m_core_showReadLaterPosts:
+    pattern:  /later-its-now-posts/{page}
+    defaults: { _controller: P4MCoreBundle:Wall:readLaterWallPosts ,page:1}
+    requirements:
+        page:  \d+
+
+
+p4m_core_category:
+    pattern:  /category/{categoryName}/{page}
+    defaults: { _controller: P4MCoreBundle:Core:category ,page:1}
+    requirements:
+        page:  \d+
+        
+p4m_core_post:
+    pattern: /view/{postSlug}
+    defaults: {_controller: P4MCoreBundle:Core:post}
+    
+        
+p4m_ajax_action:
+    pattern: /ajax/{page}
+    defaults: {_controller: P4MCoreBundle:Ajax:ajax,page:1}
+    requirements:
+        page:  \d+
+        
+p4m_core_addPost:
+    pattern: /addPost
+    defaults: {_controller: P4MCoreBundle:Core:addPost}
+
+
+fos_user_security:
+    resource: "@FOSUserBundle/Resources/config/routing/security.xml"
+fos_user_profile:
+    resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
+    prefix: /profile
+fos_user_register:
+    resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
+    prefix: /register
+fos_user_resetting:
+    resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
+    prefix: /resetting
+fos_user_change_password:
+    resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
+    prefix: /profile

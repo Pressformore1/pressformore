@@ -1,0 +1,8 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+    <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
+    <p>Our e-mail may land in your <strong>spam folder</strong>, make sure to check it out, or <a href="{{path('p4m_core_home')}}#contact">contact us</a>.</p>
+{% endblock fos_user_content %}

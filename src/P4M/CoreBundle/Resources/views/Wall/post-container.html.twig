@@ -1,0 +1,9 @@
+<div id="content-wall" class="container-fluid" role="main">
+    
+    {% if showTiles is not defined or showTiles == true%}
+    {%include "P4MCoreBundle:Wall:post-collection-ajax.html.twig"%}
+    {%endif%}
+    
+    <div class="clear"></div>
+
+</div>

@@ -1,0 +1,52 @@
+{% extends "P4MCoreBundle::layout.html.twig" %}
+
+{% block welcomeMessage %}
+
+{% endblock %}
+
+{% block widgetArea %}
+
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row-fluid">
+       <div id="primary" class="span8">
+          <div id="content" role="main">
+             <div class="entry-page">
+                 <h1 class="entry-title">{%block pageTitle%}{%endblock%}</h1>
+                {%block pageSubTitle%}{%endblock%}
+                <div class="entry-page-content">
+                 {% block leftCol %}
+                 {% endblock %}
+                </div>
+             </div>
+          </div>
+       </div>
+        <div id="secondary" class="widget-area span4 sb-4" role="complementary">
+            <div id="content" role="main">
+            {% block rightCol %}
+            {% endblock %}
+            </div>
+                     {#<aside id="search-5" class="widget widget_search">
+                        <form method="get" id="searchform" action="#">
+                           <label for="s" class="assistive-text">Search</label>
+                           <input type="text" class="field" name="s" id="s" placeholder="Search" />
+                           <button type="submit" class="submit btn" name="submit" id="searchsubmit"><i class="icon-search"></i></button>
+                        </form>
+                     </aside>#}
+        </div>
+    </div>
+</div>
+              
+{% endblock %}
+
+
+{% block pagination %}
+{% endblock %}
+
+
+{#{% block scripts %}
+
+{% include "P4MCoreBundle:Core:scripts.html.twig" %}
+{% endblock %}#}

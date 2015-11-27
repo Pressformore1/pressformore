@@ -1,0 +1,127 @@
+;
+jQuery(document).ready(function(){
+        
+	tooltipManage();
+        formManage();
+	loading();
+
+});
+
+$(window).load(function(){
+	//Page wall, et author
+	if($('#content-wall').length){
+		$('#content-wall').bind('loaded', function(){
+			$('#loading-zone').trigger('hide-loading');
+			$('#content-wall').unbind('loaded');
+		});
+		
+		
+	//Page normal
+	}else{
+		$('#loading-zone').trigger('hide-loading');
+	}
+	
+	alignThumb();
+});
+
+
+function log(msg){
+	try{
+		console.log(msg);
+	}catch(e){
+	
+	}
+}
+
+function tooltipManage(){
+	var $ = jQuery;    
+	//Tootltip
+	$('.tooltip-type-tiles, .tooltip-menu-icon').tooltip({
+		placement : 'bottom'
+	});
+	
+	$('.action-bar-link, .action-bar-tooltip').tooltip({
+		placement : 'left',
+		container: 'body'
+	});
+};
+	
+	
+	
+//Changement des icones couleur/gris, l'image est pass� en param�tre, en de status on affiche la grise ou la color�
+function iconColor(img, status){
+        var $ = jQuery;
+        var url = $(img).attr('src');
+        var newUrl='';
+        if(status===1){
+                newUrl = url.substr(0,url.indexOf('gray')) + 'full' + url.substr(url.indexOf('gray')+4);
+                
+        }else if(status===0){
+               newUrl = url.substr(0,url.indexOf('full')) + 'gray' + url.substr(url.indexOf('full')+4);
+        }
+        $(img).attr('src', newUrl);
+};
+
+
+function formManage(){
+	var $ = jQuery;    
+        if ($('input[type="checkbox"]').length)
+        {
+            $('input[type="checkbox"]').ezMark({checkboxCls: 'ez-checkbox', checkedCls: 'ez-checked'});
+        }
+    
+};
+
+function resizeContent(){
+	var $ = jQuery;
+	if($('#action-bar-sections-wrap').attr('data-status')=='open'){
+			actionBarWidth = $('#action-bar-sections-wrap').width();
+	}else{ 
+			actionBarWidth = 0;
+	}
+	
+	
+	$('#content-wrap').width($(window).width()-$('#action-bar-wrap').width()-actionBarWidth-4);
+	
+	 log('WRAP : '+$('#content-wrap').width());
+    log('WALL : '+$('#content-wall').width());
+    log('TILE : '+$('.col-md-5').width());
+};
+
+
+//Affichage de la loading zone
+function loading(){
+	
+	$('#loading-zone').bind('show-loading',function(){
+		$('#loading-zone').fadeIn();	
+	});
+	
+	$('#loading-zone').bind('hide-loading',function(){
+		$('#loading-zone').fadeOut();	
+	});
+}
+
+function alignThumb(){
+	$('.thumb-align').parent().each(function(i,wrap){
+        img = $(wrap).find('img');
+
+        //La largeur de l'image est plus petite que le conteneur
+        if($(wrap).width()>img.width()){
+
+            //largeur de l'image �gal au wrap
+            img.width($(wrap).width()).height('auto');
+
+            //centre l'image en hauteur
+            marge = parseInt((img.height()-$(wrap).height())/2);
+            img.css('top', '-'+marge+'px');
+
+        //la largeur de l'image est plsu grande que celle du conteneur
+        }else{
+            //centre l'image en largeur
+            marge = parseInt((img.width()-$(wrap).width())/2);
+            img.css('left', '-'+marge+'px');
+
+
+        }
+    });
+}

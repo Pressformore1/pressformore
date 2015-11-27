@@ -1,0 +1,5 @@
+p4_m_blog_homepage:
+    pattern:  /{page}
+    defaults: { _controller: P4MBlogBundle:Blog:index,page:1 }
+    requirements:
+        page: \d+

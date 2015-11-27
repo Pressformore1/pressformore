@@ -1,0 +1,512 @@
+imports:
+    - { resource: parameters.yml }
+    - { resource: security.yml }
+
+framework:
+    #esi:             ~
+    translator:      { fallback: %locale% }
+    secret:          %secret%
+    router:
+        resource: "%kernel.root_dir%/config/routing.yml"
+        strict_requirements: ~
+    form:            ~
+    csrf_protection: ~
+    validation:      { enable_annotations: true }
+    templating:
+        engines: ['twig']
+        #assets_version: SomeVersionScheme
+    default_locale:  "%locale%"
+    trusted_proxies: ~
+    session:         ~
+    fragments:       ~
+    http_method_override: true
+
+# Twig Configuration
+twig:
+    debug:            %kernel.debug%
+    strict_variables: %kernel.debug%
+    form:
+        resources:
+            - 'P4MUserBundle:Form:fields.html.twig'
+            - 'P4MCoreBundle:Form:fields.html.twig'
+    globals:
+        facebook_id: %facebook_app_id%
+        
+            
+
+# Assetic Configuration
+assetic:
+    debug:          %kernel.debug%
+    use_controller: false
+    bundles:        [ P4MCoreBundle,P4MUserBundle,P4MBackofficeBundle,P4MBlogBundle,SKCMSAdminBundle]
+    #java: /usr/bin/java
+    filters:
+        cssrewrite: ~
+        #closure:
+        #    jar: %kernel.root_dir%/Resources/java/compiler.jar
+        #yui_css:
+        #    jar: %kernel.root_dir%/Resources/java/yuicompressor-2.4.7.jar
+
+# Doctrine Configuration
+doctrine:
+    dbal:
+        driver:   %database_driver%
+        host:     %database_host%
+        port:     %database_port%
+        dbname:   %database_name%
+        user:     %database_user%
+        password: %database_password%
+        charset:  UTF8
+        # if using pdo_sqlite as your database driver, add the path in parameters.yml
+        # e.g. database_path: %kernel.root_dir%/data/data.db3
+        # path:     %database_path%
+
+    orm:
+        entity_managers:
+            default:
+                auto_mapping: true
+                dql:
+                    string_functions:
+                        GROUP_CONCAT: SKCMS\AdminBundle\Doctrine\MySQL\GroupConcat
+        auto_generate_proxy_classes: %kernel.debug%
+        
+        
+# Stof\DoctrineExtensionBundle configuration
+stof_doctrine_extensions:
+    orm:
+        default:
+            sluggable: true
+
+# Swiftmailer Configuration
+swiftmailer:
+    transport: %mailer_transport%
+    host:      %mailer_host%
+    username:  %mailer_user%
+    password:  %mailer_password%
+    spool:     { type: memory }
+    
+fos_user:
+    db_driver:     orm                        # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
+    firewall_name: secure_area                       # Le nom du firewall derrière lequel on utilisera ces utilisateurs
+    user_class:    P4M\UserBundle\Entity\User
+    service:
+        mailer: fos_user.mailer.default
+    from_email:
+        address:        %mailer_user%
+        sender_name:    Pressformore
+#    resetting:
+#        email:
+#            from_email:
+#                address:        hello@pressformore.com
+#                sender_name:    Pressformore
+    
+    registration:
+        form:
+            type: p4m_user_registration
+#            type: p4m_user_registration
+        confirmation:
+            enabled:    false # change to true for required email confirmation
+            template:   FOSUserBundle:Registration:email.txt.twig
+ 
+
+
+hwi_oauth:
+    # name of the firewall in which this bundle is active, this setting MUST be set
+    firewall_name: secure_area
+    connect:
+        confirmation: true
+        #account_connector: hwi_oauth.user.provider.fosub_bridge
+        #registration_form_handler: hwi_oauth.registration.form.handler.fosub_bridge
+        #registration_form: fos_user.registration.form
+
+    resource_owners:
+        facebook:
+            type: facebook
+            client_id: "%facebook_app_id%"
+            client_secret: "%facebook_app_secret%"
+            scope: ""
+        google:
+            type: google
+            client_id: "%google_app_id%"
+            client_secret: "%google_app_secret%"
+            scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+
+    fosub:
+        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+        username_iterations: 30
+
+        # mapping between resource owners (see below) and properties
+        properties:
+            github: githubID
+
+jonlil_ck_finder:
+    license: # optional, can be used in demo mode also
+        key: ""
+        name: ""
+    baseDir: "%assetic.read_from%"
+    baseUrl: "/images/uploads/"  # path where your files will be stored
+    service: "php"
+    
+skcmsck_finder:
+    license: # optional, can be used in demo mode also
+        key: ""
+        name: ""
+    baseDir: "%assetic.read_from%"
+    baseUrl: "/images/uploads/"  # path where your files will be stored
+    service: "php"
+                
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        %elastica_profile%:
+            client: default
+            finder: ~
+            settings: 
+                analysis:
+                    analyzer:
+                        str_search_analyzer: 
+                            tokenizer: "keyword"
+                            filter: "lowercase"
+                        str_index_analyzer:
+                            tokenizer: keyword
+                            filter: ["lowercase", "substring"]
+                        
+                    filter: 
+                        substring: 
+                            type: "nGram"
+                            min_gram: 1
+                            max_gram: 20
+            types:
+                userlink:
+                    mappings:
+                        id: ~
+                        dateAddedTimeStamp: ~
+                        follower:
+                            type: "object"
+                            properties:
+                                id : ~
+                        following:
+                            type: "object"
+                            properties:
+                                id : ~
+                    persistence:
+                        driver: orm
+                        model: P4M\UserBundle\Entity\UserLink
+                        provider: ~
+                        finder: ~
+                        
+                vote:
+                    mappings:
+                        id: ~
+                        dateAddedTimeStamp: ~
+                        user:
+                            type: "object"
+                            properties:
+                                id : ~
+                        post:
+                            type: "object"
+                            properties:
+                                quarantaine: ~
+                        
+                    persistence:
+                        driver: orm
+                        model: P4M\CoreBundle\Entity\Vote
+                        provider: ~
+                        finder: ~
+                
+                comment:
+                    mappings:
+                        id: ~
+                        dateAddedTimeStamp: ~
+                        user:
+                            type: "object"
+                            properties:
+                                id : ~
+                        post:
+                            type: "object"
+                            properties:
+                                quarantaine: ~
+                        
+                    persistence:
+                        driver: orm
+                        model: P4M\CoreBundle\Entity\Comment
+                        provider: ~
+                        finder: ~
+                post:
+                    mappings:
+                        id: ~
+                        quarantaine: ~
+                        dateAddedTimeStamp: ~
+                        user:
+                            type: "object"
+                            properties:
+                                id : ~
+                        
+                    persistence:
+                        driver: orm
+                        model: P4M\CoreBundle\Entity\Post
+                        provider: ~
+                        finder: ~
+                wall:
+                    mappings:
+                        id: ~
+                        dateAddedTimeStamp: ~
+                        user:
+                            type: "object"
+                            properties:
+                                id : ~
+                        
+                    persistence:
+                        driver: orm
+                        model: P4M\CoreBundle\Entity\Wall
+                        provider: ~
+                        finder: ~
+                        
+        %elastica_website%:
+            client: default
+            finder: ~
+            settings: 
+                analysis:
+                    analyzer:
+                        str_search_analyzer: 
+                            tokenizer: "keyword"
+                            filter: "lowercase"
+                        str_index_analyzer:
+                            tokenizer: keyword
+                            filter: ["lowercase", "substring"]
+                        
+                    filter: 
+                        substring: 
+                            type: "nGram"
+                            min_gram: 1
+                            max_gram: 20
+            types:
+                user:
+                    mappings:
+                        id: ~
+                        username: { boost: 3, type: "string", search_analyzer: "str_search_analyzer", index_analyzer: "str_index_analyzer"}
+                        firstName: { boost: 3 }
+                        lastName: { boost: 3 }
+                        wallsCount: ~
+                        postsCount: ~
+                        followers:
+                            type: "object"
+                            properties:
+                                follower.username : ~
+                                follower.id : ~
+                                follower.firstName : ~
+                                follower.lastName : ~
+                                dateAddedTimeStamp: ~
+                        following:
+                            type: "object"
+                            properties:
+                                following.username : ~
+                                following.id : ~
+                                following.firstName : ~
+                                following.lastName : ~
+                                dateAddedTimeStamp: ~
+                    persistence:
+                        driver: orm
+                        model: P4M\UserBundle\Entity\User
+                        provider: ~
+                        finder: ~
+                        repository: P4M\UserBundle\SearchRepository\UserRepository
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+                post:
+                    mappings:
+                        id: ~
+                        title: { boost: 5 }
+#                        author.username: { boost: 3 }
+#                        author.id: ~
+                        author: 
+                            type: "object" 
+                            properties: 
+                                username: { boost: 3 }
+                                id: ~
+                        user: 
+                            type: "object" 
+                            properties: 
+                                username: { boost: 3 }
+                                id: ~
+#                        user.username: { boost: 3 }
+#                        user.id: ~
+                        dateAddedTimeStamp: {boost: 1}
+                        type:
+                            type: "object"
+                            properties:
+                                id: {boost: 1}
+                        lang:
+                            type: "object"
+                            properties:
+                                id: {boost: 1}
+                        votes: 
+                            type: "object" 
+                            properties: 
+                                user:
+                                    type: "object"
+                                    properties:
+                                        username: ~
+                                        id: ~
+                                dateAddedTimeStamp: {boost: 1}
+                        comments: 
+                            type: "object" 
+                            properties: 
+                                user:
+                                    type: "object"
+                                    properties:
+                                        username: ~
+                                        id: ~
+                                dateAddedTimeStamp: {boost: 1}
+                        categories: 
+                            type: "object" 
+                            properties: 
+                                id: ~
+                        tags: 
+                            type: "object" 
+                            properties: 
+                                id: ~
+                                name: ~
+                        views:
+                            type: "object"
+                            properties: 
+                                user:
+                                    type: "object"
+                                    properties:
+                                        username: ~
+                                        id: ~
+                                dateTimestamp: ~
+                        readLater:
+                            type: "object"
+                            properties: 
+                                user:
+                                    type: "object"
+                                    properties:
+                                        username: ~
+                                        id: ~
+                                dateTimestamp: ~
+                        commentsCount: {boost: 1}
+                        score:
+                            type: "object"
+                            properties:
+                                score: ~
+                                ratio: ~
+#                        score.score: {boost: 1}
+#                        score.ratio: {boost: 1}
+                        viewsCount: {boost: 1}
+                        showOnHome: ~
+                        quarantaine: ~
+                    persistence:
+                        driver: orm 
+                        model: P4M\CoreBundle\Entity\Post
+                        provider: ~
+                        finder: ~
+                        listener:
+                            is_indexable_callback: "isSearchable"
+                        repository: P4M\CoreBundle\SearchRepository\PostRepository
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+                            service: p4m.transformers.elastica.post
+                wall:
+                    mappings:
+                        name: { boost: 5 }
+                        user:
+                            type: "object"
+                            properties:
+                                username: { boost: 3 }
+                                id: ~
+                        followersCount: ~
+                        viewsCount: ~
+                        votesRatio: ~
+                        commentsCount: ~
+                        dateAddedTimeStamp: {boost: 1}
+                        includedCategories:  
+                            type: "object" 
+                            properties: 
+                                id: ~
+                    persistence:
+                        driver: orm 
+                        model: P4M\CoreBundle\Entity\Wall
+                        provider: ~
+                        finder: ~
+                        listener:
+                            is_indexable_callback: "isSearchable"
+                        repository: P4M\CoreBundle\SearchRepository\WallRepository
+                        elastica_to_model_transformer:
+                            ignore_missing: true
+                                            
+#        user:
+#            client: default
+#            finder:
+#            types:
+#                user:
+#                    mappings:
+#                        username: { boost: 5 }
+#                        name: { boost: 3 }
+#                        surName: { boost: 3 }
+#                    persistence:
+#                        driver: orm
+#                        model: P4M\UserBundle\Entity\User
+#                        provider: ~
+#        post:
+#            client: default
+#            finder:
+#            types:
+#                post:
+#                    mappings:
+#                        title: { boost: 5 }
+#                    persistence:
+#                        driver: orm 
+#                        model: P4M\CoreBundle\Entity\Post
+#                        provider: ~
+#                        listener:
+#                            is_indexable_callback: "isSearchable"
+
+                
+services:
+    form.type.p4m_corebundle_usercategory:
+        class: P4M\CoreBundle\Form\UserCategoryType
+        tags:
+            - { name: form.type, alias: p4m_corebundle_usercategory }
+    form.type.p4m_corebundle_wallcategory:
+        class: P4M\CoreBundle\Form\WallCategoryType
+        tags:
+            - { name: form.type, alias: p4m_corebundle_wallcategory }
+    form.type.p4m_corebundle_walltag:
+        class: P4M\CoreBundle\Form\WallTagType
+        tags:
+            - { name: form.type, alias: p4m_corebundle_walltag}
+    
+    event_listener.p4m_trackingbundle_entitylistener_onflush:
+        class: P4M\TrackingBundle\Listener\PostVersion
+        tags:
+            - { name: doctrine.event_listener, event: onFlush}
+        arguments: ['@service_container']
+    event_listener.p4m_trackingbundle_entitylistener_authorfinded:
+        class: P4M\TrackingBundle\Listener\AuthorFinded
+        tags:
+            - { name: doctrine.event_listener, event: onFlush}
+        arguments: ['@service_container']
+    event_listener.p4m_trackingbundle_entitylistener_authorchanged:
+        class: P4M\TrackingBundle\Listener\PostAuthorChangeCheck
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate}
+        arguments: ['@service_container']
+    event_listener.p4m_trackingbundle_entitylistener_notifier:
+        class: P4M\TrackingBundle\Listener\Notify
+        tags:
+            - { name: doctrine.event_listener, event: onFlush}
+        arguments: ['@service_container']
+    event_listener.p4m_userbundle_newuser:
+        class: P4M\UserBundle\Listener\NewUser
+        tags:
+            - { name: doctrine.event_listener, event: onFlush}
+        arguments: ['@service_container']
+        
+    hwi_oauth.user.provider.entity:
+            class:  HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+            
+            
+parameters:
+    fos_user.template.engine: 'twig'

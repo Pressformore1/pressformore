@@ -1,0 +1,68 @@
+{# On étend notre layout #}
+{% extends "P4MAdminBundle::admin.html.twig" %}
+
+{% block pageTitle%}Choose Invitations to send{% endblock %}
+
+
+{# Dans notre layout, il faut définir le block body #}
+
+{%block adminActions%}
+<a href="{{path('p4m_admin_invitationList')}}" class="btn btn-info">BACK TO LIST</a>
+{%endblock%}
+
+{% block leftCol %}
+{{parent()}}
+<form action="" method="post">
+        <table class="table table-striped table-sortable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Invitation Email</th>
+                <th>Added By</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Code</th>
+                <th>iterations</th>
+                <th>Max iterations</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for invitation in invitations %} 
+                {% set trClass='' %}
+                {#{% if invitation.draft == 1%}
+                    {%set trClass='warning'%}
+                {%endif%}#}
+            <tr class="{{trClass}}">
+                <td><input type="checkbox" id="id_{{invitation.id}}" class="checkBoxInvitationChoose" name="invitation[]" value="{{invitation.id}}" /><label for="id_{{invitation.id}}"></label></td>
+                <td>{{invitation.email}}</td>
+                <td>{% if invitation.user %}{{invitation.user.username}}{%endif%}</td>
+                <td>{%if invitation.sent == true%}Sent{%else%}Not Sent{%endif%}</td>
+                <td>{{invitation.date|date('d/m/Y')}}</td>
+                <td>{{invitation.code}}</td>
+                <td>{{invitation.iterations}}</td>
+                <td>{{invitation.maxIterations}}</td>
+                <td><a href="{{path('p4m_admin_editInvitation',{invitationId:invitation.id})}}">Edit / Delete </a></td>
+                
+              </tr>
+
+            {% endfor %}
+
+
+            </tbody>
+          </table>
+    <div class="formElement">
+        <a href="#" id="checkAllInvitations">Check all</a>
+         | <a href="#" id="unCheckAllInvitations">Uncheck all</a>
+                    </div>
+    <div class="formElement">
+                        <input type="submit" class="btn btn-primary" />
+                    </div>
+</form>
+                        
+{% endblock %}{# empty Twig template #}
+
+{% block scriptCustom %}
+{{parent()}}
+<script type="text/javascript" src="{{asset('js/scripts/admin/script-admin.js')}}"></script>
+{%endblock%}{# empty Twig template #}

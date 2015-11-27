@@ -1,0 +1,35 @@
+{%extends 'P4MUserBundle:Social/Profile:my-account.html.twig'%}
+
+
+{%block accountTitle%}Change your profile picture{%endblock%}
+
+{%block accountNote%}
+    {%if form_errors(form)|length %}
+        <p><i class="icon-info-sign"></i>{{ form_errors(form) }}</p>
+    {%endif%}
+{%endblock%}
+
+{%block accountForm%}
+<div class="form-field">
+        <label class="required form-field-title" for="currentPassword">Current picture</label>
+{#        {% if user.picture.webPath is defined%}#}
+            <img id="profilePicImage" src="{%if user.picture %}{{asset(user.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}"/>
+{#        {%endif%}#}
+</div>
+
+<div class="form-field">
+        {{form_label(form.picture,label|default(null), { 'label_attr': { 'class': 'form-field-title' } }) }}
+        {{form_widget(form.picture)}}<br />
+       
+</div>
+
+{{form_rest(form)}}
+
+
+{%endblock%}
+        
+{%block scripts%}
+        {{parent()}}
+{#        <script type="text/javascript" src="{{ asset('js/jquery.passstrength.min.js')}}"></script>#}
+
+{%endblock%}

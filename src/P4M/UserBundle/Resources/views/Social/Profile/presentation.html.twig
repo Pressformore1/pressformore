@@ -1,0 +1,51 @@
+<div class="welcome-block">
+               <div class="container">
+                  <div class="row-fluid">
+                    <div class="span4">
+                            <div class="social-logo-wrap">
+{#                                {% if user.picture %}#}
+                                    <img src="{%if user.picture %}{{asset(user.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}" alt="" class="social-logo">
+{#                                {% endif %}#}
+                            </div>
+                    </div>
+                    <div class="span8">
+                            <div class="social-block-head">
+                                    <h1 class="social-title">{{user.username|title}} <small>({{user.firstName|title}} {{user.lastName|upper}})</small></h1>
+                                    <h3 class="social-name">{{user.title}}</h3>
+                                    <p class="social-about">{{user.bio}}</p>
+                                    
+                                    {% if following is defined %}
+                                    
+                                        {% if following%}
+                                            {%set visibleFollowClass = ''%}
+                                            {%set visibleUnfollowClass = 'hidden'%}
+                                            {% set infoClass=''%}
+                                        {%else%}
+                                            {%set visibleFollowClass = 'hidden'%}
+                                            {%set visibleUnfollowClass = ''%}
+                                            {% set infoClass='following'%}
+                                    {%endif%}
+                                    
+                                    
+{#                                    <a href="#" class="button contact left">Contact</a>#}
+                                    <p class="followed_info {{infoClass}}">Followed by <span id="nombre_followers">{{user.followers|length}}</span> people</p>
+                                    <a href="#follow" class="followActions ajax_action button follow {{visibleFollowClass}}" data-url="{{url('p4m_ajax_action')}}" data-action="follow" data-params="{{{'user':user.id}|json_encode()}}" data-key="{{{'user':user.id}|json_encode()|sha512}}">+Follow</a>
+                                    <a href="#follow" data-placement="left" data-toggle="tooltip" class="followActions button unfollow {{visibleUnfollowClass}}"  data-html="true" 
+                                       data-content="<a href='#' class='ajax_action popoverLink' data-url='{{url('p4m_ajax_action')}}' data-action='unfollow' data-params='{{{'user':user.id}|json_encode()}}' data-key='{{{'user':user.id}|json_encode()|sha512}}'>Unfollow</a>"
+                                       >Following</a>
+                                    
+                                    {%endif%}
+                               
+                               </div>
+                    </div>
+                    <div class="clear"></div>
+                     <!-- /span12 -->
+                  </div>
+                  <!-- /row-fluid -->
+               </div>
+               <!-- .container -->
+               <div class="social-strip">
+		</div>
+               <!-- .welcome-strip -->
+            </div>
+            <!-- .welcome-block -->

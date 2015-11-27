@@ -1,0 +1,49 @@
+{# On étend notre layout #}
+{% extends "P4MAdminBundle::admin.html.twig" %}
+
+{% block pageTitle%}Category List{% endblock %}
+
+
+{# Dans notre layout, il faut définir le block body #}
+
+{%block adminActions%}
+<a href="{{path('p4m_admin_createcategory')}}" class="btn btn-info">CREATE CATEGORY</a>
+{%endblock%}
+
+{% block leftCol %}
+{{parent()}}
+        <table class="table table-striped table-sortable">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Category Name</th>
+                <th>Category Icon</th>
+                <th>Draft</th>
+                <th>Edit</th>
+              </tr>
+            </thead>
+            <tbody>
+            {% for category in categories %} 
+                {% set trClass='' %}
+                {% if category.draft == 1%}
+                    {%set trClass='warning'%}
+                {%elseif category.deleted ==1%}
+                    {%set trClass='danger'%}
+                {%endif%}
+            <tr class="{{trClass}}">
+                <td>{{category.id}}</td>
+                <td>{{category.name}}</td>
+                <td>{% if category.iconColor%} <img src="{{asset(category.iconColor)}}" width="50" alt="" />{%endif%}</td>
+                <td>{{category.draft}}</td>
+                <td><a href="{{path('p4m_admin_categoryedit',{'categoryId':category.id})}}">Edit</a></td>
+                
+              </tr>
+
+            {% endfor %}
+
+
+            </tbody>
+          </table>
+
+                        
+{% endblock %}{# empty Twig template #}

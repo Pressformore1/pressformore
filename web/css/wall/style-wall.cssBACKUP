@@ -1,0 +1,108 @@
+
+
+/***************************** TILES ***********************************/
+#content-wrap{
+  margin: 2px;
+  width: 96%;
+}
+#content-wall{
+  padding: 0;
+  width: 100%;
+  min-height: 1000px;
+}
+
+/******************* TILES **********************/
+#infscr-loading{position: absolute; bottom: 0px; left: 46%; background: #f8f8f8; z-index: 120; background: #f8f8f8; border: 1px solid #a3a6a8; border-radius: 5px 5px 0 0; padding: 10px; text-align: center;}
+#infscr-loading img{width: 40px; margin: auto;}
+
+.masonry-block{padding: 0px; height: 280px;}
+.is-hidden{opacity: 0;}
+.masonry-block.row-2{height: 560px;}
+
+.post-wrap{padding: 2px; width: 100%; height: 100%;}
+
+.post {border-radius: 3px; padding: 0; background: #f8f8f8; height: 100%; border: 1px solid #9c9c9c; position: relative; overflow: hidden; width: 100%;}
+
+
+/*Header : non hover*/
+.post-header{height: 100%; width: 100%; }
+.post-header h1.post-header-title{position: absolute; bottom: 10%; left: 0px; width: 80%; padding: 0; margin: 0; line-height: inherit !important; font-size: inherit !important; z-index: 10;}
+.post-header h1.post-header-title a.post-title-link{ font-size: 20px; font-family: 'robotobold'; color: #363636; line-height: 30px; background: rgba(255,255,255,0.8); display: block; padding: 7px 10px;}
+
+.post-header-action{position: absolute; top: 5px; right: 5px; z-index: 11;}
+.post-header-action img{width: 35px;}
+
+.post-header .post-header-thumb{display: block; width: 100%; height: 100%; overflow: hidden;}
+.post-header .post-header-thumb img{position: absolute; top: 0; left: 0; height: 100%; z-index: 9;}
+
+
+/*Content : hover*/
+.post-content{display: none; position: absolute; top: 0px; z-index: 12; background: rgba(255,255,255,0.85); padding: 7px 10px; height: 100%; width: 100%;}
+.post-content a{color: #363636;}
+.post-content a:hover{text-decoration: none;}
+.post-meta {font-size: 12px;  font-family: 'robotolight'; text-align: right;}
+
+
+.post-content-scroll{height: 190px; cursor: pointer;}
+
+.post-content-title {margin: 10px 0 3px; font-size: 14px; }
+.post-content-title a{font-size: 14px; font-family: 'robotomedium';}
+.post-content-description{margin:5px 0; font-size:12px; text-align: justify; line-height: normal;}
+
+
+
+.post-footer{position: absolute; bottom: 0px; left: 0px; width: 100%; height: 70px;}
+.post-footer-meta{margin:0; padding: 0 10px;}
+.post-meta{margin:0px; font-size: 12px;  font-family: 'robotolight';}
+.post-meta:hover{color: #ED3237;}
+
+.post-categories-list{padding: 0; float: left; margin: 7px 0 0px 10px;}
+.post-category-item{margin: 0 5px 0 0; padding: 0 4px 0 0; width: auto; display: inline-block; position: relative;}
+.post-category-icon{display: inline-block; width: 30px;  vertical-align: middle; margin: 0 px 0 0;}
+.post-category-item .glyphicon{color: #ED3237; background: none repeat scroll 0 0 rgba(0, 0, 0, 0.4); border-radius: 50px; display: none; height: 30px; left: 0; position: absolute;  top: 0;  width: 30px;  z-index: 10; font-size: 20px;}
+.post-category-item .glyphicon-minus{padding: 6px 5px; }
+.post-category-item .glyphicon-plus{padding: 4px 6px; }
+.post-type{float: left; margin: 7px 7px 0 20px; color: #929292;}
+.post-type img{width: 30px;}
+
+.rating-horizontal-bar{height: 7px; width: 100%; margin:0px 0 0; position: absolute; bottom: 0px; left: 0px;}
+.rating-horizontal-bar-plus{background: #6cde66; display: block; height: 7px; float: left;}
+.rating-horizontal-bar-less{background: #d45959 ; display: block; height: 7px; float: left;}
+
+
+.read-later-wrap{float: right; margin: 12px 6px 0 0;}
+.read-later:hover{color: #ED3237; }
+.read-later:hover .read-later-text{display: inline;}
+.read-later{font-size: 22px; color: #363636; margin: 0; cursor: pointer; }
+.read-later.selected{color: #ED3237;}
+.read-later span{vertical-align: middle;}
+.read-later-text{display: none; font-size: 12px;}
+
+.post-remove{position: absolute; top: 0px; right: 3px; opacity: 0.6; cursor: pointer; color: #363636;}
+.post-remove:hover{color: #363636; opacity: 1;}
+
+/*********************************TYPE OF TILES*************************************************/
+/*SMALL*/
+.masonry-block.col-md-5 .post-header h1.post-header-title a.post-title-link{font-size: 18px; line-height: 20px;}
+.masonry-block.col-md-5 .post-content .post-content-title{display: none;}
+.masonry-block.col-md-5 .post-content .post-content-description{margin: 15px 0 0;}
+
+
+/*NORMAL*/
+.masonry-block.col-md-10 .post-header h1.post-header-title a.post-title-link{font-size: 22px; line-height: 24px;}
+.masonry-block.col-md-6 .post-content-title a{font-size: 18px;}
+.masonry-block.col-md-6 .post-content-description a{font-size: 12px;}
+
+
+/*LARGE*/
+.masonry-block.col-md-15 .post-header h1.post-header-title a.post-title-link{font-size: 24px; line-height: 26px;}
+.masonry-block.col-md-15 .post-content-title a{font-size: 22px;}
+.masonry-block.col-md-15 .post-content-description a{font-size: 14px;}
+
+
+/*EXTRA LARGE*/
+.masonry-block.col-md-15.row-2 .post-header h1.post-title a.post-title-link{font-size: 26px;line-height: 28px;}
+.masonry-block.col-md-12.row-2 .post-content-title a{font-size: 24px;}
+.masonry-block.col-md-12.row-2 .post-content-description a{font-size: 14px;}
+
+

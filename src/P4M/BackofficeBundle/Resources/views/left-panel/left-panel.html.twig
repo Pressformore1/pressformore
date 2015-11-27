@@ -1,0 +1,221 @@
+{%set route = app.request.get('_route')%}
+
+
+    <ul class="account-menu">
+        <li class="selected">
+        {% set selected = ''%}
+        {% if route =="p4_m_backoffice_profile_infos"%}
+            {% set selected = ' selected'%}
+        {% endif%}
+               <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_profile_infos')}}"><span class="glyphicon glyphicon-user"></span>Account</a>
+        </li>
+        {% set selected = ''%}
+        {% if route =="p4_m_backoffice_password"%}
+            {% set selected = ' selected'%}
+        {% endif%}
+         <li>
+                <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_password')}}"><span class="glyphicon glyphicon-tower"></span>Password</a>
+        </li>
+        {% set selected = ''%}
+        {% if route =="p4_m_backoffice_profile_picture"%}
+            {% set selected = ' selected'%}
+        {% endif%}
+         <li>
+                <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_profile_picture')}}"><span class="glyphicon glyphicon-camera"></span>Profile Picture</a>
+        </li>
+        {#{% set selected = ''%}
+        {% if route =="p4_m_backoffice_notifications"%}
+            {% set selected = ' selected'%}
+        {% endif%}
+         <li>
+                <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_notifications')}}"><span class="glyphicon glyphicon-camera"></span>Notifications</a>
+        </li>#}
+         {#<li>
+                <a class="account-menu-link" href="{{path('p4_m_backoffice')}}"><span class="glyphicon glyphicon-cog"></span>Preferences</a>
+        </li>#}
+        {#{% set selected = ''%}
+        {% if route =="p4_m_backoffice_walls"%}
+            {% set selected = ' selected'%}
+        {% endif%}
+         <li>
+                <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_walls')}}"><span class="glyphicon glyphicon-th"></span>Walls</a>
+                
+                {% if user.walls|length%}
+                <ul class="account-sub-menu">
+                    <li>
+                       <a class="account-menu-link " href="{{path('p4m_core_wall_create')}}">Create a new wall</a>
+                    </li>
+                    {% for wall in user.walls%}
+                    <li>
+                       <a class="account-menu-link " href="{{path('p4m_core_wall_create',{'wallSlug':wall.slug})}}">Edit {{wall.name}}</a>
+                    </li>
+                    
+                    {%endfor%}
+                    
+                </ul>	
+                {% endif %}
+        </li>
+        
+        {% set selected = ''%}
+        {% if route =="p4_m_backoffice_money"%}
+            {% set selected = ' selected'%}
+        {% endif%}
+        #}
+        {% set selected = ''%}
+        {% if route =="p4_m_backoffice_producer"%}
+            {% set selected = ' selected'%}
+        {% endif%}
+         <li>
+            <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_producer_key')}}"><span class="glyphicon glyphicon-camera"></span>Producer</a>
+                 
+            {% if user.mangoUserNatural%}
+                <ul class="account-sub-menu">
+                    <li>
+                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_key')}}">My key</a>
+                    </li>
+                       {% set selected = ''%}
+                        {% if route =="p4_m_backoffice_producer_pressforms"%}
+                            {% set selected = ' selected'%}
+                        {% endif%}
+                    <li>
+                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_pressforms')}}">Retributions</a>
+                    </li>
+                    {% set selected = ''%}
+                        {% if route =="p4_m_backoffice_producer_money"%}
+                            {% set selected = ' selected'%}
+                        {% endif%}
+                    <li>
+                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_money')}}">Money transfer</a>
+                    </li> 
+                    <li>   
+                    {% set selected = ''%}
+                        {% if route =="p4_m_backoffice_producer_bankAccount"%}
+                            {% set selected = ' selected'%}
+                        {% endif%}
+                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_bankAccount')}}">Bank account information</a>
+                    </li>
+                 </ul>
+            {%endif%}
+                	
+        </li>
+        
+
+    </ul>                               
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    <div class="login-info">
+        <span>
+            <nav><a href="{{path('p4_m_backoffice_dashboardReader')}}"><i class="fa fa-angle-down"></i> Back Office </a></nav>
+        </span>
+    </div>
+    <!-- end user info -->
+
+    <!-- NAVIGATION : This navigation is also responsive
+
+    To make this navigation dynamic please make sure to link the node
+    (the reference to the nav > ul) after page load. Or the navigation
+    will not initialize.
+    -->
+    <nav>
+        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul>
+            {#<li class="">
+                <a href="{{path('p4_m_backoffice_dashboardReader')}}" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+                <ul>
+                    <li>
+                        <a href="{{path('p4_m_backoffice_dashboardReader')}}" title="Dashboard">Reader</a>
+                    </li>
+                    <li>
+                        <a href="ajax/articles_curator.html">Curator</a>
+                    </li>
+                    <li>
+                        <a href="ajax/articles_producer.html">Producer</a>
+                    </li>
+                    <li>
+                        <a href="ajax/articles_overview.html">Overview P4m</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="ajax/inbox.html"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Inbox</span><span class="badge pull-right inbox-badge">14</span></a>
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">My Pref</span></a>
+                <ul>
+                    {% for wall in user.walls%}
+                    <li>
+                        <a href="{{path('p4_m_backoffice_wallEdit',{'wallSlug':wall.slug})}}">{{wall.name}}</a>
+                    </li>
+                    {%endfor%}
+                    <li>
+                            <a href="{{path('p4_m_backoffice_wallAdd')}}">Set a new wall </a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="ajax/myprofile.html"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">MyProfile</span></a>
+            </li>
+
+            <li>
+                <a href="ajax/grades.html"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Grades</span></a>
+            </li>
+
+
+
+
+        </ul>
+    </nav>
+    <span class="minifyme"> <i class="fa fa-arrow-circle-left hit"></i> </span>
+
+</aside>
+#}

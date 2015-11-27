@@ -1,0 +1,59 @@
+{%extends "SKCMSAdminBundle::layout.html.twig"%}
+	
+{%block adminContent%}
+    <div class="row-fluid sortable">
+        <div class="box span12">
+                <div class="box-header well" data-original-title>
+                        <h2><i class="icon-edit"></i> Charge User <span class="red">{{targetUser.username}}</span></h2>
+                        <h3>Debiter Money Balance : {{debiterWallet.Balance.Amount/100}}€</h3>
+                        {#<div class="box-icon">
+                                <a href="#" class="btn btn-setting btn-round"><i class="icon-cog"></i></a>
+                                <a href="#" class="btn btn-minimize btn-r   ound"><i class="icon-chevron-up"></i></a>
+                                <a href="#" class="btn btn-close btn-round"><i class="icon-remove"></i></a>
+                        </div>#}
+                </div>
+                {% if transactions|length%}
+                <div class="box-content">
+                    Previous transactions : 
+                    <ul>
+                        {%for transaction in transactions%}
+                            <li>{{transaction.CreditedFunds.Amount/100}} | {{transaction.CreationDate|date('Y-m-d')}} | {{transaction.Status}}</li>
+                        {%endfor%}
+                    </ul>
+                </div>
+                
+                {%endif%}
+                <div class="box-content">
+{#                    {{form_errors(form)}}#}
+                        <form class="form-horizontal" method="post" {{ form_enctype(form) }}>
+                          <fieldset>
+{#                                <legend>{%if entity.id is defined%}Edit{%else%}Create{%endif%} {{entityParams.beautyName}}</legend>#}
+                            {%for input in form.children%}
+                                {%if '__token' in input.vars.id %}
+                                    {{form_widget(input,{attr:{class:'col-sm-60'}})}}
+                                {%else %}
+                                <div class="control-group">
+                                    {{form_label(input,null,{label_attr:{class:'control-label'} })}}
+    {#                              <label class="control-label" for="{{input.id}}">Auto complete </label>#}
+                                  <div class="controls">
+                                      {{form_widget(input,{attr:{class:'col-sm-60'}})}}
+    {#                                    <input type="text" class="span6 typeahead" id="typeahead"  data-provide="typeahead" data-items="4" data-source='["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Dakota","North Carolina","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"]'>#}
+    {#                                    <p class="help-block">Start typing to activate auto complete!</p>#}
+                                  </div>
+                                </div>
+                                {%endif%}
+                            {%endfor%}
+                                <div class="form-actions">
+                                  <button type="submit" class="btn btn-primary">Save changes</button>
+                                  <button type="reset" class="btn">Cancel</button>
+                                </div>
+                          </fieldset>
+                        </form>   
+
+                </div>
+        </div><!--/span-->
+
+        </div><!--/row-->
+
+
+        {%endblock%}

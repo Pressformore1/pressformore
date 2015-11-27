@@ -1,0 +1,30 @@
+{%if notification.activity.vote and notification.activity.vote.comment %}
+    {%if notification.activity.vote.comment.post%}
+        
+        {%set link = path('p4m_core_post',{postSlug:notification.activity.vote.comment.post.slug})~"#comments"%}
+    {%elseif notification.activity.vote.comment.wall%}
+        
+        {%set link = path('p4m_core_showWall',{wallSlug:notification.activity.vote.comment.wall.slug})~"#comments"%}
+    {%else%}
+        
+        {%set link = "#"%}
+    {%endif%}
+{%else %}
+    {%set link = notification.type.link|evaluate%}
+{%endif %}
+
+
+<li class="notification">
+    <a href="{{link}}">
+        <div class="notifcation-user-pic">
+            <img class="user-pic-thumb" src="{%if notification.activity.user.picture %}{{asset(notification.activity.user.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}" alt="{{notification.activity.user.username }}"/>
+        </div>
+        <p class="notifcation-content">
+            {{notification.type.message|evaluate}}
+        </p>
+        <p class="notifcation-date">
+            {{notification.date.format('Y-m-d H:i:s')}}
+        </p>
+        <div class="clear"></div>
+    </a> 
+</li>

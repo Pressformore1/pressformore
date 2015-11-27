@@ -1,0 +1,350 @@
+;
+jQuery(document).ready(function(){
+        actionBarManage();
+});
+
+
+jQuery(window).resize(function(){
+	
+	actionBarResize();
+});
+
+
+/*****************************************************************************************************************/
+//Menu de droite affich� sur la page post
+function actionBarManage(){
+        var $ = jQuery;
+	log('NICHE');
+	
+	$('#comments').addClass('table-striped');
+	
+	//Block statique sur les pages wall et user avec le btn follow
+	if($('#action-bar-header').length){
+		$('#action-bar-wrap').css('top', parseInt($('#action-bar-wrap').css('top'))+parseInt($('#action-bar-header').height()))
+	}
+	
+	
+	commentManage();
+	postRating();
+	actionBarResize();
+              
+	//force l'ouverture de l'action bar si un item de l'action est marqu� comme current. page author notament
+        if($('.current-action-bar-item').length){
+		openactionBar($('.current-action-bar-item'));
+        }
+        
+	
+	$('.action-bar-link').click(function(){
+		log('ferer');
+		//post menu section n'est pas ouvert
+		//menu ouvert et click sur l'item d�j� selected
+		if($('#action-bar-sections-wrap').attr('data-status')=='open' && $(this).attr('data-target')== $('.current-action-bar-item').attr('data-target')){
+			log('papap');
+			closeactionBar();
+		}else{
+			openactionBar($(this));
+		}
+	});
+	
+        $('#action-bar-sections-wrap').on('mousewheel', function(event) {
+                event.preventDefault();
+                event.stopPropagation();
+                if(event.deltaY<=-5){
+                        if($('.current-action-bar-item').parent().next('.action-bar-item-active').length){
+                                openactionBar($('.current-action-bar-item').parent().next('.action-bar-item-active').children());
+                        }
+                }else if(event.deltaY>=5){
+                        if($('.current-action-bar-item').parent().prev('.action-bar-item-active').length){
+                                openactionBar($('.current-action-bar-item').parent().prev('.action-bar-item-active').children());
+                        }
+                }
+        });
+        
+	
+	$('#action-bar-remove').click(function(){
+		closeactionBar();
+	});
+        
+        filterManage();
+        authorManage();
+
+};
+
+function closeactionBar(){
+	
+	var $ = jQuery;
+	if($('#action-bar-sections-wrap').attr('data-status')=='open'){
+		$('#action-bar-sections-wrap').animate({right:'-550px'},500).attr('data-status', 'close');
+		$('.current-action-bar-item').removeClass('current-action-bar-item');
+                $('#action-bar').trigger('resize');
+	}
+};
+var apiScrollBar=false;
+function openactionBar(item){
+        var $ = jQuery;
+       
+        if($('#action-bar-sections-wrap').attr('data-status')!='open'){
+		$('#action-bar-sections-wrap').animate({right:'50px'},500,function(){
+			
+		}).attr('data-status', 'open');
+		
+		$('#action-bar').trigger('resize');
+		
+                var actionBarScroll = $($($(item).attr('data-target'))).jScrollPane();
+		apiScrollBar = actionBarScroll.data('jsp');
+	}
+        
+	
+	//Ajoute la classe qui d�finit l'item courant
+		$('.current-action-bar-item').removeClass('current-action-bar-item');
+		$(item).addClass('current-action-bar-item');
+		
+                
+                //apiScrollBar.scrollToElement($($(item).attr('data-target')), true, "easing");
+                $("#action-bar-sections-wrap").scrollTo($($(item).attr('data-target')), 800 );
+		
+                
+		
+		$('.current-action-bar-item').hover(
+			function(){
+				$(this).find('i').attr('data-class',$(this).find('i').attr('class'))
+				$(this).find('i').attr('class', 'icon-remove action-bar-icon');
+			},function(){
+				$(this).find('i').attr('class', $(this).find('i').attr('data-class'));
+			}
+		);
+	
+	
+};
+function actionBarResize(){
+	var $ = jQuery;
+	//Adaptation de la hauteur de l'action bar
+	var marg = parseInt($('#action-bar-wrap').css('top'));
+	
+	$('#action-bar-wrap').height(parseInt($(window).height()-marg)+'px');
+	$('.action-bar-section').height(parseInt($(window).height()-marg)+'px');
+	if(apiScrollBar!==false){
+		apiScrollBar.reinitialise();
+	}
+	//L'action bar ouverte on replace la sextion sélectionné
+	if($("#action-bar-sections-wrap").attr('data-status')=='open'){
+		$("#action-bar-sections-wrap").scrollTo($('.current-action-bar-item').attr('data-target'), 100 );
+	}
+	
+	//Hauteur du postRating si existant (-1 au bout par qu'on ne compte himself)
+	if($('#action-bar-rating-item').length){
+		var ratingH = $('#action-bar').height()-($('.action-bar-item').height()*($('.action-bar-item').length-1));
+		$('#action-bar-rating-item').height(ratingH);
+	}
+};
+
+//Page author, anaimation des infos pr�sentes dans la'action bar
+function authorManage(){
+        var $ = jQuery;
+        $('.user-block-wrap').hover(
+                function(){
+                        $('.user-content').fadeIn();
+                        $('.user-head-title').fadeOut();
+			data=$('.user-unfollow').attr('data-action');
+			$('.user-unfollow').attr('data-action', $('.user-unfollow').html()).html(data).css('background','#ED3237').css('color','#FFFFFF');
+                },function(){
+                        $('.user-content').fadeOut();
+                        $('.user-head-title').fadeIn();
+			data=$('.user-unfollow').attr('data-action');
+			$('.user-unfollow').attr('data-action', $('.user-unfollow').html()).html(data).css('background','#FFFFFF').css('color','#ED3237');;
+                }
+        )
+};
+
+
+function filterManage(){
+        var $ = jQuery;
+       
+        if($('#filter-time').length){
+                //$("#filter-time").noUiSlider({
+                //        range: [0, 11]
+                //       ,start: [parseInt($('#filter-time-to-val').val()), parseInt($('#filter-time-from-val').val())]
+                //       ,direction:'rtl'
+                //       ,connect: true
+                //       ,step:1
+                //       ,serialization: {
+                //                to: [ $('#filter-time-to-val'), $('#filter-time-from-val') ]
+                //               ,resolution: 1
+                //       }
+                //       ,slide: function(){
+                //                filterTimeChange();
+                //       }
+                //});
+        }
+	
+	filterTimeChange();
+	
+	//Equivalent � checkbox
+	$('.filter-type, .filter-category').click(function(){
+		if($(this).hasClass('selected')){
+			iconColor($(this).find('img'), 0);
+                        $(this).removeClass('selected');
+		}else{
+                        iconColor($(this).find('img'), 1);
+			$(this).addClass('selected');
+		}
+	});
+	
+	//Equivalent � radio
+	$('.filter-rank').click(function(){
+		if(!$(this).hasClass('selected')){
+			iconColor($('.filter-rank.selected').removeClass('selected').find('img'), 0);
+			iconColor($(this).find('img'), 1);
+                        $(this).addClass('selected');
+			
+		}
+	});
+	
+};
+
+function filterTimeChange(){
+	var $ = jQuery;
+	
+	switch(parseInt($('#filter-time-from-val').val()))
+		{
+			case 11:
+				$('#filter-time-from').html('For ever');
+				break;
+			case 10:
+				$('#filter-time-from').html('For 5 years');
+				break;
+			case 9:
+				$('#filter-time-from').html('For 1 years');
+				break;
+			case 8:
+				$('#filter-time-from').html('For 6 months');
+				break;
+			case 7:
+				$('#filter-time-from').html('For 3 months');
+				break;
+			case 6:
+				$('#filter-time-from').html('For 1 months');
+				break;
+			case 5:
+				$('#filter-time-from').html('For 2 weeks');
+				break;
+			case 4:
+				$('#filter-time-from').html('For 1 weeks');
+				break;
+			case 3:
+				$('#filter-time-from').html('For 3 days');
+				break;
+			case 2:
+				$('#filter-time-from').html('For 2 days');
+				break;
+			case 1:
+				$('#filter-time-from').html('For 1 days');
+				break;
+			case 0:
+				$('#filter-time-from').html('');
+				break;
+			default:
+		}
+		
+		switch(parseInt($('#filter-time-to-val').val()))
+		{
+			case 11:
+				$('#filter-time-to').html('It`s gonna be hard for me!');
+				break;
+			case 10:
+				$('#filter-time-to').html('5 years ago');
+				break;
+			case 9:
+				$('#filter-time-to').html('1 year ago');
+				break;
+			case 8:
+				$('#filter-time-to').html('6 months ago');
+				break;
+			case 7:
+				$('#filter-time-to').html('3 months ago');
+				break;
+			case 6:
+				$('#filter-time-to').html('1 month ago');
+				break;
+			case 5:
+				$('#filter-time-to').html('2 weeks ago');
+				break;
+			case 4:
+				$('#filter-time-to').html('1 week ago');
+				break;
+			case 3:
+				$('#filter-time-to').html('3 days ago');
+				break;
+			case 2:
+				$('#filter-time-to').html('2 days ago');
+				break;
+			case 1:
+				$('#filter-time-to').html('yesterday');
+				break;
+			case 0:
+				$('#filter-time-to').html('today');
+				break;
+			default:
+		}
+};
+
+function commentManage(){
+	var $ = jQuery;
+	$('.comment-hover').css('opacity',0);
+	$('.comment').hover(
+		function(){
+			$(this).find('.comment-hover').animate({opacity:1},50);
+                },function(){
+                        $(this).find('.comment-hover').animate({opacity:0},50);
+		}
+	)
+};
+
+/********************************** RATING BAR *******************************************/
+//barre de vote dans le actionBar, gestion du hover, vote ...
+function postRating(){
+	var $ = jQuery;
+	resizePostRating();
+	$('#rating_more, #rating_less').hover(
+		function(){
+			if($('#rating_more, #rating_less').attr('data-status')!='disabled'){
+				//Au hover l'�lement survol� prend toutes la hauteur
+				$(this).stop().css('height','85%');
+				//$(this).stop().animate({height:'85%'},500);
+				// l'autre bouton sera cach�
+				if($(this).next().length){
+					$(this).next().stop().css('height','15%');
+				}else{
+					$(this).prev().stop().css('height','15%');
+					//$(this).prev().stop().animate({height:'15%'},500);
+				}
+			}
+		},function(){
+			if($('#rating_more, #rating_less').attr('data-status')!='disabled'){
+				resizePostRating();
+			}
+		}
+	);
+	
+	
+	//Au click on effectue le vote, et d�sactive la possibilit� de 
+	$('#rating_more, #rating_less').click(function(){
+		if($('#rating_more, #rating_less').attr('data-status')!='disabled'){
+			$('#rating_more, #rating_less').attr('data-status', 'disabled').addClass('rating-unselected');
+			$(this).removeClass('rating-unselected').addClass('rating-selected');
+		}
+	});
+};
+
+function resizePostRating(){
+	var $ = jQuery;
+	totalVote = parseInt($('#rating_more').attr('data-vote-number')) + parseInt($('#rating_less').attr('data-vote-number'));
+	
+	$('#rating_more, #rating_less').each(function(i,item){
+		var buttonHeight = ($(item).attr('data-vote-number')*100)/totalVote;
+		if(buttonHeight>80)buttonHeight=80;
+		else if(buttonHeight<20)buttonHeight=20;
+		$(item).css('height', buttonHeight+'%');
+		//$(item).animate({height : buttonHeight+'%'});
+	});
+};

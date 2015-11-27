@@ -1,0 +1,749 @@
+<?php
+
+namespace P4M\CoreBundle\Controller;
+
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
+use P4M\CoreBundle\Entity\Category;
+use P4M\CoreBundle\Entity\Post;
+use P4M\CoreBundle\Entity\PostType;
+use P4M\CoreBundle\Entity\Wall;
+use P4M\UserBundle\Entity\User;
+
+class WallController extends Controller
+{
+    public function trendyPostsAction($page)
+    {
+        
+        $user = $this->getUser();
+        $nombrePostsParPage = $this->container->getParameter('nombre_post_par_page');
+        
+        $repositoryManager = $this->container->get('fos_elastica.manager.orm');
+        $repository = $repositoryManager->getRepository('P4MCoreBundle:Post');
+        
+        $results = $repository->findTrendyPosts($page,$nombrePostsParPage);
+        
+        
+        $nombrePages = ceil($results['count']/$nombrePostsParPage);
+        $params = array
+            (
+                'user'=>$user,
+                'posts'=> $results['entities'] ,
+                'nombrePages'=>$nombrePages,
+                'postPath'=>$this->generateUrl('p4m_core_trendyPosts'),
+                'filters'=>''
+                
+            );
+        
+        $response = array
+            (
+                'status'=>1,
+                'action'=>'homeRefreshPosts',
+
+                'data'=>array
+                (
+                    'content'=>$this->renderView('P4MCoreBundle:Wall:post-container.html.twig',$params),
+                    'pagination'=>$this->renderView('P4MCoreBundle:Wall:pagination.html.twig',$params),
+
+
+                )
+        );
+        
+//        return $this->render('P4MCoreBundle:Wall:post-container.html.twig',$params);
+        return new Response(json_encode($response));
+        
+        
+        
+        
+    }
+    
+    public function wallAction($wallSlug,$page)
+    {
+        $ajaxResponse = false;
+        
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        
+        $wallRepo = $em->getRepository('P4MCoreBundle:Wall');
+        $wall = $wallRepo->findOneBySlug($wallSlug);
+        
+        if ($wall === null)
+        {
+//            return new Response($this->createNotFoundException($wallSlug.' not found'));
+            return new Response($wallSlug.' not found');
+        }
+        if ($page ==1)
+        {
+            $view = new \P4M\TrackingBundle\Entity\WallView();
+            $view->setWall($wall);
+            $view->setUser($user);
+            $em->persist($view);
+            $em->flush();
+        }
+        
+        
+        $commentForm = $this->createForm(new \P4M\CoreBundle\Form\CommentType()); 
+        
+        $nombrePostsParPage = $this->container->getParameter('nombre_post_par_page');
+        
+        
+        
+        
+        if ($this->get('request')->request->get('params') !== null)
+        {
+            $ajaxResponse = true;
+        }
+        
+        if ($this->get('request')->query->all())
+        {
+            $this->get('request')->request = $this->get('request')->query;
+        }
+        $postDataContainer = $this->get('request')->request->all();
+        
+        if (isset($postDataContainer['params']))
+        {
+            $postData = json_decode($postDataContainer['params'],true);
+        }
+        
+        
+
+        
+        $repositoryManager = $this->container->get('fos_elastica.manager.orm');
+        $repository = $repositoryManager->getRepository('P4MCoreBundle:Post');
+        
+        $bannedPostId = [];
+        if (null !== $user)
+        {
+            $bannedRepo = $em->getRepository('P4MBackofficeBundle:BannedPost');
+            $bannedPostId = $bannedRepo->findIdsByUser($user);
+        }
+        
+        
+        if (!isset($postData) || !isset($postData['time']))
+        {
+            $postData['categories'] = $wall->getIncludedCatsId();
+            $postData['tags'] = $wall->getIncludedTagsId();
+        }
+        
+        $postData['excludedCategories']=$wall->getExcludedCatsId();
+        $postData['excludedTags']=$wall->getExcludedTagsId();
+        $postData['bannedPost']=$bannedPostId;
+        
+        $searchResult = $repository->findCustom(null,$postData,$page);
+        
+        $posts = $searchResult['entities'];
+        
+        
+        
+//        die('c'.count($searchResult['count']));
+//        $nombrePages = ceil($searchResult['count']/$nombrePostsParPage);
+        $nombrePages = 999;
+        
+        $postTypesRepo = $em->getRepository("P4MCoreBundle:PostType");
+        $postTypes = $postTypesRepo->findAll();
+
+        $flagged = false;
+        if ($wall->getFlag() && null !== $user)
+        {
+            $reportForm = $this->createForm(new \P4M\ModerationBundle\Form\WallFlagConfirmationType());
+            $flagRepo = $em->getRepository('P4MModerationBundle:WallFlag');
+            $flagConfirmRepo = $em->getRepository('P4MModerationBundle:WallFlagConfirmation');
+        
+            $wallFlag = $flagRepo->findOneBy(['user'=>$user,'wall'=>$wall]);
+            $wallFlagConfirm = $flagConfirmRepo->findOneBy(['user'=>$user,'flag'=>$wall->getFlag()]);
+            
+            if (null !== $wallFlag || null !== $wallFlagConfirm)
+            {
+                $flagged = true;
+            }
+        }
+        else
+        {
+            $reportForm = $this->createForm(new \P4M\ModerationBundle\Form\WallFlagType());
+            $reportForm->remove('description');
+            
+        }
+        
+        
+        $params = array
+            (
+                'user'=>$user,
+                'wall'=>$wall,
+                'posts'=> $posts ,
+                'categories'=>$wall->getIncludedCategories(),
+                'commentForm'=>$commentForm->createView(),
+                'postTypes'=>$postTypes,
+                'nombrePages'=>$nombrePages,
+                'postPath'=>$this->generateUrl('p4m_core_showWall', ['wallSlug'=>$wallSlug]),
+                'filters'=>  http_build_query($this->get('request')->request->all()),
+                'flagged'=>$flagged,
+                'reportForm'=>$reportForm->createView()
+            );
+        if ($ajaxResponse)
+        {
+            $response = array
+            (
+                'status'=>1,
+                'action'=>'setWallPost',
+
+                'data'=>array
+                (
+                    'posts'=>$this->renderView('P4MCoreBundle:Wall:post-collection-ajax.html.twig',$params),
+                    'pagination'=>$this->renderView('P4MCoreBundle:Wall:pagination.html.twig',$params),
+
+
+                )
+            );
+
+            if (isset($postData['callBack']))
+            {
+                $response['callBack'] = 'backToPostsListener';
+            }
+
+    //        return new Response('</body>');
+            return new Response(json_encode($response));
+        }
+        else
+        {
+            return $this->render('P4MCoreBundle:Wall:wall.html.twig',$params);
+        }
+        
+        
+    }
+    
+    
+    
+    public function readLaterWallAction($page)
+    {
+        $ajaxResponse = false;
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        
+        $postsPath = $this->generateUrl('p4m_core_showReadLater');
+        $categories = array();
+        
+        
+        $nombrePostsParPage = $this->container->getParameter('nombre_post_par_page');
+        
+        if ($this->get('request')->request->get('params') !== null)
+        {
+            $ajaxResponse = true;
+        }
+        
+        $postDataContainer = $this->get('request')->request->all();
+        $postData = array();
+        if (isset($postDataContainer['params']))
+        {
+            $postData = json_decode($postDataContainer['params'],true);
+        }
+        
+        
+        $repositoryManager = $this->container->get('fos_elastica.manager.orm');
+        $repository = $repositoryManager->getRepository('P4MCoreBundle:Post');
+        
+        $results = $repository->findReadLaterPosts($user,$postData,$page,$nombrePostsParPage);
+        
+        
+        $nombrePages = ceil($results['count']/$nombrePostsParPage);
+        
+        $postTypesRepo = $em->getRepository("P4MCoreBundle:PostType");
+        $postTypes = $postTypesRepo->findAll();
+        
+        
+        $categoriesId= array();
+        $categoriesIdCheck= array();
+        foreach ($results['entities'] as $post)
+        {
+            foreach ($post->getCategories() as $category)
+            {
+                if (!in_array($category->getId(), $categoriesIdCheck,true))
+                {
+                    $categoriesId[] = array('id'=>$category->getId());
+                    $categoriesIdCheck[] = $category->getId();
+                }
+            }
+                
+        }
+        
+        if (count($categoriesIdCheck))
+        {
+            $categoriesRepo = $em->getRepository('P4MCoreBundle:Category');
+            $categories = $categoriesRepo->findById($categoriesIdCheck);
+        }
+        else
+        {
+            $categories = [];
+        }
+        
+        $params = array
+            (
+                'user'=>$user,
+                'posts'=> $results['entities'] ,
+                'categories'=>$categories,
+                'postTypes'=>$postTypes,
+                'postPath'=>$postsPath,
+                'nombrePages'=>$nombrePages,
+                'filters'=>  http_build_query($this->get('request')->request->all())
+            );
+        
+        if ($ajaxResponse)
+        {
+            $response = array
+            (
+                'status'=>1,
+                 'action'=>'setWallPost',
+                'data'=>array
+                (
+                    'posts'=>$this->renderView('P4MCoreBundle:Wall:post-collection-ajax.html.twig',$params),
+                    'pagination'=>$this->renderView('P4MCoreBundle:Wall:pagination.html.twig',$params),
+
+
+                )
+            );
+
+            return new Response(json_encode($response));
+            }
+        else
+        {
+            return $this->render('P4MCoreBundle:Wall:read-later.html.twig',$params);
+        }
+        
+    }
+    public function featuredContentAction($page)
+    {
+        $ajaxResponse = false;
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+    
+        $postsPath = $this->generateUrl('p4m_core_showFeaturedContent');
+        $categories = array();
+        
+        
+        $nombrePostsParPage = $this->container->getParameter('nombre_post_par_page');
+        
+        if ($this->get('request')->request->get('params') !== null)
+        {
+            $ajaxResponse = true;
+        }
+        
+        $postDataContainer = $this->get('request')->request->all();
+        $postData = array();
+        if (isset($postDataContainer['params']))
+        {
+            $postData = json_decode($postDataContainer['params'],true);
+        }
+        
+        
+        $repositoryManager = $this->container->get('fos_elastica.manager.orm');
+        $repository = $repositoryManager->getRepository('P4MCoreBundle:Post');
+        
+        $results = $repository->findPressablePosts($postData,$page,$nombrePostsParPage);
+        
+        $nombrePages = ceil($results['count']/$nombrePostsParPage);
+        
+        $postTypesRepo = $em->getRepository("P4MCoreBundle:PostType");
+        $postTypes = $postTypesRepo->findAll();
+        
+        
+        $categoriesId= array();
+        $categoriesIdCheck= array();
+        foreach ($results['entities'] as $post)
+        {
+            foreach ($post->getCategories() as $category)
+            {
+                if (!in_array($category->getId(), $categoriesIdCheck,true))
+                {
+                    $categoriesId[] = array('id'=>$category->getId());
+                    $categoriesIdCheck[] = $category->getId();
+                }
+            }
+                
+        }
+        
+        if (count($categoriesIdCheck))
+        {
+            $categoriesRepo = $em->getRepository('P4MCoreBundle:Category');
+            $categories = $categoriesRepo->findById($categoriesIdCheck);
+        }
+        else
+        {
+            $categories = [];
+        }
+        
+        $params = array
+            (
+                'user'=>$user,
+                'posts'=> $results['entities'] ,
+                'categories'=>$categories,
+                'postTypes'=>$postTypes,
+                'postPath'=>$postsPath,
+                'nombrePages'=>$nombrePages,
+                'filters'=>  http_build_query($this->get('request')->request->all())
+            );
+        
+        if ($this->getRequest()->isXmlHttpRequest())
+        {
+            $response = array
+            (
+                'status'=>1,
+                 'action'=>'homeRefreshPosts',
+//                'data'=>array
+//                (
+//                    'posts'=>$this->renderView('P4MCoreBundle:Wall:post-collection-ajax.html.twig',$params),
+//                    'pagination'=>$this->renderView('P4MCoreBundle:Wall:pagination.html.twig',$params),
+//
+//
+//                )
+                'data'=>array
+                (
+                    'content'=>$this->renderView('P4MCoreBundle:Wall:post-container.html.twig',$params),
+                    'pagination'=>$this->renderView('P4MCoreBundle:Wall:pagination.html.twig',$params),
+
+
+                )
+            );
+
+            return new Response(json_encode($response));
+            }
+        else
+        {
+            return $this->render('P4MCoreBundle:Wall:featured-content.html.twig',$params);
+        }
+        
+    }
+    
+    public function historyWallAction($page)
+    {
+        $ajaxResponse = false;
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $nombrePostsParPage = $this->container->getParameter('nombre_post_par_page');
+        
+        $postsPath = $this->generateUrl('p4m_core_showHistoryPosts');
+//        $categories = array();
+        
+        if ($this->get('request')->request->get('params') !== null)
+        {
+            $ajaxResponse = true;
+        }
+        
+        $postData = array();
+        if ($this->get('request')->query->all())
+        {
+            $this->get('request')->request = $this->get('request')->query;
+        }
+        
+       $postDataContainer = $this->get('request')->request->all();
+        $postData = array();
+        if (isset($postDataContainer['params']))
+        {
+            $postData = json_decode($postDataContainer['params'],true);
+        }
+        
+        
+        $repositoryManager = $this->container->get('fos_elastica.manager.orm');
+        $repository = $repositoryManager->getRepository('P4MCoreBundle:Post');
+        
+        $results = $repository->findUserViewedPosts($user,$postData,$page);
+        
+//        $posts = $postsRepo->findViewedPosts($user,$nombrePostsParPage,($page-1)*$nombrePostsParPage);
+        
+        $nombrePages = ceil($results['count']/$nombrePostsParPage);
+        
+        $postTypesRepo = $em->getRepository("P4MCoreBundle:PostType");
+        $postTypes = $postTypesRepo->findAll();
+        
+        $categories= array();
+        $categoriesIdCheck= array();
+        foreach ($results['entities'] as $post)
+        {
+            foreach ($post->getCategories() as $category)
+            {
+                if (!in_array($category->getId(), $categoriesIdCheck,true))
+                {
+                    $categories[] = $category;
+                    $categoriesIdCheck[] = $category->getId();
+                }
+            }
+                
+        }
+        
+       
+        
+        
+        $params = array
+            (
+                'user'=>$user,
+                'posts'=> $results['entities'] ,
+                'categories'=>$categories,
+                'postTypes'=>$postTypes,
+                'postsPath'=>$postsPath,
+                'nombrePages'=>$nombrePages,
+                'postPath'=>$this->generateUrl('p4m_core_showHistory'),
+                'filters'=>  http_build_query($this->get('request')->request->all())
+            );
+        
+        if ($ajaxResponse)
+        {
+            $response = array
+            (
+                'status'=>1,
+                'action'=>'setWallPost',
+                'data'=>array
+                (
+                    'posts'=>$this->renderView('P4MCoreBundle:Wall:post-collection-ajax.html.twig',$params),
+                    'pagination'=>$this->renderView('P4MCoreBundle:Wall:pagination.html.twig',$params),
+
+
+                )
+            );
+
+            return new Response(json_encode($response));
+        }
+        else
+        {
+            return $this->render('P4MCoreBundle:Wall:history.html.twig',$params);
+        }
+        
+        
+        
+        
+    }
+    
+   
+    
+    public function readLaterWallPostsAction($page)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $user = $this->getUser();
+        $postData = array();
+        
+        $postsPath = $this->generateUrl('p4m_core_showReadLaterPosts');
+        $categories = array();
+        
+        
+        $nombrePostsParPage = $this->container->getParameter('nombre_post_par_page');
+        
+        $postDataContainer = $this->get('request')->request->all();
+        $postData = array();
+        if (isset($postDataContainer['params']))
+        {
+            $postData = json_decode($postDataContainer['params'],true);
+        }
+        
+        
+        $repositoryManager = $this->container->get('fos_elastica.manager.orm');
+        $repository = $repositoryManager->getRepository('P4MCoreBundle:Post');
+        
+        $results = $repository->findReadLaterPosts($user,$postData,$page,$nombrePostsParPage);
+        
+        
+        $nombrePages = ceil($results['count']/$nombrePostsParPage);
+        $params = array
+            (
+                'posts'=> $results['entities'] ,
+                'nombrePages'=>$nombrePages,
+                'filters'=>  http_build_query($this->get('request')->request->all()),
+                'postPath'=>$this->generateUrl('p4m_core_showReadLater')
+              
+            );
+        
+        
+        
+        
+        $response = array
+        (
+            'status'=>1,
+             'action'=>'setWallPost',
+            'data'=>array
+            (
+                'posts'=>$this->renderView('P4MCoreBundle:Wall:post-collection-ajax.html.twig',$params),
+                'pagination'=>$this->renderView('P4MCoreBundle:Wall:pagination.html.twig',$params),
+                
+                
+            )
+        );
+        
+        return new Response(json_encode($response));
+        
+    }
+    
+    
+    public function createAction($wallSlug = null)
+    {
+        $em = $this->getDoctrine()->getManager();
+        
+        $user = $this->getUser();
+        
+        $categories = array();
+        $tags = array();
+        
+//        $tagRepo = $em->getRepository('P4MCoreBundle:Tag');
+//        $tags = $tagRepo->findAll();
+        $catRepo = $em->getRepository('P4MCoreBundle:Category');
+        $categories = $catRepo->findAll();
+        
+        
+        
+//        die(print_r($postData,true));
+        
+        if (null === $wallSlug)
+        {
+            $wall = new Wall();
+            $wallPicture = null;
+        }
+        else
+        {
+            $wallRepo = $em->getRepository('P4MCoreBundle:Wall');
+            $wall = $wallRepo->findOneBySlug($wallSlug);
+            
+            if ($wall == null)
+            {
+                throw new \Symfony\Component\HttpKernel\Exception\NotFoundHttpException('This Strew doesn\'t exists');
+            }
+            if ($wall->getUser() !== $user)
+            {
+                throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException('This is not your strew');
+            }
+            if (is_numeric($wall->getPicture()->getId()))
+            {
+                 $wallPicture = $wall->getPicture();
+            }
+            else
+            {
+                $wallPicture = null;
+            }
+            
+        
+        }
+        
+
+        $request = $this->getRequest();
+ 
+        if (!is_numeric($wall->getPicture()->getId()) && $request->getMethod() != 'POST')
+        {
+            $path = __DIR__.'/../../../../web/images/uploads/default-strew.png';
+            
+//            $uploadedFile = new \Symfony\Component\HttpFoundation\File\UploadedFile($path,'strew-default.png');
+        
+        
+            $picture = new \P4M\CoreBundle\Entity\Image();
+            $picture->forceLocalPicture($path);
+            $em->persist($picture);
+            $em->flush();
+            $wall->setPicture($picture);
+            $request->getSession()->set('pictureId', $picture->getId());
+        
+//            dump($picture);
+//            die($path);
+        }
+        
+        
+ 
+        
+        
+        
+        $wall->setUser($user);
+        $form = $this->createForm(new \P4M\CoreBundle\Form\WallType(),$wall);
+        
+        
+        
+
+        
+        
+        // On vérifie qu'elle est de type POST
+        if ($request->getMethod() == 'POST') 
+        {
+//             dump($request->getSession()->get('pictureId'));
+//             dump($wallPicture);
+            
+            if (null !== $request->getSession()->get('pictureId') && null === $wallPicture)
+            {
+                
+                $imageRepo = $em->getRepository('P4MCoreBundle:Image');
+                $picture = $imageRepo->find($request->getSession()->get('pictureId'));
+//                dump($picture);
+                $wallPicture = $picture;
+//                $request->getSession()->remove('pictureId');
+            }
+//            die();
+            $form = $this->createForm(new \P4M\CoreBundle\Form\WallType(true),$wall);
+           
+            $form->bind($request);
+
+            
+            $postedFiles = $request->files->get('p4m_corebundle_wall');
+            $customPictureValidation = $wallPicture !== null || isset($postedFiles['picture']['file']) ? true : false;
+            
+//            die(print_r($request->files->all(),true));
+            
+            
+            
+            if ($form->isValid() && $customPictureValidation) 
+            {
+                if (!isset($postedFiles['picture']['file']))
+                {
+                    $wall->setPicture($wallPicture);
+                }
+//                die('form valid');
+              $em->persist($wall);
+              $em->flush();
+              $this->get('session')->getFlashBag()->add(
+                'success',
+                'wall '.$wall->getName().' Created :)'
+                );
+              return $this->redirect($this->generateUrl('p4m_core_showWall',array('wallSlug'=>$wall->getSlug())));
+            }
+            else
+            {
+                $form = $this->createForm(new \P4M\CoreBundle\Form\WallType(),$wall);
+                $form->bind($request);
+                
+                if (!$customPictureValidation)
+                {
+                    $form->get('picture')->get('file')->addError(new \Symfony\Component\Form\FormError('Please choose a picture'));
+                }
+                
+//                die($form->getErrorsAsString());
+                $this->get('session')->getFlashBag()->add(
+                    'error',
+                    'Oops, Wall '.$wall->getName().' not edited, sorry, try again :/'
+                );
+//                die ($form->getErrorsAsString());
+//                return $this->redirect($this->generateUrl('p4m_core_wall_create'));
+            }
+            
+        }
+        else
+        {
+            if ($wall->getPicture()->getId() !== null)
+            {
+    //            die('has picture');
+                $form   ->remove('picture')
+                        ->add('picture',new \P4M\CoreBundle\Form\ImageType(),['required'=>false])
+                        ;
+
+            }
+        }
+        
+//        die(print_r($form->getErrors(),true));
+        
+        
+        
+        $params = array
+        (
+//            'categories'=>$categories,
+//            'tags'=>$tags,
+            'results'=>$categories,
+            'form'=>$form->createView(),
+            'wall'=>$wall,
+            'user'=>$user,
+            'showTiles'=>false
+        );
+        
+        return $this->render('P4MCoreBundle:Wall/Edit:wall-edit.html.twig',$params);
+    }
+}
+
+

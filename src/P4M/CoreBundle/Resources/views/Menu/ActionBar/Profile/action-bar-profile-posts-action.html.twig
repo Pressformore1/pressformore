@@ -1,0 +1,16 @@
+ <li class="action-bar-section" id="section-posts">
+     <div class="action-bar-block">
+        <h1 class="action-bar-title"><span class="glyphicon cardio"></span> {{userDisplayed.username}}'s activity</h1>
+        <p>Explore the activity of {{userDisplayed.username}}</p>
+    </div>    
+     
+     
+     
+    <form data-target="serialize" data-url="{{path('p4m_ajax_action')}}" id="action-bar-filters-posts" data-action="getProfilePosts" data-key="{{'getProfilePosts'|sha512}}" method="post" class="ajax_form">
+       <input type="hidden" name="callBack" value="backToPostsListener" />
+       <input type="hidden" name="userId" value="{{userDisplayed.id}}" />
+       {% include 'P4MCoreBundle:Menu/ActionBar/filters:action-bar-posts-filter.html.twig'%}
+   </form>
+
+
+</li>

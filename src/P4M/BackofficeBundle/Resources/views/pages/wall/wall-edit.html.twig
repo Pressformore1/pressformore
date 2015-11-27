@@ -1,0 +1,135 @@
+<div class="row">
+    <form action="{{path('p4_m_backoffice_wallEdit',{'wallSlug':wall.slug})}}" method="post" id="checkout-form" class="smart-form" novalidate="novalidate" {{ form_enctype(form) }}>
+    <article class="col-sm-12 col-md-12 col-lg-12">
+
+        <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget col-sm-12 col-md-12 col-lg-6" id="wid-id-100" data-widget-fullscreenbutton="true" data-widget-collapsed="true" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false">
+
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>{{wall.name}}</h2>				
+            </header>
+            <!-- widget div-->
+
+        <div>
+
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                    <!-- This area used as dropdown edit box -->
+            </div>
+            <!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body no-padding">
+                    <fieldset>
+                        <legend>Choice the name</legend>
+                        <div class="row">
+                            <section class="col col-6">
+                                <label class="input" for="{{form.name.vars.id}}"> <i class="icon-prepend fa fa-folder"></i>
+                                    {{form_widget(form.name, { 'attr': {'placeholder': "wall's name"} })}}
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend><i class="glyphicon glyphicon-shopping-cart"></i>Pick some category</legend>
+                        <div class="form-group">
+                            <label for="{{form.includedCategories.vars.id}}"></label>
+                            {{form_widget(form.includedCategories) }}
+                        </div>
+
+                    </fieldset>
+
+                    <fieldset>
+                        <legend><i class="fa fa-tags"></i> a few tags</legend>
+                        <div class="form-group">
+                            <label for="{{form.includedTags.vars.id}}"></label>
+                            {{form_widget(form.includedTags) }}
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend><i class="fa fa-user"></i> people</legend>
+                        <div class="form-group">
+                            <label for="{{form.includedPeople.vars.id}}"></label>
+                            {{form_widget(form.includedPeople) }}
+                        </div>
+                    </fieldset>
+
+                    {#<footer>
+                            <button type="submit" class="btn btn-primary">
+                                    Update 
+                            </button>
+                    </footer>#}
+                </div>
+                <!-- end widget content -->
+            </div>
+            <!-- end widget div -->
+        </div>
+    	
+            <!-- Widget ID (each widget will need unique ID)-->
+        <div class="jarviswidget col-sm-12 col-md-12 col-lg-6" id="wid-id-200" data-widget-fullscreenbutton="true" data-widget-collapsed="true" data-widget-colorbutton="false" data-widget-deletebutton="false" data-widget-editbutton="false">
+            <header>
+                <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                <h2>Block these category & tags</h2>				
+            </header>
+            <!-- widget div-->
+            <div>
+
+            <!-- widget edit box -->
+            <div class="jarviswidget-editbox">
+                    <!-- This area used as dropdown edit box -->
+            </div>
+            <!-- end widget edit box -->
+
+            <!-- widget content -->
+            <div class="widget-body no-padding">
+
+                <fieldset>
+                    <legend><i class="glyphicon glyphicon-shopping-cart"></i>Block Category</legend>
+                    <div class="form-group">
+                         <label for="{{form.excludedCategories.vars.id}}"></label>
+                        {{form_widget(form.excludedCategories) }}
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend><i class="fa fa-tags"></i>Block tags</legend>
+                    <div class="form-group">
+                        <label for="{{form.excludedTags.vars.id}}"></label>
+                        {{form_widget(form.excludedTags) }}
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend><i class="fa fa-user"></i>Block people</legend>
+                    <div class="form-group">
+                        <label for="{{form.excludedPeople.vars.id}}"></label>
+                        {{form_widget(form.excludedPeople) }}
+                    </div>
+                </fieldset>
+
+               
+            </div>
+            <!-- end widget content -->
+        </div>
+            <!-- end widget div -->
+        </div>
+            <div class="clear"></div>
+        <footer>
+            <button type="submit" class="btn btn-primary">
+                Update 
+            </button>
+        </footer>
+    </article>
+        {{form_rest(form)}}
+    </form>
+
+</div>
+
+<script>
+	pageSetUp();
+	loadScript("{{asset("bundles/p4mbackoffice/js/plugin/bootstrap-tags/bootstrap-tagsinput.min.js")}}");
+</script>
+

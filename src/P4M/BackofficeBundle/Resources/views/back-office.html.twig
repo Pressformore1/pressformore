@@ -1,0 +1,47 @@
+{% extends "P4MCoreBundle:Core/Template:wall-template.html.twig" %}
+
+{% block bodyClass%}
+{{parent()}}
+
+{% endblock%}
+
+{% block actionBarMenu %}
+{% include 'P4MCoreBundle:Menu/ActionBar/Backoffice:action-bar-backoffice-menu.html.twig'%}
+{% endblock%}
+
+{% block actionBarAction %}
+{% include 'P4MCoreBundle:Menu/ActionBar/Backoffice:action-bar-backoffice-actions.html.twig'%}
+{% endblock%}
+
+
+{% block pagination %}
+{#{% include "P4MCoreBundle:Wall:pagination.html.twig" %}#}
+{% endblock %}
+
+{% block scriptPlugins%}
+{{parent()}}
+{% javascripts 'js/plugin/account/*.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %} 
+{% javascripts 'js/plugin/admin/*.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %} 
+{%endblock%}
+
+{% block scriptCustom %}
+{{parent()}}
+{% javascripts 'js/scripts/account/*.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}   
+{%endblock%}
+
+    
+{%block stylesheets%}
+{{parent()}}
+{% stylesheets 'css/account/*' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset(asset_url) }}" />
+{% endstylesheets %}
+{%endblock%}
+
+{% block loading %}
+{%endblock%}

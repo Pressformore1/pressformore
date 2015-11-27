@@ -1,0 +1,58 @@
+{# On étend notre layout #}
+{% extends "P4MCoreBundle:Core/Template:two-cols.html.twig" %}
+{#{% extends "P4MCoreBundle:Core/Template:two-cols.html.twig" %}#}
+
+{% block head%}
+{{parent()}}
+<link type="text/css" rel="stylesheet" href="{{asset('css/tablesorter/style.css')}}" />
+<link type="text/css" rel="stylesheet" href="{{asset('css/colorPicker/colorpicker.css')}}" />
+{% endblock %}
+
+{% block bodyClass%}gray-light{% endblock %}
+
+{%block pageTitle%}
+Admin
+{%endblock%}
+
+{% block leftCol%}
+    <div class="adminActions">{%block adminActions%}{%endblock%}</div>
+
+    {% for flashMessage in app.session.flashbag.get('error') %}
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block rightCol %}
+<aside id="" class="widget ">
+    <h4>What do you want to do ?</h4>
+    <ul class="unstyled">
+        <li><a href="{{path('p4m_admin_userlist')}}">Manage Users</a></li>
+        <li><a href="{{path('p4m_admin_categorylist')}}">Manage Categories</a></li>
+        <li><a href="{{path('p4m_admin_flagList')}}">Manage Post Flag Types</a></li>
+        <li><a href="{{path('p4m_admin_wallFlagList')}}">Manage Wall Flag Types</a></li>
+        <li><a href="{{path('p4m_admin_flaggedPostList')}}">Flagged Posts</a></li>
+        <li><a href="{{path('p4m_admin_invitationList')}}">Invitations</a></li>
+        <li><a href="{{path('p4m_admin_postTypeList')}}">Post Types</a></li>
+        <li><a href="{{path('p4m_admin_notificationTypeList')}}">Notification Types</a></li>
+        <li><a href="{{path('p4m_admin_wpPostlist')}}">WP Blog Posts</a></li>
+    </ul>
+</aside>
+{% endblock %}
+            
+                     
+
+{#{%block scriptsCustom %}
+{{parent()}}
+<script type="text/javascript" src="{{asset('js/jquery.tablesorter.min.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/colorpicker.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/admin.js')}}"></script>
+{%endblock%}{# empty Twig template #}

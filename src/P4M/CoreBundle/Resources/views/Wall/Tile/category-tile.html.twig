@@ -1,0 +1,34 @@
+<article id="category_{{category.id}}" data-categoryId="{{category.id}}" data-brick-type="small-brick" class="masonry-block is-hidden{% if wall is defined and wall.includedCategories.contains(category) == true  %} hidden{%endif%}">
+    <div class="tile-wrap">
+        <div class="tile">
+            <div class="tile-category">
+                 <header class="tile-header">
+                    <div class="tile-header-cat-thumb">
+                         <img src="{{category.iconColor}}" alt="" class="category-tile-icon"/>
+                    </div>
+
+                </header>
+
+                <div class="tile-hover">
+                    <!--Croix en haut � droite-->
+                    <span class="tile-remove"><span class="glyphicon remove"></span></span>
+
+                    <h2 class="tile-hover-title">
+                        <span class="main"><img src="{{asset(category.iconColor)}}" alt="" class="category-tile-icon" /> {{category.name}}</span>
+                    </h2>
+
+                    <p class="tile-hover-description">{{category.description}}</p>
+                    <p class="tile-add"><span class="glyphicon plus"></span> Ajouter</p>
+
+                </div>
+
+
+            </div>
+            <button class="tile-follow-btn">
+                {{category.name}}
+            </button>
+
+
+        </div>
+    </div>
+</article>

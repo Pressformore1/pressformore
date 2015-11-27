@@ -1,0 +1,304 @@
+{% set user = app.security.getToken().getUser() %}
+
+{% set route = app.request.attributes.get('_route')%} 
+
+
+
+					
+					
+  
+
+{%include('P4MCoreBundle:Menu/ActionBar/History:action-bar-filters-action.html.twig')%}
+
+
+
+
+    
+{#
+<li class="action-bar-section" id="section-strews">
+    <div id="section-cover-block">
+        <header class="cover-block">
+        
+            <h1 class="cover-block-title">
+                <span class="main"><span class="glyphicon show_big_thumbnails"></span> Your historic</span><br />
+                
+            </h1>
+        </header>
+    </div>
+</li>
+#}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li class="action-bar-section" id="section-wall-meta">
+<div class="wall-block-wrap">
+    {% if wall is defined %}
+      <div class="action-bar-block">
+              <h1 class="action-bar-title">{% if wall is defined %}{{wall.name}}{%endif%}</h1>
+      </div>
+      <!--Category-->
+      {#<div class="action-bar-block">
+              <p class="action-bar-p">Ceci est une description de ce qu'est mon wall, beau, gentil et un peu encombrant, enfin plait.</p>
+      </div>#}
+      {%set following = wall.hasFollower(user)%}
+{#      {{following}}#}
+      <button class="user-follow primary ajax_action{%if following == 'oui'%} hidden{%endif%}" data-action="followWall" data-url="{{path('p4m_ajax_action')}}"  data-params="{{{'wallId':wall.id}|json_encode()}}" data-key="{{{'wallId':wall.id}|json_encode()|sha512}}" >+Follow</button>
+      <button class="user-unfollow primary ajax_action{%if following == 'non'%} hidden{%endif%}" data-hover-text="-Unfollow"  data-url="{{path('p4m_ajax_action')}}"  data-action="unfollowWall" data-params="{{{'wallId':wall.id}|json_encode()}}" data-key="{{{'wallId':wall.id}|json_encode()|sha512}}">Unfollow</button>
+      {%endif%}
+</div>	
+      <div class="action-bar-block">
+
+        <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-book"></span>Categories of this wall</h4>
+
+        <ul class="section-post-meta-categories-list">
+        {% if wall is defined %}
+        {% for category in wall.includedCategories%}    
+            {% include 'P4MCoreBundle:Core:categoryAction.html.twig'%}
+        {% endfor %}
+        {% endif %}
+        </ul>
+        <div class="clear"></div>
+      </div>
+    <div class="action-bar-block">
+        <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-tags"></span>Tags of this wall</h4>	
+
+        <ul class="tags-list">
+        {% if wall is defined %}
+        {% for tag in wall.includedTags %}
+            <li class="tag-item">
+                <button data-toggle="dropdown" id="dropdown-tag" type="button" class="dropdown-toggle post-tag-button">{{tag.name}}</button>
+                <ul aria-labelledby="dropdown-tag" role="menu" class="dropdown-menu">
+                   <li class="dropdown-submenu">
+                      <a href="#" tabindex="-1" role="menuitem">Add to</a>
+                      <ul class="dropdown-menu">
+                      {% for userWall in user.walls %}
+                          <li><a href="#" tabindex="-1">{{userWall.name}}</a></li>
+                      {% endfor %}
+                      </ul>
+                   </li>
+                   <li class="dropdown-submenu">
+                       <a href="#" tabindex="-1" role="menuitem">Ban to</a>
+                       <ul class="dropdown-menu">
+                           {% for userWall in user.walls %}
+                              <li><a href="#" tabindex="-1">{{userWall.name}}</a></li>
+                          {% endfor %}
+                       </ul>
+                   </li>
+               </ul>
+            </li>
+        {% endfor %}
+        {% endif %}
+            
+
+
+        </ul>
+
+    </div>	
+
+    <div class="action-bar-block">
+        {% if wall is defined %}
+              <!--Date-->
+        <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-info-sign"></span>Meta of this wall</h4>	
+
+        <div class="action-bar-block">
+                <p><a class="post-meta post-footer-author" href="{{path('p4m_social_profile',{'username':wall.user.username})}}"><span class="glyphicon glyphicon-user"></span> {{wall.user.username}}</a></p>
+                <!--Nombre vue-->
+                <p><span class="glyphicon glyphicon-plus"></span>{{wall.followers|length}}</p>
+
+        </div>
+        {%endif%}
+    </div>
+
+      <div class="action-bar-block">
+              <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-share"></span>Share this wall</a></h4>
+
+              <div class="shareIt action-bar-block">
+                      <span class='st_facebook_large' displayText='Facebook'></span>
+                      <span class='st_twitter_large' displayText='Tweet'></span>
+                      <span class='st_linkedin_large' displayText='LinkedIn'></span>
+                      <span class='st_pinterest_large' displayText='Pinterest'></span>
+                      <span class='st_email_large' displayText='Email'></span>
+                      <span class='st_googleplus_large' displayText='Google +'></span>
+              </div>
+
+
+
+              <div class="clear"></div>
+      </div>
+
+
+
+</li>
+<li class="action-bar-section" id="section-wall-community">
+      <div class="action-bar-block">
+              <h1 class="action-bar-title">Community</h1>
+      </div>
+      <!--Category-->
+      <div class="action-bar-block">
+              <div id="action-bar-wall-community-type">
+                      <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-eye"></span>What would you like to see?</h4>
+                      <ul id="wall-community-type">
+                              <li class="wall-community-type"><img src="images/design/icons/megaphone2-gray-color.png" />Following</li>
+                              <li class="wall-community-type"><img src="images/design/icons/shoeprints-gray-color.png" />Followed</li>
+
+                      </ul>
+                      <div class="clear"></div>
+              </div>
+      </div>     
+
+</li>
+<li class="action-bar-section" id="section-filters">
+<div class="action-bar-block">
+      {#<div id="action-bar-filters-type">
+              <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-file"></span>Type</h4>	
+              <ul id="filters-type">
+
+                      <li class="filter-type"><img src="images/design/icons/news-gray-color.png" />Article</li> 
+                      <li class="filter-type selected"><img src="images/design/icons/money-gray-color.png" />Documentary</li>
+                      <li class="filter-type"><img src="images/design/icons/chat-gray-color.png" />Ilnfography</li>
+                      <li class="filter-type selected"><img src="images/design/icons/browser-gray-color.png" />Website</li>
+                      <li class="filter-type"><img src="images/design/icons/eye-gray-color.png" />Visual</li>
+                      <li class="filter-type"><img src="images/design/icons/map-gray-color.png" />Webdoc</li>
+
+              </ul>
+              <div class="clear"></div>
+      </div>
+#}
+    <div class="clear"></div>
+    <div id="action-bar-filters-time">
+          <h4 class="action-bar-small-title"><span class="glyphicon clock"></span>Time</h4>	
+        <div class="filter-time"></div>
+
+        <form class="filter-time-form">
+                <input type="hidden" class="filter-time-start" value="0"/>
+
+                <span class="filter-time-end-text filter-time-val"></span>
+                <span class="filter-time-explanation">till</span>
+                <span class="filter-time-start-text filter-time-val"></span>
+
+                <input type="hidden" class="filter-time-end" value="2" />
+
+        </form>
+    </div>
+      
+{#
+      <div id="action-bar-filters-ranck">
+              <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-star"></span>Ranck</h4>	
+              <ul id="filters-rank">
+
+                      <li class="filter-rank"><img src="images/design/icons/circlecompass-gray-color.png" />Quality</li> 
+                      <li class="filter-rank"><img src="images/design/icons/money-gray-color.png" />Paids</li>
+                      <li class="filter-rank "><img src="images/design/icons/chat-gray-color.png" />Comments</li>
+                      <li class="filter-rank selected"><img src="images/design/icons/megaphone-full-color.png" />Reach</li>
+
+              </ul>
+              <div class="clear"></div>
+      </div>
+
+
+      <div class="clear"></div>#}
+      <!--Category-->
+      <div id="action-bar-filters-categories">
+              <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-book"></span>Categories</h4>
+              <ul id="filters-categories">
+            {% if route == 'p4m_core_showWall' %}
+                {%set categories = wall.includedCategories%}
+{#                    {% else %}#}
+            {%endif%}
+            {% for category in categories%}    
+                <li class="filter-category selected">
+                    {%if category.iconColor%}
+                    <img alt="" src="{{category.iconColor}}" />
+                    {% endif %}
+                    <span class="filter-label">{{category.name}}</span>
+                    <input type="checkbox" checked="checked" name="post-categories[]" value="{{category.id}}" checked="checked" />
+                </li>
+            {% endfor%}
+              </ul>
+              <div class="clear"></div>
+      </div>
+
+      <div class="clear"></div>
+</div>
+
+
+
+</li>
+<li class="action-bar-section" id="section-wall-community">
+      <div class="action-bar-block">
+              <h1 class="action-bar-title">Community</h1>
+      </div>
+      <!--Category-->
+      <div class="action-bar-block">
+              <div id="action-bar-wall-community-type">
+                      <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-eye"></span>What would you like to see?</h4>
+                      <ul id="wall-community-type">
+                              <li class="wall-community-type"><img src="images/design/icons/megaphone2-gray-color.png" />Following</li>
+                              <li class="wall-community-type"><img src="images/design/icons/shoeprints-gray-color.png" />Followed</li>
+
+                      </ul>
+                      <div class="clear"></div>
+              </div>
+      </div>     
+
+</li>
+<li class="action-bar-section" id="section-pressformore">
+
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,139 @@
+<?php
+
+namespace P4M\ConsoleBundle\Command;
+
+use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
+use Symfony\Component\Console\Output\OutputInterface;
+
+class PostScanCommand extends ContainerAwareCommand
+{
+    protected function configure()
+    {
+        $this
+            ->setName('post:scan')
+            ->setDescription('Rescanne les posts pour mettre à jour l\'auteur')
+//            ->addOption(
+//               'force',
+//               null,
+//               InputOption::VALUE_NONE,
+//               'Si défini, On distribue tous les wallets actifs'
+//            )
+            ->addArgument('id', InputArgument::OPTIONAL, 'Quel post voulez vous forcer')
+//            ->addOption('yell', null, InputOption::VALUE_NONE, 'Si définie, la tâche criera en majuscules')
+        ;
+    }
+
+    protected function execute(InputInterface $input, OutputInterface $output)
+    {
+        
+        $container = $this->getContainer();
+        
+        $postUtils = $container->get('p4mCore.post_utils');
+        
+        $doctrine = $container->get('doctrine');
+        $em = $doctrine->getManager();
+        
+        $userRepo = $em->getRepository('P4MUserBundle:User');
+        $postRepo = $em->getRepository('P4MCoreBundle:Post');
+        
+        if ($input->getArgument('id')) {
+            $posts = $postRepo->findBy(['id'=>$input->getArgument('id')]);
+        }
+        else
+        {
+            $criteria = new \Doctrine\Common\Collections\Criteria();
+            $criteria->where($criteria->expr()->lt('lastScanned', new \DateTime()));
+            $criteria->orderBy(['lastScanned'=>'ASC']);
+            $criteria->setMaxResults(50);
+            $posts = $postRepo->matching($criteria);
+        }
+        
+        
+        
+        
+        $updated = 0;
+        $scanned = 0;
+        foreach ($posts as $post)
+        {
+            $key = $postUtils->getPostAuthorMeta($post->getSourceUrl());
+            $scanned ++;
+//            die('key'.$key);
+            if ($key != 404)
+            {
+                if ($key !== null && ($post->getAuthor() === null || $key != $post->getAuthor()->getProducerKey()))
+                {
+                    $orginalAuthor = $post->getAuthor();
+                    $author = $userRepo->findOneBy(['producerKey'=>$key]);
+                    if (null !== $author)
+                    {
+                        $post->setAuthor($author);
+                        $updated ++;
+
+                        // Devrait être dans P4M\TrackingBundle\Listener\PostAuthorChangeCheck, mais en attendant de trouver comment 
+                        //persister dans un preUpdate ou une solution alternative se trouve ici. 
+                        $activity = new \P4M\TrackingBundle\Entity\UserActivity();
+                        $activity->setPost($post);
+                        $activity->setType(\P4M\TrackingBundle\Entity\UserActivity::TYPE_POST_AUTHOR_IDENTIFIED);
+                        $activity->setUser($author);
+                        $em->persist($activity);
+
+                        if ($orginalAuthor !== null)
+                        {
+                            $activity2 = new \P4M\TrackingBundle\Entity\UserActivity();
+                            $activity2->setPost($post);
+                            $activity2->setType(\P4M\TrackingBundle\Entity\UserActivity::TYPE_POST_AUTHOR_CHANGED);
+                            $activity2->setUser($orginalAuthor);
+                            $em->persist($activity2);
+                        }
+
+
+                    }
+                    
+                }
+                
+                
+                
+//                if ($post->getEmbed() === null)
+//                {
+                    $embed = $postUtils->getEmbed($post->getSourceUrl());
+                    if (null != $embed)
+                    {
+                        $post->setEmbed($embed);
+                        $post->setIframeAllowed(true);
+                    }
+                    
+//                }
+                if ($post->getEmbed() === null)
+                {
+                    $allowed = $postUtils->isIframeAllowed($post->getSourceUrl());
+
+                    if ($allowed != $post->getIframeAllowed())
+                    {
+                        $updated ++;
+                        $post->setIframeAllowed($allowed);
+                        
+                    }
+                }
+                
+                
+            }
+            else // 404
+            {
+                 $post->setQuarantaine(true);
+            }
+           
+            $post->setLastScanned(new \DateTime());
+            $em->persist($post);
+        }
+        
+        $em->flush();
+        
+        
+
+        $output->writeln($scanned . ' scanned with success '.$updated.' postUpdated');
+        exit();
+    }
+}

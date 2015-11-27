@@ -1,0 +1,50 @@
+{% extends "P4MCoreBundle::layout.html.twig" %}
+
+
+{% block actionBar %}
+{#{% include "P4MCoreBundle:Menu/ActionBar:action-bar.html.twig"%}#}
+{% endblock %}
+
+{% block content %}
+<div role="main" class="container" id="content">
+{%block leftPanel%}
+{% include "P4MBackofficeBundle:left-panel:left-panel.html.twig"%}
+{%endblock%}
+    <div id="account-container">
+    {%block page%}
+    {%endblock%}
+    </div>
+    
+</div>
+
+{% endblock %}
+
+
+{% block pagination %}
+{#{% include "P4MCoreBundle:Wall:pagination.html.twig" %}#}
+{% endblock %}
+
+{% block scriptPlugins%}
+{{parent()}}
+{% javascripts 'js/plugin/account/*.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %} 
+{%endblock%}
+
+{% block scriptCustom %}
+{{parent()}}
+{% javascripts 'js/scripts/account/*.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+{% endjavascripts %}   
+{%endblock%}
+
+    
+{%block stylesheets%}
+{{parent()}}
+{% stylesheets 'css/account/*.css' filter='cssrewrite' %}
+<link rel="stylesheet" href="{{ asset(asset_url) }}" />
+{% endstylesheets %}
+{%endblock%}
+
+{% block loading %}
+{%endblock%}

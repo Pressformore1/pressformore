@@ -1,0 +1,3 @@
+skcms_core_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: SKCMSCoreBundle:Default:index }

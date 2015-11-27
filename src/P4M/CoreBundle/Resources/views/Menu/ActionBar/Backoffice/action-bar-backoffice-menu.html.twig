@@ -1,0 +1,65 @@
+{% set actionLink = '' %}
+{#{% if absoluteLinks is defined%}#}
+{% set actionLink = path('p4_m_backoffice_homepage') %}
+{%set route =app.request.attributes.get('_route')%}
+{#{%endif%}#}
+{%if route == 'p4_m_backoffice_homepage'%}
+{%set ajax_action = 'ajax_action'%}
+{%else%}
+{%set ajax_action = ''%}
+{%endif%}
+
+<li id="action-bar-settings">
+    <a class="action-bar-link" href="{{path('p4m_social_profile',{username:user.username} )}}" title="Visit your public profile">
+        <span class="action-bar-icon glyphicon user"></span>
+    </a>
+</li>
+
+<li class="action-bar-item">
+    <a class="action-bar-link {% if absolutelinks is defined%} {#current-action-bar-item#}{%endif%}" href="{{path('p4_m_backoffice_profile_infos')}}" title="Manage your settings">
+        <span class="action-bar-icon glyphicon cogwheel"></span>
+    </a>
+</li>
+
+<li class="action-bar-item">
+    <a class="action-bar-link {{ajax_action}}" data-action="loadWalletView" data-loader="content" data-url="{{path('p4m_ajax_action')}}" data-params="{{ {callBack:'loadWalletView'}|json_encode() }}" data-key="{{'loadWalletView'|sha512()}}" data-toggle="action-bar" data-target="#section-wallet" href="{{actionLink}}#wallet" title="Wallet">
+        <span class="action-bar-icon icon-coins"></span>
+    </a>
+</li>
+
+<li class="action-bar-item hidden">
+   
+    <a class="action-bar-link {{ajax_action}}" data-action="loadWalletForm" data-url="{{path('p4m_ajax_action')}}" data-params="{{ {callBack:'loadWalletForm'}|json_encode() }}" data-key="{{'loadWalletForm'|sha512()}}" data-toggle="action-bar" data-target="#section-wallet-charge" href="{{actionLink}}#wallet-charge" data-loader="content" title="Wallet">
+        <span class="action-bar-icon icon-coins"></span>
+    </a>
+</li>
+
+<li class="action-bar-item">
+    <a class="action-bar-link ajax_form_force" data-ajaxTarget="profile-wall-form" data-toggle="action-bar" data-target="#section-strews" href="{{actionLink}}#strews" title="Manage your strews">
+        <span class="action-bar-icon icon-strew"></span>
+    </a>
+</li>
+
+<li class="action-bar-item">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-notifications" href="{{actionLink}}#notifications" title="Check your notifications">
+        <span class="action-bar-icon glyphicon bell"></span>
+    </a>
+</li>
+
+{#<li class="action-bar-item">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-messages" href="{{actionLink}}#messages" title="Read your messages">
+        <span class="action-bar-icon glyphicon message_empty"></span>
+    </a>
+</li>
+
+<li class="action-bar-item">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-stats" href="{{actionLink}}#stats"  title="Monitor your stats">
+        <span class="action-bar-icon glyphicon charts"></span>
+    </a>
+</li>#}
+
+<li class="action-bar-item">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-skills-badges" href="{{actionLink}}#badges"  title="Control your reputation">
+        <span class="action-bar-icon glyphicon crown"></span>
+    </a>
+</li>
