@@ -1601,7 +1601,7 @@ class AjaxController extends Controller
         $em = $this->getDoctrine()->getManager();
         $viewRepo = $em->getRepository('P4MTrackingBundle:PostView');
         $view = $viewRepo->find($params->viewId);
-        if (($view->getUser() != null && $user === $view->getUser()) || ($view->getUser === null && !$user instanceof \P4M\UserBundle\Entity\User))
+        if (($view->getUser() != null && $user === $view->getUser()) || ($view->getUser() === null && !$user instanceof \P4M\UserBundle\Entity\User))
         {
             $view->setDateout(new \DateTime());
         }
