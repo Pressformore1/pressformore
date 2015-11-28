@@ -279,8 +279,7 @@ class CoreController extends Controller
                     'wantPressform'=>$wantPressform
                 );
         
-        
-//        $response =  $this->renderView('P4MCoreBundle:Post:post.html.twig',$params);
+  	$response =  $this->renderView('P4MCoreBundle:Post:post.html.twig',$params);
         $response =  $this->render('P4MCoreBundle:Post:post.html.twig',$params);
         if (null === $user)
         {
@@ -289,6 +288,7 @@ class CoreController extends Controller
             $response->headers->setCookie(new \Symfony\Component\HttpFoundation\Cookie('login_redirection',$request->getUri(),$cookieExpiration ));
         }
 //        die($response);
+	
         return $response;
         
         

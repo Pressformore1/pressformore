@@ -1,0 +1,196 @@
+
+
+/***************************** TILES ***********************************/
+#content-wrap{margin: 2px; width: 96%;height: 100%;position:relative;z-index:1;}
+
+#content-wall{padding: 0; width: 100%;min-height: 1000px;}
+
+.container-fluid{padding: 0;}
+
+#post_iframe { border: 0 none; height: 100%; width: 100%;}
+
+#contact_form .form-group label{text-align: left;}
+#contact_form button.primary{margin: 0 0 0 435px;}
+
+
+/******************* TILES **********************/
+#infscr-loading{position: absolute; bottom: 0px; left: 46%; background: #f8f8f8; z-index: 120; background: #f8f8f8; border: 1px solid #a3a6a8; border-radius: 5px 5px 0 0; padding: 10px; text-align: center;}
+#infscr-loading img{width: 40px; margin: auto;}
+
+.masonry-block{padding: 0px; height: 280px;}
+
+.is-hidden{opacity: 0;}
+.masonry-block.row-2{height: 560px;}
+
+.tile-wrap{padding: 2px; width: 100%; height: 100%;}
+
+.tile{border-radius: 3px; padding: 0; background: #f8f8f8; border: 1px solid #9c9c9c; position: relative; width: 100%; height: 100%;}
+.tile-post {height: 100%;  width: 100%; position: relative;}
+.tile-tag {height: 100%;  width: 100%; position: relative; cursor: pointer;}
+.tile-wall {height: 85%; width: 100%; position: relative;}
+.tile-user {height: 85%; width: 100%; position: relative;}
+.tile-category {height: 85%; width: 100%; position: relative; cursor: pointer;}
+.category-tile-icon {width:64px;}
+
+
+
+
+
+
+/******************* TILES - COMMON **********************/
+
+.tile-follow-btn{width: 100%; height: 15%; font-size: 20px; position: absolute; bottom: 0; background:#fff; color:#363636; border:0px;}
+.tile-follow-btn.red{background:#ed3237; color: #f8f8f8;}
+.tile-follow-btn .glyphicon{line-height: normal; vertical-align: text-bottom;}
+.tile-follow-btn:hover{color:#ed3237; }
+.tile-follow-btn:hover .glyphicon{color:#ed3237;}
+.tile-follow-btn.red:hover{background:#f8f8f8;}
+
+/*Header : non hover*/
+    .tile-header{width:100%; height: 100%; position: relative; overflow:hidden;}
+    .tile-header h2.tile-header-title{position: absolute; bottom: 10%; left: 0px; width: 80%; margin: 0; line-height: inherit !important; font-size: inherit !important; z-index: 10;font-size: 20px; font-family: 'pfm-medium'; color: #363636; line-height: 30px; background: rgba(255,255,255,0.91); display: block; padding: 7px 10px;}
+    .tile-header h2.tile-header-title .main{ font-size: 20px; }
+    .tile-header h2.tile-header-title .main .glyphicon{ font-size: 20px; vertical-align: text-top; }
+    .tile-header h2.tile-header-title .sub{ font-size: 15px; }
+
+    .tile-header-action{position: absolute; top: 5px; right: 5px; z-index: 11;}
+    /*.tile-header-action img{width: 35px;}*/
+
+    .tile-header .tile-header-thumb{display: block; width: 100%; height: 100%; overflow: hidden;}
+    .tile-header .tile-header-thumb img{/*position: absolute; top: 0; left: 0;*/ min-height: 100%; min-width:100%; margin:auto;z-index: 9;visiblity:hidden;}
+
+    
+/*Content : hover*/
+    .tile-hover{display: none; position: absolute; top: 0px; z-index: 12; background: rgba(255,255,255,0.95); padding: 7px 10px; height: 100%; width: 100%;}
+    .tile-hover a{color: #363636;}
+    .tile-hover a:hover{text-decoration: none;}
+    
+    .tile-hover-title {margin: 5px 0 3px; font-size: 14px;position:relative;z-index: 2; }
+    .tile-hover-title a .main{font-size: 15px; font-family: 'pfm-medium';}
+    .tile-hover-title a .main .glyphicon{vertical-align: text-top;}
+    .tile-hover-title a .sub{font-size: 13px; font-family: 'pfm-medium'; margin: 2px 0 0;}
+    .tile-hover-description{margin:5px 0; font-size:12px; text-align: justify; line-height: normal;position: relative;z-index: 2;}
+    .tile-hover .tile-hover-description a{height:100%; display: block;}
+    
+    .tile-hover-footer{position: absolute; bottom: 0px; left: 0px; width: 100%; height: 74px;}
+    .tile-hover-footer-meta{margin:0; padding: 0 10px;}
+    .tile-hover-meta{margin:0px; font-size: 12px;  font-family: 'pfm-medium'; vertical-align: middle;}
+    .tile-hover-meta .glyphicon{vertical-align: middle;}
+    .tile-hover-meta:hover{color: #ED3237;}
+   
+    .tile-add{font-size: 20px; text-align: center;}
+    .tile-add .glyphicon{vertical-align: text-top;}
+   
+    
+    
+    
+/******************* TILES - POST **********************/
+    .tile-post-categories{position: absolute; bottom: 12px; left: 9px;}
+    .tile-post-categories .categories-list{margin: 0;}
+    .tile-post-type{position: absolute; bottom: 9px; right: 45px;}
+    .tile-wall-categories{position: absolute; bottom: 9px; left: 9px;}
+    .tile-user-categories{position: absolute; bottom: 2px; left: 9px;}
+    
+    .tile-icon{width:30px;}
+    .rating-horizontal-bar{height: 7px; width: 100%; margin:0px 0 0;  position: absolute; bottom: 0; left: 0;}
+    .rating-horizontal-bar-plus{background: #6cde66; display: block; height: 7px; float: left;}
+    .rating-horizontal-bar-less{background: #d45959 ; display: block; height: 7px; float: left;}
+
+    /*Content : hover*/
+   
+    
+
+
+    .post-content-scroll{height: 190px; cursor: pointer;}
+
+    .read-later-wrap{float: right; margin: 8px 6px 0 0;}
+    .read-later:hover{color: #ED3237; }
+    .read-later:hover .read-later-text{display: inline;}
+    .read-later{font-size: 22px; color: #363636; margin: 0; cursor: pointer; }
+    .read-later.selected{color: #ED3237;}
+    .read-later span{vertical-align: middle;}
+    .read-later-text{display: none; font-size: 12px;}
+    
+    
+    .tile-remove{position: absolute; top: 0px; right: 3px; opacity: 0.6; cursor: pointer; color: #363636;z-index: 2;}
+    .tile-remove:hover{color: #363636; opacity: 1;}
+
+    .post-tile-link-fix {height: 100%;left: 0;position: absolute;top: 0;width: 100%;z-index: 0;}
+    
+/******************* TILES - USER **********************/
+
+    
+    /*Content : hover*/
+    .user-content{display: none; }
+    h1.user-content-username{font-size: 18px; font-family:'pfm-bold'; margin: 10px 0 3px; }
+    .user-content-activity{font-size: 12px; font-family: 'pfm-medium'; margin: 3px 0; }
+    .user-content-city{font-size: 12px; font-family: 'pfm-italic'; margin: 3px 0; }
+    .user-content-website{margin: 3px 0; }
+    .user-content-website a{font-size: 12px; font-family: 'robotoitalic'; color: #ED3237;}
+    .user-content-about{font-size: 12px; font-family: 'pfm-regular'; margin:5px 0; font-size:12px; text-align: justify;}
+    .user-content-followed-info{font-size: 12px; margin: 0; float: right;}
+
+
+    
+/******************* TILES - WALL **********************/
+
+    
+    h1.wall-content-name{font-size: 18px; font-family: 'pfm-bold'; margin: 10px 0 3px; }
+    h2.wall-content-username{color: #636363; font-family: 'pfm-regular'; font-size: 16px; margin: 0; }
+    .wall-content-about{font-size: 12px; font-family: 'pfm-regular'; margin:5px 0; line-height:16px; text-align: justify;}
+    .wall-content-followed-info{font-size: 12px; margin: 0; float: right;}
+
+    .add-new-wall{font-size: 28px; font-family: 'pfm-bold'; margin: 100px 0 0; text-align: center; text-transform: uppercase;}
+    .add-new-wall a{color: #363636;}
+    .add-new-wall a:hover{color: #ed3237;}
+    .add-new-wall a .glyphicon{vertical-align: bottom;}
+/******************* TILES - CATGEORY  **********************/
+    .tile-category .tile-header .tile-header-cat-thumb img{/*width: 160px; height: 160px; margin: 36px auto;*/margin:93px auto; display: block; text-align: center; position: relative;}
+    .tile-category .tile-hover-description{height: 80px !important;}
+    .tile-category-btn-title{display: none; color:#363636; text-align:center; height: 100%; width: 50%; float: left;}
+    .tile-category-btn-picked{display: block; background: #47A447; color:#363636; font-size: 20px; text-align:center; height: 100%; width: 50%; float: left; border:0px;}
+    .tile-category-btn-banned{display: block; background: #ED3237; color:#363636; font-size: 20px; texxt-align:center; height: 100%; width: 50%;float: left;border:0px;}
+    
+/******************* TILES - TAG  **********************/
+    .tile-tag-title{font-weight: bold; text-align: center; padding: 40% 0 0; width: 100%; font-size: 24px; text-transform: uppercase;}
+    .tile-tag-title .glyphicon{vertical-align: text-bottom; margin:0 5px 0 0;}
+    .tile-tag-add{font-size: 25px; text-align: center;}
+    .tile-tag-add .glyphicon{vertical-align: text-top;}    
+    
+/*********************************TYPE OF TILES*************************************************/
+/*SMALL*/
+.masonry-block.col-xs-12 .tile-header h2.tile-header-title .main{font-size: 18px; line-height: 20px;}
+.masonry-block.col-xs-12 .tile-header h2.tile-header-title .sub{font-size: 14px; line-height: 20px;}
+/*.masonry-block.col-xs-12 .tile-hover .tile-hover-title{display: none;}*/
+.masonry-block.col-xs-12 .tile-hover .tile-hover-description{margin: 15px 0 0; height:135px;}
+
+
+
+
+/*NORMAL*/
+.masonry-block.col-md-10 .post-header h1.post-header-title a.post-title-link{font-size: 22px; line-height: 24px;}
+.masonry-block.col-md-6 .post-content-title a{font-size: 18px;}
+.masonry-block.col-md-6 .post-content-description a{font-size: 12px;}
+
+
+/*LARGE*/
+.masonry-block.col-md-15 .post-header h1.post-header-title a.post-title-link{font-size: 24px; line-height: 26px;}
+.masonry-block.col-md-15 .post-content-title a{font-size: 22px;}
+.masonry-block.col-md-15 .post-content-description a{font-size: 14px;}
+
+
+/*EXTRA LARGE*/
+.masonry-block.col-md-15.row-2 .post-header h1.post-title a.post-title-link{font-size: 26px;line-height: 28px;}
+.masonry-block.col-md-12.row-2 .post-content-title a{font-size: 24px;}
+.masonry-block.col-md-12.row-2 .post-content-description a{font-size: 14px;}
+    
+
+
+    
+    
+/******************* CREATE STREW **********************/
+.content-multiwall{padding: 0; width: 100%;  }
+.content-multiwall-wrap{padding: 0; width: 100%;  }
+    
+    
+    
