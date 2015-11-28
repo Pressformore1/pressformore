@@ -10,4 +10,7 @@
 /composer.phar
 /vendor/
 /web/bundles/
+/web/images/posts
+/web/images/uploads
 
+/nbproject/private/

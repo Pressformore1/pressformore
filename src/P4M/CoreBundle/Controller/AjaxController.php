@@ -36,12 +36,12 @@ class AjaxController extends Controller
         $salt = $this->container->getParameter('ajax_salt');
         $noKeyActions = array('updatePostView','reportAjaxError');
         
-        if ($this->getRequest()->request->get('action') && $this->getRequest()->request->get('key') && $this->getRequest()->request->get('params') )
+        if ($this->getRequest()->request->get('action') && $this->getRequest()->request->get('params') )
         {
             $jsonParams = $this->getRequest()->request->get('params');
             $key = $this->getRequest()->request->get('key');
             $action = $this->getRequest()->request->get('action');
-            if (hash('sha512',$jsonParams.$salt)==$key || hash('sha512',$action.$salt)==$key || in_array($action, $noKeyActions) )
+            if (in_array($action, $noKeyActions) || hash('sha512',$jsonParams.$salt)==$key || hash('sha512',$action.$salt)==$key  )
             {
                 return $this->processRequest($action,  json_decode($jsonParams),$page);
             }
@@ -1601,7 +1601,7 @@ class AjaxController extends Controller
         $em = $this->getDoctrine()->getManager();
         $viewRepo = $em->getRepository('P4MTrackingBundle:PostView');
         $view = $viewRepo->find($params->viewId);
-        if ($user === $view->getUser())
+        if (($view->getUser() != null && $user === $view->getUser()) || ($view->getUser === null && !$user instanceof \P4M\UserBundle\Entity\User))
         {
             $view->setDateout(new \DateTime());
         }

@@ -1,4 +1,4 @@
-<article id="content-wrap" {%if isMobile()%}class="mobile"{%endif%} data-viewid="{{viewId}}">
+<article id="content-wrap" {%if isMobile()%}class="mobile"{%endif%} data-ajax_path="{{path('p4m_ajax_action')}}" data-viewid="{{viewId}}">
         <!--<img src="files/design/loader.gif" id="post_iframe_loader" />-->
         {%if post.embed != null  and post.embed|length %}
         {{post.embed|raw}}

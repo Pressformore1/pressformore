@@ -24,8 +24,8 @@ class AppKernel extends Kernel
             new P4M\ModerationBundle\P4MModerationBundle(),
             new P4M\TrackingBundle\P4MTrackingBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
-            new Jonlil\CKFinderBundle\JonlilCKFinderBundle('IvoryCKEditorBundle'),
+           new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new FM\ElfinderBundle\FMElfinderBundle(),
             new P4M\BackofficeBundle\P4MBackofficeBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
             new P4M\PinocchioBundle\P4MPinocchioBundle(),
@@ -34,7 +34,6 @@ class AppKernel extends Kernel
             new P4M\ContactBundle\P4MContactBundle(),
             new P4M\BlogBundle\P4MBlogBundle(),
             new P4M\MyElasticaBundle\P4MMyElasticaBundle(),
-            new SKCMS\CKFinderBundle\SKCMSCKFinderBundle(),
             new SKCMS\CoreBundle\SKCMSCoreBundle(),
             new SKCMS\AdminBundle\SKCMSAdminBundle(),
             new P4M\ConsoleBundle\P4MConsoleBundle(),
@@ -58,9 +57,4 @@ class AppKernel extends Kernel
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
     
-    public function init()
-    {
-        date_default_timezone_set( 'Europe/Paris' );
-        parent::init();
-    }
 }

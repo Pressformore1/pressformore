@@ -15,25 +15,25 @@
 
             {%block stylesheets %}
                 {% stylesheets 'css/common/*.css' filter='cssrewrite' %}
-                <link rel="stylesheet" href="{{ asset(asset_url) }}" />
+                <link rel="stylesheet" href="{{ asset_url }}" />
                 {% endstylesheets %}
                 
                 {% stylesheets 'css/action-bar/*.css' filter='cssrewrite' %}
-                <link rel="stylesheet" href="{{ asset(asset_url) }}" />
+                <link rel="stylesheet" href="{{ asset_url }}" />
                 {% endstylesheets %}
                 {% stylesheets 'css/menu/*.css' filter='cssrewrite' %}
-                <link rel="stylesheet" href="{{ asset(asset_url) }}" />
+                <link rel="stylesheet" href="{{ asset_url}}" />
                 {% endstylesheets %}
                 {% stylesheets 'css/help/*.css' filter='cssrewrite' %}
-                <link rel="stylesheet" href="{{ asset(asset_url) }}" />
+                <link rel="stylesheet" href="{{ asset_url }}" />
                 {% endstylesheets %}
                 {% stylesheets 'css/form/*.css' filter='cssrewrite' %}
-                <link rel="stylesheet" href="{{ asset(asset_url) }}" />
+                <link rel="stylesheet" href="{{ asset_url }}" />
                 {% endstylesheets %}
                 
                 {%if isMobile()%}
                 {% stylesheets 'css/mobile/*.css' filter='cssrewrite' %}
-                <link rel="stylesheet" href="{{ asset(asset_url) }}" />
+                <link rel="stylesheet" href="{{ asset_url }}" />
                 {% endstylesheets %}
                 {%endif%}
             {% endblock %}

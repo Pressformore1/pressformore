@@ -83,7 +83,8 @@ class PostRepository extends Repository
 //        }
         
         $existsFilter = new \Elastica\Filter\Exists('post.author.id');
-        $query->setFilter($existsFilter);
+//        $query->setFilter($existsFilter);
+        $query->setPostFilter($existsFilter);
         
          $query->setFrom(($page-1)*$nombreParPage);
         $query->setSize($nombreParPage);

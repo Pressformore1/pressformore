@@ -49,13 +49,14 @@ class CoreExtension extends \Twig_Extension
     public function getFunctions()
     {
         return array(
-            'getTopScore' => new \Twig_Function_Method($this, 'getTopScore'),
-            'getUnreadNotificationNumber' => new \Twig_Function_Method($this, 'getUnreadNotificationNumber'),
-            'getLanguages' => new \Twig_Function_Method($this, 'getLanguages'),
-            'getWallsCategories' => new \Twig_Function_Method($this, 'getWallsCategories'),
-            'getPostAction' => new \Twig_Function_Method($this, 'getPostAction'),
-            'getWallAction' => new \Twig_Function_Method($this, 'getWallAction'),
-            'isMobile' => new \Twig_Function_Method($this, 'isMobile'),
+
+            new \Twig_SimpleFunction('getTopScore',[$this,'getTopScore']),
+            new \Twig_SimpleFunction('getUnreadNotificationNumber',[$this,'getUnreadNotificationNumber']),
+            new \Twig_SimpleFunction('getLanguages',[$this,'getLanguages']),
+            new \Twig_SimpleFunction('getWallsCategories',[$this,'getWallsCategories']),
+            new \Twig_SimpleFunction('getPostAction',[$this,'getPostAction']),
+            new \Twig_SimpleFunction('getWallAction',[$this,'getWallAction']),
+            new \Twig_SimpleFunction('isMobile',[$this,'isMobile'])
         );
     }
 

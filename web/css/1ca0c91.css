@@ -43,7 +43,7 @@
 #menu-notifications{position: relative;}
 /**/
 #notifications-box{width: 400px; height: 450px; border-radius: 4px; border:1px solid #a8a8a8; background:#fff;  position:absolute; top: 51px; right: 0px; display: none;}
-#notifications-box-corner{width: 22px; height: 11px; position:absolute; top: -11px; right: 15px; background: url(../images/design/corner.png) no-repeat;}
+#notifications-box-corner{width: 22px; height: 11px; position:absolute; top: -11px; right: 15px; background: url(../../images/design/corner.png) no-repeat;}
 
 #notifications-tab{list-style:none; width: 100%; padding: 0; margin: 0; border-bottom: 1px solid #a8a8a8; padding: 15px 10px;}
 #notifications-tab button.primary{width: 189px; height:30px; margin:0; float: left; background: #f8f8f8; color: #363636;}
@@ -67,7 +67,7 @@
 .menu-form input#addPostUrl{padding-right:40px !important;}
 
 
-#post-meta-sidebar{display: none; position: fixed; right: 0px; top: 56px; background:url("img/pattern01.png") repeat scroll left top #000000; width: 400px; height: 100%; z-index: 10;}
+#post-meta-sidebar{display: none; position: fixed; right: 0px; top: 56px; background:url("../../css/img/pattern01.png") repeat scroll left top #000000; width: 400px; height: 100%; z-index: 10;}
 .close-sidebar{position: absolute; right: 3px; top: 0px; color: #333;}
 .close-sidebar:hover{text-decoration: none;}
 

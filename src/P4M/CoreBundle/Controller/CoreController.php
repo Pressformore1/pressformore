@@ -182,13 +182,14 @@ class CoreController extends Controller
         
         
         $view = new \P4M\TrackingBundle\Entity\PostView();
-         $view->setPost($post);
+        $view->setPost($post);
          if (null !== $user)
          {
              $view->setUser($user);
-             $em->persist($view); 
+             
          }
-           
+        $em->persist($view); 
+        
         
         
         $ReadLaterRepo = $em->getRepository('P4MBackofficeBundle:ReadPostLater');

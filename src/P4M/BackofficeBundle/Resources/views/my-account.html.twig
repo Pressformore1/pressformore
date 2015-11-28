@@ -53,7 +53,7 @@ settings
 {%block stylesheets%}
 {{parent()}}
 {% stylesheets 'css/account/*.css' filter='cssrewrite' %}
-<link rel="stylesheet" href="{{ asset(asset_url) }}" />
+<link rel="stylesheet" href="{{ asset_url }}" />
 {% endstylesheets %}
 {%endblock%}
 

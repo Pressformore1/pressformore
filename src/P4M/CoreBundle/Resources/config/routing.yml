@@ -1,18 +1,18 @@
 p4m_core_home:
-    pattern:  /
+    path:  /
     defaults: { _controller: P4MCoreBundle:Core:index }
 
 
 #CLASSIC WALL
 #Obsolete Mais encore utilisé pour rediriger vers le premier wall de l'user
 p4m_core_wall:
-    pattern:  /my-wall/{page}
+    path:  /my-wall/{page}
     defaults: { _controller: P4MCoreBundle:Core:wall ,page:1}
     requirements:
         page:  \d+
 #/Obsolete
 p4m_core_showWall:
-    pattern:  /strew/{wallSlug}/{page}
+    path:  /strew/{wallSlug}/{page}
     defaults: { _controller: P4MCoreBundle:Wall:wall ,page:1}
     requirements:
         page:  \d+
@@ -20,7 +20,7 @@ p4m_core_showWall:
 #        wallSlug: ([\w-]+[/]?[\D-]+)
         
 p4m_core_showWallPosts:
-    pattern:  /wall-posts/{wallSlug}/{page}
+    path:  /wall-posts/{wallSlug}/{page}
     defaults: { _controller: P4MCoreBundle:Wall:wallPosts ,page:1}
     requirements:
         page:  \d+
@@ -28,7 +28,7 @@ p4m_core_showWallPosts:
         
 #TRENDY
 p4m_core_trendyPosts:
-    pattern:  /trendy/{page}
+    path:  /trendy/{page}
     defaults: { _controller: P4MCoreBundle:Wall:trendyPosts ,page:1}
     requirements:
         page:  \d+
@@ -37,66 +37,66 @@ p4m_core_trendyPosts:
         
 #SEARCH
 p4m_core_search:
-    pattern:  /search
+    path:  /search
     defaults: { _controller: P4MCoreBundle:Search:search }     
 p4m_core_search_ajax:
-    pattern:  /search-ajax/{page}
+    path:  /search-ajax/{page}
     defaults: { _controller: P4MCoreBundle:Search:searchAjax,page:1 }     
     requirements:
         page:  \d+
         
 #HISTORY
 p4m_core_showHistory:
-    pattern:  /history/{page}
+    path:  /history/{page}
     defaults: { _controller: P4MCoreBundle:Wall:historyWall,page:1 }
     requirements:
         page:  \d+
     
 p4m_core_showHistoryPosts:
-    pattern:  /history-posts/{page}
+    path:  /history-posts/{page}
     defaults: { _controller: P4MCoreBundle:Wall:historyPosts ,page:1}
     requirements:
         page:  \d+
 
 #READLATER
 p4m_core_showFeaturedContent:
-    pattern:  /featured-content/{page}
+    path:  /featured-content/{page}
     defaults: { _controller: P4MCoreBundle:Wall:featuredContent,page:1 }
     requirements:
         page:  \d+
 
 p4m_core_showReadLater:
-    pattern:  /later-its-now/{page}
+    path:  /later-its-now/{page}
     defaults: { _controller: P4MCoreBundle:Wall:readLaterWall,page:1 }
     requirements:
         page:  \d+
     
 p4m_core_showReadLaterPosts:
-    pattern:  /later-its-now-posts/{page}
+    path:  /later-its-now-posts/{page}
     defaults: { _controller: P4MCoreBundle:Wall:readLaterWallPosts ,page:1}
     requirements:
         page:  \d+
 
 
 p4m_core_category:
-    pattern:  /category/{categoryName}/{page}
+    path:  /category/{categoryName}/{page}
     defaults: { _controller: P4MCoreBundle:Core:category ,page:1}
     requirements:
         page:  \d+
         
 p4m_core_post:
-    pattern: /view/{postSlug}
+    path: /view/{postSlug}
     defaults: {_controller: P4MCoreBundle:Core:post}
     
         
 p4m_ajax_action:
-    pattern: /ajax/{page}
+    path: /ajax/{page}
     defaults: {_controller: P4MCoreBundle:Ajax:ajax,page:1}
     requirements:
         page:  \d+
         
 p4m_core_addPost:
-    pattern: /addPost
+    path: /addPost
     defaults: {_controller: P4MCoreBundle:Core:addPost}
 
 

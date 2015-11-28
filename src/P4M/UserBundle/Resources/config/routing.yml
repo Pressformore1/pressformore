@@ -1,31 +1,31 @@
 p4m_social_profile:
-    pattern:  /user/{username}/{page}
+    path:  /user/{username}/{page}
     defaults: { _controller: P4MUserBundle:Profile:profile,page:1}
     requirements:
         page: \d+
 
 p4m_social_profile_edit:
-    pattern:  /my-account
+    path:  /my-account
     defaults: { _controller: P4MUserBundle:User:myAccount}
 
 p4m_social_profile_edit_password:
-    pattern:  /my-account/password
+    path:  /my-account/password
     defaults: { _controller: P4MUserBundle:User:myAccountPassword}
 
 p4m_social_profile_edit_picture:
-    pattern:  /my-account/picture
+    path:  /my-account/picture
     defaults: { _controller: P4MUserBundle:User:myAccountPicture}
 
 p4m_social_profile_edit_preferences:
-    pattern:  /my-account/preferences
+    path:  /my-account/preferences
     defaults: { _controller: P4MUserBundle:User:myAccountPreferences}
 
 p4m_social_profile_edit_walls:
-    pattern:  /my-account/walls
+    path:  /my-account/walls
     defaults: { _controller: P4MUserBundle:User:myAccount}
 
 p4m_social_register_choice:
-    pattern:  /register/choice
+    path:  /register/choice
     defaults: { _controller: P4MUserBundle:CustomRegister:registerChoice}
     
 

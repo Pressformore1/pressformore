@@ -48,6 +48,7 @@ post-page home
 {%endblock%}
     
 {%block stylesheets%}
+    
     {{parent()}}
     {% stylesheets 'css/post/*.css' filter='cssrewrite' %}
     <link rel="stylesheet" href="{{ asset_url }}" />

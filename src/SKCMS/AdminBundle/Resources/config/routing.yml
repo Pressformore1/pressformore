@@ -1,33 +1,33 @@
 sk_admin_homepage:
-    pattern:  /
+    path:  /
     defaults: { _controller: SKCMSAdminBundle:Admin:index }
 sk_admin_list:
-    pattern:  /list/{entity}/{page}
+    path:  /list/{entity}/{page}
     defaults: { _controller: SKCMSAdminBundle:List:index, page:1 }
 sk_admin_edit:
-    pattern:  /edit/{entity}/{id}
+    path:  /edit/{entity}/{id}
     defaults: { _controller: SKCMSAdminBundle:Edit:index, id:null }
 sk_admin_delete:
-    pattern:  /delete/{entity}/{id}
+    path:  /delete/{entity}/{id}
     defaults: { _controller: SKCMSAdminBundle:Edit:delete}
 sk_admin_charge_wallet:
-    pattern:  /wallet/charge
+    path:  /wallet/charge
     defaults: { _controller: SKCMSAdminBundle:Wallet:list}
 sk_admin_wallet_charge_user:
-    pattern:  /wallet/charge/user/{id}
+    path:  /wallet/charge/user/{id}
     defaults: { _controller: SKCMSAdminBundle:Wallet:charge}
 sk_admin_wanted_pressforms:
-    pattern:  /authors/wanted-pressforms
+    path:  /authors/wanted-pressforms
     defaults: { _controller: SKCMSAdminBundle:Author:wantedPressformList}
 sk_admin_temp_author:
-    pattern:  /authors/temp-author/{postSlug}
+    path:  /authors/temp-author/{postSlug}
     defaults: { _controller: SKCMSAdminBundle:Author:tempAuthor}
 sk_admin_user_list:
-    pattern:  /users/list
+    path:  /users/list
     defaults: { _controller: SKCMSAdminBundle:User:userList}
 #sk_admin_press:
-#    pattern:  /users/list
+#    path:  /users/list
 #    defaults: { _controller: SKCMSAdminBundle:User:userList}
 #sk_admin_user_list:
-#    pattern:  /users/list
+#    path:  /users/list
 #    defaults: { _controller: SKCMSAdminBundle:User:userList}

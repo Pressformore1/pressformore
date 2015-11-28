@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.3.*",
+        "symfony/symfony": "2.7.*",
         "doctrine/orm": ">=2.2.3,<2.4-dev",
         "doctrine/doctrine-bundle": "1.2.*",
         "twig/extensions": "1.0.*",
@@ -23,8 +23,8 @@
         "stof/doctrine-extensions-bundle": "1.1.x@dev",
         "winzou/console-bundle": "dev-master",
         "hwi/oauth-bundle": "0.4.*@dev",
-        "egeloen/ckeditor-bundle": "~2.0",
-        "jonlil/ckfinder-bundle": "dev-master",
+        "egeloen/ckeditor-bundle": "dev-master@dev",
+        "helios-ag/fm-elfinder-bundle": "~5",
         "friendsofsymfony/elastica-bundle": "3.0.x",
         "white-october/pagerfanta-bundle": "dev-master",
         "kayue/kayue-essence-bundle": "dev-master"
@@ -46,8 +46,9 @@
         ]
     },
     "config": {
-        "bin-dir": "bin"
-    },
+        "bin-dir": "bin",
+        "component-dir": "web/assets"
+    },  
     "minimum-stability": "stable",
     "extra": {
         "symfony-app-dir": "app",

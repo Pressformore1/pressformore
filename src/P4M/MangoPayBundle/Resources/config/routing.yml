@@ -1,19 +1,19 @@
 #p4_m_mango_pay_homepage:
-#    pattern:  /register-card-return/{cardId}
+#    path:  /register-card-return/{cardId}
 #    defaults: { _controller: P4MMangoPayBundle:Card:register }
 
 p4_m_mango_pay_register_card:
-    pattern:  /register-card
+    path:  /register-card
     defaults: { _controller: P4MMangoPayBundle:Card:register }
 
 p4_m_mango_pay_register_card_return:
-    pattern:  /register-card-return/{cardId}/{ammount}/{preAuthorisation}
+    path:  /register-card-return/{cardId}/{ammount}/{preAuthorisation}
     defaults: { _controller: P4MMangoPayBundle:Card:registerReturn }
 
 p4_m_mango_pay_wallet_charge:
-    pattern:  /wallet-charge/{cardId}/{ammount}/{preAuthorisation}
+    path:  /wallet-charge/{cardId}/{ammount}/{preAuthorisation}
     defaults: { _controller: P4MMangoPayBundle:Wallet:charge }
 
 p4_m_mango_pay_wallet_charge_post:
-    pattern:  /wallet-charge
+    path:  /wallet-charge
     defaults: { _controller: P4MMangoPayBundle:Wallet:chargePost }

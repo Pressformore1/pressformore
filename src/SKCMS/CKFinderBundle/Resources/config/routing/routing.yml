@@ -1,7 +1,0 @@
-ckfinder_index:
-  pattern: /browse
-  defaults: { _controller: JonlilCKFinderBundle:Default:index }
-
-ckfinder_init:
-  pattern: /connector/{service}
-  defaults: { _controller: JonlilCKFinderBundle:Default:init }
