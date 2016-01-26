@@ -24,7 +24,7 @@ services:
     fos_elastica.listener.search_engine.example:
         class: 'P4M\MyElasticaBundle\Listener\ReadLaterListener'
         arguments:
-            - '@fos_elastica.object_persister.prodwebsite.post'
+            - '@fos_elastica.object_persister.jeremiewebsite.post'
             - ['postPersist', 'postUpdate', 'preRemove']
             - @fos_elastica.indexable
             - { indexName: 'id', typeName: 'id'}
@@ -36,7 +36,7 @@ services:
     fos_elastica.listener.search_engine.history:
         class: 'P4M\MyElasticaBundle\Listener\PostViewListener'
         arguments:
-            - '@fos_elastica.object_persister.prodwebsite.post'
+            - '@fos_elastica.object_persister.jeremiewebsite.post'
             - ['postPersist', 'postUpdate', 'preRemove']
             - @fos_elastica.indexable
             - { indexName: 'id', typeName: 'id'}
@@ -47,7 +47,7 @@ services:
     fos_elastica.listener.search_engine.user:
         class: 'P4M\MyElasticaBundle\Listener\UserListener'
         arguments:
-            - '@fos_elastica.object_persister.prodwebsite.user'
+            - '@fos_elastica.object_persister.jeremiewebsite.user'
             - ['postPersist']
             - @fos_elastica.indexable
             - { indexName: 'id', typeName: 'id'}
@@ -58,7 +58,7 @@ services:
     fos_elastica.listener.search_engine.follower:
         class: 'P4M\MyElasticaBundle\Listener\FollowerListener'
         arguments:
-            - '@fos_elastica.object_persister.prodwebsite.user'
+            - '@fos_elastica.object_persister.jeremiewebsite.user'
             - ['postPersist', 'postUpdate', 'preRemove']
             - @fos_elastica.indexable
             - { indexName: 'id', typeName: 'id'}
@@ -69,7 +69,7 @@ services:
     fos_elastica.listener.search_engine.followed:
         class: 'P4M\MyElasticaBundle\Listener\FollowedListener'
         arguments:
-            - '@fos_elastica.object_persister.prodwebsite.user'
+            - '@fos_elastica.object_persister.jeremiewebsite.user'
             - ['postPersist', 'postUpdate', 'preRemove']
             - @fos_elastica.indexable
             - { indexName: 'id', typeName: 'id'}
