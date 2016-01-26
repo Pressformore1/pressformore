@@ -3,10 +3,12 @@
 
 namespace  P4M\MyElasticaBundle\Listener;
 
+use Doctrine\Common\EventSubscriber;
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use FOS\ElasticaBundle\Doctrine\Listener as BaseListener;
 use \Doctrine\Common\EventArgs;
 
-class ReadLaterListener extends BaseListener
+class ReadLaterListener extends BaseListener implements EventSubscriber
 {
    
     /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
@@ -22,7 +24,7 @@ class ReadLaterListener extends BaseListener
         $this->em = $this->container->get('doctrine')->getEntityManager();
     }
 
-    public function postUpdate(EventArgs $args)
+    public function postUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
 
@@ -35,7 +37,7 @@ class ReadLaterListener extends BaseListener
         }
     }
     
-    public function postPersist(EventArgs $eventArgs)
+    public function postPersist(LifecycleEventArgs $eventArgs)
     {
         
         $entity = $eventArgs->getEntity();
@@ -49,7 +51,7 @@ class ReadLaterListener extends BaseListener
         }
     }
     
-    public function preRemove(EventArgs $eventArgs)
+    public function preRemove(LifecycleEventArgs $eventArgs)
     {
         $entity = $eventArgs->getEntity();
        
@@ -58,11 +60,21 @@ class ReadLaterListener extends BaseListener
         if ($entity instanceof \P4M\BackofficeBundle\Entity\ReadPostLater) 
         {
              
-            $this->scheduleForDeletion($entity);
+            $this->scheduleForDeletion[] = $entity;
             $this->inicializaPost();
             $this->objectPersisterPost->replaceOne($entity->getPost());
         }
     }
+
+    public function getSubscribedEvents()
+    {
+        return array(
+            'postPersist',
+            'preRemove',
+            'postUpdate'
+        );
+    }
+
     
 
 }

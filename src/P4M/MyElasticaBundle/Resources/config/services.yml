@@ -12,7 +12,7 @@ services:
             - [ setPropertyAccessor ,[@fos_elastica.property_accessor]]
             - [ setIgnoreMissing ,[true]]
         tags:
-            - {name: 'fos_elastica.elastica_to_model_transformer', type: post, index: sandboxwebsite}
+            - {name: 'fos_elastica.elastica_to_model_transformer', type: post, index: prodwebsite}
             
 #    p4m.elastica.finder.website:
 #        class : 'P4M\MyElasticaBundle\Finder\TransformedFinder'
@@ -24,8 +24,8 @@ services:
     fos_elastica.listener.search_engine.example:
         class: 'P4M\MyElasticaBundle\Listener\ReadLaterListener'
         arguments:
-            - '@fos_elastica.object_persister.sandboxwebsite.post'
-            - ['postPersist', 'postUpdate', 'preRemove']
+            - '@fos_elastica.object_persister.prodwebsite.post'
+            #- ['postPersist', 'postUpdate', 'preRemove']
             - @fos_elastica.indexable
             - { indexName: 'id', typeName: 'id'}
         calls:
@@ -36,8 +36,8 @@ services:
     fos_elastica.listener.search_engine.history:
         class: 'P4M\MyElasticaBundle\Listener\PostViewListener'
         arguments:
-            - '@fos_elastica.object_persister.sandboxwebsite.post'
-            - ['postPersist', 'postUpdate', 'preRemove']
+            - '@fos_elastica.object_persister.prodwebsite.post'
+            #- ['postPersist', 'postUpdate', 'preRemove']
             - @fos_elastica.indexable
             - { indexName: 'id', typeName: 'id'}
         calls:
@@ -47,8 +47,8 @@ services:
     fos_elastica.listener.search_engine.user:
         class: 'P4M\MyElasticaBundle\Listener\UserListener'
         arguments:
-            - '@fos_elastica.object_persister.sandboxwebsite.user'
-            - ['postPersist']
+            - '@fos_elastica.object_persister.prodwebsite.user'
+            #- ['postPersist']
             - @fos_elastica.indexable
             - { indexName: 'id', typeName: 'id'}
         calls:
@@ -58,8 +58,8 @@ services:
     fos_elastica.listener.search_engine.follower:
         class: 'P4M\MyElasticaBundle\Listener\FollowerListener'
         arguments:
-            - '@fos_elastica.object_persister.sandboxwebsite.user'
-            - ['postPersist', 'postUpdate', 'preRemove']
+            - '@fos_elastica.object_persister.prodwebsite.user'
+            #- ['postPersist', 'postUpdate', 'preRemove']
             - @fos_elastica.indexable
             - { indexName: 'id', typeName: 'id'}
         calls:
@@ -69,8 +69,8 @@ services:
     fos_elastica.listener.search_engine.followed:
         class: 'P4M\MyElasticaBundle\Listener\FollowedListener'
         arguments:
-            - '@fos_elastica.object_persister.sandboxwebsite.user'
-            - ['postPersist', 'postUpdate', 'preRemove']
+            - '@fos_elastica.object_persister.prodwebsite.user'
+            #- ['postPersist', 'postUpdate', 'preRemove']
             - @fos_elastica.indexable
             - { indexName: 'id', typeName: 'id'}
         calls:

@@ -1,0 +1,57 @@
+/**************************************************************************************************************
+/************************************************       Action Bar      ***********************************************
+/**************************************************************************************************************/
+#actionbar-doorknob {display:block;z-index:15;position: fixed;top:12px;right:120px;width:80px;height:80px;font-size:41px;text-align: center;}
+#actionbar-doorknob .icon-logo {/*background:#eee;border-radius: 5px;border:1px solid #555;*/padding:10px;}
+
+.mobile #action-bar-wrap{right: -100%;width: 100%; }
+.mobile #action-bar {width:10%;}
+.mobile .action-bar-item,.mobile #action-bar-report ,.mobile #action-bar-follow { width:100%}
+.mobile .action-bar-link,.mobile #action-bar-follow a {width:100%; font-size: 28px;}
+.mobile .action-bar-text {font-size: 16px;top:18px;left:12px;}
+
+.mobile #action-bar-sections-wrap {right:10%;width:90%;}
+.mobile #action-bar-sections-slider{width:auto;}
+
+.mobile #section-cover-block,.mobile .cover-block {width:auto;}
+
+
+.mobile #action-bar-ratio-wrap .ratio-plus-number,.mobile #action-bar-ratio-wrap .ratio-less-number {width:100%;font-size:16px;}
+.mobile #action-bar-ratio {left:0;width:100%;padding:0 46%;}
+
+/*No actions fix*/
+.mobile.home #action-bar-sections-wrap ,.mobile.settings #action-bar-sections-wrap {display:none;}
+.mobile.home #action-bar-wrap,.mobile.settings #action-bar-wrap{width: 10%; }
+.mobile.home #action-bar ,.mobile.settings #action-bar {width:100%;}
+
+/*COMMENTS*/
+
+.mobile #comments {width:auto;}
+.mobile .comment-content-text {font-size:16px;}
+.mobile #action-bar-remove{display:none;}
+
+/**************************************************************************************************************
+/************************************************       Content      ***********************************************
+/**************************************************************************************************************/
+
+.mobile #content-wrap{width: 100%;position: absolute;z-index:8;}
+
+
+/**************************************************************************************************************
+/************************************************       BackOffice      ***********************************************
+/**************************************************************************************************************/
+.mobile #account-sidebar {width:20%;margin-left:10%;}
+.mobile #account-container {width:70%;}
+
+/**************************************************************************************************************
+/************************************************       Menu      ***********************************************
+/**************************************************************************************************************/
+/*.mobile #center-menu{display: none}*/
+.mobile #header {position:absolute;top:-48px;width:100%}
+.mobile #center-menu-left-zone, .mobile #center-menu-right-zone{display:none;}
+.mobile #menu-logo {    margin: 0;text-align: center;float:none;}
+.mobile #join-beta, .mobile #left-menu,.mobile #center-menu {display:none;}
+/*.mobile #center-menu{width:80px;}*/
+
+.mobile #right-menu .menu-item {display:none;}
+.mobile #right-menu .menu-item#user-menu-pic {display:block;}

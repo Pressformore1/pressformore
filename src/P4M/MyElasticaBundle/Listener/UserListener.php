@@ -3,10 +3,13 @@
 
 namespace  P4M\MyElasticaBundle\Listener;
 
-use FOS\ElasticaBundle\Doctrine\Listener as BaseListener;
-use \Doctrine\Common\EventArgs;
+use Doctrine\Common\EventSubscriber;
 
-class UserListener extends BaseListener
+use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use FOS\ElasticaBundle\Doctrine\Listener as BaseListener;
+
+
+class UserListener extends BaseListener implements EventSubscriber
 {
    
     /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
@@ -22,7 +25,7 @@ class UserListener extends BaseListener
         $this->em = $this->container->get('doctrine')->getEntityManager();
     }
 
-    public function postPersist(EventArgs $eventArgs)
+    public function postPersist(LifecycleEventArgs $eventArgs)
     {
         
         $entity = $eventArgs->getEntity();
@@ -34,6 +37,13 @@ class UserListener extends BaseListener
             $this->inicializaUser();
             $this->objectPersisterPost->replaceOne($entity);
         }
+    }
+
+    public function getSubscribedEvents()
+    {
+        return array(
+            'postPersist'
+        );
     }
     
    

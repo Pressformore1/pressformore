@@ -1,0 +1,82 @@
+
+/*******************************************   USER ACCOUNT **************************************************/
+
+
+body.gray-light.public{background: #E6E6E6 !important;}
+#account-sidebar{float: left; width: 200px; margin: 50px 0 0;}
+#account-sidebar li a{font-size: 15px;}
+#account-sidebar li a .glyphicon{margin: 0 5px 0 0;}
+#account-container{float: left; width: 900px; padding: 20px;  border-right: 1px solid #d8d8d8; border-left: 1px solid #d8d8d8; background: #fff;} 
+
+.account-menu{list-style: none; padding: 0;}
+.account-menu li{background: #f8f8f8; padding: 5px 10px; margin: 5px 0;}
+.account-menu li.selected{background: #fff; padding: 5px 10px; margin: 5px 0;}
+.account-menu-link{color: #363636;font-size: 17px; font-style: normal; line-height: 17px;}
+.account-menu-link:hover {border:0px;}
+.account-menu-link.selected {color: #ED3237;}
+
+.account-sub-menu{ list-style:square; padding: 0 0px; margin:0 0 0 20px; } 
+.account-sub-menu li{margin:2px 0; padding:0;} 
+.account-sub-menu li a.account-menu-link{font-size:12px;} 
+
+.form-wrap{background-color: #FBFBFB;   padding: 20px; box-shadow: 2px 2px 7px rgba(0, 0, 0, 0.5); margin-bottom: 20px; position: relative;}
+.form-wrap .entry-title{padding: 0 0 20px;}
+.explanation-zone{background: #a8a8a8; margin: 10px -20px 30px; padding: 20px; /*display: none;*/}
+.explanation-zone i{font-size: 26px; margin: 0 10px 0 0; vertical-align: bottom;}
+.form-wrap .bootstrap-tagsinput{margin: 5px 0;}
+.bootstrap-tagsinput input{margin: 5px 0 !important;}
+
+
+#account-container h2.form-title{font-size: 25px; display: block; float: none;}
+#account-container .form-field-wrap{clear: both; margin: 10px;}
+#account-container .form-field-label{float: left; width: 250px; text-align: right; margin: 3px 10px;}
+#account-container .form-field{float: left; width: 400px; margin: 0;}
+#account-container .form-field-privacy p small{vertical-align: text-bottom; font-size: 12px;}
+#account-container .primary{float: right;}
+.account-pic-wrap{position: relative; width: 400px; height: 400px;}
+
+/*.red-zone{background: rgba(237,50,55,0.1);}*/
+.red-zone h4{color: #A94442; font-weight: bold; font-size: 15px;}
+.has-error .select2-choices{border-color: #A94442}
+.has-success .select2-choices{border-color: #3C763D}
+#password-no-match{color: #FF0000; display: none; margin: 0 15px 0 0; float: left;}
+#password-match{color: #008000; display: none; margin: 0 15px 0 0; float: left;}
+
+#s2id_myPref-category{margin: 10px 0;}
+#searchTags{margin: 10px 0 0;}
+#searchTags-wrap{display: none;}
+
+
+/*Hover par d�faut*/
+
+/*.tags-list li.tag-followed a.tag-icon:hover{background: #ED1C24 !important; color: #f8f8f8;}*/
+
+#tagsFollowed, #tagsBanned{min-height: 30px;}
+#tagsFollowed li.tag{background:#009F3C ;}
+#tagsBanned li.tag{background:#ED1C24 ;}
+
+#tagsFollowed-wrap{float: left; width: 330px; border: 1px solid #A3A6A8; padding: 10px; background: #EBEBEB; margin: 15px 0 0;}
+#tagsBanned-wrap{float: right; width: 330px; border: 1px solid #A3A6A8; padding: 10px; background: #EBEBEB; margin: 15px 0 0;}
+
+.floatP {float:left;}
+
+.inline-block{display:inline-block;}
+
+#walletGraphs {margin-top:20px;text-align:center;}
+/*.walletGraph {width:100%;height:200px !important;}*/
+#walletGlobalResume{margin-top:4em;}
+#walletGlobalPress {margin-top: 4em;text-align:left;}
+#walletGlobalPress h1 {text-align:center;}
+
+.graphButton {float:none !important;margin:0 auto;margin-bottom: 20px;}
+.big {font-size:2em;font-weight:bold;}
+.knob {margin:2em auto;}
+
+#lengendYou {width:10px;height:10px;display:inline-block;background:rgba(270,50,55,1);}
+#lengendAverage {width:10px;height:10px;display:inline-block;background:rgba(151,151,151,1);}
+.bigCenterTitle {text-align:center;font-size: 8em;  font-weight: bold;}
+.pfmred{color:#ED3237;}
+.pressformersP{font-size:3em;vertical-align:text-bottom;line-height:90px;}
+.round-picture {width:100px;height: 100px;border-radius:50px;overflow: hidden;position:relative;}
+.aligncenter{margin-left: auto;margin-right: auto;}
+

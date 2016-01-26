@@ -3,10 +3,13 @@
 
 namespace  P4M\MyElasticaBundle\Listener;
 
+use Doctrine\Common\EventSubscriber;
+//use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\LifecycleEventArgs;
 use FOS\ElasticaBundle\Doctrine\Listener as BaseListener;
 use \Doctrine\Common\EventArgs;
 
-class FollowerListener extends BaseListener
+class FollowerListener extends BaseListener implements EventSubscriber
 {
    
     /** @var \Symfony\Component\DependencyInjection\ContainerInterface */
@@ -22,7 +25,7 @@ class FollowerListener extends BaseListener
         $this->em = $this->container->get('doctrine')->getEntityManager();
     }
 
-    public function postUpdate(EventArgs $args)
+    public function postUpdate(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
 
@@ -34,8 +37,9 @@ class FollowerListener extends BaseListener
             
         }
     }
-    
-    public function postPersist(EventArgs $eventArgs)
+
+
+    public function postPersist(LifecycleEventArgs $eventArgs)
     {
         
         $entity = $eventArgs->getEntity();
@@ -49,7 +53,7 @@ class FollowerListener extends BaseListener
         }
     }
     
-    public function preRemove(EventArgs $eventArgs)
+    public function preRemove(LifecycleEventArgs $eventArgs)
     {
         $entity = $eventArgs->getEntity();
        
@@ -58,11 +62,22 @@ class FollowerListener extends BaseListener
         if ($entity instanceof \P4M\UserBundle\Entity\UserLink) 
         {
              
-            $this->scheduleForDeletion($entity);
+            $this->scheduleForDeletion[]=$entity;
             $this->inicializaUser();
             $this->objectPersisterPost->replaceOne($entity->getFollower());
         }
     }
+
+
+    public function getSubscribedEvents()
+    {
+        return array(
+            'postPersist',
+            'preRemove',
+            'postUpdate'
+        );
+    }
+
     
 
 }
