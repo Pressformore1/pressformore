@@ -10,5 +10,7 @@
 /web/bundles/
 /web/images/posts
 /web/images/uploads
+.idea
+/web/assets
 
 /nbproject/private/
