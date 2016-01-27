@@ -550,7 +550,7 @@ class AjaxController extends Controller
         $globalPostReadNumber = $postViewRepo->findLastMonthPostReadNumber();
         $globalPressFormNumber = $pressRepo->findLastMonthNumber();
         
-        $averagePostReadNumber = $globalPostReadNumber/$userNumber;
+        $averagePostReadNumber = $userNumber == 0 ? 0 : $globalPostReadNumber/$userNumber;
         if ($globalPressFormNumber)
         {
             $averagePressRatio = ($averagePostReadNumber/($averagePostReadNumber/($globalPressFormNumber/$userNumber)))*100;

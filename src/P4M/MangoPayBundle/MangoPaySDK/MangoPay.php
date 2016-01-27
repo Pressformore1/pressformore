@@ -37,16 +37,12 @@ class MangoPay
     private function config()
     {
 //        die($_SERVER['DOCUMENT_ROOT']);
-        $this->api->Config->ClientId = 'pressformore';
-        $this->api->Config->ClientPassword = 'bKUjH9WcbfzkKQDn85q1gyw2Km27ovMmiJSiUv8sZu5B390ZJn';
-//        $this->api->Config->ClientId = 'pfm-sandbox';
-//        $this->api->Config->ClientPassword = 'Qe9v3rZD0uYRMPdbK2Aky0esSLEkU5kmjagFuX5imc5jNRwAaO';
+
+        $this->api->Config->ClientId = 'pfm-sandbox';
+        $this->api->Config->ClientPassword = 'Qe9v3rZD0uYRMPdbK2Aky0esSLEkU5kmjagFuX5imc5jNRwAaO';
         $this->api->Config->TemporaryFolder = __DIR__.'/../../../../MP_tmp/';
-//        $this->api->Config->TemporaryFolder = 'D:/localhost/Press4More/trunk/MP_tmp/';
-//        $this->api->Config->TemporaryFolder = '/home/pressformore/www/MP_tmp/';
-//        $this->api->Config->TemporaryFolder = $_SERVER['DOCUMENT_ROOT'].'/Press4More/trunk/MP_tmp/';
-//        die();
-        $this->api->Config->BaseUrl = 'https://api.mangopay.com/';
+
+        $this->api->Config->BaseUrl = 'https://api.sandbox.mangopay.com/';
     }
     
     
