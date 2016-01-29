@@ -66,7 +66,7 @@ class DefaultStorageStrategy implements IStorageStrategy {
     private function GetPathToTemporaryFolder() {
         
         if (is_null($this->_config->TemporaryFolder))
-            throw new P4M\MangoPayBundle\MangoPaySDK\Types\Exceptions('Path to temporary folder is not defined');
+            throw new \P4M\MangoPayBundle\MangoPaySDK\Types\Exceptions\Exception('Path to temporary folder is not defined');
         
         return $this->_config->TemporaryFolder;
     }

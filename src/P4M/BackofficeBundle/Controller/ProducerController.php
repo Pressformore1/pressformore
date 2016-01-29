@@ -11,7 +11,7 @@
  *
  * @author Jona
  */
-namespace P4M\BackOfficeBundle\Controller;
+namespace P4M\BackofficeBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;

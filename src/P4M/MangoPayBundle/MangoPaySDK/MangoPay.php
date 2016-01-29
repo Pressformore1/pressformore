@@ -44,6 +44,7 @@ class MangoPay
         $this->api->Config->ClientId = $this->clientId;
         $this->api->Config->ClientPassword = $this->clientPassword;
         $this->api->Config->BaseUrl = 'https://api.mangopay.com/';
+        $this->api->Config->TemporaryFolder = __DIR__.'/../../../../MP_tmp/';
     }
     
     
