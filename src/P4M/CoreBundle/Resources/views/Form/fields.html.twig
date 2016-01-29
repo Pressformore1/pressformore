@@ -69,7 +69,7 @@
 {#    {%for choice in choices%}#}
     {%for child in form%}
         {% set choice =  form.vars.choices[child.vars.value]%}
-        {% if value[choice.value] == true %}
+        {% if value[choice.value] is defined and value[choice.value] == true %}
         <li class="create-wall-form-item category-item {% if value[choice.value] == false %} hidden{% endif %}" data-categoryId="{{choice.data.id}}" data-tileId="category_{{choice.data.id}}" >
             <button title="{{choice.data.name}}" type="button" class="category-button">
                 <img src="{{asset(choice.data.iconColor)}}" class="category-icon" alt="{{choice.data.name}}">
