@@ -9,6 +9,7 @@ p4_m_my_elastica:
 p4_m_blog:
     resource: "@P4MBlogBundle/Resources/config/routing.yml"
     prefix:   /
+
 p4_m_mango_pay:
     resource: "@P4MMangoPayBundle/Resources/config/routing.yml"
     prefix:   /
@@ -68,8 +69,6 @@ hwi_oauth_connect:
 hwi_facebook_login:
     path: /secure_area/login/check-facebook
 
-
-
 p4_m_admin:
     resource: "@P4MAdminBundle/Resources/config/routing.yml"
     prefix:   /admin-old
@@ -101,8 +100,6 @@ fos_user_resetting:
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
     prefix: /secure_area/profile
-
-    
 
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"
