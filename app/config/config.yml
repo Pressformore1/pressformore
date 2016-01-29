@@ -530,3 +530,6 @@ services:
             
 parameters:
     fos_user.template.engine: 'twig'
+
+skcms_locale:
+    locales: [en, fr]
