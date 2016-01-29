@@ -1,10 +1,10 @@
 <?php
 
-namespace SKCMS\LocalBundle;
+namespace P4M\LocaleBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SKCMSLocalBundle extends Bundle{
+class LocaleBundle extends Bundle{
     public function getParent(){
         return 'SKCMSLocaleBundle';
     }
