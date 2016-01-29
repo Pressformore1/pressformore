@@ -28,7 +28,7 @@
         "friendsofsymfony/elastica-bundle": "3.0.x",
         "white-october/pagerfanta-bundle": "dev-master",
         "kayue/kayue-essence-bundle": "dev-master",
-        "SKCMS/locale-bundle": "v0.1"
+        "SKCMS/locale-bundle": "0.2.x-dev"
     },
     "scripts": {
         "post-install-cmd": [

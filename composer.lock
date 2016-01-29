@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9ec5ca5229aab48abedd376f4cdda1bd",
-    "content-hash": "3f54cb58eefc5452ef311e50727b1b97",
+    "hash": "bbc046af93333b42922ba965aa49691b",
+    "content-hash": "4c72e4bc44c800ad573b1cf8f7e7adbb",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -2267,17 +2267,17 @@
         },
         {
             "name": "skcms/locale-bundle",
-            "version": "v0.1",
+            "version": "0.2.x-dev",
             "target-dir": "SKCMS/LocaleBundle",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kokmok/SKCMS-Locale.git",
-                "reference": "3d687883c1bfecbeedd5cf424e8c7a29f89e50e3"
+                "reference": "80ce6ce82bcbc48ec89808c1db7fa3ff6d2e772e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kokmok/SKCMS-Locale/zipball/3d687883c1bfecbeedd5cf424e8c7a29f89e50e3",
-                "reference": "3d687883c1bfecbeedd5cf424e8c7a29f89e50e3",
+                "url": "https://api.github.com/repos/kokmok/SKCMS-Locale/zipball/80ce6ce82bcbc48ec89808c1db7fa3ff6d2e772e",
+                "reference": "80ce6ce82bcbc48ec89808c1db7fa3ff6d2e772e",
                 "shasum": ""
             },
             "require": {
@@ -2304,7 +2304,7 @@
                 }
             ],
             "description": "Symfony SKCMS Locale Bundle by SOLID-kiss",
-            "time": "2016-01-29 15:16:55"
+            "time": "2016-01-29 16:11:30"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
@@ -3468,7 +3468,8 @@
         "hwi/oauth-bundle": 20,
         "egeloen/ckeditor-bundle": 20,
         "white-october/pagerfanta-bundle": 20,
-        "kayue/kayue-essence-bundle": 20
+        "kayue/kayue-essence-bundle": 20,
+        "skcms/locale-bundle": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

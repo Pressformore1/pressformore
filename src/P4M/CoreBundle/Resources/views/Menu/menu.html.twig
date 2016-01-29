@@ -95,7 +95,7 @@
         <ul class="p4m-menu">
             {%if user is defined and user %}
             <li class="menu-item" id="user-menu-pic">
-                    <a class="menu-item-text  tooltip-menu-icon" title="View your profile" href="{{path('p4m_social_profile',{username:user.username} )}}">
+                    <a class="menu-item-text  tooltip-menu-icon" title="{{ 'View your profile'|trans({},'menu')}}" href="{{path('p4m_social_profile',{username:user.username} )}}">
                     <img class="thumb-align" src="{%if user.picture %}{{asset(user.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}" alt="{{user.username}}"/>
 
                 </a>
@@ -127,7 +127,7 @@
 {#            </li>#}
                 
                  <li class="menu-item">
-                   <a class="main-button-link"  href="{{path('fos_user_security_login')}}">Log in</a>
+                   <a class="main-button-link"  href="{{path('fos_user_security_login')}}">{{ 'Log in'|trans({},'menu')}}</a>
         
                 </li>
             {%endif%}
