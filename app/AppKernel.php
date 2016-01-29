@@ -38,6 +38,7 @@ class AppKernel extends Kernel
             new SKCMS\AdminBundle\SKCMSAdminBundle(),
             new P4M\ConsoleBundle\P4MConsoleBundle(),
             new Kayue\EssenceBundle\KayueEssenceBundle(),
+            new \SKCMS\LocaleBundle\SKCMSLocaleBundle(),
             );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
