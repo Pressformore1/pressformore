@@ -9,8 +9,8 @@
 
     <li class="action-bar-section" id="section-filters">
         <div class="action-bar-block">
-            <h1 class="action-bar-title"><span class="glyphicon file"></span> {{wall.name}} strew content</h1>
-            <p>Explore the content of {{wall.name}} strew</p>
+            <h1 class="action-bar-title"><span class="glyphicon file">&nbsp;</span>{{ 'strew content'|trans({'wallName': wall.name}, 'menu')}}</h1>
+            <p>{{ 'Explore the content of strew'|trans({'wallName': wall.name }, 'menu')}}</p>
         </div>    
         <form data-target="serialize" data-url="{{dataUrl}}" id="action-bar-filters-form" method="post" class="ajax_form">
             <input type="hidden" name="callBack" value="backToPostsListener" />

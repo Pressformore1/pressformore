@@ -62,8 +62,10 @@
 
 
 
-                <p>{{ 'Beware! this content has been reported as'|trans({}, 'menu')}} <strong>{{ post.flag.type.name }}</strong>. <br/> {{ 'What do
-                    you think ?'|trans({}, 'menu')}}</p>
+                <p>
+                    {{ 'Beware! this content has been reported as'|trans({}, 'menu')}} <strong>{{ post.flag.type.name }}</strong>.
+                    <br/> {{ 'What do you think ?'|trans({}, 'menu')}}
+                </p>
 
 
                 <form class="post-form ajax_form" id="commentform" data-action="confirmFlag"
@@ -81,7 +83,7 @@
                     <button class="primary action-bar-btn" type="submit">{{ 'I don\'t confirm'|trans({}, 'menu')}}</button>
                 </form>
             {% else %}
-                <p>You want to report this content, please tell us why:</p>
+                <p>{{ 'You want to report this content, please tell us why:'|trans({}, 'menu')}}</p>
                 <form class="post-form ajax_form" id="commentform" data-action="reportPost"
                       data-url="{{ path('p4m_ajax_action') }}" data-key="{{ 'reportPost'|sha512 }}"
                       data-target="serialize">

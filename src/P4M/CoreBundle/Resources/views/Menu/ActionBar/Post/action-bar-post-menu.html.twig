@@ -1,58 +1,71 @@
 <li id="action-bar-pfm" class="action-bar-item">
-{#<li id="action-bar-pfm" class="action-bar-item">#}
-    {%if post.author %}
-        {%if walletFill%}
-        <a class="action-bar-link {%if pressformed %} pressed{%endif%}{%if unpressform is null and pressformed == false%} autostart{%endif%}" id="pfm-press-menu"  data-toggle="action-bar" data-target="#section-press" href="#press" title="This content will be rewarded in 25 sec. Want to know more about it? Click here">
+    {#<li id="action-bar-pfm" class="action-bar-item">#}
+    {% if post.author %}
+        {% if walletFill %}
+            <a class="action-bar-link {% if pressformed %} pressed{% endif %}{% if unpressform is null and pressformed == false %} autostart{% endif %}"
+               id="pfm-press-menu" data-toggle="action-bar" data-target="#section-press" href="#press"
+               title="{{ 'This content will be rewarded in 25 sec. Want to know more about it? Click here'|trans({}, 'menu')}}">
+                <span class="action-bar-icon icon-logo"><span id="press-timer"></span></span>
+            </a>
+        {% else %}
+            <a id="pfm-button"
+               class="action-bar-link {% if user.alertWalletEmpty == false %}action-bar-autostart{% endif %}" {% if user.alertWalletEmpty == false %} data-delay="10" {% endif %}
+               data-toggle="action-bar" data-target="#section-press" href="#contribute"
+               title="{{ 'Discover how to contribute.'|trans({}, 'menu')}}"><span class="action-bar-icon icon-logo"></span></a>
+        {% endif %}
+
+        {#<a id="pfm-button" href="#meta"  title="Pressform a post!" class="ajax_action {%if pressformed %}pressformed{%endif%}" data-url="{{path('p4m_ajax_action')}}" data-action="{%if pressformed%}unpressform{%else%}pressform{%endif%}" data-params="{{ {postId:post.id,callBack:'pressformed'}|json_encode() }}" data-key="{{{postId:post.id,callBack:'pressformed'}|json_encode()|sha512()}}">
+
+        </a>#}
+    {% else %}
+        <a class="action-bar-link autostart" id="pfm-press-menu" data-toggle="action-bar" data-target="#section-press"
+           href="#press">
             <span class="action-bar-icon icon-logo"><span id="press-timer"></span></span>
         </a>
-        {%else%}
-        <a id="pfm-button" class="action-bar-link {%if user.alertWalletEmpty == false %}action-bar-autostart{%endif%}" {%if user.alertWalletEmpty == false %} data-delay="10" {%endif%} data-toggle="action-bar" data-target="#section-press" href="#contribute"  title="Discover how to contribute."><span class="action-bar-icon icon-logo"></span></a> 
-        {%endif%}
-    
-    {#<a id="pfm-button" href="#meta"  title="Pressform a post!" class="ajax_action {%if pressformed %}pressformed{%endif%}" data-url="{{path('p4m_ajax_action')}}" data-action="{%if pressformed%}unpressform{%else%}pressform{%endif%}" data-params="{{ {postId:post.id,callBack:'pressformed'}|json_encode() }}" data-key="{{{postId:post.id,callBack:'pressformed'}|json_encode()|sha512()}}">
-
-    </a>#}
-    {%else%}
-    <a class="action-bar-link autostart" id="pfm-press-menu"  data-toggle="action-bar" data-target="#section-press" href="#press">
-        <span class="action-bar-icon icon-logo"><span id="press-timer"></span></span>
-    </a>
-    {#<a id="pfm-button" href="#press"  class="action-bar-link autostart" data-target="#section-press"  data-toggle="action-bar" >
-        <span class="action-bar-icon icon-logo"></span>
-    </a>#}
-    {%endif%}
+        {#<a id="pfm-button" href="#press"  class="action-bar-link autostart" data-target="#section-press"  data-toggle="action-bar" >
+            <span class="action-bar-icon icon-logo"></span>
+        </a>#}
+    {% endif %}
 </li>
 
-{% set voteScore = user.id|postVoteScore(post.id)%}
+{% set voteScore = user.id|postVoteScore(post.id) %}
 <li id="action-bar-rate">
-        <div id="action-bar-ratio-wrap">
-                <span class="ratio-plus-number">{{positiveVotesNumber}}</span>
+    <div id="action-bar-ratio-wrap">
+        <span class="ratio-plus-number">{{ positiveVotesNumber }}</span>
 
-                <div id="action-bar-ratio">
-                        <div class="ratio-plus"></div>
-                        <div class="ratio-less"></div>
-                </div>	
-                <span class="ratio-less-number">{{negativeVotesNumber}}</span>	
+        <div id="action-bar-ratio">
+            <div class="ratio-plus"></div>
+            <div class="ratio-less"></div>
         </div>
+        <span class="ratio-less-number">{{ negativeVotesNumber }}</span>
+    </div>
 
-        <div id="action-bar-vote-wrap">
-                <a data-vote-number="{{positiveVotesNumber}}" id="rating_more"  class="{% if voteScore > 0%}rating-selected {%endif%}ajax_action action-bar-link action-bar-rate-button" data-target="#section-rating" href="#comments" title="Vote up !" data-url="{{path('p4m_ajax_action')}}" data-params="{{{'score':1,'postId':post.id}|json_encode()}}" data-action="vote" data-key="{{{'score':1,'postId':post.id}|json_encode()|sha512}}">
-                        <span class="action-bar-icon glyphicon plus"></span>
-                </a>
+    <div id="action-bar-vote-wrap">
+        <a data-vote-number="{{ positiveVotesNumber }}" id="rating_more"
+           class="{% if voteScore > 0 %}rating-selected {% endif %}ajax_action action-bar-link action-bar-rate-button"
+           data-target="#section-rating" href="#comments" title="{{ 'Vote up !'|trans({}, 'menu')}}" data-url="{{ path('p4m_ajax_action') }}"
+           data-params="{{ {'score':1,'postId':post.id}|json_encode() }}" data-action="vote"
+           data-key="{{ {'score':1,'postId':post.id}|json_encode()|sha512 }}">
+            <span class="action-bar-icon glyphicon plus"></span>
+        </a>
 
-                <a data-vote-number="{{negativeVotesNumber}}" id="rating_less" class="{% if voteScore < 0%}rating-selected {%endif%}ajax_action action-bar-link action-bar-rate-button" data-target="#section-rating" href="#comments" title="Vote down !" data-url="{{path('p4m_ajax_action')}}" data-params="{{{'score':-1,'postId':post.id}|json_encode()}}" data-action="vote" data-key="{{{'score':-1,'postId':post.id}|json_encode()|sha512}}">
-                        <span class="action-bar-icon glyphicon minus"></span>
-                </a>
-        </div>
+        <a data-vote-number="{{ negativeVotesNumber }}" id="rating_less"
+           class="{% if voteScore < 0 %}rating-selected {% endif %}ajax_action action-bar-link action-bar-rate-button"
+           data-target="#section-rating" href="#comments" title="{{ 'Vote down !'|trans({}, 'menu')}}" data-url="{{ path('p4m_ajax_action') }}"
+           data-params="{{ {'score':-1,'postId':post.id}|json_encode() }}" data-action="vote"
+           data-key="{{ {'score':-1,'postId':post.id}|json_encode()|sha512 }}">
+            <span class="action-bar-icon glyphicon minus"></span>
+        </a>
+    </div>
 
 </li>
-
-
 
 
 <li class="action-bar-item">
-    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-comments" href="#comments" title="See the comments or add one!">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-comments" href="#comments"
+       title="{{ 'See the comments or add one!'|trans({}, 'menu')}}">
         <span class="action-bar-icon glyphicon comments">
-            <span class="action-bar-text">{{post.comments|length}}</span>
+            <span class="action-bar-text">{{ post.comments|length }}</span>
         </span>
     </a>
 </li>
@@ -63,27 +76,19 @@
     </a>
 </li>#}
 <li class="action-bar-item">
-    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-meta" href="#meta" title="About this content">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-meta" href="#meta"
+       title="{{ 'About this content'|trans({}, 'menu')}}">
         <span class="action-bar-icon glyphicon circle_info"></span>
     </a>
 </li>
 
 
 <li id="action-bar-report" class="action-bar-item">
-    <a class="action-bar-link{% if post.flag and flagged == false%} current-action-bar-item{%endif%}" data-toggle="action-bar" href="#report" data-target="#section-report"  title="Report an error">
+    <a class="action-bar-link{% if post.flag and flagged == false %} current-action-bar-item{% endif %}"
+       data-toggle="action-bar" href="#report" data-target="#section-report" title="{{ 'Report an error'|trans({}, 'menu')}}">
         <span class="glyphicon flag"></span>
     </a>
 </li>
-
-
-
-
-
-
-
-
-
-
 
 
 {#<li id="action-bar-report" class="action-bar-item">#}

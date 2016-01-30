@@ -39,7 +39,9 @@ skcms_admin:
 
 p4_m_notification:
     resource: "@P4MNotificationBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}/
+    requirements:
+      _locale: en|fr
 
 p4_m_pinocchio:
     resource: "@P4MPinocchioBundle/Resources/config/routing.yml"
@@ -47,8 +49,9 @@ p4_m_pinocchio:
 
 p4_m_backoffice:
     resource: "@P4MBackofficeBundle/Resources/config/routing.yml"
-    prefix:   /my-account
-    
+    prefix:   /{_locale}/my-account
+    requirements:
+      _locale: en|fr
 
 p4_m_tracking:
     resource: "@P4MTrackingBundle/Resources/config/routing.yml"
@@ -91,23 +94,33 @@ p4_m_core:
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-    prefix: /secure_area
+    prefix: /{_locale}/secure_area
+    requirements:
+      _locale: en|fr
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"
-    prefix: /secure_area/profile
+    prefix: /{_locale}/secure_area/profile
+    requirements:
+      _locale: en|fr
 
 fos_user_register:
     resource: "@FOSUserBundle/Resources/config/routing/registration.xml"
-    prefix: /secure_area/register
+    prefix: /{_locale}/secure_area/register
+    requirements:
+      _locale: en|fr
 
 fos_user_resetting:
     resource: "@FOSUserBundle/Resources/config/routing/resetting.xml"
-    prefix: /secure_area/resetting
+    prefix: /{_locale}/secure_area/resetting
+    requirements:
+      _locale: en|fr
 
 fos_user_change_password:
     resource: "@FOSUserBundle/Resources/config/routing/change_password.xml"
-    prefix: /secure_area/profile
+    prefix: /{_locale}/secure_area/profile
+    requirements:
+      _locale: en|fr
 
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"

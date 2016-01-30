@@ -1,6 +1,6 @@
 <li class="action-bar-section" id="section-wallet-charge">
                     <div class="action-bar-block">
-                        <h1 class="action-bar-title">{{ ''|trans({}, 'menu')}}Wallet Settings</h1>
+                        <h1 class="action-bar-title">{{ 'Wallet Settings'|trans({}, 'menu')}}</h1>
                         <p>
                             {{ 'Congratulations!'|trans({}, 'menu')}}
                             {{ 'You\'ve correctly set up your wallet!'|trans({}, 'menu')}}
@@ -8,7 +8,10 @@
                         </p>
                         {% for flashMessage in app.session.flashbag.get('chargeError') %}
                         
-                            <p class="pfm-red big"><i class="glyphicon warning_sign" style="vertical-align:bottom;"></i> <strong>{{ {{ flashMessage|trans({}, 'menu')}} }}</strong></p>
+                            <p class="pfm-red big">
+                                <i class="glyphicon warning_sign" style="vertical-align:bottom;"></i>
+                                <strong>{{ flashMessage|trans({}, 'menu') }}</strong>
+                            </p>
                             <p class="pfm-red">
                                 {{ 'Please'|trans({}, 'menu')}}, {{ 'verify your informations and try again'|trans({}, 'menu')}}
                             </p>
@@ -16,17 +19,17 @@
                         {% endfor %}
                     </div>
                     <div class="action-bar-block">
-                        <h4 class="action-bar-small-title">{{ ''|trans({}, 'menu')}}Loading</h4>
+                        <h4 class="action-bar-small-title">{{ 'Loading'|trans({}, 'menu')}}</h4>
                         <p id="loading-amount"></p>
                         <p id="loading-duration"></p>
                         
                     </div>
                     {% if walletFill is defined and walletFill is null  %}
                         <div  class="action-bar-block">
-                            <h4 class="action-bar-small-title">{{ ''|trans({}, 'menu')}}Choose a payment method</h4>
+                            <h4 class="action-bar-small-title">{{ 'Choose a payment method'|trans({}, 'menu')}}</h4>
                             
                             {% if cards is defined and cards|length > 0%}
-                                <h5 class="action-bar-extra-small-title">{{ ''|trans({}, 'menu')}}Use a registred card</h5>
+                                <h5 class="action-bar-extra-small-title">{{ 'Use a registred card'|trans({}, 'menu')}}</h5>
                                 
                                 <form class="distant-form-force" data-target="#wallet-load-amount"  data-confirmed="0" class="" data-confirm-text="{{ 'You are about to load'|trans({}, 'menu')}} <span id='confirm-amount'>&nbsp;</span>{{ 'euro for the following period'|trans({}, 'menu')}}: <span class='confirm-perdiod'></span>" >
 {#                                <select id="cardChooser" class="{#form-control#} {#distant-form-force" data-target="#wallet-load-amount" name="cardId">#}

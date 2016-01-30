@@ -12,8 +12,7 @@
         {% else %}
             <a href="#" class="ajax_action" data-url="{{ path('p4m_ajax_action') }}" data-action="unQuarantainePost"
                data-params="{{ {'postId':post.id}|json_encode() }}"
-               data-key="{{ {'postId':post.id}|json_encode()|sha512 }}">[admin]&nbsp;{{ 'Sortir le post de la
-                quarantaine'|trans({}, 'menu')}}</a></h4>
+               data-key="{{ {'postId':post.id}|json_encode()|sha512 }}">[admin]&nbsp;{{ 'Sortir le post de la quarantaine'|trans({}, 'menu')}}</a></h4>
         {% endif %}
         <div class="clear"></div>
     </div>

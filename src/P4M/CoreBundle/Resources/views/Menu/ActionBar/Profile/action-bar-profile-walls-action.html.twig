@@ -1,7 +1,7 @@
 <li class="action-bar-section" id="section-strews">
     <div class="action-bar-block">
-        <h1 class="action-bar-title"><span class="glyphicon show_thumbnails"></span> {{userDisplayed.walls|length}} Strews</h1>
-        <p>Explore the strews created by {{userDisplayed.username}}</p>
+        <h1 class="action-bar-title"><span class="glyphicon show_thumbnails"></span> {{ 'Strews'|trans({'%userWallsLength%' : userDisplayed.walls|length}, 'menu')}} </h1>
+        <p>{{ 'Explore the strews created by'|trans({'%username%' : userDisplayed.username}, 'menu')}}</p>
     </div>
 
     <form data-target="serialize" data-url="{{path('p4m_ajax_action')}}" id="profile-wall-form" data-action="loadUserWalls" data-key="{{'loadUserWalls'|sha512}}" method="post" class="ajax_form">

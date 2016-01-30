@@ -1,1 +1,185 @@
 'Log in': 'Log in'
+Messages: Messages
+Notifications: Notifications
+'More notifications': 'More notifications'
+'Look for something': 'Look for something'
+'Add new content': 'Add new content'
+'Paste here any URL to share your favorite content on Pressformore': 'Paste here any URL to share your favorite content on Pressformore'
+'Find an articles, author..': 'Find an articles, author..'
+All: All
+People: People
+Strew: Strew
+Content: Content
+Values: Values
+'Follow Us': 'Follow Us'
+'Logo Pressformore, the first crowd-shaped media': 'Logo Pressformore, the first crowd-shaped media'
+Legal: Legal
+Contact: Contact
+'View your profile': 'View your profile'
+'Help me!': 'Help me!'
+Disconnect: Disconnect
+'Leave a comment': 'Leave a comment'
+'Content stats': 'Content stats'
+'You''re using an early access version, be patient!': 'You''re using an early access version, be patient!'
+'Report content': 'Report content'
+'You already report this content': 'You already report this content'
+'Beware! this content has been reported as': 'Beware! this content has been reported as'
+'What do you think ?': 'What do you think ?'
+'I confirm': 'I confirm'
+'I don''t confirm': 'I don''t confirm'
+'You want to report this content, please tell us why:': 'You want to report this content, please tell us why:'
+Report: Report
+'Mettre le post en quarantaine': 'Mettre le post en quarantaine'
+'Sortir le post de la quarantaine': 'Sortir le post de la quarantaine'
+'Categories of this content': 'Categories of this content'
+'Tags of this content': 'Tags of this content'
+'Meta of this content': 'Meta of this content'
+'added this content': 'added this content'
+'Edit those info': 'Edit those info'
+'Share this content': 'Share this content'
+'Discover how to contribute.': 'Discover how to contribute.'
+'Vote up !': 'Vote up !'
+'Vote down !': 'Vote down !'
+'See the comments or add one!': 'See the comments or add one!'
+'About this content': 'About this content'
+'This content will be rewarded in 25 sec. Want to know more about it? Click here': 'This content will be rewarded in 25 sec. Want to know more about it? Click here'
+'Report an error': 'Report an error'
+'It seems like this content was well worth the read!': 'It seems like this content was well worth the read!'
+'is the author': 'is the author'
+'Perhaps it''s time to reward him for his duty work.': 'Perhaps it''s time to reward him for his duty work.'
+'mandatory to rewards authors': 'mandatory to rewards authors'
+'You decided not to reward this author.': 'You decided not to reward this author.'
+'Thank you!': 'Thank you!'
+'You just rewarded this author': 'You just rewarded this author'
+'You are about to reward this content': 'You are about to reward this content'
+'You''ve chosen not to reward this content.': 'You''ve chosen not to reward this content.'
+'May we know why?': 'May we know why?'
+'Thanks for your feedback': 'Thanks for your feedback'
+'we are working hard to provide you quality news': 'we are working hard to provide you quality news'
+'Perhaps it''s time to reward him for his duty work': 'Perhaps it''s time to reward him for his duty work'
+'Load your wallet with the amount of your choice': 'Load your wallet with the amount of your choice'
+'To retribute your favorite authors, we need to have more information about you. Your privacy will always matter to us.': 'To retribute your favorite authors, we need to have more information about you. Your privacy will always matter to us.'
+'Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': 'Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.'
+'Fill Information': 'Fill Information'
+'You liked this content and want to retribute the author?': 'You liked this content and want to retribute the author?'
+'Let us know!': 'Let us know!'
+'Tell this author you want to reward him': 'Tell this author you want to reward him'
+Hi: Hi
+'I would love to reward your work on @Pressformore_ #joinpfm': 'I would love to reward your work on @Pressformore_ #joinpfm'
+'Thank you! We ’ll make our best to contact the author(s)': 'Thank you! We ’ll make our best to contact the author(s)'
+'Maybe you want to help us further?': 'Maybe you want to help us further?'
+facultative: facultative
+'Author twitter account': 'Author twitter account'
+'Author email': 'Author email'
+'Send informations': 'Send informations'
+'We''ll make our best to contact the author as fast as possible.': 'We''ll make our best to contact the author as fast as possible.'
+'Your contribution is precious and will be rewarded in the future.': 'Your contribution is precious and will be rewarded in the future.'
+History: History
+'See the comments or add one': 'See the comments or add one'
+Time: Time
+till: till
+Rank: Rank
+Quality: Quality
+Comments: Comments
+View: View
+Type: Type
+'Action Type': 'Action Type'
+Evaluate: Evaluate
+Comment: Comment
+Add: Add
+Categories: Categories
+Followers: Followers
+Like: Like
+Views: Views
+'Manage your strews': 'Manage your strews'
+'Create, edit or filter your strews': 'Create, edit or filter your strews'
+'An historic of your notifications': 'An historic of your notifications'
+'More Notifications': 'More Notifications'
+'Your Messages': 'Your Messages'
+'Your Stats': 'Your Stats'
+'Your Reputation': 'Your Reputation'
+'Wallet Settings': 'Wallet Settings'
+Congratulations!: Congratulations!
+'You''ve correctly set up your wallet!': 'You''ve correctly set up your wallet!'
+'But you can still edit your info by pressing the corresponding button below.': 'But you can still edit your info by pressing the corresponding button below.'
+Please: Please
+'verify your informations and try again': 'verify your informations and try again'
+Loading: Loading
+'Choose a payment method': 'Choose a payment method'
+'Use a registred card': 'Use a registred card'
+'You are about to load': 'You are about to load'
+'euro for the following period': 'euro for the following period'
+'Confirm your loading': 'Confirm your loading'
+'Register a new method': 'Register a new method'
+'Credit Card': 'Credit Card'
+'Bank account details': 'Bank account details'
+Name: Name
+Adress: Adress
+Zip: Zip
+City: City
+Send: Send
+'Credit card details': 'Credit card details'
+'Card Number': 'Card Number'
+'Expiration Date': 'Expiration Date'
+Load: Load
+'Powered By': 'Powered By'
+'Back to Summary': 'Back to Summary'
+Unfortunatly: Unfortunatly
+'mandatory information about your account is missing': 'mandatory information about your account is missing'
+'Complete my account informations': 'Complete my account informations'
+'': __
+In: In
+Out: Out
+'CREATE IBAN': 'CREATE IBAN'
+'Account Type': 'Account Type'
+'Register Card': 'Register Card'
+'Visit your public profile': 'Visit your public profile'
+'Manage your settings': 'Manage your settings'
+Wallet: Wallet
+'Check your notifications': 'Check your notifications'
+'Control your reputation': 'Control your reputation'
+Strews: Strews
+'Explore the strews created by': 'Explore the strews created by'
+Follow: Follow
+'''s strews': '%username%''s strews'
+'''s community': '%username%''s community'
+'''s activity': '%username%''s activity'
+About: About
+'Report user': 'Report user'
+'Manage your account': 'Manage your account'
+Unfollow: Unfollow
+'Meta of this User': 'Meta of this User'
+Skills: Skills
+'''s reputation': '%username%''s reputation'
+'''s stats': '%username%''s stats'
+'You already report this user': 'You already report this user'
+'Beware! this user has been reported as': 'Beware! this user has been reported as'
+'Explore the community of': 'Explore the community of %username%'
+Following: Following
+'Content add': 'Content add'
+'Featured Content': 'Featured Content'
+'Trendy on PM': 'Trendy on PM'
+Blog: Blog
+'Legal mention': 'Legal mention'
+Resume: Resume
+'Contact Us': 'Contact Us'
+'Welcome on Pressformore': 'Welcome on Pressformore'
+'The first crowd-shaped media': 'The first crowd-shaped media'
+'we''re running an early access version': 'we''re running an early access version'
+'Read Later': '__Read Later'
+'Explore the content of your read-later posts': '__Explore the content of your read-later posts'
+'Filtering content': '__Filtering content'
+'results for you search, explore those results.': '%number% results for you search, explore those results.'
+'Filter on contents': '__Filter on contents'
+'Filter on peoples': '__Filter on peoples'
+'Filter on strews': '__Filter on strews'
+'Filtering people': '__Filtering people'
+'Filtering strews': '__Filtering strews'
+'strew content': '%wallname% strew content'
+'Explore the content of strew': '__Explore the content of %wallname% strew'
+'strew community': '__strew community'
+'Explore the community of strew': '__Explore the community of strew'
+'Categories of this strew': '__Categories of this strew'
+'Tags of this strew': '__Tags of this strew'
+'Meta of this strew': '__Meta of this strew'
+'created this strew': '%wallUserUsername% created this strew'

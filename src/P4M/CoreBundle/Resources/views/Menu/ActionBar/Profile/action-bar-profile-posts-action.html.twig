@@ -1,6 +1,7 @@
  <li class="action-bar-section" id="section-posts">
      <div class="action-bar-block">
-        <h1 class="action-bar-title"><span class="glyphicon cardio"></span> {{userDisplayed.username}}'s activity</h1>
+        <h1 class="action-bar-title">
+            <span class="glyphicon cardio">&nbsp;</span>{{ '\'s activity'|trans({'%username%' : userDisplayed.username}, 'menu')}}</h1>
         <p>Explore the activity of {{userDisplayed.username}}</p>
     </div>    
      

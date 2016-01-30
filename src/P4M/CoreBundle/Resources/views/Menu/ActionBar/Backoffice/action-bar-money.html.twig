@@ -114,10 +114,10 @@
                    <input type="hidden" name="accessKeyRef" value="{{cardForm.vars.value.accessKeyRef}}" />
                    <input type="hidden" name="returnURL" value="{{cardForm.vars.value.returnURL}}" />
 
-                   <label for="cardNumber">{{ ''|trans({}, 'menu')}}Card Number</label>
+                   <label for="cardNumber">{{ 'Card Number'|trans({}, 'menu')}}</label>
                    <input type="text" name="cardNumber" value="" />
 
-                   <label for="cardExpirationDate">{{ ''|trans({}, 'menu')}}Expiration Date</label>
+                   <label for="cardExpirationDate">{{ 'Expiration Date'|trans({}, 'menu')}}</label>
                    <input type="text" name="cardExpirationDate" value="" />
 
                    <label for="cardCvx">CVV</label>
@@ -170,9 +170,7 @@
                         <div id="p4m_userbundle_user">
 
                             <div class="form-group">
-
                                 {{ form_rest(registerCardForm) }}
-
                                 <button class="primary" type="submit">{{ 'Send'|trans({}, 'menu') }}</button>
 
                             </div>
@@ -191,7 +189,7 @@
 
 
     {#<div class="action-bar-block">
-       <h1 class="action-bar-title"><span class="glyphicon coins"></span>&nbsp;{{ ''|trans({}, 'menu')}}Your wallet</h1>
+       <h1 class="action-bar-title"><span class="glyphicon coins"></span>&nbsp;{{ 'Your wallet'|trans({}, 'menu')}}</h1>
        <p>{{ 'You\'re using an early access version'|trans({}, 'menu')}}, {{ 'be patient'|trans({}, 'menu')}}!</p>
    </div>#}
 </li>

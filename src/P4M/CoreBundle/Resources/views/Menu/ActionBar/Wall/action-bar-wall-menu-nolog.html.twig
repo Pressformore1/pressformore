@@ -1,80 +1,72 @@
 {% set user = app.security.getToken().getUser() %}
 
-{%if wall is defined%}
-    
-        <li id="action-bar-follow">
-
-            <a class="to-follow action-bar-link " href="#meta" title="Follow {{wall.name}} strew" data-toggle="modal" data-target="#modal-register" >
-                    <span class="action-bar-icon icon-strew-follow"></span>
-            </a>
-            
-        </li>
-    
-
-
-<li id="action-bar-rate">
-        <div id="action-bar-ratio-wrap">
-                <span class="ratio-plus-number">{{wall.positiveVoteNumber}}</span>
-
-                <div id="action-bar-ratio">
-                        <div class="ratio-plus"></div>
-                        <div class="ratio-less"></div>
-                </div>	
-                <span class="ratio-less-number">{{wall.negativeVoteNumber}}</span>
-        </div>
-
-        <div id="action-bar-vote-wrap">
-                <a data-vote-number="{{wall.positiveVoteNumber}}" id="rating_more"  class="action-bar-link action-bar-rate-button" data-toggle="modal" data-target="#modal-register">
-                        <span class="action-bar-icon glyphicon plus"></span>
-                </a>
-
-                <a data-vote-number="{{wall.negativeVoteNumber}}" id="rating_less" class="action-bar-link action-bar-rate-button " data-toggle="modal" data-target="#modal-register">
-                        <span class="action-bar-icon glyphicon minus"></span>
-                </a>
-        </div>
-
-</li>
-
-
-<li class="action-bar-item">
-        <a class="action-bar-link" data-toggle="action-bar" data-toggle="action-bar" data-target="#section-comments" href="#comments" title="See the comments or add one!">
-                <span class="action-bar-icon glyphicon comments"><span class="action-bar-text">{{wall.comments|length}}</span></span>
+{% if wall is defined %}
+    <li id="action-bar-follow">
+        <a class="to-follow action-bar-link " href="#meta"
+           title="{{ 'Follow strew'|trans({'wallName': wall.name }, 'menu') }}" data-toggle="modal"
+           data-target="#modal-register">
+            <span class="action-bar-icon icon-strew-follow"></span>
         </a>
-</li>
 
-
-<li class="action-bar-item">
-        <a class="action-bar-link content-modifier ajax_form_force" data-toggle="action-bar" data-target="#section-community" href="#community" title="{{wall.name}} strew community" data-ajaxTarget="wall-community-form">
+    </li>
+    <li id="action-bar-rate">
+        <div id="action-bar-ratio-wrap">
+            <span class="ratio-plus-number">{{ wall.positiveVoteNumber }}</span>
+            <div id="action-bar-ratio">
+                <div class="ratio-plus"></div>
+                <div class="ratio-less"></div>
+            </div>
+            <span class="ratio-less-number">{{ wall.negativeVoteNumber }}</span>
+        </div>
+        <div id="action-bar-vote-wrap">
+            <a data-vote-number="{{ wall.positiveVoteNumber }}" id="rating_more"
+               class="action-bar-link action-bar-rate-button" data-toggle="modal" data-target="#modal-register">
+                <span class="action-bar-icon glyphicon plus"></span>
+            </a>
+            <a data-vote-number="{{ wall.negativeVoteNumber }}" id="rating_less"
+               class="action-bar-link action-bar-rate-button " data-toggle="modal" data-target="#modal-register">
+                <span class="action-bar-icon glyphicon minus"></span>
+            </a>
+        </div>
+    </li>
+    <li class="action-bar-item">
+        <a class="action-bar-link" data-toggle="action-bar" data-toggle="action-bar" data-target="#section-comments"
+           href="#comments" title="{{ 'See the comments or add one!'|trans({}, 'menu')}}">
+            <span class="action-bar-icon glyphicon comments"><span
+                        class="action-bar-text">{{ wall.comments|length }}</span></span>
+        </a>
+    </li>
+    <li class="action-bar-item">
+        <a class="action-bar-link content-modifier ajax_form_force" data-toggle="action-bar"
+           data-target="#section-community" href="#community" title=" {{ 'strew community'|trans({'wallName': wall.name }, 'menu')}}{{ wall.name }}"
+           data-ajaxTarget="wall-community-form">
                 <span class="action-bar-icon glyphicon group">
                 </span>
 
 
         </a>
-</li>
-{%endif%}
+    </li>
+{% endif %}
 <li class="action-bar-item">
-      <a class="action-bar-link content-modifier" data-toggle="action-bar" data-target="#section-filters" data-ajaxTarget="action-bar-filters-form" href="#filters" title="{{wall.name}} strew content">
-              <span class="action-bar-icon glyphicon file"></span>
-      </a>
-</li>
-{%if wall is defined%}
-
-{#<li class="action-bar-item">
-        <a class="action-bar-link content-modifier" data-toggle="action-bar" data-target="#section-stats" data-ajaxTarget="action-bar-filters-form"  href="#stats" title="{{wall.name}} strew stats">
-                <span class="action-bar-icon glyphicon charts"></span>
-        </a>
-</li>
-#}
-
-
-{#
-<li id="action-bar-report">
-    <a class="action-bar-link"  data-toggle="modal" data-target="#modal-register" href="#report"  title="Report strew">
-        <span class="glyphicon flag"></span>
+    <a class="action-bar-link content-modifier" data-toggle="action-bar" data-target="#section-filters"
+       data-ajaxTarget="action-bar-filters-form" href="#filters" title=" {{ 'strew content'|trans({'wallName': wall.name }, 'menu')}}{{ wall.name }}">
+        <span class="action-bar-icon glyphicon file"></span>
     </a>
-</li>#}
-
-{%endif%}
+</li>
+{% if wall is defined %}
+    {#<li class="action-bar-item">
+            <a class="action-bar-link content-modifier" data-toggle="action-bar" data-target="#section-stats" data-ajaxTarget="action-bar-filters-form"  href="#stats" title="{{wall.name}} strew stats">
+                    <span class="action-bar-icon glyphicon charts"></span>
+            </a>
+    </li>
+    #}
+    {#
+    <li id="action-bar-report">
+        <a class="action-bar-link"  data-toggle="modal" data-target="#modal-register" href="#report"  title="Report strew">
+            <span class="glyphicon flag"></span>
+        </a>
+    </li>#}
+{% endif %}
 
 
 

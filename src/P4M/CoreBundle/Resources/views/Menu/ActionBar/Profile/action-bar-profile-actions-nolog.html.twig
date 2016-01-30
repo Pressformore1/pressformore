@@ -13,7 +13,7 @@
 
 
         <div class="action-bar-block">
-            <h4 class="action-bar-small-title"><span class="glyphicon circle_info"></span>Meta of this User</h4>	
+            <h4 class="action-bar-small-title"><span class="glyphicon circle_info"></span>{{ 'Meta of this User'|trans({}, 'menu')}}</h4>
             <ul class="meta-list">
                 <li><span class="glyphicon nameplate"></span>{{userDisplayed.title}}</li>
                 <li><span class="glyphicon building"></span>{{userDisplayed.city}}</li>
@@ -27,7 +27,7 @@
 
 
         <div class="action-bar-block">
-            <h4 class="action-bar-small-title"><span class="glyphicon briefcase"></span>Skills</h4>	
+            <h4 class="action-bar-small-title"><span class="glyphicon briefcase"></span{{ 'Skills'|trans({}, 'menu')}}></h4>
 
             <ul class="skills-list">
             {% for skill in userDisplayed.skills%}
@@ -51,8 +51,8 @@
 
     <li class="action-bar-section" id="section-badges">
         <div class="action-bar-block">
-            <h1 class="action-bar-title"><span class="glyphicon crown"></span> {{userDisplayed.username}}'s reputation</h1>
-            <p>You're using an early access version, be patient!</p>
+            <h1 class="action-bar-title"><span class="glyphicon crown">&nbsp;</span>{{ '\'s reputation'|trans({'%username%' : userDisplayed.username}, 'menu')}}</h1>
+            <p>{{ 'You\'re using an early access version, be patient!'|trans({}, 'menu')}}</p>
         </div>
     </li>
 
@@ -62,35 +62,35 @@
 
     <li class="action-bar-section" id="section-stats">
         <div class="action-bar-block">
-            <h1 class="action-bar-title"><span class="glyphicon charts"></span> {{userDisplayed.username}}'s stats</h1>
-            <p>You're using an early access version, be patient!</p>
+            <h1 class="action-bar-title"><span class="glyphicon charts">&nbsp;</span>{{ '\'s stats'|trans({'%username%' : userDisplayed.username}, 'menu')}}</h1>
+            <p>{{ 'You\'re using an early access version, be patient!'|trans({}, 'menu')}}</p>
         </div>
     </li>
 
     
 <li class="action-bar-section" id="section-report">
     <div class="action-bar-block">
-        <h1 class="action-bar-title"><span class="glyphicon charts"></span> Report user</h1>
+        <h1 class="action-bar-title"><span class="glyphicon charts">&nbsp;</span>{{ 'Report user'|trans({}, 'menu')}}</h1>
         {%if user is defined and user is not null%}
         {% if flagged == true %}
-            <p>You already report this user</p>
+            <p>{{ 'You already report this user'|trans({}, 'menu')}}</p>
         {%else%}
             {% if userDisplayed.flag %}
                     
                        
                         
-                        <p>Beware! this user has been reported as <strong>{{userDisplayed.flag.type.name}}</strong>. <br /> What do you think ?</p>
+                        <p>{{ 'Beware! this user has been reported as'|trans({}, 'menu')}}&nbsp;<strong>{{userDisplayed.flag.type.name}}</strong>. <br /> {{ 'What do you think ?'|trans({}, 'menu')}}</p>
                                
                         
                         <form class="post-form ajax_form" id="commentform" data-action="confirmUserFlag" data-url="{{path('p4m_ajax_action')}}" data-key="{{'confirmUserFlag'|sha512}}" data-target="serialize">
                              <input type="hidden" id="postId" name="flagId"  value="{{userDisplayed.flag.id}}"/>
                              <input type="hidden" id="confirmed" name="confirmed"  value="1"/>
-                        <button class="primary action-bar-btn" type="submit">I confirm</button>
+                        <button class="primary action-bar-btn" type="submit">{{ 'I confirm'|trans({}, 'menu')}}</button>
                     </form>
                     <form class="post-form ajax_form" id="commentform" data-action="confirmUserFlag" data-url="{{path('p4m_ajax_action')}}" data-key="{{'confirmUserFlag'|sha512}}" data-target="serialize">
                              <input type="hidden" id="postId" name="flagId"  value="{{userDisplayed.flag.id}}"/>
                              <input type="hidden" id="confirmed" name="confirmed"  value="0"/>
-                        <button class="primary action-bar-btn" type="submit">I don't confirm</button>
+                        <button class="primary action-bar-btn" type="submit">{{ 'I don\'t confirm'|trans({}, 'menu')}}</button>
                     </form>
             {% else %}
                     <p>You want to report this content, please tell us why:</p>
@@ -110,7 +110,7 @@
                             </div>
                         </div>
                         {{form_rest(reportForm)}}
-                        <button class="primary action-bar-btn" type="submit">Report</button>
+                        <button class="primary action-bar-btn" type="submit">{{ 'Report'|trans({}, 'menu')}}</button>
                         
                     </form>
             {%endif%}

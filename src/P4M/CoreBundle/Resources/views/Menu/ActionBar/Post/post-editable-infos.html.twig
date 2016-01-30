@@ -8,18 +8,25 @@
             {% if post.quarantaine == false %}
             <a href="#" class="ajax_action" data-url="{{ path('p4m_ajax_action') }}" data-action="quarantainePost"
                data-params="{{ {'postId':post.id}|json_encode() }}"
-               data-key="{{ {'postId':post.id}|json_encode()|sha512 }}">[admin]&nbsp;{{ 'Mettre le post en quarantaine'|trans({}, 'menu')}}</a></h4>
+               data-key="{{ {'postId':post.id}|json_encode()|sha512 }}">
+                [admin]&nbsp;{{ 'Mettre le post en quarantaine'|trans({}, 'menu') }}
+            </a>
+        </h4>
         {% else %}
-            <a href="#" class="ajax_action" data-url="{{ path('p4m_ajax_action') }}" data-action="unQuarantainePost"
-               data-params="{{ {'postId':post.id}|json_encode() }}"
-               data-key="{{ {'postId':post.id}|json_encode()|sha512 }}">[admin]&nbsp;{{ 'Sortir le post de la
-                quarantaine'|trans({}, 'menu')}}</a></h4>
+            <h4>
+                <a href="#" class="ajax_action" data-url="{{ path('p4m_ajax_action') }}" data-action="unQuarantainePost"
+                   data-params="{{ {'postId':post.id}|json_encode() }}"
+                   data-key="{{ {'postId':post.id}|json_encode()|sha512 }}">
+                    [admin]&nbsp;{{ 'Sortir le post de la quarantaine'|trans({}, 'menu') }}
+                </a>
+            </h4>
         {% endif %}
         <div class="clear"></div>
     </div>
 {% endif %}
 <div class="action-bar-block">
-    <h4 class="action-bar-small-title"><span class="glyphicon book"></span>{{ 'Categories of this content'|trans({}, 'menu')}}</h4>
+    <h4 class="action-bar-small-title"><span
+                class="glyphicon book"></span>{{ 'Categories of this content'|trans({}, 'menu') }}</h4>
 
     <ul class="categories-list">
         {% for category in post.categories %}
@@ -30,7 +37,8 @@
     <div class="clear"></div>
 </div>
 <div class="action-bar-block">
-    <h4 class="action-bar-small-title"><span class="glyphicon tags"></span>{{ 'Tags of this content'|trans({}, 'menu')}}</h4>
+    <h4 class="action-bar-small-title"><span
+                class="glyphicon tags"></span>{{ 'Tags of this content'|trans({}, 'menu') }}</h4>
 
     <ul class="tags-list">
         {% for tag in post.tags %}
@@ -42,7 +50,8 @@
 
 <div class="action-bar-block">
     <!--Date-->
-    <h4 class="action-bar-small-title"><span class="glyphicon circle_info">&nbsp</span>{{ 'Meta of this content'|trans({}, 'menu')}}</h4>
+    <h4 class="action-bar-small-title"><span
+                class="glyphicon circle_info">&nbsp</span>{{ 'Meta of this content'|trans({}, 'menu') }}</h4>
 
     <div class="action-bar-block">
         <p><a class="post-meta post-content-source external-link" href="http://{{ post.sourceUrl|domain }}"><span
@@ -55,7 +64,8 @@
         {% endif %}
         <p><a class="post-meta post-footer-author"
               href="{{ path('p4m_social_profile',{username:post.user.username}) }}"><span
-                        class="glyphicon user"></span> {{ post.user.username }}&nbsp{{ 'added this content'|trans({}, 'menu')}}</a></p>
+                        class="glyphicon user"></span> {{ post.user.username }}
+                &nbsp{{ 'added this content'|trans({}, 'menu') }}</a></p>
 
         <p><span class="glyphicon calendar"></span> {{ post.dateAdded|date('F j Y G:i') }}</p>
         <!--Link of the post-->
@@ -70,12 +80,13 @@
                                       class="ajax_action" data-url="{{ path('p4m_ajax_action') }}"
                                       data-action="editPost" data-params="{{ {'postId':post.id}|json_encode() }}"
                                       data-key="{{ {'postId':post.id}|json_encode()|sha512 }}"><span
-                        class="glyphicon glyphicon-edit"></span>{{ 'Edit those info'|trans({}, 'menu')}}</a></p>
+                        class="glyphicon glyphicon-edit"></span>{{ 'Edit those info'|trans({}, 'menu') }}</a></p>
     </div>
 </div>
 
 <div class="action-bar-block">
-    <h4 class="action-bar-small-title"><span class="glyphicon share_alt">&nbsp;</span>{{ 'Share this content'|trans({}, 'menu')}}</h4>
+    <h4 class="action-bar-small-title"><span
+                class="glyphicon share_alt">&nbsp;</span>{{ 'Share this content'|trans({}, 'menu') }}</h4>
 
     <div class="shareIt action-bar-block">
         <span class='st_facebook_large' displayText='Facebook'></span>

@@ -10,6 +10,7 @@ p4m_core_wall:
     defaults: { _controller: P4MCoreBundle:Core:wall ,page:1}
     requirements:
         page:  \d+
+        _locale: fr|en
 #/Obsolete
 p4m_core_showWall:
     path:  /strew/{wallSlug}/{page}

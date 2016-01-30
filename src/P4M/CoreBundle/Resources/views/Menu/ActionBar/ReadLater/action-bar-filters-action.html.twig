@@ -3,8 +3,8 @@
 
     <li class="action-bar-section" id="section-filters">
         <div class="action-bar-block">
-            <h1 class="action-bar-title"><span class="glyphicon file"></span> Read Later</h1>
-            <p>Explore the content of your read-later posts</p>
+            <h1 class="action-bar-title">&nbsp;</span>{{ 'Read Later'|trans({}, 'menu')}}</h1>
+            <p>{{ 'Explore the content of your read-later posts'|trans({}, 'menu')}}</p>
         </div>    
         <form data-target="serialize" data-url="{{dataUrl}}" id="action-bar-filters-form" method="post" class="ajax_form">
             <input type="hidden" name="callBack" value="backToPostsListener" />

@@ -27,8 +27,8 @@
 
 <li class="action-bar-section" id="section-post">
     <div class="action-bar-block">
-        <h1 class="action-bar-title"><span class="glyphicon file"></span> Filtering content</h1>
-        <p>250 000 results for you search, explore those results.</p>
+        <h1 class="action-bar-title"><span class="glyphicon file">&nbsp;</span>{{ 'Filtering content'|trans({}, 'menu')}}</h1>
+        <p>{{ 'results for you search, explore those results.'|trans({'number': 250000}, 'menu')}}</p>
     </div>    
   
     <form data-target="serialize" data-url="{{path('p4m_core_search_ajax')}}" id="action-bar-filters-form" method="post" class="ajax_form">
@@ -44,8 +44,8 @@
 
 <li class="action-bar-section" id="section-community">
     <div class="action-bar-block">
-        <h1 class="action-bar-title"><span class="glyphicon group"></span> Filtering people</h1>
-        <p>250 000 results for you search, explore those results.</p>
+        <h1 class="action-bar-title"><span class="glyphicon group">&nbsp;</span>{{ 'Filtering people'|trans({}, 'menu')}}</h1>
+        <p>{{ 'results for you search, explore those results.'|trans({'number': 250000}, 'menu')}}</p>
     </div>    
     
     
@@ -71,7 +71,7 @@
                         <input type="radio" name="rank" value="comments" checked="checked" />   
                     </li> #}
                     <li class="filter-radio">
-                        <span class="filter-label">Strews</span>
+                        <span class="filter-label">{{ 'Strews'|trans({}, 'menu')}}</span>
                         <input type="radio"  name="rank" value="strews" />   
                     </li> 
                     {#<li class="filter-radio">
@@ -84,7 +84,7 @@
                         <input type="radio"  name="filter-rank" value="view" />   
                     </li> #}
                      <li class="filter-radio">
-                        <span class="filter-label">Content add</span>
+                        <span class="filter-label">{{ 'Content add'|trans({}, 'menu')}}</span>
                         <input type="radio"  name="rank" value="add" />   
                     </li> 
 
@@ -97,8 +97,8 @@
 
 <li class="action-bar-section" id="section-strews">
     <div class="action-bar-block">
-        <h1 class="action-bar-title"><span class="glyphicon show_thumbnails"></span> Filtering strews</h1>
-        <p>250 000 results for you search, explore those results.</p>
+        <h1 class="action-bar-title"><span class="glyphicon show_thumbnails">&nbsp;</span>{{ 'Filtering strews'|trans({}, 'menu')}}</h1>
+        <p>{{ 'results for you search, explore those results.'|trans({'number': 250000}, 'menu')}}</p>
     </div>    
 
 
