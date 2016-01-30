@@ -1,92 +1,91 @@
-{%include 'P4MCoreBundle:Menu/ActionBar/Post/PressElement:action-bar-post-press.html.twig'%}
+{% include 'P4MCoreBundle:Menu/ActionBar/Post/PressElement:action-bar-post-press.html.twig' %}
 <li class="action-bar-section" id="section-meta">
-        
-    {%include "P4MCoreBundle:Menu/ActionBar/Post:post-editable-infos.html.twig" %}    
-    
-
-
-
+    {% include "P4MCoreBundle:Menu/ActionBar/Post:post-editable-infos.html.twig" %}
 </li>
 
 <li class="action-bar-section" id="section-comments">
-        <div class="comments-area" id="comments">
-
-                <div class="action-bar-block">
-                    <h4 class="action-bar-small-title">{{post.comments|length}} <span class="glyphicon comments"></span>- <a href="#leaveComment" data-target="#modal-addComment" data-toggle="modal"  class="leave-comment">Leave a comment</a></h4>
-                </div>
-                <ol class="actcion-bar-comments">
-                    {% set index = 0 %}
-                    {% for comment in post.comments%}
-                        {%if comment.parent is null%}
-                            {%include "P4MCoreBundle:Post:post-comment.html.twig" with {'comment' : comment,'index':index} %}    
-                            {% set index = index +1%}
-                        {%endif%}
-                    {% endfor %}
-                </ol><!-- .commentlist -->
+    <div class="comments-area" id="comments">
+        <div class="action-bar-block">
+            <h4 class="action-bar-small-title">
+                {{ post.comments|length }}&nbsp;
+                <span class="glyphicon comments"></span>
+                - <a href="#leaveComment" data-target="#modal-addComment" data-toggle="modal" class="leave-comment">
+                    {{ 'Leave a comment'|trans({}, 'menu') }}
+                </a>
+            </h4>
         </div>
-
+        <ol class="actcion-bar-comments">
+            {% set index = 0 %}
+            {% for comment in post.comments %}
+                {% if comment.parent is null %}
+                    {% include "P4MCoreBundle:Post:post-comment.html.twig" with {'comment' : comment,'index':index} %}
+                    {% set index = index +1 %}
+                {% endif %}
+            {% endfor %}
+        </ol><!-- .commentlist -->
+    </div>
 </li>
-
 
 <li class="action-bar-section" id="section-stats">
     <div class="action-bar-block">
-        <h1 class="action-bar-title"><span class="glyphicon charts"></span> Content stats</h1>
-        <p>You're using an early access version, be patient!</p>
+        <h1 class="action-bar-title">
+            <span class="glyphicon charts"></span>
+            {{ 'Content stats'|trans({}, 'menu') }}
+        </h1>
+        <p>{{ 'You\'re using an early access version, be patient!'|trans({}, 'menu') }}</p>
     </div>
-
 </li>
-
-
-
 
 <li class="action-bar-section" id="section-report">
     <div class="action-bar-block">
-        <h1 class="action-bar-title"><span class="glyphicon charts"></span> Report content</h1>
-        
+        <h1 class="action-bar-title">
+            <span class="glyphicon charts"></span>
+            &nbsp;{{ 'Report content'|trans({}, 'menu') }}
+        </h1>
         {% if flagged == true %}
-            <p>You already report this content</p>
-        {%else%}
+            <p>{{ 'You already report this content'|trans({}, 'menu') }}</p>
+        {% else %}
             {% if post.flag %}
-                    
-                       
-                        
-                        <p>Beware! this content has been reported as <strong>{{post.flag.type.name}}</strong>. <br /> What do you think ?</p>
-                               
-                        
-                        <form class="post-form ajax_form" id="commentform" data-action="confirmFlag" data-url="{{path('p4m_ajax_action')}}" data-key="{{'confirmFlag'|sha512}}" data-target="serialize">
-                             <input type="hidden" id="postId" name="flagId"  value="{{post.flag.id}}"/>
-                             <input type="hidden" id="confirmed" name="confirmed"  value="1"/>
-                        <button class="primary action-bar-btn" type="submit">I confirm</button>
-                    </form>
-                    <form class="post-form ajax_form" id="commentform" data-action="confirmFlag" data-url="{{path('p4m_ajax_action')}}" data-key="{{'confirmFlag'|sha512}}" data-target="serialize">
-                             <input type="hidden" id="postId" name="flagId"  value="{{post.flag.id}}"/>
-                             <input type="hidden" id="confirmed" name="confirmed"  value="0"/>
-                        <button class="primary action-bar-btn" type="submit">I don't confirm</button>
-                    </form>
+                <p>{{ 'Beware! this content has been reported as'|trans({}, 'menu') }}
+                    <strong>{{ post.flag.type.name }}</strong>. <br/> {{ 'What do you think ?'|trans({}, 'menu') }}</p>
+                <form class="post-form ajax_form" id="commentform" data-action="confirmFlag"
+                      data-url="{{ path('p4m_ajax_action') }}" data-key="{{ 'confirmFlag'|sha512 }}"
+                      data-target="serialize">
+                    <input type="hidden" id="postId" name="flagId" value="{{ post.flag.id }}"/>
+                    <input type="hidden" id="confirmed" name="confirmed" value="1"/>
+                    <button class="primary action-bar-btn" type="submit">{{ 'I confirm'|trans({}, 'menu') }}</button>
+                </form>
+                <form class="post-form ajax_form" id="commentform" data-action="confirmFlag"
+                      data-url="{{ path('p4m_ajax_action') }}" data-key="{{ 'confirmFlag'|sha512 }}"
+                      data-target="serialize">
+                    <input type="hidden" id="postId" name="flagId" value="{{ post.flag.id }}"/>
+                    <input type="hidden" id="confirmed" name="confirmed" value="0"/>
+                    <button class="primary action-bar-btn"
+                            type="submit">{{ 'I don\'t confirm'|trans({}, 'menu') }}</button>
+                </form>
             {% else %}
-                    <p>You want to report this content, please tell us why:</p>
-                    <form class="post-form ajax_form" id="commentform" data-action="reportPost" data-url="{{path('p4m_ajax_action')}}" data-key="{{'reportPost'|sha512}}" data-target="serialize">
-                        <input type="hidden" id="postId" name="postId"  value="{{post.id}}"/>
-                        <div class="modal-body">
-                            <div class="add-post" id="reportPostZone">
-                                <div class="formElement">
-                                    {{form_label(reportForm.type)}}
-                                    {{form_widget(reportForm.type)}}
-                                </div>
-                                
-                                {#<div class="formElement">
-                                    {{form_label(reportForm.description)}}
-                                    {{form_widget(reportForm.description)}}
-                                </div>#}
+                <p>You want to report this content, please tell us why:</p>
+                <form class="post-form ajax_form" id="commentform" data-action="reportPost"
+                      data-url="{{ path('p4m_ajax_action') }}" data-key="{{ 'reportPost'|sha512 }}"
+                      data-target="serialize">
+                    <input type="hidden" id="postId" name="postId" value="{{ post.id }}"/>
+                    <div class="modal-body">
+                        <div class="add-post" id="reportPostZone">
+                            <div class="formElement">
+                                {{ form_label(reportForm.type) }}
+                                {{ form_widget(reportForm.type) }}
                             </div>
+                            {#<div class="formElement">
+                                {{form_label(reportForm.description)}}
+                                {{form_widget(reportForm.description)}}
+                            </div>#}
                         </div>
-                        {{form_rest(reportForm)}}
-                        <button class="primary action-bar-btn" type="submit">Report</button>
-                        
-                    </form>
-            {%endif%}
-        {%endif%}
-        
+                    </div>
+                    {{ form_rest(reportForm) }}
+                    <button class="primary action-bar-btn" type="submit">{{ 'Report'|trans({}, 'menu') }}</button>
+                </form>
+            {% endif %}
+        {% endif %}
     </div>
 
 </li>

@@ -79,11 +79,15 @@ p4_m_admin:
 
 p4_m_user:
     resource: "@P4MUserBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}/
+    requirements:
+      _locale: en|fr
 
 p4_m_core:
     resource: "@P4MCoreBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /{_locale}/
+    requirements:
+      _locale: en|fr
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"

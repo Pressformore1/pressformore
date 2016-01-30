@@ -24,7 +24,7 @@ class AppKernel extends Kernel
             new P4M\ModerationBundle\P4MModerationBundle(),
             new P4M\TrackingBundle\P4MTrackingBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-           new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
+            new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new P4M\BackofficeBundle\P4MBackofficeBundle(),
             new FOS\ElasticaBundle\FOSElasticaBundle(),
@@ -38,7 +38,8 @@ class AppKernel extends Kernel
             new SKCMS\AdminBundle\SKCMSAdminBundle(),
             new P4M\ConsoleBundle\P4MConsoleBundle(),
             new Kayue\EssenceBundle\KayueEssenceBundle(),
-            new \SKCMS\LocaleBundle\SKCMSLocaleBundle(),
+            new SKCMS\LocaleBundle\SKCMSLocaleBundle(),
+            new P4M\LocaleBundle\P4MLocaleBundle(),
             );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

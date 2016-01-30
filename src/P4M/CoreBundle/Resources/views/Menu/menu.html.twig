@@ -19,11 +19,11 @@
         
         {%if user is defined and user%}
             <li class="menu-item">
-                    <a id="add-post-icon" href="#addPost" class="menu-item-icon tooltip-menu-icon" title="Add new content"><span class="glyphicon plus"></span></a>
+                    <a id="add-post-icon" href="#addPost" class="menu-item-icon tooltip-menu-icon" title="{{ 'Add new content'|trans({}, 'menu') }}"><span class="glyphicon plus"></span></a>
             </li>
         {%else%}
             <li class="menu-item">
-                    <a id="add-post-icon" href="#addPost" class="menu-item-icon tooltip-menu-icon" data-toggle="modal" data-target="#modal-register" title="Add new content"><span class="glyphicon plus"></span></a>
+                    <a id="add-post-icon" href="#addPost" class="menu-item-icon tooltip-menu-icon" data-toggle="modal" data-target="#modal-register" title="{{ 'Add new content'|trans({}, 'menu') }}"><span class="glyphicon plus"></span></a>
             </li>
         {%endif%}
 
@@ -33,19 +33,19 @@
         <!--Formulaire caché -->
         {%if user is defined and user%}
         <form id="add-post-form" class="menu-form"  autocomplete="off">
-            <input type="text" placeholder="Paste here any URL to share your favorite content on Pressformore" name="post-url" class="menu-form-field " id="addPostUrl"/>
+            <input type="text" placeholder="{{ 'Paste here any URL to share your favorite content on Pressformore'|trans({}, 'menu') }}" name="post-url" class="menu-form-field " id="addPostUrl"/>
             <button class="menu-form-icon ajax_action" data-target="{{['addPostUrl']|json_encode()}}" data-action="addPost" data-url="{{path('p4m_ajax_action')}}" data-key="{{'addPost'|sha512}}"><span class="glyphicon edit"></span></button>
         </form>
         {%endif%}
 
         <form id="menu-search-form" class="menu-form{% if keyword is defined and keyword|length>0%} force-open{%endif%}" action="{{path("p4m_core_search")}}"  autocomplete="off">
-                <input type="text" placeholder="Find an articles, author.." name="k" class="menu-form-field" {% if keyword is defined and keyword|length>0%}value="{{keyword}}"{%endif%}>
+                <input type="text" placeholder="{{ 'Find an articles, author..'|trans({}, 'menu') }}" name="k" class="menu-form-field" {% if keyword is defined and keyword|length>0%}value="{{keyword|trans({}, 'menu')}}"{%endif%}>
 
                 <select class="menu-form-select" name="where">
-                    <option data-icon="glyphicon star" value="all" >All</option>
-                    <option data-icon="glyphicon user" value="user" >People</option>
-                    <option data-icon="glyphicon show_thumbnails" value="strew" >Strew</option>
-                    <option data-icon="glyphicon file" value="post">Content</option>
+                    <option data-icon="glyphicon star" value="all" >{{ 'All'|trans({}, 'menu') }}</option>
+                    <option data-icon="glyphicon user" value="user" >{{ 'People'|trans({}, 'menu') }}</option>
+                    <option data-icon="glyphicon show_thumbnails" value="strew" >{{ 'Strew'|trans({}, 'menu') }}</option>
+                    <option data-icon="glyphicon file" value="post">{{ 'Content'|trans({}, 'menu') }}</option>
                 </select>
                 <button class="menu-form-icon"><span class="glyphicon search"></span></button>
         </form>
@@ -56,12 +56,12 @@
         <div id="center-menu-left-zone">
             <ul class="p4m-menu">
                 <li class="menu-item hide-menu-item">
-                    <a class="menu-item-text" href="{{path('p4m_core_home')}}#resume">Values</a>
+                    <a class="menu-item-text" href="{{path('p4m_core_home')}}#resume">{{ 'Values'|trans({}, 'menu')}}</a>
                         
                 </li>
                 <li class="menu-item hide-menu-item">
                     <a class="menu-item-text" href="#follow-us" id="menu-social-links" data-html="true" 
-                        >Follow Us</a>   
+                        >{{ 'Follow Us'|trans({}, 'menu')}}</a>
                        
                        <div class="hidden">
                            <a href='https://www.facebook.com/Pressformore' target='_blank'><img src='{{asset('images/social_icons/facebook-icon.png')}}' alt='Faceboook icon' /></a>
@@ -75,17 +75,17 @@
 
         <div class="menu-item" id="menu-logo" >
             <a class="menu-item-pic" href="{% if app.user %}{{path('p4_m_backoffice_homepage')}}{%else%}{{path('p4m_core_home')}}{%endif%}">
-                    <img alt="Logo Pressformore, the first crowd-shaped media" src="{{asset('images/design/logo-big.png')}}">
+                    <img alt="{{ 'Logo Pressformore, the first crowd-shaped media'|trans({}, 'menu')}}" src="{{asset('images/design/logo-big.png')}}">
             </a>
         </div>
 
         <div id="center-menu-right-zone">
             <ul class="p4m-menu">
                 <li class="menu-item hide-menu-item">
-                        <a class="menu-item-text" href="{{path('p4m_core_home')}}#legal-mention">Legal</a>
+                        <a class="menu-item-text" href="{{path('p4m_core_home')}}#legal-mention">{{ 'Legal'|trans({}, 'menu')}}</a>
                 </li>
                 <li class="menu-item hide-menu-item">
-                        <a class="menu-item-text" href="{{path('p4m_core_home')}}#contact">Contact</a>
+                        <a class="menu-item-text" href="{{path('p4m_core_home')}}#contact">{{ 'Contact'|trans({}, 'menu')}}</a>
                 </li>
             </ul>
         </div>
@@ -105,13 +105,13 @@
            
 
             <li class="menu-item">
-                    <a class="menu-item-icon   tooltip-menu-icon" title="Help me!" id="help-me" href="#help">
+                    <a class="menu-item-icon   tooltip-menu-icon" title="{{ 'Help me!'|trans({}, 'menu')}}" id="help-me" href="#help">
                         <span class="glyphicon life_preserver"></span>
                     </a>
                 </li>
                 
                 <li class="menu-item">
-                <a class="menu-item-icon   tooltip-menu-icon" title="Disconnect" href="{{path('fos_user_security_logout')}}">
+                <a class="menu-item-icon   tooltip-menu-icon" title="{{ 'Disconnect'|trans({}, 'menu')}}" href="{{path('fos_user_security_logout')}}">
                     <span class="glyphicon power"></span>
                 </a>
             </li>

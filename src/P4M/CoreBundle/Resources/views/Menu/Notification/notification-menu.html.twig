@@ -12,8 +12,8 @@
     <div id="notifications-box" data-status="close">
         <div id="notifications-box-corner"></div>
         <div id="notifications-tab">
-            <button title="Coming Soon" class="primary tooltip-menu-icon">Messages</button>
-            <button class="primary selected">Notifications</button>
+            <button title="Coming Soon" class="primary tooltip-menu-icon">{{ 'Messages'|trans({}, 'menu')}}</button>
+            <button class="primary selected">{{ 'Notifications'|trans({}, 'menu')}}</button>
             <div class="clear"></div>
         </div>
 
@@ -21,7 +21,7 @@
 {#        {% for notification in notifications%}#}
             {% include 'P4MBackofficeBundle:pages/notification:notification.html.twig'%}
 {#        {%endfor%}#}
-            <li class="notification"><a class="align-right ajax_action" id="more-notifications-menu" href="#" data-loader="none" data-url="{{path('p4m_ajax_action')}}" data-action="loadUserNotifications" data-key="{{'loadUserNotifications'|sha512}}" data-params="{{ {page:2,target:'more-notifications-menu',callBack:'loadUserNotifications'}|json_encode() }}">More notifications</a></li>
+            <li class="notification"><a class="align-right ajax_action" id="more-notifications-menu" href="#" data-loader="none" data-url="{{path('p4m_ajax_action')}}" data-action="loadUserNotifications" data-key="{{'loadUserNotifications'|sha512}}" data-params="{{ {page:2,target:'more-notifications-menu',callBack:'loadUserNotifications'}|json_encode() }}">{{ 'More notifications'|trans({}, 'menu') }}</a></li>
         </ul>
         
     </div>

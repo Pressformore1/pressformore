@@ -1,57 +1,61 @@
 <li id="action-bar-pfm" class="action-bar-item">
-    <a id="pfm-button" class="action-bar-link action-bar-autostart" data-delay="10" data-toggle="action-bar" data-target="#section-press" href="#press"  title="Discover how to contribute."><span class="action-bar-icon icon-logo"></span></a> 
+    <a id="pfm-button" class="action-bar-link action-bar-autostart" data-delay="10" data-toggle="action-bar"
+       data-target="#section-press" href="#press" title="{{ 'Discover how to contribute.'|trans({}, 'menu')}}"><span
+                class="action-bar-icon icon-logo"></span></a>
 
 </li>
 
 {#{% set voteScore = user.id|postVoteScore(post.id)%}#}
 <li id="action-bar-rate">
-        <div id="action-bar-ratio-wrap">
-                <span class="ratio-plus-number">{{positiveVotesNumber}}</span>
+    <div id="action-bar-ratio-wrap">
+        <span class="ratio-plus-number">{{ positiveVotesNumber }}</span>
 
-                <div id="action-bar-ratio">
-                        <div class="ratio-plus"></div>
-                        <div class="ratio-less"></div>
-                </div>	
-                <span class="ratio-less-number">{{negativeVotesNumber}}</span>	
+        <div id="action-bar-ratio">
+            <div class="ratio-plus"></div>
+            <div class="ratio-less"></div>
         </div>
+        <span class="ratio-less-number">{{ negativeVotesNumber }}</span>
+    </div>
 
-        <div id="action-bar-vote-wrap">
-                <a data-vote-number="{{positiveVotesNumber}}" id="rating_more"  class="action-bar-link action-bar-rate-button" data-toggle="modal" data-target="#modal-register" href="#" title="Vote up !" >
-                        <span class="action-bar-icon glyphicon plus"></span>
-                </a>
+    <div id="action-bar-vote-wrap">
+        <a data-vote-number="{{ positiveVotesNumber }}" id="rating_more" class="action-bar-link action-bar-rate-button"
+           data-toggle="modal" data-target="#modal-register" href="#" title="{{ 'Vote up !'|trans({}, 'menu')}}">
+            <span class="action-bar-icon glyphicon plus"></span>
+        </a>
 
-                <a data-vote-number="{{negativeVotesNumber}}" id="rating_less" class="action-bar-link action-bar-rate-button" data-toggle="modal" data-target="#modal-register" href="#" title="Vote down !" >
-                        <span class="action-bar-icon glyphicon minus"></span>
-                </a>
-        </div>
+        <a data-vote-number="{{ negativeVotesNumber }}" id="rating_less" class="action-bar-link action-bar-rate-button"
+           data-toggle="modal" data-target="#modal-register" href="#" title="{{ 'Vote down !'|trans({}, 'menu')}}">
+            <span class="action-bar-icon glyphicon minus"></span>
+        </a>
+    </div>
 
 </li>
 
 
-
-
 <li class="action-bar-item">
-    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-comments" href="#comments" title="See the comments or add one!">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-comments" href="#comments"
+       title="{{ 'See the comments or add one!'|trans({}, 'menu')}}">
         <span class="action-bar-icon glyphicon comments">
-            <span class="action-bar-text">{{post.comments|length}}</span>
+            <span class="action-bar-text">{{ post.comments|length }}</span>
         </span>
     </a>
 </li>
 
 {#<li class="action-bar-item">
-    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-stats" href="#stats" title="Stats of this content">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-stats" href="#stats" title="{{ 'Stats of this content'|trans({}, 'menu')}}">
         <span class="action-bar-icon glyphicon charts"></span>
     </a>
 </li>#}
 <li class="action-bar-item">
-    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-meta" href="#meta" title="About this content">
+    <a class="action-bar-link" data-toggle="action-bar" data-target="#section-meta" href="#meta"
+       title="{{ 'About this content'|trans({}, 'menu')}}">
         <span class="action-bar-icon glyphicon circle_info"></span>
     </a>
 </li>
 
 {#
 <li id="action-bar-report">
-    <a class="action-bar-link" data-toggle="action-bar" href="#report" data-target="#section-report"  title="Report an error">
+    <a class="action-bar-link" data-toggle="action-bar" href="#report" data-target="#section-report"  title="{{ 'Report an error'|trans({}, 'menu')}}">
         <span class="glyphicon flag"></span>
     </a>
 </li>#}

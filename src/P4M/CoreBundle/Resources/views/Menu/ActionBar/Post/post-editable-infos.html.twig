@@ -1,80 +1,100 @@
 <div class="action-bar-block">
-    <h1 class="action-bar-title">{{post.title}}</h1>
+    <h1 class="action-bar-title">{{ post.title }}</h1>
 </div>
-{% if is_granted('ROLE_ADMIN') %} 
-<!--Category-->
-<div class="action-bar-block">
+{% if is_granted('ROLE_ADMIN') %}
+    <!--Category-->
+    <div class="action-bar-block">
         <h4 class="action-bar-small-title"><span class="glyphicon book"></span>
-            {%if post.quarantaine == false%}
-            <a href="#" class="ajax_action"  data-url="{{path('p4m_ajax_action')}}" data-action="quarantainePost" data-params="{{{'postId':post.id}|json_encode()}}" data-key="{{{'postId':post.id}|json_encode()|sha512}}">[admin] Mettre le post en quarantaine</a></h4>	
-            {%else%}
-            <a href="#" class="ajax_action"  data-url="{{path('p4m_ajax_action')}}" data-action="unQuarantainePost" data-params="{{{'postId':post.id}|json_encode()}}" data-key="{{{'postId':post.id}|json_encode()|sha512}}">[admin] Sortir le post de la quarantaine</a></h4>	
-            {%endif%}
+            {% if post.quarantaine == false %}
+            <a href="#" class="ajax_action" data-url="{{ path('p4m_ajax_action') }}" data-action="quarantainePost"
+               data-params="{{ {'postId':post.id}|json_encode() }}"
+               data-key="{{ {'postId':post.id}|json_encode()|sha512 }}">[admin]&nbsp;{{ 'Mettre le post en quarantaine'|trans({}, 'menu')}}</a></h4>
+        {% else %}
+            <a href="#" class="ajax_action" data-url="{{ path('p4m_ajax_action') }}" data-action="unQuarantainePost"
+               data-params="{{ {'postId':post.id}|json_encode() }}"
+               data-key="{{ {'postId':post.id}|json_encode()|sha512 }}">[admin]&nbsp;{{ 'Sortir le post de la
+                quarantaine'|trans({}, 'menu')}}</a></h4>
+        {% endif %}
         <div class="clear"></div>
-</div>
+    </div>
 {% endif %}
 <div class="action-bar-block">
-        <h4 class="action-bar-small-title"><span class="glyphicon book"></span>Categories of this content</h4>	
+    <h4 class="action-bar-small-title"><span class="glyphicon book"></span>{{ 'Categories of this content'|trans({}, 'menu')}}</h4>
 
-        <ul class="categories-list">
-        {% for category in post.categories%}
-            {% include 'P4MCoreBundle:Core:categoryAction.html.twig'%}
-        {%endfor%}
-        </ul>
+    <ul class="categories-list">
+        {% for category in post.categories %}
+            {% include 'P4MCoreBundle:Core:categoryAction.html.twig' %}
+        {% endfor %}
+    </ul>
 
-        <div class="clear"></div>
+    <div class="clear"></div>
 </div>
 <div class="action-bar-block">
-    <h4 class="action-bar-small-title"><span class="glyphicon tags"></span>Tags of this content</h4>	
+    <h4 class="action-bar-small-title"><span class="glyphicon tags"></span>{{ 'Tags of this content'|trans({}, 'menu')}}</h4>
 
     <ul class="tags-list">
-    {% for tag in post.tags%}
-        {%include 'P4MCoreBundle:Core:tagAction.html.twig'%}
-    {% endfor %}
+        {% for tag in post.tags %}
+            {% include 'P4MCoreBundle:Core:tagAction.html.twig' %}
+        {% endfor %}
     </ul>
     <div class="clear"></div>
-</div>	
-
-<div class="action-bar-block">
-        <!--Date-->
-        <h4 class="action-bar-small-title"><span class="glyphicon circle_info"></span> Meta of this content</h4>	
-
-        <div class="action-bar-block">
-                <p><a class="post-meta post-content-source external-link" href="http://{{post.sourceUrl|domain}}"><span class="glyphicon globe"></span> {{post.sourceUrl|domain}}</a></p>
-                {%if post.author%}
-                    <p><a class="post-meta post-footer-author" href="{{path('p4m_social_profile',{username:post.author.username})}}"><span class="glyphicon pencil"></span> {{post.author.username}}</a></p>
-{#                {%else%}#}
-                {%endif%}
-                    <p><a class="post-meta post-footer-author" href="{{path('p4m_social_profile',{username:post.user.username})}}"><span class="glyphicon user"></span> {{post.user.username}} added this content</a></p>
-                
-                <p><span class="glyphicon calendar"></span> {{post.dateAdded|date('F j Y G:i')}}</p>
-                <!--Link of the post-->
-                <p><a href="{{post.sourceUrl}}" class="external-link"><span class="glyphicon globe"></span> {{post.sourceUrl}}</a></p>
-
-                <!--Nombre vue-->
-                <p><span class="glyphicon eye_open"></span> {{post.views|length}}</p>
-
-
-                <p class="action-bar-edit"><a href="#edit-post" {#data-toggle="modal" data-target="#modal-addPost"#} class="ajax_action" data-url="{{path('p4m_ajax_action')}}" data-action="editPost" data-params="{{{'postId':post.id}|json_encode()}}" data-key="{{{'postId':post.id}|json_encode()|sha512}}"><span class="glyphicon glyphicon-edit"></span>Edit those info</a></p>
-        </div>
 </div>
 
 <div class="action-bar-block">
-        <h4 class="action-bar-small-title"><span class="glyphicon share_alt"></span> Share this content</h4>
+    <!--Date-->
+    <h4 class="action-bar-small-title"><span class="glyphicon circle_info">&nbsp</span>{{ 'Meta of this content'|trans({}, 'menu')}}</h4>
 
-        <div class="shareIt action-bar-block">
-                <span class='st_facebook_large' displayText='Facebook'></span>
-                <span class='st_twitter_large' displayText='Tweet'></span>
-                <span class='st_linkedin_large' displayText='LinkedIn'></span>
-                <span class='st_pinterest_large' displayText='Pinterest'></span>
-                <span class='st_email_large' displayText='Email'></span>
-                <span class='st_googleplus_large' displayText='Google +'></span>
-        </div>
+    <div class="action-bar-block">
+        <p><a class="post-meta post-content-source external-link" href="http://{{ post.sourceUrl|domain }}"><span
+                        class="glyphicon globe"></span> {{ post.sourceUrl|domain }}</a></p>
+        {% if post.author %}
+            <p><a class="post-meta post-footer-author"
+                  href="{{ path('p4m_social_profile',{username:post.author.username}) }}"><span
+                            class="glyphicon pencil"></span> {{ post.author.username }}</a></p>
+            {#                {%else%}#}
+        {% endif %}
+        <p><a class="post-meta post-footer-author"
+              href="{{ path('p4m_social_profile',{username:post.user.username}) }}"><span
+                        class="glyphicon user"></span> {{ post.user.username }}&nbsp{{ 'added this content'|trans({}, 'menu')}}</a></p>
 
-        <script type="text/javascript">var switchTo5x=true;</script>
-        <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-        <script type="text/javascript">stLight.options({publisher: "7fbd99fa-03e2-49a2-ba7a-1f21b85bc485", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+        <p><span class="glyphicon calendar"></span> {{ post.dateAdded|date('F j Y G:i') }}</p>
+        <!--Link of the post-->
+        <p><a href="{{ post.sourceUrl }}" class="external-link"><span
+                        class="glyphicon globe">&nbsp;</span>{{ post.sourceUrl }}</a></p>
+
+        <!--Nombre vue-->
+        <p><span class="glyphicon eye_open">&nbsp;</span>{{ post.views|length }}</p>
 
 
-        <div class="clear"></div>
+        <p class="action-bar-edit"><a href="#edit-post" {#data-toggle="modal" data-target="#modal-addPost"#}
+                                      class="ajax_action" data-url="{{ path('p4m_ajax_action') }}"
+                                      data-action="editPost" data-params="{{ {'postId':post.id}|json_encode() }}"
+                                      data-key="{{ {'postId':post.id}|json_encode()|sha512 }}"><span
+                        class="glyphicon glyphicon-edit"></span>{{ 'Edit those info'|trans({}, 'menu')}}</a></p>
+    </div>
+</div>
+
+<div class="action-bar-block">
+    <h4 class="action-bar-small-title"><span class="glyphicon share_alt">&nbsp;</span>{{ 'Share this content'|trans({}, 'menu')}}</h4>
+
+    <div class="shareIt action-bar-block">
+        <span class='st_facebook_large' displayText='Facebook'></span>
+        <span class='st_twitter_large' displayText='Tweet'></span>
+        <span class='st_linkedin_large' displayText='LinkedIn'></span>
+        <span class='st_pinterest_large' displayText='Pinterest'></span>
+        <span class='st_email_large' displayText='Email'></span>
+        <span class='st_googleplus_large' displayText='Google +'></span>
+    </div>
+
+    <script type="text/javascript">var switchTo5x = true;</script>
+    <script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+    <script type="text/javascript">stLight.options({
+            publisher: "7fbd99fa-03e2-49a2-ba7a-1f21b85bc485",
+            doNotHash: false,
+            doNotCopy: false,
+            hashAddressBar: false
+        });</script>
+
+
+    <div class="clear"></div>
 </div>

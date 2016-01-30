@@ -1,13 +1,13 @@
 {#            TIME#}
 <div class="filter-wrap-large">
-    <h4 class="action-bar-small-title"><span class="glyphicon clock"></span>Time</h4>	
+    <h4 class="action-bar-small-title"><span class="glyphicon clock"></span>{{ 'Time'|trans({}, 'menu')}}</h4>
     <div class="filter-time"></div>
 
     <div class="filter-time-form">
         <input type="hidden" class="filter-time-start" name="time-to" value="0"/>
 
         <span class="filter-time-end-text filter-time-val"></span>
-        <span class="filter-time-explanation">till</span>
+        <span class="filter-time-explanation">{{ 'till'|trans({}, 'menu')}}</span>
         <span class="filter-time-start-text filter-time-val"></span>
 
         <input type="hidden" class="filter-time-end" name="time-from" value="8" />
@@ -19,43 +19,43 @@
 
 {#            ------RANK#}
 <div class="filter-wrap-large">
-        <h4 class="action-bar-small-title"><span class="glyphicon star"></span>Rank</h4>	
+        <h4 class="action-bar-small-title"><span class="glyphicon star"></span>{{ 'Rank'|trans({}, 'menu')}}</h4>
         <ul class="filter-type-radio">
                {# <li class="filter-radio">
                     <img alt="" data-unselected="{{asset('images/design/icons/p4m-gray-color.png')}}" data-selected="{{asset('images/design/icons/p4m-full-color.png')}}" src="{{asset('images/design/icons/p4m-gray-color.png')}}" />
-                    <span class="filter-label">Press</span>
+                    <span class="filter-label">{{ 'Press'|trans({}, 'menu')}}</span>
                     <input type="radio"  name="filter-rank" value="press" />   
                 </li> #}
             {%if userDisplayed is defined%}
                 <li class="filter-radio selected">
                     <img alt="" data-unselected="{{asset('images/design/icons/clock-gray-color.png')}}" data-selected="{{asset('images/design/icons/clock-full-color.png')}}" src="{{asset('images/design/icons/clock-full-color.png')}}" />
-                    <span class="filter-label">Time</span>
+                    <span class="filter-label">{{ 'Time'|trans({}, 'menu')}}</span>
                     <input type="radio" name="rank" value="time" checked="checked" />   
                 </li> 
             {%endif%}
                 <li class="filter-radio{%if userDisplayed is not defined%} selected{%endif%}">
                     <img alt="" data-unselected="{{asset('images/design/icons/star-gray-color.png')}}" data-selected="{{asset('images/design/icons/star-full-color.png')}}" src="{{asset('images/design/icons/star-full-color.png')}}" />
-                    <span class="filter-label">Quality</span>
+                    <span class="filter-label">{{ 'Quality'|trans({}, 'menu')}}</span>
                     <input type="radio" name="rank" value="quality" {%if userDisplayed is not defined%}checked="checked"{%endif%} />   
                 </li> 
                 {#<li class="filter-radio">
                     <img alt="" data-unselected="{{asset('images/design/icons/trophy-gray-color.png')}}" data-selected="{{asset('images/design/icons/trophy-full-color.png')}}" src="{{asset('images/design/icons/trophy-gray-color.png')}}" />
-                    <span class="filter-label">Like</span>
+                    <span class="filter-label">{{ ''|trans({}, 'menu')}}Like</span>
                     <input type="radio" name="rank" value="like" />   
                 </li> #}
                 <li class="filter-radio">
                     <img alt="" data-unselected="{{asset('images/design/icons/chat-gray-color.png')}}" data-selected="{{asset('images/design/icons/chat-full-color.png')}}" src="{{asset('images/design/icons/chat-gray-color.png')}}" />
-                    <span class="filter-label">Comments</span>
+                    <span class="filter-label">{{ 'Comments'|trans({}, 'menu')}}</span>
                     <input type="radio" name="rank" value="comments" />   
                 </li> 
                 <li class="filter-radio">
                     <img alt="" data-unselected="{{asset('images/design/icons/eye-gray-color.png')}}" data-selected="{{asset('images/design/icons/eye-full-color.png')}}" src="{{asset('images/design/icons/eye-gray-color.png')}}" />
-                    <span class="filter-label">View</span>
+                    <span class="filter-label">{{ 'View'|trans({}, 'menu')}}</span>
                     <input type="radio"  name="rank" value="views" />   
                 </li> 
                 {# <li class="filter-radio">
                     <img alt="" data-unselected="{{asset('images/design/icons/upload-gray-color.png')}}" data-selected="{{asset('images/design/icons/upload-full-color.png')}}" src="{{asset('images/design/icons/upload-gray-color.png')}}" />
-                    <span class="filter-label">share</span>
+                    <span class="filter-label">{{ ''|trans({}, 'menu')}}share</span>
                     <input type="radio"  name="filter-rank" value="upload" />   
                 </li> #}
 
@@ -66,7 +66,7 @@
 <div class="clear"></div>
 
 <div class="filter-wrap-large">
-       <h4 class="action-bar-small-title"><span class="glyphicon file"></span>Type</h4>	
+       <h4 class="action-bar-small-title"><span class="glyphicon file"></span>{{ 'Type'|trans({}, 'menu')}}</h4>
        <ul class="filter-type-checkbox">
        {% for type in postTypes%}
            <li class="filter-checkbox selected">
@@ -104,21 +104,21 @@
 
 {% if userDisplayed is defined%}
 <div class="filter-wrap-large">
-        <h4 class="action-bar-small-title"><span class="glyphicon file"></span>Action Type</h4>	
+        <h4 class="action-bar-small-title"><span class="glyphicon file"></span>{{ 'Action Type'|trans({}, 'menu')}}</h4>
         <ul class="filter-type-checkbox">
                 {#<li class="filter-checkbox selected">
                     <img alt="" data-unselected="images/design/icons/p4m-gray-color.png" data-selected="images/design/icons/p4m-full-color.png" src="images/design/icons/p4m-full-color.png" />
-                    <span class="filter-label">Press</span>
+                    <span class="filter-label">{{ 'Press'|trans({}, 'menu')}}</span>
                     <input type="checkbox"  name="activities[]" value="" />   
                 </li> #}
                 <li class="filter-checkbox selected">
                     <img alt="" data-unselected="{{asset('images/design/icons/traffic-gray-color.png')}}" data-selected="{{asset('images/design/icons/traffic-full-color.png')}}" src="{{asset('images/design/icons/traffic-gray-color.png')}}" />
-                    <span class="filter-label">Evaluate</span>
+                    <span class="filter-label">{{ 'Evaluate'|trans({}, 'menu')}}</span>
                     <input type="checkbox"  name="activities[]" value="post_voted" checked="checked"/>   
                 </li> 
                 <li class="filter-checkbox selected">
                     <img alt="" data-unselected="{{asset('images/design/icons/chat-gray-color.png')}}" data-selected="{{asset('images/design/icons/chat-full-color.png')}}" src="{{asset('images/design/icons/chat-gray-color.png')}}" />
-                    <span class="filter-label">Comment</span>
+                    <span class="filter-label">{{ 'Comment'|trans({}, 'menu')}}</span>
                     <input type="checkbox"  name="activities[]" value="post_commented" checked="checked"/>   
                 </li> 
                 {#<li class="filter-checkbox">
@@ -128,7 +128,7 @@
                 </li> #}
                 <li class="filter-checkbox selected">
                     <img alt="" data-unselected="{{asset('images/design/icons/compose-gray-color.png')}}" data-selected="{{asset('images/design/icons/compose-full-color.png')}}" src="{{asset('images/design/icons/compose-gray-color.png')}}" />
-                    <span class="filter-label">Add</span>
+                    <span class="filter-label">{{ 'Add'|trans({}, 'menu')}}</span>
                     <input type="checkbox"  name="activities[]" value="post_added" checked="checked"/>   
                 </li> 
 
@@ -138,7 +138,7 @@
 {%endif%}
 
 <div class="filter-wrap-large">
-       <h4 class="action-bar-small-title"><span class="glyphicon book"></span>Categories</h4>	
+       <h4 class="action-bar-small-title"><span class="glyphicon book"></span>{{ 'Categories'|trans({}, 'menu')}}</h4>
        <ul class="filter-type-checkbox">
            {% for category in categories%}
 {#                {% include 'P4MCoreBundle:Core:categoryAction.html.twig' %}#}

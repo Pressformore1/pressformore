@@ -33,9 +33,9 @@
 
 <li class="action-bar-section" id="section-presentation">
     <div class="action-bar-block">
-        <h1>Welcome on Pressformore</h1>
+        <h1>{{ 'Welcome on Pressformore'|trans({}, 'menu')}}</h1>
 
-        <p>The first crowd-shaped media, we're running an early access version.</p>
+        <p>{{ 'The first crowd-shaped media'|trans({}, 'menu')}}, {{ 'we\'re running an early access version'|trans({}, 'menu')}}.</p>
         
         {#{%if user is null%}
         <a class="main-button-link"  href="{{path('fos_user_security_login')}}">Log in</a>

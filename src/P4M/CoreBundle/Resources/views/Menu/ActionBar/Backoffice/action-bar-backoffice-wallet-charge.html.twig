@@ -1,28 +1,34 @@
 <li class="action-bar-section" id="section-wallet-charge">
                     <div class="action-bar-block">
-                        <h1 class="action-bar-title">Wallet Settings</h1>
-                        <p>Congratulations! You've correctly set up your wallet! But you can still edit your info by pressing the corresponding button below.</p>
+                        <h1 class="action-bar-title">{{ ''|trans({}, 'menu')}}Wallet Settings</h1>
+                        <p>
+                            {{ 'Congratulations!'|trans({}, 'menu')}}
+                            {{ 'You\'ve correctly set up your wallet!'|trans({}, 'menu')}}
+                            {{ 'But you can still edit your info by pressing the corresponding button below.'|trans({}, 'menu')}}
+                        </p>
                         {% for flashMessage in app.session.flashbag.get('chargeError') %}
                         
-                            <p class="pfm-red big"><i class="glyphicon warning_sign" style="vertical-align:bottom;"></i> <strong>{{ flashMessage }}</strong></p>
-                            <p class="pfm-red">Please, verify your informations and try again</p>
+                            <p class="pfm-red big"><i class="glyphicon warning_sign" style="vertical-align:bottom;"></i> <strong>{{ {{ flashMessage|trans({}, 'menu')}} }}</strong></p>
+                            <p class="pfm-red">
+                                {{ 'Please'|trans({}, 'menu')}}, {{ 'verify your informations and try again'|trans({}, 'menu')}}
+                            </p>
 
                         {% endfor %}
                     </div>
                     <div class="action-bar-block">
-                        <h4 class="action-bar-small-title">Loading</h4>
+                        <h4 class="action-bar-small-title">{{ ''|trans({}, 'menu')}}Loading</h4>
                         <p id="loading-amount"></p>
                         <p id="loading-duration"></p>
                         
                     </div>
                     {% if walletFill is defined and walletFill is null  %}
                         <div  class="action-bar-block">
-                            <h4 class="action-bar-small-title">Choose a payment method</h4>	
+                            <h4 class="action-bar-small-title">{{ ''|trans({}, 'menu')}}Choose a payment method</h4>
                             
                             {% if cards is defined and cards|length > 0%}
-                                <h5 class="action-bar-extra-small-title">Use a registred card</h5>
+                                <h5 class="action-bar-extra-small-title">{{ ''|trans({}, 'menu')}}Use a registred card</h5>
                                 
-                                <form class="distant-form-force" data-target="#wallet-load-amount"  data-confirmed="0" class="" data-confirm-text="You are about to load <span id='confirm-amount'></span> euro for the following period: <span class='confirm-perdiod'></span>" >
+                                <form class="distant-form-force" data-target="#wallet-load-amount"  data-confirmed="0" class="" data-confirm-text="{{ 'You are about to load'|trans({}, 'menu')}} <span id='confirm-amount'>&nbsp;</span>{{ 'euro for the following period'|trans({}, 'menu')}}: <span class='confirm-perdiod'></span>" >
 {#                                <select id="cardChooser" class="{#form-control#} {#distant-form-force" data-target="#wallet-load-amount" name="cardId">#}
 {#                                    <option>Choose a card</option>#}
                                     {%for card in cards%}
@@ -32,7 +38,7 @@
                                     {%endfor%}
                                     
                                     <div class="form-line">
-                                    <button type="submit" class="primary">Confirm your loading</button>
+                                    <button type="submit" class="primary">{{ 'Confirm your loading'|trans({}, 'menu')}}</button>
                                 </div>
                                 </form>
 {#                                </select>#}
@@ -41,14 +47,14 @@
                             {%endif%}
                             <div  class="action-bar-block">
                                
-                                <h5 class="action-bar-extra-small-title">Register a new method</h5>
+                                <h5 class="action-bar-extra-small-title">{{ 'Register a new method'|trans({}, 'menu')}}</h5>
                         
-                            <a href="" class="payment-method-link" data-form="#credit-card">Credit Card</a>
+                            <a href="" class="payment-method-link" data-form="#credit-card">{{ 'Credit Card'|trans({}, 'menu')}}</a>
 {#                            <a href="" class="payment-method-link" data-form="#bank-account">Bank account</a>#}
                         </div>
                          
                         <div id="bank-account"  class="action-bar-block payment-method-form">
-                            <h4 class="action-bar-small-title">2. Bank account details</h4>	
+                            <h4 class="action-bar-small-title">2. {{ 'Bank account details'|trans({}, 'menu')}}</h4>
                             <div class="action-bar-block">
                                 <div class="form-line">
                                     <label for="iban" class="required form-field-title">IBAN</label>
@@ -60,46 +66,46 @@
                                     <input type="text" id="bic" name="bic" required="required" class="col-sm-30">
                                 </div>
                                 <div class="form-line">
-                                    <label for="name" class="required  form-field-title">Name</label>
+                                    <label for="name" class="required  form-field-title">{{ 'Name'|trans({}, 'menu')}}</label>
                                     <input type="text" id="name" name="bic" required="required" class="col-sm-50">
                                 </div>
                                 
                                 <div class="form-line">
-                                    <label for="address" class="required  form-field-title">Adress</label>
+                                    <label for="address" class="required  form-field-title">{{ 'Adress'|trans({}, 'menu')}}</label>
                                     <input type="text" id="address" name="bic" required="required" class="col-sm-50">
                                 </div>
                                 
                                 <div class="form-line">
-                                    <label for="zip" class="required  form-field-title">Zip</label>
+                                    <label for="zip" class="required  form-field-title">{{ 'Zip'|trans({}, 'menu')}}</label>
                                     <input type="text" id="zip" name="bic" required="required" class="col-sm-30">
                                 </div>
                                 <div class="form-line">
-                                    <label for="city" class="required  form-field-title">City</label>
+                                    <label for="city" class="required  form-field-title">{{ 'City'|trans({}, 'menu')}}</label>
                                     <input type="text" id="city" name="bic" required="required" class="col-sm-50">
                                 </div>
                                 <div class="form-line">
-                                    <button type="submit" class="primary">Send</button>
+                                    <button type="submit" class="primary">{{ 'Send'|trans({}, 'menu')}}</button>
                                 </div>
                                 <div class="clear"></div>
                             </div>  
                         </div>  
                             
                         <div id="credit-card"  class="action-bar-block  payment-method-form">
-                            <h4 class="action-bar-small-title">2. Credit card details</h4>	
+                            <h4 class="action-bar-small-title">2. {{ 'Credit card details'|trans({}, 'menu')}}</h4>
                             <div class="action-bar-block">
                                 {%if cardForm is defined%}
                     {#         {{dump(cardForm.vars)}}#}
-                                <form action="" method="post" id="cardForm" data-registerUrl="{{cardRegisterUrl}}" data-submit="0" data-confirmed="0" class="" data-confirm-text="You are about to load <span id='confirm-amount'></span> euro for the following period: <span class='confirm-perdiod'></span>">
+                                <form action="" method="post" id="cardForm" data-registerUrl="{{cardRegisterUrl}}" data-submit="0" data-confirmed="0" class="" data-confirm-text="{{ 'You are about to load'|trans({}, 'menu')}} <span id='confirm-amount'></span> {{ 'euro for the following period'|trans({}, 'menu')}}: <span class='confirm-perdiod'></span>">
                                     <input type="hidden" id="data"  name="data" value="" />
                                     <input type="hidden" id="accessKeyRef" name="accessKeyRef" value="" />
                                     <input type="hidden" name="returnURL" id="returnURL" value="" />
                                     
                                     <div class="form-line">
-                                        <label for="cardNumber">Card Number</label>
+                                        <label for="cardNumber">{{ 'Card Number'|trans({}, 'menu')}}</label>
                                         <input type="text" name="cardNumber" value="" />
                                     </div>
                                     <div class="form-line">
-                                        <label for="cardExpirationDateSelect">Expiration Date</label>
+                                        <label for="cardExpirationDateSelect">{{ 'Expiration Date'|trans({}, 'menu')}}</label>
                                         {%set months = ['January','febrary','march','april','may','june','july','augustus',"september","october",'november','december']%}
                                         {%set yearsNumber = 10%}
                                         {%set currentYear = "now"|date('Y')%}
@@ -127,7 +133,7 @@
 {#                                    <input type="submit" value="Pay" />#}
 
                                     <div class="form-line">
-                                        <button type="submit" class="primary">Load</button>
+                                        <button type="submit" class="primary">{{ 'Load'|trans({}, 'menu')}}</button>
                                     </div>
                                    </form>
                                    
@@ -138,8 +144,8 @@
                         </div>
                         
                         {%endif%}
-                        <div id="powered-by-mangopay" class="small"><i>Powered By</i> <img src="{{asset('images/design/mangopay-small.png')}}" alt="mangoPay" /></div>
-                    <button class="main-button-link pfm-grey-button action-bar-btn" data-toggle="action-bar" data-target="#section-wallet">Back to Summary</button>
+                        <div id="powered-by-mangopay" class="small"><i>{{ 'Powered By'|trans({}, 'menu')}}</i> <img src="{{asset('images/design/mangopay-small.png')}}" alt="mangoPay" /></div>
+                    <button class="main-button-link pfm-grey-button action-bar-btn" data-toggle="action-bar" data-target="#section-wallet">{{ 'Back to Summary'|trans({}, 'menu')}}</button>
                 <div class="clear"></div>
 
                 </li>

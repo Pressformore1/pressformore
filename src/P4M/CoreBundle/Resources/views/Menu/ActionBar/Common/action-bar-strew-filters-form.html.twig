@@ -1,30 +1,30 @@
  <div class="filter-wrap-large">
-<h4 class="action-bar-small-title"><span class="glyphicon star"></span>Rank</h4>	
+<h4 class="action-bar-small-title"><span class="glyphicon star"></span>{{ 'Rank'|trans({}, 'menu')}}</h4>
 <ul class="filter-type-radio">
        <li class="filter-radio selected">
           <img alt="" data-unselected="{{asset('images/design/icons/running-gray-color.png')}}" data-selected="{{asset('images/design/icons/running-full-color.png')}}" src="{{asset('images/design/icons/running-gray-color.png')}}" />
-          <span class="filter-label">Followers</span>
+          <span class="filter-label">{{ 'Followers'|trans({}, 'menu')}}</span>
           <input type="radio" name="rank" value="followers" checked="checked" />   
       </li> 
       <li class="filter-radio">
           <img alt="" data-unselected="{{asset('images/design/icons/heart-gray-color.png')}}" data-selected="{{asset('images/design/icons/heart-full-color.png')}}" src="{{asset('images/design/icons/heart-gray-color.png')}}" />
-          <span class="filter-label">Like</span>
+          <span class="filter-label">{{ 'Like'|trans({}, 'menu')}}</span>
           <input type="radio"  name="rank" value="like" />   
       </li> 
       <li class="filter-radio">
           <img alt="" data-unselected="{{asset('images/design/icons/chat-gray-color.png')}}" data-selected="{{asset('images/design/icons/chat-full-color.png')}}" src="{{asset('images/design/icons/chat-gray-color.png')}}" />
-          <span class="filter-label">Comment</span>
+          <span class="filter-label">{{ 'Comment'|trans({}, 'menu')}}</span>
           <input type="radio" name="rank" value="comments" />   
       </li> 
 
       {#<li class="filter-radio">
           <img alt="" data-unselected="{{asset('images/design/icons/upload-gray-color.png')}}" data-selected="{{asset('images/design/icons/upload-full-color.png')}}" src="{{asset('images/design/icons/upload-gray-color.png')}}" />
-          <span class="filter-label">share</span>
+          <span class="filter-label">{{ ''|trans({}, 'menu')}}share</span>
           <input type="radio"  name="rank" value="share" />   
       </li> #}
        <li class="filter-radio">
            <img alt="" data-unselected="{{asset('images/design/icons/eye-gray-color.png')}}" data-selected="{{asset('images/design/icons/eye-full-color.png')}}" src="{{asset('images/design/icons/eye-gray-color.png')}}" />
-          <span class="filter-label">Views</span>
+          <span class="filter-label">{{ 'Views'|trans({}, 'menu')}}</span>
           <input type="radio"  name="rank" value="view" />   
       </li> 
 
@@ -61,7 +61,7 @@
     </div>#}
 
     <div class="filter-wrap-large">
-            <h4 class="action-bar-small-title"><span class="glyphicon book"></span>Categories</h4>	
+            <h4 class="action-bar-small-title"><span class="glyphicon book"></span>{{ 'Categories'|trans({}, 'menu')}}</h4>
             <ul class="filter-type-checkbox">
             {%if categories is not defined%}
                 {% if userDisplayed is defined %}

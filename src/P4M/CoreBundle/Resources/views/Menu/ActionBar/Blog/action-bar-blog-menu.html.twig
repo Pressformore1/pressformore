@@ -2,38 +2,38 @@
 
 
 <li class="action-bar-item">
-    <a class="action-bar-link ajax_action" data-toggle="action-bar" data-target="#section-featured-content" href="#featured-content" title="Featured Content" data-url="{{path('p4m_core_showFeaturedContent')}}">
+    <a class="action-bar-link ajax_action" data-toggle="action-bar" data-target="#section-featured-content" href="#featured-content" title="{{ 'Featured Content'|trans({}, 'menu')}}" data-url="{{path('p4m_core_showFeaturedContent')}}">
         <span class="action-bar-icon icon-logo" style="font-size:24px"></span>
     </a>
 </li>
 
 
 <li class="action-bar-item">
-    <a class="action-bar-link ajax_action" data-toggle="action-bar" data-target="#section-trendy" href="#trendy" title="Trendy on PM" data-url="{{path('p4m_core_trendyPosts')}}" data-action="loadTrendyPosts" data-key="{{'loadTrendyPosts'|sha512()}}" data-params="{{{loadTrendyPosts:1}|json_encode()}}">
+    <a class="action-bar-link ajax_action" data-toggle="action-bar" data-target="#section-trendy" href="#trendy" title="{{ 'Trendy on PM'|trans({}, 'menu')}}" data-url="{{path('p4m_core_trendyPosts')}}" data-action="loadTrendyPosts" data-key="{{'loadTrendyPosts'|sha512()}}" data-params="{{{loadTrendyPosts:1}|json_encode()}}">
         <span class="action-bar-icon glyphicon fire"></span>
     </a>
 </li>
 <li class="action-bar-item">
-    <a class="action-bar-link ajax_action" data-toggle="action-bar" data-url="{{path('p4m_ajax_action')}}" data-action="loadBlogPosts" data-key="{{'loadBlogPosts'|sha512()}}" data-params="{{{loadBlogPosts:1}|json_encode()}}" data-target="#section-blog" href="#blog" title="Blog">
+    <a class="action-bar-link ajax_action" data-toggle="action-bar" data-url="{{path('p4m_ajax_action')}}" data-action="loadBlogPosts" data-key="{{'loadBlogPosts'|sha512()}}" data-params="{{{loadBlogPosts:1}|json_encode()}}" data-target="#section-blog" href="#blog" title="{{ 'Blog'|trans({}, 'menu')}}">
         <span class="action-bar-icon glyphicon sort"></span>
     </a>
 </li>
 
 <li class="action-bar-item">
-    <a class="action-bar-link ajax_action" data-action="loadLegal" data-url="{{path('p4m_ajax_action')}}" data-key="{{'loadLegal'|sha512()}}"data-params="{{{"loadLegal":1}|json_encode()}}" data-toggle="action-bar" data-target="#section-legal-mention" href="#legal-mention"  title="Legal mention">
+    <a class="action-bar-link ajax_action" data-action="loadLegal" data-url="{{path('p4m_ajax_action')}}" data-key="{{'loadLegal'|sha512()}}"data-params="{{{"loadLegal":1}|json_encode()}}" data-toggle="action-bar" data-target="#section-legal-mention" href="#legal-mention"  title="{{ 'Legal mention'|trans({}, 'menu')}}">
         <span class="action-bar-icon glyphicon security_camera"></span>
     </a>
  </li>
 
 
 <li class="action-bar-item">
-    <a class="action-bar-link ajax_action {%if user is null%}current-action-bar-item{%endif%}" data-action="loadResume" data-url="{{path('p4m_ajax_action')}}" data-key="{{'loadResume'|sha512()}}"data-params="{{{"loadResume":1}|json_encode()}}" {#data-toggle="action-bar" data-target="#section-presentation"#} href="#resume"  title="Resume!">
+    <a class="action-bar-link ajax_action {%if user is null%}current-action-bar-item{%endif%}" data-action="loadResume" data-url="{{path('p4m_ajax_action')}}" data-key="{{'loadResume'|sha512()}}"data-params="{{{"loadResume":1}|json_encode()}}" {#data-toggle="action-bar" data-target="#section-presentation"#} href="#resume"  title="{{ 'Resume'|trans({}, 'menu')}}!">
         <span class="action-bar-icon glyphicon circle_info"></span>
     </a>
 </li>
 
 <li class="action-bar-item">
-    <a class="action-bar-link ajax_action" data-toggle="action-bar" data-url="{{path('p4_m_contact_homepage')}}" data-target="#section-contact" href="#contact"  title="Contact Us">
+    <a class="action-bar-link ajax_action" data-toggle="action-bar" data-url="{{path('p4_m_contact_homepage')}}" data-target="#section-contact" href="#contact"  title="{{ 'Contact Us'|trans({}, 'menu')}}">
         <span class="action-bar-icon glyphicon message_full"></span>
     </a>
 </li>

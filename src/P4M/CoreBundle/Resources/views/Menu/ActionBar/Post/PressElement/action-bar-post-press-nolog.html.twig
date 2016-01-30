@@ -7,10 +7,15 @@
     {% endif%}
     
     <div class="action-bar-block">
-        <h1 class="action-bar-title text-center">It seems like this content was well worth the read! <a href="{{path("p4m_core_home")}}#blog" class="faq-link external-link"><i class="glyphicon circle_question_mark"></i></a></h1>
+        <h1 class="action-bar-title text-center">
+            {{ 'It seems like this content was well worth the read!'|trans({}, 'menu')}}
+            <a href="{{path("p4m_core_home")}}#blog" class="faq-link external-link">
+                <i class="glyphicon circle_question_mark"></i>
+            </a>
+        </h1>
         {%if post.author %}
         <p class="middle text-center">
-            {{post.author.username}} is the author. Perhaps it's time to reward him for his duty work.
+            {{post.author.username}} {{ 'is the author'|trans({}, 'menu')}}. {{ 'Perhaps it\'s time to reward him for his duty work.'|trans({}, 'menu')}}
         </p>
         {%else%}
             
@@ -22,7 +27,7 @@
     {%if post.author %}
         <div class="action-bar-block">
         {%include "P4MCoreBundle:Menu/ActionBar:login-button.html.twig" %}
-        <p class="small text-center">*mandatory to rewards authors</p>
+        <p class="small text-center">*{{ 'mandatory to rewards authors'|trans({}, 'menu')}}</p>
         </div>
         {%include 'P4MCoreBundle:Menu/ActionBar/Post/PressElement:pressformers.html.twig'%}
         
@@ -30,7 +35,7 @@
         {%include 'P4MCoreBundle:Menu/ActionBar/Post/PressElement:waitingPressformers.html.twig'%}
         <div class="action-bar-block">
         {%include "P4MCoreBundle:Menu/ActionBar:login-button.html.twig" %}
-        <p class="small text-center">*mandatory to rewards authors</p>
+        <p class="small text-center">*{{ 'mandatory to rewards authors'|trans({}, 'menu')}}</p>
         </div>
     {%endif%}
 </li>

@@ -1931,16 +1931,16 @@
         },
         {
             "name": "paragonie/random_compat",
-            "version": "1.1.5",
+            "version": "1.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/paragonie/random_compat.git",
-                "reference": "dd8998b7c846f6909f4e7a5f67fabebfc412a4f7"
+                "reference": "e6f80ab77885151908d0ec743689ca700886e8b0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/dd8998b7c846f6909f4e7a5f67fabebfc412a4f7",
-                "reference": "dd8998b7c846f6909f4e7a5f67fabebfc412a4f7",
+                "url": "https://api.github.com/repos/paragonie/random_compat/zipball/e6f80ab77885151908d0ec743689ca700886e8b0",
+                "reference": "e6f80ab77885151908d0ec743689ca700886e8b0",
                 "shasum": ""
             },
             "require": {
@@ -1975,7 +1975,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2016-01-06 13:31:20"
+            "time": "2016-01-29 16:19:52"
         },
         {
             "name": "psr/log",
@@ -2272,12 +2272,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/kokmok/SKCMS-Locale.git",
-                "reference": "80ce6ce82bcbc48ec89808c1db7fa3ff6d2e772e"
+                "reference": "84e0e24a8c777b4701a39574674ea256d123e403"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kokmok/SKCMS-Locale/zipball/80ce6ce82bcbc48ec89808c1db7fa3ff6d2e772e",
-                "reference": "80ce6ce82bcbc48ec89808c1db7fa3ff6d2e772e",
+                "url": "https://api.github.com/repos/kokmok/SKCMS-Locale/zipball/84e0e24a8c777b4701a39574674ea256d123e403",
+                "reference": "84e0e24a8c777b4701a39574674ea256d123e403",
                 "shasum": ""
             },
             "require": {
@@ -2304,7 +2304,7 @@
                 }
             ],
             "description": "Symfony SKCMS Locale Bundle by SOLID-kiss",
-            "time": "2016-01-29 16:11:30"
+            "time": "2016-01-29 16:56:00"
         },
         {
             "name": "stof/doctrine-extensions-bundle",
