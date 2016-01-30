@@ -1,87 +1,90 @@
+<p class="addPost-intro">
+    {{ 'Thanks, you\'re about to feed Pressformore with a content worth sharing. In order to enhance its visibility, help us to better classify it by filling these fields.'|trans({}, 'post')}}
+</p>
 
-<p class="addPost-intro">Thanks, you're about to feed Pressformore with a content worth sharing. In order to enhance its visibility, help us to better classify it by filling these fields.<br /></p>
-       
 
 <div class="form-group">
-            {{ form_label(form.title, 'Content title :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+    {{ form_label(form.title, 'Content title :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
 
-            <div class="col-sm-45">
-                {{ form_widget(form.title,{attr:{class:'col-sm-60'}} )}}  
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-                
-        <div class="form-group">
-            {{ form_label(form.picture, 'Picture :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+    <div class="col-sm-45">
+        {{ form_widget(form.title,{attr:{class:'col-sm-60'}} ) }}
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
 
-            <div class="col-sm-45">
-                <p class="form-field-explanation">The picture that will be displayed on your tile<br />NB: Prefer a large picure than a small one</p>
-                {{ form_widget(form.picture) }}  
-                
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-                
-        <div class="form-group">
-            {{ form_label(form.content, 'Abstract :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+<div class="form-group">
+    {{ form_label(form.picture, 'Picture :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
 
-            <div class="col-sm-45">
-                {{ form_widget(form.content,{attr:{class:'col-sm-60'}} )}}  
-                
-                <span class="chars-limit" id="p4m_corebundle_post_content_chars_limit"></span>
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
+    <div class="col-sm-45">
+        <p class="form-field-explanation">{{ 'The picture that will be displayed on your tile'|trans({}, 'post')}}<br/>
+            {{ 'NB: Prefer a large picure than a small one'|trans({}, 'post')}}</p>
+        {{ form_widget(form.picture) }}
 
-        <div class="form-group">
-            {{ form_label(form.lang, 'Language :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
 
-            <div class="col-sm-45">
-                <p class="form-field-explanation">The language used in your content</p>
-                {{ form_widget(form.lang,{attr:{class:'col-sm-30'}} )}}  
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
+<div class="form-group">
+    {{ form_label(form.content, 'Abstract :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
 
-        <div class="form-group">
-            {{ form_label(form.type, 'Content type :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+    <div class="col-sm-45">
+        {{ form_widget(form.content,{attr:{class:'col-sm-60'}} ) }}
 
-            <div class="col-sm-45">
-                <p class="form-field-explanation">The type of your content</p>
-                {{ form_widget(form.type,{attr:{class:'col-sm-30'}} )}}  
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-                
-                
-        <div class="form-group">
-            
-            {{ form_label(form.categories, 'Categories :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+        <span class="chars-limit" id="p4m_corebundle_post_content_chars_limit"></span>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
 
-            <div class="col-sm-45">
-                <p class="form-field-explanation">Classify your content by categories...</p>
-                {{ form_widget(form.categories) }}  
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-                
-        <div class="form-group">
-            
-           {{ form_label(form.tags, 'Tags :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+<div class="form-group">
+    {{ form_label(form.lang, 'Language :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
 
-            <div class="col-sm-45">
-                <p class="form-field-explanation">... and by tags</p>
-                {{ form_widget(form.tags)}}  
-                <p class="form-field-explanation bg-info"><span class="glyphicon circle_info"></span> To add a new tag, just write it, and click enter</p> 
-                <div class="clear"></div>
-            </div>
-            <div class="clear"></div>
-        </div>
-        {{ form_widget(form.iframeAllowed,{attr:{class:'hidden'}}) }}  
-        {{form_rest(form)}}
+    <div class="col-sm-45">
+        <p class="form-field-explanation">{{ 'The language used in your content'|trans({}, 'post')}}</p>
+        {{ form_widget(form.lang,{attr:{class:'col-sm-30'}} ) }}
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="form-group">
+    {{ form_label(form.type, 'Content type :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+
+    <div class="col-sm-45">
+        <p class="form-field-explanation">{{ 'The type of your content'|trans({}, 'post')}}</p>
+        {{ form_widget(form.type,{attr:{class:'col-sm-30'}} ) }}
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+
+<div class="form-group">
+
+    {{ form_label(form.categories, 'Categories :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+
+    <div class="col-sm-45">
+        <p class="form-field-explanation">{{ 'Classify your content by categories...'|trans({}, 'post')}}</p>
+        {{ form_widget(form.categories) }}
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="form-group">
+
+    {{ form_label(form.tags, 'Tags :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+
+    <div class="col-sm-45">
+        <p class="form-field-explanation">{{ '... and by tags'|trans({}, 'post')}}</p>
+        {{ form_widget(form.tags) }}
+        <p class="form-field-explanation bg-info"><span class="glyphicon circle_info">&nbsp;</span>
+            {{ 'To add a new tag, just write it, and click enter'|trans({}, 'post')}}</p>
+        <div class="clear"></div>
+    </div>
+    <div class="clear"></div>
+</div>
+{{ form_widget(form.iframeAllowed,{attr:{class:'hidden'}}) }}
+        {{ form_rest(form) }}

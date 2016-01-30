@@ -1,41 +1,42 @@
 {% extends "P4MCoreBundle:Core/Template:wall-template.html.twig" %}
 
 
-{% block headTitle %}{{parent()}} {{post.title}}{%endblock%}
+{% block headTitle %}{{ parent() }} {{ post.title }}{% endblock %}
 
 {% block meta %}
-    {{parent()}}
-    <meta property="og:url" content="{{url('p4m_core_post',{postSlug : post.slug})}}" />
-    <meta property="og:title" content="{{post.title}}" />
-    <meta name="keywords" content="{{post.tags|join(',')}}">
-    <meta name="description" content="{{post.content}}">
-    <meta name="og:description" content="{{post.content}}">
-    <meta name="og:image" content="{%if post.localPicture|length%}{{app.request.getSchemeAndHttpHost() ~asset(post.localPicture)}}{%else%}{{post.picture}}{%endif%}">
-{%endblock%}
+    {{ parent() }}
+    <meta property="og:url" content="{{ url('p4m_core_post',{postSlug : post.slug}) }}"/>
+    <meta property="og:title" content="{{ post.title }}"/>
+    <meta name="keywords" content="{{ post.tags|join(',') }}">
+    <meta name="description" content="{{ post.content }}">
+    <meta name="og:description" content="{{ post.content }}">
+    <meta name="og:image"
+          content="{% if post.localPicture|length %}{{ app.request.getSchemeAndHttpHost() ~asset(post.localPicture) }}{% else %}{{ post.picture }}{% endif %}">
+{% endblock %}
 
 
-{% block bodyClass%}
-{{parent()}}
-post-page
-{% endblock%}
+{% block bodyClass %}
+    {{ parent() }}
+    post-page
+{% endblock %}
 
 {% block actionBarMenu %}
-{%if user %}
-    {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-menu.html.twig"%}
-{%else%}
-    {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-menu-nolog.html.twig"%}
-{%endif%}
-{% endblock%}
+    {% if user %}
+        {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-menu.html.twig" %}
+    {% else %}
+        {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-menu-nolog.html.twig" %}
+    {% endif %}
+{% endblock %}
 {% block actionBarAction %}
-{%if user%}
-    {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-actions.html.twig"%}
-{%else%}
-    {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-actions-nolog.html.twig"%}
-{%endif%}
-{% endblock%}
+    {% if user %}
+        {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-actions.html.twig" %}
+    {% else %}
+        {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-actions-nolog.html.twig" %}
+    {% endif %}
+{% endblock %}
 
 {% block content %}
-{% include "P4MCoreBundle:Post:post-content.html.twig" %}
+    {% include "P4MCoreBundle:Post:post-content.html.twig" %}
 {% endblock %}
 
 
@@ -51,23 +52,23 @@ post-page
 {% endblock %}#}
 
 {% block scriptPlugin %}
-{{parent()}}
-{% javascripts 'js/plugin/post/*.js' %}
+    {{ parent() }}
+    {% javascripts 'js/plugin/post/*.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-{%endblock%}
+    {% endjavascripts %}
+{% endblock %}
 
 {% block scriptCustom %}
-{{parent()}}
-{% javascripts 'js/scripts/post/*.js' %}
+    {{ parent() }}
+    {% javascripts 'js/scripts/post/*.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
-{% endjavascripts %}
-{%endblock%}
+    {% endjavascripts %}
+{% endblock %}
     
-{%block stylesheets%}
-    {{parent()}}
+{% block stylesheets %}
+    {{ parent() }}
     {% stylesheets 'css/post/*.css' filter='cssrewrite' %}
-    <link rel="stylesheet" href="{{ asset_url }}" />
+    <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
 
-{%endblock%}
+{% endblock %}

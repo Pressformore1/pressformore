@@ -7,21 +7,30 @@
         {% if route =="p4_m_backoffice_profile_infos"%}
             {% set selected = ' selected'%}
         {% endif%}
-               <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_profile_infos')}}"><span class="glyphicon glyphicon-user"></span>Account</a>
+               <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_profile_infos')}}">
+                   <span class="glyphicon glyphicon-user"></span>
+                   {{ 'Account'|trans({}, 'Backoffice')}}
+               </a>
         </li>
         {% set selected = ''%}
         {% if route =="p4_m_backoffice_password"%}
             {% set selected = ' selected'%}
         {% endif%}
          <li>
-                <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_password')}}"><span class="glyphicon glyphicon-tower"></span>Password</a>
+                <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_password')}}">
+                    <span class="glyphicon glyphicon-tower"></span>
+                    {{ 'Password'|trans({}, 'Backoffice')}}
+                </a>
         </li>
         {% set selected = ''%}
         {% if route =="p4_m_backoffice_profile_picture"%}
             {% set selected = ' selected'%}
         {% endif%}
          <li>
-                <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_profile_picture')}}"><span class="glyphicon glyphicon-camera"></span>Profile Picture</a>
+                <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_profile_picture')}}">
+                    <span class="glyphicon glyphicon-camera"></span>
+                    {{ 'Profile Picture'|trans({}, 'Backoffice')}}
+                </a>
         </li>
         {#{% set selected = ''%}
         {% if route =="p4_m_backoffice_notifications"%}
@@ -66,33 +75,44 @@
             {% set selected = ' selected'%}
         {% endif%}
          <li>
-            <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_producer_key')}}"><span class="glyphicon glyphicon-camera"></span>Producer</a>
+            <a class="account-menu-link{{selected}}" href="{{path('p4_m_backoffice_producer_key')}}">
+                <span class="glyphicon glyphicon-camera"></span>
+                {{ 'Producer'|trans({}, 'Backoffice')}}
+            </a>
                  
             {% if user.mangoUserNatural%}
                 <ul class="account-sub-menu">
                     <li>
-                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_key')}}">My key</a>
+                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_key')}}">
+                           {{ 'My key'|trans({}, 'Backoffice')}}
+                       </a>
                     </li>
                        {% set selected = ''%}
                         {% if route =="p4_m_backoffice_producer_pressforms"%}
                             {% set selected = ' selected'%}
                         {% endif%}
                     <li>
-                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_pressforms')}}">Retributions</a>
+                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_pressforms')}}">
+                           {{ 'Retributions'|trans({}, 'Backoffice')}}
+                       </a>
                     </li>
                     {% set selected = ''%}
                         {% if route =="p4_m_backoffice_producer_money"%}
                             {% set selected = ' selected'%}
                         {% endif%}
                     <li>
-                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_money')}}">Money transfer</a>
+                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_money')}}">
+                           {{ 'Money transfer'|trans({}, 'Backoffice')}}
+                       </a>
                     </li> 
                     <li>   
                     {% set selected = ''%}
                         {% if route =="p4_m_backoffice_producer_bankAccount"%}
                             {% set selected = ' selected'%}
                         {% endif%}
-                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_bankAccount')}}">Bank account information</a>
+                       <a class="account-menu-link {{selected}}" href="{{path('p4_m_backoffice_producer_bankAccount')}}">
+                           {{ 'Bank account information'|trans({}, 'Backoffice')}}
+                       </a>
                     </li>
                  </ul>
             {%endif%}

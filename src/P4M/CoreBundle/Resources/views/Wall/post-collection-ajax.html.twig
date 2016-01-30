@@ -1,79 +1,80 @@
-{%if showTiles is defined and showTiles == false%}
+{% if showTiles is defined and showTiles == false %}
 
-{%else%}
+{% else %}
 
-{% set index = 0%}
-{% if posts is defined%}
-    {% for post in posts %}
-    {% include "P4MCoreBundle:Wall/Tile:post-tile.html.twig" with {'index' : index}%}
-    {% set index = index+1%}
-    {% endfor %}
-{% else%}
-    {% for result in results %}
-{#        {{result|getClass}} - {{result.dateAddedTimeStamp}}#}
-        {% if result|getClass == 'Post' or result|getClass == 'WPBlogPost'%} {#POST#}
-            {% include "P4MCoreBundle:Wall/Tile:post-tile.html.twig" with {'index' : index,'post':result}%}
-        {% elseif result|getClass == 'User'%} {#USER#}
-            {% include "P4MCoreBundle:Wall/Tile:user-tile.html.twig" with {'index' : index}%}
-        {% elseif result|getClass == 'Wall'%} {#WALL#}
-            {% include "P4MCoreBundle:Wall/Tile:wall-tile.html.twig" with {'index' : index,'wall':result}%}
-        {% elseif result|getClass == 'Vote'%} {#VOTE#}
-            {%if result.wall%} {#WALL#}
-                {% include "P4MCoreBundle:Wall/Tile:wall-tile.html.twig" with {'index' : index,'wall':result.wall}%}
-            {% elseif result.post %} {#POST#}
-                {% include "P4MCoreBundle:Wall/Tile:post-tile.html.twig" with {'index' : index,'post':result.post}%}
+    {% set index = 0 %}
+    {% if posts is defined %}
+        {% for post in posts %}
+            {% include "P4MCoreBundle:Wall/Tile:post-tile.html.twig" with {'index' : index} %}
+            {% set index = index+1 %}
+        {% endfor %}
+    {% else %}
+        {% for result in results %}
+            {#        {{result|getClass}} - {{result.dateAddedTimeStamp}}#}
+            {% if result|getClass == 'Post' or result|getClass == 'WPBlogPost' %} {#POST#}
+                {% include "P4MCoreBundle:Wall/Tile:post-tile.html.twig" with {'index' : index,'post':result} %}
+            {% elseif result|getClass == 'User' %} {#USER#}
+                {% include "P4MCoreBundle:Wall/Tile:user-tile.html.twig" with {'index' : index} %}
+            {% elseif result|getClass == 'Wall' %} {#WALL#}
+                {% include "P4MCoreBundle:Wall/Tile:wall-tile.html.twig" with {'index' : index,'wall':result} %}
+            {% elseif result|getClass == 'Vote' %} {#VOTE#}
+                {% if result.wall %} {#WALL#}
+                    {% include "P4MCoreBundle:Wall/Tile:wall-tile.html.twig" with {'index' : index,'wall':result.wall} %}
+                {% elseif result.post %} {#POST#}
+                    {% include "P4MCoreBundle:Wall/Tile:post-tile.html.twig" with {'index' : index,'post':result.post} %}
+                {% endif %}
+            {% elseif result|getClass == 'Comment' %}{#COMMENT#}
+                {% if result.wall %} {#WALL#}
+                    {% include "P4MCoreBundle:Wall/Tile:wall-tile.html.twig" with {'index' : index,'wall':result.wall} %}
+                {% elseif result.post %} {#POST#}
+                    {% include "P4MCoreBundle:Wall/Tile:post-tile.html.twig" with {'index' : index,'post':result.post} %}
+                {% endif %}
+
+                {#                    USERACTIVITY#}
+            {% elseif result|getClass == 'UserActivity' %}
+                {% if result.wall %} {#WALL#}
+                    {% include "P4MCoreBundle:Wall/Tile:wall-tile.html.twig" with {'index' : index,'wall':result.wall,showAction:true} %}
+                {% elseif result.post %} {#POST#}
+                    {#                {{result.type}}#}
+                    {% include "P4MCoreBundle:Wall/Tile:post-tile.html.twig" with {'index' : index,'post':result.post,showAction:true} %}
+                {% elseif result.userLink %} {#POST#}
+                    {% include "P4MCoreBundle:Wall/Tile:user-tile.html.twig" with {'index' : index,'result':result.userLink.following} %}
+                {% endif %}
+                {#            USER#}
+            {% elseif result|getClass == 'UserLink' %}
+                {% if result.follower == userDisplayed %}
+                    {% set tileUser = result.following %}
+                {% else %}
+                    {% set tileUser = result.follower %}
+                {% endif %}
+                {% include "P4MCoreBundle:Wall/Tile:user-tile.html.twig" with {'index' : index,'result' : tileUser} %}
+                {#            CATEGORY#}
+            {% elseif result|getClass == 'Category' %}
+                {% include "P4MCoreBundle:Wall/Tile:category-tile.html.twig" with {'category' : result} %}
+            {% elseif result|getClass == 'Tag' %}
+                {% include "P4MCoreBundle:Wall/Tile:tag-tile.html.twig" with {'tag' : result} %}
             {% endif %}
-        {% elseif result|getClass == 'Comment'%}{#COMMENT#}
-            {%if result.wall%} {#WALL#}
-                {% include "P4MCoreBundle:Wall/Tile:wall-tile.html.twig" with {'index' : index,'wall':result.wall}%}
-            {% elseif result.post %} {#POST#}
-                {% include "P4MCoreBundle:Wall/Tile:post-tile.html.twig" with {'index' : index,'post':result.post}%}
-            {% endif %}
 
-{#                    USERACTIVITY#}
-        {% elseif result|getClass == 'UserActivity' %}
-            {%if result.wall%} {#WALL#}
-                {% include "P4MCoreBundle:Wall/Tile:wall-tile.html.twig" with {'index' : index,'wall':result.wall,showAction:true}%}
-            {% elseif result.post %} {#POST#}
-{#                {{result.type}}#}
-                {% include "P4MCoreBundle:Wall/Tile:post-tile.html.twig" with {'index' : index,'post':result.post,showAction:true}%}
-            {% elseif result.userLink %} {#POST#}
-                {% include "P4MCoreBundle:Wall/Tile:user-tile.html.twig" with {'index' : index,'result':result.userLink.following}%}
-            {% endif %}
-{#            USER#}
-        {% elseif result|getClass == 'UserLink' %}
-            {% if result.follower == userDisplayed %}
-                {% set tileUser = result.following%}
-            {% else%}
-                {% set tileUser = result.follower%}
-            {%endif%}
-            {% include "P4MCoreBundle:Wall/Tile:user-tile.html.twig" with {'index' : index,'result' : tileUser}%}
-{#            CATEGORY#}
-        {% elseif result|getClass == 'Category' %}
-            {% include "P4MCoreBundle:Wall/Tile:category-tile.html.twig" with {'category' : result} %}
-        {% elseif result|getClass == 'Tag' %}
-            {% include "P4MCoreBundle:Wall/Tile:tag-tile.html.twig" with {'tag' : result} %}
-        {% endif %}
-
-        {% set index = index+1%}
-    {% endfor %}
-    {% if tilesEdit is defined%}
-         <article data-brick-type="small-brick" class="masonry-block is-hidden">
-            <div class="tile-wrap">
-                <div class="tile">
-                    <div class="tile-wall">
+            {% set index = index+1 %}
+        {% endfor %}
+        {% if tilesEdit is defined %}
+            <article data-brick-type="small-brick" class="masonry-block is-hidden">
+                <div class="tile-wrap">
+                    <div class="tile">
+                        <div class="tile-wall">
 
 
-                        <h1 class="add-new-wall"><a href="{{path('p4m_backoffice_wall_create')}}"><span class="glyphicon server_plus"></span>  Add new strew</a></h1>
+                            <h1 class="add-new-wall"><a href="{{ path('p4m_backoffice_wall_create') }}"><span
+                                            class="glyphicon server_plus">&nbsp;</span>{{ 'Add new strew'|trans({}, 'wall')}}</a></h1>
 
 
+                        </div>
                     </div>
                 </div>
-            </div>
-        </article>
-    {%endif%}
-{% endif%}
-{% endif%}
+            </article>
+        {% endif %}
+    {% endif %}
+{% endif %}
 
 
 

@@ -3,16 +3,16 @@
 
 {% block page %}
 
-<h2 class="form-title">Your bank accounts list</h2>
-<a href="{{path('p4_m_backoffice_money_bankAccount_create_iban')}}" class="main-button-link">NEW IBAN</a>
+<h2 class="form-title">{{ 'Your bank accounts list'|trans({}, 'Backoffice')}}</h2>
+<a href="{{path('p4_m_backoffice_money_bankAccount_create_iban')}}" class="main-button-link">{{ 'NEW IBAN'|trans({}, 'Backoffice')}}</a>
 
 <table class="table table-striped table-sortable">
             <thead>
                 <tr>
-                    <th>Label</th>
-                    <th>Code</th>
-                    <th>Type</th>
-                    <th>Owner Name</th>
+                    <th>{{ 'Label'|trans({}, 'Backoffice')}}</th>
+                    <th>{{ 'Code'|trans({}, 'Backoffice')}}</th>
+                    <th>{{ 'Type'|trans({}, 'Backoffice')}}</th>
+                    <th>{{ 'Owner Name'|trans({}, 'Backoffice')}}</th>
                 </tr>
             </thead>
             <tbody>

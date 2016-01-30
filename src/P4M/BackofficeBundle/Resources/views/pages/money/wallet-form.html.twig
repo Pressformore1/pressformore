@@ -2,46 +2,74 @@
     <div class="page-align-center" id="sign-in-block">
         <h1 class="page-align-center-title">Wallet</h1>
         {% if wallet.Balance.Amount == 0 or walletFill is null %}
-{#        {% if wallet.Balance.Amount == 0 or wallet.Balance.Amount > 0%}#}
-        <p class="regular-text">Your wallet seems to be empty at the moment.</p> 
-        <p class="regular-text">Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.</p>
-        <p class="regular-text">You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.</p>
-            <p class="regular-text">Beware: on {{("now")|date_modify("+1 month")|date("F d, Y")}}, this amount will be distributed to your favorite authors.</p>
-            
-        {%elseif walletFill and walletFill.recurrent %}
-            <p class="regular-text">Your wallet loading is recurrent. The next refill is planned on <strong>{{walletFill.dateExpire|date('F d')}}</strong>
-            <br /> You can change it by moving the cursor below. Changes will apply on next refill <br />
-            
+            {#        {% if wallet.Balance.Amount == 0 or wallet.Balance.Amount > 0%}#}
+            <p class="regular-text">
+                {{ 'Your wallet seems to be empty at the moment.'|trans({}, 'Backoffice')}}
             </p>
-        {%elseif walletFill%}
-            <p class="regular-text">This amount will be ENTIRELY distributed to journalists you like You will be able to charge your wallet again on {{walletFill.dateExpire|date('F d')}}. <br />NB:Or you can make this amount to be recurrently charged every month.
-            <br /> 
-            
+            <p class="regular-text">
+                {{ 'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.'|trans({}, 'Backoffice')}}
             </p>
-        {%endif%}
-        
-        <form id="wallet-load-amount" method="post" {% if wallet.Balance.Amount == 0 or walletFill is null %}action="{{path('p4_m_mango_pay_wallet_charge_post')}}"{%elseif walletFill and walletFill.recurrent %}class="ajax_form" data-target="serialize" data-action="changeRecurrentWalletAmount" data-loader="content" data-key="{{'changeRecurrentWalletAmount'|sha512}}" data-url="{{path('p4m_ajax_action')}}"{%endif%}>
-            <input id="wallet-load-amount-field" name="ammount" class="knob" {%if (walletFill and walletFill.recurrent == false) and wallet.Balance.Amount >0%}disabled="disabled"  data-readOnly="true"  data-fgColor="#999"{%else%} data-fgColor="#ed3237"{%endif%} data-width="500" data-height="500" data-displayInput="true" value="{%if walletFill%}{{walletFill.amount/100}}{%else%}5{%endif%}" data-max="100">
+            <p class="regular-text">
+                {{ ''|trans({}, 'Backoffice')}}
+                You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.
+            </p>
+            <p class="regular-text">Beware: on {{ ("now")|date_modify("+1 month")|date("F d, Y") }}, this amount will be
+                distributed to your favorite authors.</p>
+
+        {% elseif walletFill and walletFill.recurrent %}
+            <p class="regular-text">Your wallet loading is recurrent. The next refill is planned on
+                <strong>{{ walletFill.dateExpire|date('F d') }}</strong>
+                <br/> You can change it by moving the cursor below. Changes will apply on next refill <br/>
+
+            </p>
+        {% elseif walletFill %}
+            <p class="regular-text">This amount will be ENTIRELY distributed to journalists you like You will be able to
+                charge your wallet again on {{ walletFill.dateExpire|date('F d') }}. <br/>NB:Or you can make this amount
+                to be recurrently charged every month.
+                <br/>
+
+            </p>
+        {% endif %}
+
+        <form id="wallet-load-amount" method="post"
+              {% if wallet.Balance.Amount == 0 or walletFill is null %}action="{{ path('p4_m_mango_pay_wallet_charge_post') }}"
+              {% elseif walletFill and walletFill.recurrent %}class="ajax_form" data-target="serialize"
+              data-action="changeRecurrentWalletAmount" data-loader="content"
+              data-key="{{ 'changeRecurrentWalletAmount'|sha512 }}" data-url="{{ path('p4m_ajax_action') }}"{% endif %}>
+            <input id="wallet-load-amount-field" name="ammount" class="knob"
+                   {% if (walletFill and walletFill.recurrent == false) and wallet.Balance.Amount >0 %}disabled="disabled"
+                   data-readOnly="true" data-fgColor="#999"{% else %} data-fgColor="#ed3237"{% endif %} data-width="500"
+                   data-height="500" data-displayInput="true"
+                   value="{% if walletFill %}{{ walletFill.amount/100 }}{% else %}5{% endif %}" data-max="100">
             {% if wallet.Balance.Amount == 0 or walletFill is null %}
-            <p class="text-center lead">From now to {{("now")|date_modify("+1 month")|date("F d, Y")}}</p>   
-            <p><input type="checkbox" name="preAuthorisation" id="wallet-load-amount-monthly"><label for="wallet-load-amount-monthly">Load this amount monthly</label></p>
-            {%endif%}
-                
-            {%if walletFill and walletFill.recurrent%}
+                <p class="text-center lead">From now to {{ ("now")|date_modify("+1 month")|date("F d, Y") }}</p>
+                <p><input type="checkbox" name="preAuthorisation" id="wallet-load-amount-monthly"><label
+                            for="wallet-load-amount-monthly">Load this amount monthly</label></p>
+            {% endif %}
+
+            {% if walletFill and walletFill.recurrent %}
                 <input type="hidden" name="callBack" value="loadWalletForm"/>
                 <div class="{#form-line#}">
                     <div class="col-lg-22 col-md-22 col-xs-22 col-gd-22">
-                    <button type="submit" id="change-amount" disabled="disabled" class="primary pfm-grey-button">Change amount <br />It will take effect on {{walletFill.dateExpire|date('F d')}}</button>
+                        <button type="submit" id="change-amount" disabled="disabled" class="primary pfm-grey-button">
+                            Change amount <br/>It will take effect on {{ walletFill.dateExpire|date('F d') }}</button>
                     </div>
                     <div class="col-lg-10 col-md-10 col-xs-10 col-gd-10">
-                    <button class="primary ajax_action" data-action="stopWalletRecurrency" data-url="{{path('p4m_ajax_action')}}" data-key="{{'stopWalletRecurrency'|sha512()}}" data-params="{{ {callBack:'loadWalletForm'}|json_encode() }}" data-loader="content"><span class="">Stop recurrency</span></button>
+                        <button class="primary ajax_action" data-action="stopWalletRecurrency"
+                                data-url="{{ path('p4m_ajax_action') }}"
+                                data-key="{{ 'stopWalletRecurrency'|sha512() }}"
+                                data-params="{{ {callBack:'loadWalletForm'}|json_encode() }}" data-loader="content">
+                            <span class="">Stop recurrency</span></button>
                     </div>
                 </div>
-            {%elseif walletFill%}
+            {% elseif walletFill %}
                 <div class="col-lg-10 col-md-10 col-xs-10 col-gd-10">
-                    <button class="primary ajax_action" data-action="startWalletRecurrency" data-url="{{path('p4m_ajax_action')}}" data-key="{{'startWalletRecurrency'|sha512()}}" data-params="{{ {callBack:'loadWalletForm'}|json_encode() }}" data-loader="content"><span class="">Make it Recurrent</span></button>
+                    <button class="primary ajax_action" data-action="startWalletRecurrency"
+                            data-url="{{ path('p4m_ajax_action') }}" data-key="{{ 'startWalletRecurrency'|sha512() }}"
+                            data-params="{{ {callBack:'loadWalletForm'}|json_encode() }}" data-loader="content"><span
+                                class="">Make it Recurrent</span></button>
                 </div>
-            {%endif%}
+            {% endif %}
         </form>
     </div>
 </div>

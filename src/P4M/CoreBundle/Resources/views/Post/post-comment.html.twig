@@ -1,75 +1,76 @@
+{% set voteScore = user|commentVoteScore(comment.id) %}
+{% set plusClass = '' %}
+{% set lessClass = '' %}
 
-{% set voteScore = user|commentVoteScore(comment.id)%}
-{% set plusClass = ''%}
-{% set lessClass = ''%}
-
-{%if voteScore>0 %}
-    {% set plusClass = ' selected'%}
-    {% elseif voteScore<0 %}
-    {% set lessClass = ' selected'%}
+{% if voteScore>0 %}
+    {% set plusClass = ' selected' %}
+{% elseif voteScore<0 %}
+    {% set lessClass = ' selected' %}
 {% endif %}
 
-<li class="comment-item" id="li-comment-{{comment.id}}">
+<li class="comment-item" id="li-comment-{{ comment.id }}">
     <article class="comment">
 
-            <header class="comment-header">
-                    <a href="#" class="comment-hover comment-vote-up ajax_action" data-loader="none" data-url="{{path('p4m_ajax_action')}}" data-params="{{{'score':1,'commentId':comment.id}|json_encode()}}" data-action="commentVote" data-key="{{{'score':1,'commentId':comment.id}|json_encode()|sha512}}"> <span class="glyphicon plus"></span></a>
-{#                    <a href="#"  data-target="#modal-register" data-toggle="modal" class="comment-hover comment-vote-up {{plusClass}}"> <span class="glyphicon plus"></span></a>#}
-                    <div class="comment-header-avatar">
-                            <img class="thumb-align" src="{{asset(comment.user.picture.webPath)}}" alt="">
-                    </div>
-                    <a href="#" class="comment-hover comment-vote-down ajax_action " data-loader="none" class="comment-hover comment-vote-down ajax_action{{lessClass}}" data-url="{{path('p4m_ajax_action')}}" data-params="{{{'score':-1,'commentId':comment.id}|json_encode()}}" data-action="commentVote" data-key="{{{'score':-1,'commentId':comment.id}|json_encode()|sha512}}"><span class="glyphicon minus"></span></a>
-{#                    <a href="#" data-target="#modal-register" data-toggle="modal" class="comment-hover comment-vote-down {{lessClass}}"><span class="glyphicon minus"></span></a>#}
-                    <div class="rating-horizontal-bar">
-                            <span class="rating-horizontal-bar-plus" style="width:{{comment.positiveVoteNumber|percentVote(comment.votes|length)}}%;"></span>
-                            <span class="rating-horizontal-bar-less" style="width:{{comment.negativeVoteNumber|percentVote(comment.votes|length)}}%;"></span>
-                    </div>
-                    <p class="comment-rating-total comment-hover">{{comment.votes|length}}</p>
-            </header>
+        <header class="comment-header">
+            <a href="#" class="comment-hover comment-vote-up ajax_action" data-loader="none"
+               data-url="{{ path('p4m_ajax_action') }}"
+               data-params="{{ {'score':1,'commentId':comment.id}|json_encode() }}" data-action="commentVote"
+               data-key="{{ {'score':1,'commentId':comment.id}|json_encode()|sha512 }}"> <span
+                        class="glyphicon plus"></span></a>
+            {#                    <a href="#"  data-target="#modal-register" data-toggle="modal" class="comment-hover comment-vote-up {{plusClass}}"> <span class="glyphicon plus"></span></a>#}
+            <div class="comment-header-avatar">
+                <img class="thumb-align" src="{{ asset(comment.user.picture.webPath) }}" alt="">
+            </div>
+            <a href="#" class="comment-hover comment-vote-down ajax_action " data-loader="none"
+               class="comment-hover comment-vote-down ajax_action{{ lessClass }}"
+               data-url="{{ path('p4m_ajax_action') }}"
+               data-params="{{ {'score':-1,'commentId':comment.id}|json_encode() }}" data-action="commentVote"
+               data-key="{{ {'score':-1,'commentId':comment.id}|json_encode()|sha512 }}"><span
+                        class="glyphicon minus"></span></a>
+            {#                    <a href="#" data-target="#modal-register" data-toggle="modal" class="comment-hover comment-vote-down {{lessClass}}"><span class="glyphicon minus"></span></a>#}
+            <div class="rating-horizontal-bar">
+                <span class="rating-horizontal-bar-plus"
+                      style="width:{{ comment.positiveVoteNumber|percentVote(comment.votes|length) }}%;"></span>
+                <span class="rating-horizontal-bar-less"
+                      style="width:{{ comment.negativeVoteNumber|percentVote(comment.votes|length) }}%;"></span>
+            </div>
+            <p class="comment-rating-total comment-hover">{{ comment.votes|length }}</p>
+        </header>
 
-            <section class="comment-content">
+        <section class="comment-content">
 
-                    <a class="comment-author" href="{{path('p4m_social_profile',{'username':comment.user.username})}}">{{comment.user.username}}</a>
+            <a class="comment-author"
+               href="{{ path('p4m_social_profile',{'username':comment.user.username}) }}">{{ comment.user.username }}</a>
 
-                    <a class="comment-date comment-hover">
-                            <time datetime="{{comment.dateAdded|date('c')}}"> - {{comment.dateAdded|date('F j Y G:i')}}</time>
-                    </a>
-                    <p class="comment-content-text">{{comment.content}}</p>
-            </section><!-- .comment-content -->
-            <footer class="comment-meta clearfix">
-                    <div class="comment-meta-link comment-hover">
-                        {% if child is not defined %}
-                             <a href="#" data-target="#modal-addComment" data-toggle="modal" data-id="{{comment.id}}" class="comment-reply-link"><span class="glyphicon share"></span> Reply</a> 
-{#                            <a href="#" data-target="#modal-register" data-toggle="modal" data-id="{{comment.id}}" class="comment-reply-link"><span class="glyphicon share"></span> Reply</a> #}
-                        {%endif%}
-                            <a href=""><span class="glyphicon circle_exclamation_mark"></span> Signal this comment</a>
-                    </div>
+            <a class="comment-date comment-hover">
+                <time datetime="{{ comment.dateAdded|date('c') }}"> - {{ comment.dateAdded|date('F j Y G:i') }}</time>
+            </a>
+            <p class="comment-content-text">{{ comment.content }}</p>
+        </section><!-- .comment-content -->
+        <footer class="comment-meta clearfix">
+            <div class="comment-meta-link comment-hover">
+                {% if child is not defined %}
+                    <a href="#" data-target="#modal-addComment" data-toggle="modal" data-id="{{ comment.id }}"
+                       class="comment-reply-link"><span class="glyphicon share">&nbsp;</span>{{ 'Reply'|trans({}, 'post')}}</a>
+                    {#                            <a href="#" data-target="#modal-register" data-toggle="modal" data-id="{{comment.id}}" class="comment-reply-link"><span class="glyphicon share"></span> Reply</a> #}
+                {% endif %}
+                <a href=""><span class="glyphicon circle_exclamation_mark">&nbsp;</span>{{ 'Signal this comment'|trans({}, 'post')}}</a>
+            </div>
 
-            </footer><!-- .reply -->
-            <div class="clear"></div>
+        </footer><!-- .reply -->
+        <div class="clear"></div>
     </article><!-- #comment-## -->
-<div class="clear"></div>
+    <div class="clear"></div>
     <ol class="children">
-        {% set childIndex = 0%}
-            {% for child in comment.children %}
-                    {%include "P4MCoreBundle:Post:post-comment.html.twig" with {'comment' : child,'child':1,'childIndex':childIndex} %} 
-                {% set childIndex = childIndex + 1%}
-            {%endfor %}
-            
+        {% set childIndex = 0 %}
+        {% for child in comment.children %}
+            {% include "P4MCoreBundle:Post:post-comment.html.twig" with {'comment' : child,'child':1,'childIndex':childIndex} %}
+            {% set childIndex = childIndex + 1 %}
+        {% endfor %}
+
     </ol><!-- .children -->
     <div class="clear"></div>
 </li><!-- #comment-## -->
-
-
-
-
-
-
-
-
-
-
-
 
 
 {#

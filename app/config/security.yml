@@ -56,8 +56,8 @@ security:
             pattern: ^[/]*
 
             oauth:
-                failure_path: /secure_area/connect
-                login_path: /secure_area/login
+                failure_path: hwi_oauth_connect
+                login_path: fos_user_security_login
                 check_path: fos_user_security_check
                 provider: fos_userbundle
                 resource_owners:
@@ -70,12 +70,12 @@ security:
                 csrf_provider: form.csrf_provider
                 check_path: fos_user_security_check
                 login_path: fos_user_security_login
-                default_target_path: /my-wall #default location to redirect after successful login
+                default_target_path: p4m_core_wall #default location to redirect after successful login
 
             anonymous: ~
             logout:
                 path: fos_user_security_logout
-                target: /secure_area/login #where to go after logout
+                target: fos_user_security_login #where to go after logout
 
 #        main:
 #            pattern:   ^[/]*

@@ -1,16 +1,16 @@
 <div style="display: none;" class="pagination" role="navigation">
- <span>Page 1 of 4</span><span class="current">1</span>   
- {% set route = app.request.attributes.get('_route')%} 
-{% for i in 2..nombrePages %}
-   
-    {% if route == 'p4m_core_showWall'%}
- 
-        {%set postPath = path('p4m_core_showWall', {'wallSlug': wall.slug , 'page': i}) %}
-    {%else %}
-        {%set postPath = path('p4m_core_showHistory', {'page': i}) %}
-    {%endif%}
-    
-    <a href="{{postPath}}" class="inactive">{{i}}</a>
-    
-{% endfor %}
+    <span>Page 1 of 4</span><span class="current">1</span>
+    {% set route = app.request.attributes.get('_route') %}
+    {% for i in 2..nombrePages %}
+
+        {% if route == 'p4m_core_showWall' %}
+
+            {% set postPath = path('p4m_core_showWall', {'wallSlug': wall.slug , 'page': i}) %}
+        {% else %}
+            {% set postPath = path('p4m_core_showHistory', {'page': i}) %}
+        {% endif %}
+
+        <a href="{{ postPath }}" class="inactive">{{ i }}</a>
+
+    {% endfor %}
 </div>

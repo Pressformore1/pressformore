@@ -1,61 +1,60 @@
-{%set route = app.request.get('_route')%}
+{% set route = app.request.get('_route') %}
 
 <div id="action-bar-wrap">
-{#  *
-*
-*   MENU
-*
-#}
-    
+    {#  *
+    *
+    *   MENU
+    *
+    #}
+
     <ul id="action-bar">
-    {%if route == 'p4m_core_showWall' or route == 'p4m_core_showHistory' or route == 'p4m_core_showReadLater' %}
-        
-        {% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-wall-menu.html.twig"%}
-    
-    {% elseif route == "p4m_core_post"%}
-        {%if user is not null%}
-            {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-menu.html.twig"%}
-        {%else%}
-            {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-menu-nolog.html.twig"%}
-        {%endif%}
-    {% elseif route == "p4m_social_profile"%}
-        {%if user is not null%}
-        {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-menu.html.twig"%}
-        {%else%}
-        {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-menu-nolog.html.twig"%}
-        {%endif%}
-    {%endif%}
+        {% if route == 'p4m_core_showWall' or route == 'p4m_core_showHistory' or route == 'p4m_core_showReadLater' %}
+
+            {% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-wall-menu.html.twig" %}
+
+        {% elseif route == "p4m_core_post" %}
+            {% if user is not null %}
+                {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-menu.html.twig" %}
+            {% else %}
+                {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-menu-nolog.html.twig" %}
+            {% endif %}
+        {% elseif route == "p4m_social_profile" %}
+            {% if user is not null %}
+                {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-menu.html.twig" %}
+            {% else %}
+                {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-menu-nolog.html.twig" %}
+            {% endif %}
+        {% endif %}
     </ul>
-{#  *
-*
-*   SECTIONS
-*
-#}
+    {#  *
+    *
+    *   SECTIONS
+    *
+    #}
     <div id="action-bar-sections-wrap">
         <a id="action-bar-remove" href="#closeSections"><i class="icon-remove"></i></a>
         <div id="action-bar-sections-slider">
             <ul id="action-bar-sections">
-                {%if route == 'p4m_core_showWall'%}
-                    {% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-wall-actions.html.twig"%}
-                {#{% elseif route == 'p4m_core_showHistory' %}
-                    {% include "P4MCoreBundle:Menu/ActionBar/Wall:history-filters.html.twig"%}#}
-                {% elseif  route == 'p4m_core_showHistory'  or route == 'p4m_core_showReadLater'%}
-                    {% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-filters-action.html.twig"%}
-                {% elseif route == "p4m_core_post"%}
-                    {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-actions.html.twig"%}
-                {% elseif route == "p4m_social_profile"%}
-                    {%if user is not null%}
-                    {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-actions.html.twig"%}
-                    {%else%}
-                    {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-actions-nolog.html.twig"%}
-                    {%endif%}
-                {%endif%}
+                {% if route == 'p4m_core_showWall' %}
+                    {% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-wall-actions.html.twig" %}
+                    {#{% elseif route == 'p4m_core_showHistory' %}
+                        {% include "P4MCoreBundle:Menu/ActionBar/Wall:history-filters.html.twig"%}#}
+                {% elseif  route == 'p4m_core_showHistory'  or route == 'p4m_core_showReadLater' %}
+                    {% include "P4MCoreBundle:Menu/ActionBar/Wall:action-bar-filters-action.html.twig" %}
+                {% elseif route == "p4m_core_post" %}
+                    {% include "P4MCoreBundle:Menu/ActionBar/Post:action-bar-post-actions.html.twig" %}
+                {% elseif route == "p4m_social_profile" %}
+                    {% if user is not null %}
+                        {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-actions.html.twig" %}
+                    {% else %}
+                        {% include "P4MCoreBundle:Menu/ActionBar/Profile:action-bar-profile-actions-nolog.html.twig" %}
+                    {% endif %}
+                {% endif %}
             </ul>
         </div>
     </div>
-    
-    
-    
+
+
 </div>
 
 {#

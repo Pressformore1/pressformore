@@ -1,28 +1,36 @@
- {%set notificationNumber = getUnreadNotificationNumber(user)%}
-{%set notificationId = [] %}
-{% for notification in user.notifications%}
+{% set notificationNumber = getUnreadNotificationNumber(user) %}
+{% set notificationId = [] %}
+{% for notification in user.notifications %}
     {% set notificationId = notificationId|merge([notification.id]) %}
-{%endfor%}
+{% endfor %}
 <li class="menu-item" id="menu-notifications">
-    <a class="menu-item-icon ajax_action" href="#notifcation-menu" data-loader="none" data-url="{{path('p4m_ajax_action')}}" data-action="setNotificationsRead" data-key="{{'setNotificationsRead'|sha512()}}" data-params="{{{callBack:'notificationRead',notifications:notificationId}|json_encode()}}">
+    <a class="menu-item-icon ajax_action" href="#notifcation-menu" data-loader="none"
+       data-url="{{ path('p4m_ajax_action') }}" data-action="setNotificationsRead"
+       data-key="{{ 'setNotificationsRead'|sha512() }}"
+       data-params="{{ {callBack:'notificationRead',notifications:notificationId}|json_encode() }}">
         <span class="glyphicon bell"></span>
-        <span class="notificication-count {% if notificationNumber ==0 %}hidden{%endif%}">{{getUnreadNotificationNumber(user)}}</span>
+        <span class="notificication-count {% if notificationNumber ==0 %}hidden{% endif %}">{{ getUnreadNotificationNumber(user) }}</span>
     </a>
 
     <div id="notifications-box" data-status="close">
         <div id="notifications-box-corner"></div>
         <div id="notifications-tab">
-            <button title="Coming Soon" class="primary tooltip-menu-icon">{{ 'Messages'|trans({}, 'menu')}}</button>
-            <button class="primary selected">{{ 'Notifications'|trans({}, 'menu')}}</button>
+            <button title="Coming Soon" class="primary tooltip-menu-icon">{{ 'Messages'|trans({}, 'menu') }}</button>
+            <button class="primary selected">{{ 'Notifications'|trans({}, 'menu') }}</button>
             <div class="clear"></div>
         </div>
 
         <ul class="notifications-list">
-{#        {% for notification in notifications%}#}
-            {% include 'P4MBackofficeBundle:pages/notification:notification.html.twig'%}
-{#        {%endfor%}#}
-            <li class="notification"><a class="align-right ajax_action" id="more-notifications-menu" href="#" data-loader="none" data-url="{{path('p4m_ajax_action')}}" data-action="loadUserNotifications" data-key="{{'loadUserNotifications'|sha512}}" data-params="{{ {page:2,target:'more-notifications-menu',callBack:'loadUserNotifications'}|json_encode() }}">{{ 'More notifications'|trans({}, 'menu') }}</a></li>
+            {#        {% for notification in notifications%}#}
+            {% include 'P4MBackofficeBundle:pages/notification:notification.html.twig' %}
+            {#        {%endfor%}#}
+            <li class="notification"><a class="align-right ajax_action" id="more-notifications-menu" href="#"
+                                        data-loader="none" data-url="{{ path('p4m_ajax_action') }}"
+                                        data-action="loadUserNotifications"
+                                        data-key="{{ 'loadUserNotifications'|sha512 }}"
+                                        data-params="{{ {page:2,target:'more-notifications-menu',callBack:'loadUserNotifications'}|json_encode() }}">{{ 'More notifications'|trans({}, 'menu') }}</a>
+            </li>
         </ul>
-        
+
     </div>
 </li>

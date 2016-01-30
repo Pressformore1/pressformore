@@ -1,22 +1,22 @@
 {% set user = app.security.getToken().getUser() %}
 
 {#              Setting dates class to help filters#}
-{%if post|getClass == 'Post'%}
+{% if post|getClass == 'Post' %}
     {% if date(post.dateAdded)>date('-1day') %}
-      {% set dateClass = "time_1d" %}
+        {% set dateClass = "time_1d" %}
     {% elseif date(post.dateAdded)>date('-3days') %}
-      {% set dateClass = "time_3d" %}
+        {% set dateClass = "time_3d" %}
     {% elseif  date(post.dateAdded)>date('-1week') %}
-      {% set dateClass = "time_7d" %}
+        {% set dateClass = "time_7d" %}
     {% elseif  date(post.dateAdded)>date('-1month') %}
-      {% set dateClass = "time_30d" %}
+        {% set dateClass = "time_30d" %}
     {% else %}
-      {% set dateClass = "time_1000d" %}
+        {% set dateClass = "time_1000d" %}
     {% endif %}
     {% set postLink = path('p4m_core_post',{'postSlug':post.slug}) %}
-    {%if post.iframeAllowed == false and post.embed is null%} 
+    {% if post.iframeAllowed == false and post.embed is null %}
         {% set postLink = post.sourceUrl %}
-    {%endif%}
+    {% endif %}
 
 
     {#SCORE#}
@@ -24,27 +24,27 @@
     {% set maxScore = getTopScore() %}
 
     {% set score = 1 %}
-    {% if post.score%}
-        {% set score = (post.score.score/(maxScore/4))|round(0, 'floor')%}
+    {% if post.score %}
+        {% set score = (post.score.score/(maxScore/4))|round(0, 'floor') %}
     {% endif %}
 
-    {%set score = random(3)+1%}
+    {% set score = random(3)+1 %}
 
-    {%if score < 2 %}
-    {% set sizeClass= 'small-brick'%}
-    {%elseif score < 3 %}
-    {% set sizeClass= 'normal-brick'%}
-    {%elseif score < 4%}
-    {% set sizeClass= 'large-brick'%}
+    {% if score < 2 %}
+        {% set sizeClass= 'small-brick' %}
+    {% elseif score < 3 %}
+        {% set sizeClass= 'normal-brick' %}
+    {% elseif score < 4 %}
+        {% set sizeClass= 'large-brick' %}
     {% else %}
-    {% set sizeClass= 'extra-large-brick'%}
-    {%endif%}
-{%else%}
+        {% set sizeClass= 'extra-large-brick' %}
+    {% endif %}
+{% else %}
     {% set dateClass = "time_1000d" %}
     {% set postLink = '' %}
-    {% set sizeClass= 'small-brick'%}
+    {% set sizeClass= 'small-brick' %}
     {% set score = 1 %}
-{%endif%}
+{% endif %}
 
 
 
@@ -52,86 +52,102 @@
 
 
 
-{% if forceTileClass is defined%}
-{% set sizeClass= forceTileClass %}
-{%endif%}
+{% if forceTileClass is defined %}
+    {% set sizeClass= forceTileClass %}
+{% endif %}
 
 
+<article id="post_{{ post.id }}" data-score="{{ score }}"
+         {#data-originalscore="{{post.score.score}}" data-maxScore="{{maxScore}}"#}data-brick-type="{{ sizeClass }}"
+         class="masonry-block is-hidden">
+    <div class="tile-wrap">
+        <div class="tile">
+            <div class="tile-post">
 
+                <header class="tile-header">
+                    {#            {{user}}#}
+                    {% if user != null  and user != 'anon.' and user != 'anon' %}
+                        {#                {{dump(user)}}#}
+                        <span class="{{ post|pressformClass(user) }} pressformed-post-icon"></span>
+                    {% elseif post.author %}
+                        <span class="icon-logo pfm-grey pressformed-post-icon"></span>
+                    {% endif %}
 
-<article  id="post_{{post.id}}" data-score="{{score}}" {#data-originalscore="{{post.score.score}}" data-maxScore="{{maxScore}}"#}data-brick-type="{{sizeClass}}" class="masonry-block is-hidden">
-<div class="tile-wrap">
-    <div class="tile">
-        <div class="tile-post">
+                    {% if post.iframeAllowed == false and post.embed is null %}
+                        <span class="glyphicon exit pfm-grey pressformed-post-icon"></span>
+                    {% endif %}
+                    {% if showAction is defined and showAction %}
+                        {# Pour si on veut montrer les icones dans tous les murs
 
-            <header class="tile-header">
-{#            {{user}}#}
-            {%if user != null  and user != 'anon.' and user != 'anon'%}
-{#                {{dump(user)}}#}
-                <span class="{{post|pressformClass(user)}} pressformed-post-icon"></span>
-            {%elseif post.author%}
-                <span class="icon-logo pfm-grey pressformed-post-icon"></span>
-            {%endif%}
-            
-            {%if post.iframeAllowed == false and post.embed is null%}
-                <span class="glyphicon exit pfm-grey pressformed-post-icon"></span>
-            {%endif%}
-            {%if showAction is defined and showAction%}
-                {# Pour si on veut montrer les icones dans tous les murs
-                
-                {%if (userDisplayed is defined and userDisplayed) or (user is defined and user != 'anon')%}
-                {%if (userDisplayed is defined and userDisplayed)%}
-                    {%set targetUser = userDisplayed%}
-                {%else%}
-                    {%set targetUser = user%}
-                {%endif%}#}
-                <span class="tile-header-action">
-                {%set actions = getPostAction(post,userDisplayed)%}
-                {% if 'post_voted' in actions%}
-{#                    <span class="glyphicon heart-empty pfm-grey tile-icon"></span>#}
-                    <img class="tile-icon" src="{{asset('images/uploads/images/notifications/glyphicons_019_heart_empty.png')}}">
-                {%endif%}
-                {% if 'post_added' in actions%}
-                   <img class="tile-icon" src="{{asset('images/uploads/images/notifications/glyphicons_131_inbox_plus.png')}}">
-                {%endif%}
-                {% if 'post_commented' in actions%}
-                    <img class="tile-icon" src="{{asset('images/uploads/images/notifications/glyphicons_235_pen.png')}}">
-                {%endif%}
+                        {%if (userDisplayed is defined and userDisplayed) or (user is defined and user != 'anon')%}
+                        {%if (userDisplayed is defined and userDisplayed)%}
+                            {%set targetUser = userDisplayed%}
+                        {%else%}
+                            {%set targetUser = user%}
+                        {%endif%}#}
+                        <span class="tile-header-action">
+                {% set actions = getPostAction(post,userDisplayed) %}
+                            {% if 'post_voted' in actions %}
+                                {#                    <span class="glyphicon heart-empty pfm-grey tile-icon"></span>#}
+                                <img class="tile-icon"
+                                     src="{{ asset('images/uploads/images/notifications/glyphicons_019_heart_empty.png') }}">
+                            {% endif %}
+                            {% if 'post_added' in actions %}
+                                <img class="tile-icon"
+                                     src="{{ asset('images/uploads/images/notifications/glyphicons_131_inbox_plus.png') }}">
+                            {% endif %}
+                            {% if 'post_commented' in actions %}
+                                <img class="tile-icon"
+                                     src="{{ asset('images/uploads/images/notifications/glyphicons_235_pen.png') }}">
+                            {% endif %}
                 </span>
-            {%endif%}
-                <!--<span class="tile-header-action"><img class="tile-icon" src="images/design/icons/heart-gray-color.png"></span>-->
-                <h2 class="tile-header-title">
-                    <span class="main">{{post.title}}</span>
-                </h2>
-                <div class="tile-header-thumb">
-{#<<<<<<< .mine
-                     <img onerror="imgError(this);" class="thumb-align" src="{%if post.localPicture|length>0%}{{asset(post.localPicture)}}{%else%}{{post.picture}}{%endif%}" alt="">
-=======#}
-                     <img onerror="imgError(this);" src="{%if post.localPicture|length>15%}{{asset(post.localPicture)}}{%else%}{{post.picture}}{%endif%}" alt="">
-{#>>>>>>> .r213#}
-                </div>
+                    {% endif %}
+                    <!--<span class="tile-header-action"><img class="tile-icon" src="images/design/icons/heart-gray-color.png"></span>-->
+                    <h2 class="tile-header-title">
+                        <span class="main">{{ post.title }}</span>
+                    </h2>
+                    <div class="tile-header-thumb">
+                        {#<<<<<<< .mine
+                                             <img onerror="imgError(this);" class="thumb-align" src="{%if post.localPicture|length>0%}{{asset(post.localPicture)}}{%else%}{{post.picture}}{%endif%}" alt="">
+                        =======#}
+                        <img onerror="imgError(this);"
+                             src="{% if post.localPicture|length>15 %}{{ asset(post.localPicture) }}{% else %}{{ post.picture }}{% endif %}"
+                             alt="">
+                        {#>>>>>>> .r213#}
+                    </div>
 
-            </header>
+                </header>
 
-            <div class="tile-hover">
+                <div class="tile-hover">
                     <!--Croix en haut � droite-->
-            {%if app.request.attributes.get('_route') == 'p4m_core_showReadLater'%}
-                <span class="tile-remove"><span class="glyphicon remove ajax_action" data-url="{{path('p4m_ajax_action')}}" data-params="{{{'postId':post.id,callBack:'unReadPostLater'}|json_encode()}}" data-action="unReadPostLater" data-key="{{{'postId':post.id,callBack:'unReadPostLater'}|json_encode()|sha512}}"></span></span>
-            {%else%}
-                <span class="tile-remove"><span class="glyphicon remove ajax_action" data-url="{{path('p4m_ajax_action')}}" data-params="{{{'postId':post.id}|json_encode()}}" data-action="banPost" data-key="{{{'postId':post.id}|json_encode()|sha512}}"></span></span>
-            {%endif%}
-                <div class="clear"></div>
-                    <a href="{{postLink}}" class="post-tile-link-fix{%if post.iframeAllowed == false and post.embed is null%} external-link{%endif%}" ></a>
-                    
+                    {% if app.request.attributes.get('_route') == 'p4m_core_showReadLater' %}
+                        <span class="tile-remove"><span class="glyphicon remove ajax_action"
+                                                        data-url="{{ path('p4m_ajax_action') }}"
+                                                        data-params="{{ {'postId':post.id,callBack:'unReadPostLater'}|json_encode() }}"
+                                                        data-action="unReadPostLater"
+                                                        data-key="{{ {'postId':post.id,callBack:'unReadPostLater'}|json_encode()|sha512 }}"></span></span>
+                    {% else %}
+                        <span class="tile-remove"><span class="glyphicon remove ajax_action"
+                                                        data-url="{{ path('p4m_ajax_action') }}"
+                                                        data-params="{{ {'postId':post.id}|json_encode() }}"
+                                                        data-action="banPost"
+                                                        data-key="{{ {'postId':post.id}|json_encode()|sha512 }}"></span></span>
+                    {% endif %}
+                    <div class="clear"></div>
+                    <a href="{{ postLink }}"
+                       class="post-tile-link-fix{% if post.iframeAllowed == false and post.embed is null %} external-link{% endif %}"></a>
+
                     <!--Contenu titre et description-->
 
-                        <h2 class="tile-hover-title">
-                            <a href="{{postLink}}" {%if post.iframeAllowed == false%}class="external-link"{%endif%}>
-                                <span class="main">{{post.title}}</span>
-                            </a> 
-                        </h2>
+                    <h2 class="tile-hover-title">
+                        <a href="{{ postLink }}" {% if post.iframeAllowed == false %}class="external-link"{% endif %}>
+                            <span class="main">{{ post.title }}</span>
+                        </a>
+                    </h2>
 
-                        <p class="tile-hover-description"><a href="{{postLink}}"{%if post.iframeAllowed == false and post.embed is null%}class="external-link"{%endif%}>{{post.content}}</a></p>
+                    <p class="tile-hover-description"><a href="{{ postLink }}"
+                                                         {% if post.iframeAllowed == false and post.embed is null %}class="external-link"{% endif %}>{{ post.content }}</a>
+                    </p>
 
 
                     <div class="clear"></div>
@@ -139,57 +155,71 @@
                     <footer class="tile-hover-footer">
                         <!--Meta source/author/reach-->
                         <div class="tile-hover-footer-meta">
-                                <a class="tile-hover-meta post-content-source" href="#"><span class="glyphicon globe_af"></span> <span class="source-text">{{post.sourceUrl|domain}}</span></a>&nbsp;
-                                {%if post.author%}
-                                <a class="tile-hover-meta post-footer-author" href="{{path('p4m_social_profile',{'username':post.author.username})}}"><span class="glyphicon {#user#}pencil"></span> <span class="author-text">{{post.author.username}}</span></a>&nbsp;
-                                {%else%}
-                                    <a class="tile-hover-meta post-footer-author" href="{{path('p4m_social_profile',{'username':post.user.username})}}"><span class="glyphicon user"></span> <span class="author-text">{{post.user.username}}</span></a>&nbsp;
-                                {%endif%}
-                                <span class="tile-hover-meta post-footer-right">{{post.comments|length}} <span class="glyphicon comments"></span></span> &nbsp;
+                            <a class="tile-hover-meta post-content-source" href="#"><span
+                                        class="glyphicon globe_af"></span> <span
+                                        class="source-text">{{ post.sourceUrl|domain }}</span></a>&nbsp;
+                            {% if post.author %}
+                                <a class="tile-hover-meta post-footer-author"
+                                   href="{{ path('p4m_social_profile',{'username':post.author.username}) }}"><span
+                                            class="glyphicon {#user#}pencil"></span> <span
+                                            class="author-text">{{ post.author.username }}</span></a>&nbsp;
+                            {% else %}
+                                <a class="tile-hover-meta post-footer-author"
+                                   href="{{ path('p4m_social_profile',{'username':post.user.username}) }}"><span
+                                            class="glyphicon user"></span> <span
+                                            class="author-text">{{ post.user.username }}</span></a>&nbsp;
+                            {% endif %}
+                            <span class="tile-hover-meta post-footer-right">{{ post.comments|length }} <span
+                                        class="glyphicon comments"></span></span> &nbsp;
                         </div>
                         <div class="clear"></div>
-                        
+
                         <!--Categories-->
-                        {%if post.categories is defined%}
+                        {% if post.categories is defined %}
                             <div class="tile-post-categories">
                                 <ul class="categories-list">
-                                {%set i = 0%}
-                                {% for category in post.categories%}
-                                    {#Limite le nombre de catégorie affiché à 5#}
-                                    {% if i < 5%}
-                                        {% include 'P4MCoreBundle:Core:categoryAction.html.twig'%}
-                                    {% endif %}
-                                    {%set i = i +1%}
-                                {% endfor %}
-                                    
+                                    {% set i = 0 %}
+                                    {% for category in post.categories %}
+                                        {#Limite le nombre de catégorie affiché à 5#}
+                                        {% if i < 5 %}
+                                            {% include 'P4MCoreBundle:Core:categoryAction.html.twig' %}
+                                        {% endif %}
+                                        {% set i = i +1 %}
+                                    {% endfor %}
+
                                 </ul>
                             </div>
-                        {%endif%}
-                        {%if post.type is defined%}
-                        <!--Type de post-->
-                                <span class="tile-post-type"><img src="{{post.type.iconColor}}" class="tile-icon"></span>
-                        {%endif%}
-                        {%if post.type is defined%}
-                        <!--Icon read later-->
-                        {% if user.username is defined and post|isToReadLater(user) == false%}
-                            <div class="read-later-wrap">
-                                <a href="#read-later" class="read-later ajax_action" data-url="{{path('p4m_ajax_action')}}" data-params="{{{'postId':post.id}|json_encode()}}" data-action="readPostLater" data-key="{{{'postId':post.id}|json_encode()|sha512}}" title="Read it later">
+                        {% endif %}
+                        {% if post.type is defined %}
+                            <!--Type de post-->
+                            <span class="tile-post-type"><img src="{{ post.type.iconColor }}" class="tile-icon"></span>
+                        {% endif %}
+                        {% if post.type is defined %}
+                            <!--Icon read later-->
+                            {% if user.username is defined and post|isToReadLater(user) == false %}
+                                <div class="read-later-wrap">
+                                    <a href="#read-later" class="read-later ajax_action"
+                                       data-url="{{ path('p4m_ajax_action') }}"
+                                       data-params="{{ {'postId':post.id}|json_encode() }}" data-action="readPostLater"
+                                       data-key="{{ {'postId':post.id}|json_encode()|sha512 }}" title="Read it later">
                                         <span class="glyphicon clock"></span>
-                                </a>
-                            </div>
-                        {%endif%}
-                        {%endif%}
-                               
-                        
+                                    </a>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+
+
                         <!--Like bar-->
-                        {%if post.type is defined%}
-                        
-                            <div class="rating-horizontal-bar{%if post.votes|length ==0%} hidden{%endif%}">
-                                <span class="rating-horizontal-bar-plus" style="width:{{post.positiveVoteNumber|percentVote(post.votes|length)}}%;"></span>
-                                <span class="rating-horizontal-bar-less" style="width:{{post.negativeVoteNumber|percentVote(post.votes|length)}}%;"></span>
+                        {% if post.type is defined %}
+
+                            <div class="rating-horizontal-bar{% if post.votes|length ==0 %} hidden{% endif %}">
+                                <span class="rating-horizontal-bar-plus"
+                                      style="width:{{ post.positiveVoteNumber|percentVote(post.votes|length) }}%;"></span>
+                                <span class="rating-horizontal-bar-less"
+                                      style="width:{{ post.negativeVoteNumber|percentVote(post.votes|length) }}%;"></span>
                             </div>
-                        
-                        
+
+
                         {% endif %}
                     </footer>
                 </div>

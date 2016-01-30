@@ -1,102 +1,123 @@
-
 <nav id="user-sidebar" data-status="close">
     <div class="sidebar-list-block">
-            <ul class="sidebar-list">
-                    <li class="sidebar-item">
-                            <a href="{{path('p4m_core_wall')}}"><span class="icon-strew"></span>Home</a>
-                    </li>
-                    <li class="sidebar-item">
-                            <a href="{{path('p4_m_blog_homepage')}}#featured-content"><span class="icon-strew"></span>Featured Content</a>
-                    </li>
-            </ul>
+        <ul class="sidebar-list">
+            <li class="sidebar-item">
+                <a href="{{ path('p4m_core_wall') }}">
+                    <span class="icon-strew"></span>{{ 'Home'|trans({}, 'menu')}}
+                </a>
+            </li>
+            <li class="sidebar-item">
+                <a href="{{ path('p4_m_blog_homepage') }}#featured-content"><span class="icon-strew"></span>
+                    {{ 'Featured Content'|trans({}, 'menu')}}</a>
+            </li>
+        </ul>
     </div>
     <div class="sidebar-list-block">
-        <h4 class="sidebar-list-title">Your strews</h4>
+        <h4 class="sidebar-list-title">{{ 'Your strews'|trans({}, 'menu')}}</h4>
         <ul class="sidebar-list">
-            {%set newPostCount = 0%}
-            {% for wall in user.walls%}
-            {#            {%set newPostCount = user|newPostCountByWall(wall)%}#}
-            
-                <li class="sidebar-item">
-                        <a title="{{wall.name}}" href="{{path('p4m_core_showWall',{wallSlug:wall.slug})}}"><span class="icon-strew"></span><span class="sidebar-wall-name">{{wall.name}}</span>{%if newPostCount>0%}<span class="newPostNotifications">{{newPostCount}}</span>{%endif%}</a>
-                </li>
-
-            {%endfor%}
-
-            {% if user.wallsfollowed|length%}
+            {% set newPostCount = 0 %}
+            {% for wall in user.walls %}
+                {#            {%set newPostCount = user|newPostCountByWall(wall)%}#}
 
                 <li class="sidebar-item">
-                        <h4 class="sidebar-list-title">Followed strews</h4>
+                    <a title="{{ wall.name }}" href="{{ path('p4m_core_showWall',{wallSlug:wall.slug}) }}"><span
+                                class="icon-strew"></span><span
+                                class="sidebar-wall-name">{{ wall.name }}</span>{% if newPostCount>0 %}<span
+                                class="newPostNotifications">{{ newPostCount }}</span>{% endif %}</a>
                 </li>
 
-            {% for wall in user.wallsFollowed%}
-{#            {%set newPostCount = user|newPostCountByWall(wall)%}#}
+            {% endfor %}
+
+            {% if user.wallsfollowed|length %}
 
                 <li class="sidebar-item">
-
-                    <a title="{{wall.name}}" href="{{path('p4m_core_showWall',{wallSlug:wall.slug})}}"><span class="icon-strew"></span><span class="sidebar-wall-name">{{wall.name}}</span> {%if newPostCount>0%}<span class="newPostNotifications">{{newPostCount}}</span>{%endif%}</a>
+                    <h4 class="sidebar-list-title">{{ 'Followed strews'|trans({}, 'menu')}}</h4>
                 </li>
 
-            {%endfor%}
-            {%endif%}
-            {% if suggestedWalls|length%}
-             <li class="sidebar-item">
-                        <h4 class="sidebar-list-title">Suggested strews</h4>
-                </li>
-                {% for wall in suggestedWalls%}
-{#                {%set newPostCount = user|newPostCountByWall(wall)%}#}
+                {% for wall in user.wallsFollowed %}
+                    {#            {%set newPostCount = user|newPostCountByWall(wall)%}#}
+
+                    <li class="sidebar-item">
+
+                        <a title="{{ wall.name }}" href="{{ path('p4m_core_showWall',{wallSlug:wall.slug}) }}"><span
+                                    class="icon-strew"></span><span
+                                    class="sidebar-wall-name">{{ wall.name }}</span> {% if newPostCount>0 %}<span
+                                    class="newPostNotifications">{{ newPostCount }}</span>{% endif %}</a>
+                    </li>
+
+                {% endfor %}
+            {% endif %}
+            {% if suggestedWalls|length %}
                 <li class="sidebar-item">
-
-                    <a title="{{wall.name}}" href="{{path('p4m_core_showWall',{wallSlug:wall.slug})}}"><span class="icon-strew"></span><span class="sidebar-wall-name">{{wall.name}}</span> {%if newPostCount>0%}<span class="newPostNotifications">{{newPostCount}}</span>{%endif%}</a>
+                    <h4 class="sidebar-list-title">{{ 'Suggested strews'|trans({}, 'menu')}}</h4>
                 </li>
+                {% for wall in suggestedWalls %}
+                    {#                {%set newPostCount = user|newPostCountByWall(wall)%}#}
+                    <li class="sidebar-item">
 
-                {%endfor%}
-            {%endif%}
-           
+                        <a title="{{ wall.name }}" href="{{ path('p4m_core_showWall',{wallSlug:wall.slug}) }}"><span
+                                    class="icon-strew"></span><span
+                                    class="sidebar-wall-name">{{ wall.name }}</span> {% if newPostCount>0 %}<span
+                                    class="newPostNotifications">{{ newPostCount }}</span>{% endif %}</a>
+                    </li>
+
+                {% endfor %}
+            {% endif %}
+
             <li class="sidebar-item-manage">
-                    <a href="{{path('p4m_backoffice_wall_create')}}"><span class="glyphicon plus"></span>Build a new strew</a><a href="{{path('p4_m_backoffice_homepage')}}"><span class="glyphicon wrench"></span>Strew settings</a>
+                <a href="{{ path('p4m_backoffice_wall_create') }}"><span class="glyphicon plus"></span>{{ 'Build a new strew'|trans({}, 'menu')}}</a><a
+                        href="{{ path('p4_m_backoffice_homepage') }}"><span class="glyphicon wrench"></span>{{ 'Strew settings'|trans({}, 'menu')}}</a>
             </li>
         </ul>
     </div>
 
-   {# <div class="sidebar-list-block">
-            <h4>Suggested strews</h4>
-            <ul class="sidebar-list">
-                
+    {# <div class="sidebar-list-block">
+             <h4>Suggested strews</h4>
+             <ul class="sidebar-list">
 
-            </ul>
-    </div>#}
+
+             </ul>
+     </div>#}
     <div class="sidebar-list-block">
-            <!--<h4></h4>-->
-            <ul class="sidebar-list">
-{#                {%set newPostCount = user.readLater|length%}#}
-                    <li class="sidebar-item">
-                            <a href="{{path('p4m_core_showHistory')}}"><span class="glyphicon step_backward"></span> History </a>
-                    </li>
-                    <li class="sidebar-item">
-                            <a href="{{path('p4m_core_showReadLater')}}"><span class="glyphicon clock"></span> Read later {%if newPostCount>0%}<span class="newPostNotifications">{{newPostCount}}</span>{%endif%}</a>
-                    </li>
+        <!--<h4></h4>-->
+        <ul class="sidebar-list">
+            {#                {%set newPostCount = user.readLater|length%}#}
+            <li class="sidebar-item">
+                <a href="{{ path('p4m_core_showHistory') }}"><span class="glyphicon step_backward">&nbsp;</span>{{ 'History'|trans({}, 'menu')}}</a>
+            </li>
+            <li class="sidebar-item">
+                <a href="{{ path('p4m_core_showReadLater') }}">
+                    <span class="glyphicon clock">&nbsp;</span>
+                    {{ 'Read later'|trans({}, 'menu')}} {% if newPostCount>0 %}<span class="newPostNotifications">{{ newPostCount }}</span>{% endif %}
+                </a>
+            </li>
 
-            </ul>
+        </ul>
     </div>
-    
-    {% if is_granted('ROLE_ADMIN') and post is defined%}
-         <div class="sidebar-list-block">
+
+    {% if is_granted('ROLE_ADMIN') and post is defined %}
+        <div class="sidebar-list-block">
             <!--<h4></h4>-->
-            
+
             <ul class="sidebar-list">
                 {% if post.showOnHome == false %}
                     <li class="sidebar-item">
-                        <a href="#" data-url="{{path('p4m_ajax_action')}}" class="ajax_action" data-action="addPostToHome" data-params="{{ {postId:post.id}|json_encode() }}" data-key="{{ {postId:post.id}|json_encode()|sha512() }}"><span class="glyphicon step_backward"></span> Show this post on home page </a>
+                        <a href="#" data-url="{{ path('p4m_ajax_action') }}" class="ajax_action"
+                           data-action="addPostToHome" data-params="{{ {postId:post.id}|json_encode() }}"
+                           data-key="{{ {postId:post.id}|json_encode()|sha512() }}">
+                            <span class="glyphicon step_backward">&nbsp;</span>{{ 'Show this post on home page'|trans({}, 'menu')}} </a>
                     </li>
-                {%else%}
-                     <li class="sidebar-item">
-                        <a href="{{path('p4m_ajax_action')}}" class="ajax_action" data-action="removePostFromHome" data-params="{{ {postId:post.id}|json_encode() }}" data-key="{{ {postId:post.id}|json_encode()|sha512() }}"><span class="glyphicon step_backward"></span> Show this post on home page </a>
+                {% else %}
+                    <li class="sidebar-item">
+                        <a href="{{ path('p4m_ajax_action') }}" class="ajax_action" data-action="removePostFromHome"
+                           data-params="{{ {postId:post.id}|json_encode() }}"
+                           data-key="{{ {postId:post.id}|json_encode()|sha512() }}"><span
+                                    class="glyphicon step_backward">&nbsp;</span>{{ 'Show this post on home page'|trans({}, 'menu')}}</a>
                     </li>
-                {%endif%}
+                {% endif %}
             </ul>
-    </div>
-    
+        </div>
+
     {% endif %}
 </nav>
 

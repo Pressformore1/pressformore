@@ -1,65 +1,66 @@
 <div id="tuto_page">
     <div id="svgContainer" style="">
-         <svg id="svg1" width="0" height="0" >
-         
-            <path id="path1" d="M0 0" stroke="#fff" fill="none" stroke-width="1px";/>
-            <path id="path2" d="M0 0" stroke="#fff" fill="none" stroke-width="1px";/>
-            <path id="path3" d="M0 0" stroke="#fff" fill="none" stroke-width="1px";/>
-            <path id="path4" d="M0 0" stroke="#fff" fill="none" stroke-width="1px";/>
-            <path id="path5" d="M0 0" stroke="#fff" fill="none" stroke-width="1px";/>
-            <path id="path6" d="M0 0" stroke="#fff" fill="none" stroke-width="1px";/>
-            
+        <svg id="svg1" width="0" height="0">
+            <path id="path1" d="M0 0" stroke="#fff" fill="none" stroke-width="1px" ;/>
+            <path id="path2" d="M0 0" stroke="#fff" fill="none" stroke-width="1px" ;/>
+            <path id="path3" d="M0 0" stroke="#fff" fill="none" stroke-width="1px" ;/>
+            <path id="path4" d="M0 0" stroke="#fff" fill="none" stroke-width="1px" ;/>
+            <path id="path5" d="M0 0" stroke="#fff" fill="none" stroke-width="1px" ;/>
+            <path id="path6" d="M0 0" stroke="#fff" fill="none" stroke-width="1px" ;/>
+        </svg>
     </div>
-	<div id="tuto_wrap">
-            <div class="tuto_col" id="col1"> 
-                <h1>Strewbar</h1> 
-                <p>
-                Consult your feeds and those you follow.
-                </p> 
-            </div> 
-
-            <div class="tuto_col" id="col2"> 
-                    <h1>Search engine</h1>
-                    <p>
-                    Dig in our huge library with any keyword.
-                    </p>
-            </div> 
-
-            <div class="tuto_col" id="col3"> 
-                    <h1>Add new content</h1> 
-                    <p>
-                    You want to share great content? Paste the URL here, it is as simple as that.
-                    </p> 
-            </div> 
-
-            <div class="tuto_col" id="col4"> 
-                    <h1>Your settings and profile</h1>
-                    <p>
-                    Edit your information, privacy or fill your wallet to support your favorite authors.
-                    </p>
-            </div>
-
-            <div class="tuto_col" id="col5"> 
-                    <h1>Notifications</h1>
-                    <p>
-                    Get instantly notified whenever something happens on the platform.
-                    </p>
-            </div>
-
-            <div class="tuto_col" id="col6"> 
-                    <h1>Action bar</h1>
-                    <p>
-                    This lateral menu helps you <strong>Follow users</strong> and <strong>strews</strong> or <strong>Press content</strong>, 
-                    it changes depending on the page you are surfing on. To know more about specific actions, <a href="http://blog.pressformore.com/">click here</a>
-                    </p>
-            </div>
-
-
+    <div id="tuto_wrap">
+        <div class="tuto_col" id="col1">
+            <h1>{{ 'Strewbar'|trans({}, 'help')}}</h1>
+            <p>
+                {{ 'Consult your feeds and those you follow.'|trans({}, 'help')}}
+            </p>
         </div>
 
-	<div class="clear_tuto"> </div>
+        <div class="tuto_col" id="col2">
+            <h1>{{ 'Search engine'|trans({}, 'help')}}</h1>
+            <p>
+                {{ 'Dig in our huge library with any keyword.'|trans({}, 'help')}}
+            </p>
+        </div>
 
-			<div class="button_tuto">
-			<button class="tuto" id="tuto-closer">Close the help menu</button>
-			</div>
+        <div class="tuto_col" id="col3">
+            <h1>{{ 'Add new content'|trans({}, 'help')}}</h1>
+            <p>
+                {{ 'You want to share great content? Paste the URL here, it is as simple as that.'|trans({}, 'help')}}
+            </p>
+        </div>
+
+        <div class="tuto_col" id="col4">
+            <h1>{{ 'Your settings and profile'|trans({}, 'help')}}</h1>
+            <p>
+                {{ 'Edit your information, privacy or fill your wallet to support your favorite authors.'|trans({}, 'help')}}
+            </p>
+        </div>
+
+        <div class="tuto_col" id="col5">
+            <h1>{{ 'Notifications'|trans({}, 'help')}}</h1>
+            <p>
+                {{ 'Get instantly notified whenever something happens on the platform.'|trans({}, 'help')}}
+            </p>
+        </div>
+
+        <div class="tuto_col" id="col6">
+            <h1>{{ 'Action bar'|trans({}, 'help')}}</h1>
+            <p>
+                {{ 'This lateral menu helps you <strong>Follow users</strong> and <strong>strews</strong> or <strong>Press content</strong>, it changes depending on the page you are surfing on. To know more about specific actions'|trans({}, 'help')|raw }},
+                <a  href="http://blog.pressformore.com/">
+                    {{ 'click here'|trans({}, 'help')}}
+                </a>
+            </p>
+        </div>
+
+
+    </div>
+
+    <div class="clear_tuto"></div>
+
+    <div class="button_tuto">
+        <button class="tuto" id="tuto-closer">{{ 'Close the help menu'|trans({}, 'help')}}</button>
+    </div>
 </div>

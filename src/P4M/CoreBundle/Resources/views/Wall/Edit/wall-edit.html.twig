@@ -1,6 +1,6 @@
 {% extends "P4MCoreBundle:Core/Template:wall-template.html.twig" %}
 
-{% block headTitle %}{{parent()}} - {% if wall is defined %}Edit - {{wall.name}}{%else%}Create Strew{% endif%}{%endblock%}
+{% block headTitle %}{{parent()}} - {% if wall is defined %}{{ 'Edit'|trans({}, 'wall')}} - {{wall.name}}{%else%}{{ 'Create Strew'|trans({}, 'wall')}}{% endif%}{%endblock%}
 
 {% block actionBar %}
 <form action="" id="form-wall-edit" method="post" {{ form_enctype(form) }} >

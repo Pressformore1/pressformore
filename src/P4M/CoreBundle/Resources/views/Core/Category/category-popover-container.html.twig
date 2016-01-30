@@ -1,23 +1,31 @@
-<h4 class="add-to-box-title"><img src="{{asset(category.iconColor)}}" class="category-icon" alt="icon of {{category.name|title}} category" /> {{category.name|title}} </h4>
+<h4 class="add-to-box-title"><img src="{{ asset(category.iconColor) }}" class="category-icon"
+                                  alt="icon of {{ category.name|title }} category"/> {{ category.name|title }} </h4>
 
-<p class="add-to-box-description">{{category.description}} </p>
+<p class="add-to-box-description">{{ category.description }} </p>
 
-{%if user.username is defined%}
-<span class="add-to-box-link">Add/remove to <span class="glyphicon chevron-right"></span></span>
+{% if user.username is defined %}
+    <span class="add-to-box-link">Add/remove to <span class="glyphicon chevron-right"></span></span>
 
-<ul class="add-to-box-strew-list">
-{%for wall in user.walls%}
-    {% set id = 'form_'~wall.id~'_'~category.id~random()%}
-    <li>
-        <form method="post" class="ajax_form" id="{{id}}" data-loader="none" data-action="categoryToWall" data-url="{{path('p4m_ajax_action')}}" data-key="{{'categoryToWall'|sha512}}" data-target="serialize">
-            <input type="hidden" name="callBack" value="refreshAddToWall" />
-            <input type="hidden" name="formId" value="{{id}}" />
-            <input type="hidden" name="categoryId" value="{{category.id}}" />
-            <input type="hidden" name="wallId" value="{{wall.id}}" />
-            <input type="hidden" name="remove" id="{{id}}_cat{{category.id}}_wall{{wall.id}}" value="{% if wall.includedCategories.contains(category) %}0{%else%}1{% endif %}" />
-            <input type="checkbox" data-linked="{{id}}_cat{{category.id}}_wall{{wall.id}}" class="addToWallCheckbox checkbox" name="add" id="{{id}}_wall_{{wall.id}}-category_{{category.id}}" {% if wall.includedCategories.contains(category) %}checked="checked"{%endif%}/><label for="{{id}}_wall_{{wall.id}}-category_{{category.id}}">{{wall.name}}</label>
-        </form>
-    </li>
-{%endfor%}
-</ul>
-{%endif%}
+    <ul class="add-to-box-strew-list">
+        {% for wall in user.walls %}
+            {% set id = 'form_'~wall.id~'_'~category.id~random() %}
+            <li>
+                <form method="post" class="ajax_form" id="{{ id }}" data-loader="none" data-action="categoryToWall"
+                      data-url="{{ path('p4m_ajax_action') }}" data-key="{{ 'categoryToWall'|sha512 }}"
+                      data-target="serialize">
+                    <input type="hidden" name="callBack" value="refreshAddToWall"/>
+                    <input type="hidden" name="formId" value="{{ id }}"/>
+                    <input type="hidden" name="categoryId" value="{{ category.id }}"/>
+                    <input type="hidden" name="wallId" value="{{ wall.id }}"/>
+                    <input type="hidden" name="remove" id="{{ id }}_cat{{ category.id }}_wall{{ wall.id }}"
+                           value="{% if wall.includedCategories.contains(category) %}0{% else %}1{% endif %}"/>
+                    <input type="checkbox" data-linked="{{ id }}_cat{{ category.id }}_wall{{ wall.id }}"
+                           class="addToWallCheckbox checkbox" name="add"
+                           id="{{ id }}_wall_{{ wall.id }}-category_{{ category.id }}"
+                           {% if wall.includedCategories.contains(category) %}checked="checked"{% endif %}/><label
+                            for="{{ id }}_wall_{{ wall.id }}-category_{{ category.id }}">{{ wall.name }}</label>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}

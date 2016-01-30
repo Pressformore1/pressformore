@@ -1,143 +1,169 @@
 <div id="menu" class="navigation" role="navigation">
     <div id="left-menu">
         <ul class="p4m-menu">
-        {%if user is defined and user is not null and  user.enabled%}
-            
-             
-            <li id="menu-sidebar-btn" class="menu-item">
-                <a id="sidebar-btn" class="tooltip-menu-icon menu-item-icon" href="#back" data-original-title="" title="" >
+            {% if user is defined and user is not null and user.enabled %}
+                <li id="menu-sidebar-btn" class="menu-item">
+                    <a id="sidebar-btn" class="tooltip-menu-icon menu-item-icon" href="#back" data-original-title=""
+                       title="">
                         <span class="non-hover-glyph icon-strew"></span>
                         <span class="hover-glyph glyphicon left_arrow"></span>
-                </a>
+                    </a>
                     {{ render(controller('P4MCoreBundle:Core:shortcutBar')) }}
-{#                    {% include "P4MCoreBundle:Menu:shortcut-bar.html.twig"%}#}
-            </li>
-        {%endif%}
+                    {#                    {% include "P4MCoreBundle:Menu:shortcut-bar.html.twig"%}#}
+                </li>
+            {% endif %}
             <li class="menu-item">
-                    <a id="search-icon" href="#search" class="menu-item-icon tooltip-menu-icon" title="{{ 'Look for something'|trans({},'menu')}}"><span class="glyphicon search"></span></a>
+                <a id="search-icon" href="#search" class="menu-item-icon tooltip-menu-icon"
+                   title="{{ 'Look for something'|trans({},'menu') }}"><span class="glyphicon search"></span></a>
             </li>
-        
-        {%if user is defined and user%}
-            <li class="menu-item">
-                    <a id="add-post-icon" href="#addPost" class="menu-item-icon tooltip-menu-icon" title="{{ 'Add new content'|trans({}, 'menu') }}"><span class="glyphicon plus"></span></a>
-            </li>
-        {%else%}
-            <li class="menu-item">
-                    <a id="add-post-icon" href="#addPost" class="menu-item-icon tooltip-menu-icon" data-toggle="modal" data-target="#modal-register" title="{{ 'Add new content'|trans({}, 'menu') }}"><span class="glyphicon plus"></span></a>
-            </li>
-        {%endif%}
 
-        
+            {% if user is defined and user %}
+                <li class="menu-item">
+                    <a id="add-post-icon" href="#addPost" class="menu-item-icon tooltip-menu-icon"
+                       title="{{ 'Add new content'|trans({}, 'menu') }}"><span class="glyphicon plus"></span></a>
+                </li>
+            {% else %}
+                <li class="menu-item">
+                    <a id="add-post-icon" href="#addPost" class="menu-item-icon tooltip-menu-icon" data-toggle="modal"
+                       data-target="#modal-register" title="{{ 'Add new content'|trans({}, 'menu') }}"><span
+                                class="glyphicon plus"></span></a>
+                </li>
+            {% endif %}
         </ul>
 
         <!--Formulaire caché -->
-        {%if user is defined and user%}
-        <form id="add-post-form" class="menu-form"  autocomplete="off">
-            <input type="text" placeholder="{{ 'Paste here any URL to share your favorite content on Pressformore'|trans({}, 'menu') }}" name="post-url" class="menu-form-field " id="addPostUrl"/>
-            <button class="menu-form-icon ajax_action" data-target="{{['addPostUrl']|json_encode()}}" data-action="addPost" data-url="{{path('p4m_ajax_action')}}" data-key="{{'addPost'|sha512}}"><span class="glyphicon edit"></span></button>
-        </form>
-        {%endif%}
+        {% if user is defined and user %}
+            <form id="add-post-form" class="menu-form" autocomplete="off">
+                <input type="text"
+                       placeholder="{{ 'Paste here any URL to share your favorite content on Pressformore'|trans({}, 'menu') }}"
+                       name="post-url" class="menu-form-field " id="addPostUrl"/>
+                <button class="menu-form-icon ajax_action" data-target="{{ ['addPostUrl']|json_encode() }}"
+                        data-action="addPost" data-url="{{ path('p4m_ajax_action') }}"
+                        data-key="{{ 'addPost'|sha512 }}"><span class="glyphicon edit"></span></button>
+            </form>
+        {% endif %}
 
-        <form id="menu-search-form" class="menu-form{% if keyword is defined and keyword|length>0%} force-open{%endif%}" action="{{path("p4m_core_search")}}"  autocomplete="off">
-                <input type="text" placeholder="{{ 'Find an articles, author..'|trans({}, 'menu') }}" name="k" class="menu-form-field" {% if keyword is defined and keyword|length>0%}value="{{keyword|trans({}, 'menu')}}"{%endif%}>
+        <form id="menu-search-form"
+              class="menu-form{% if keyword is defined and keyword|length>0 %} force-open{% endif %}"
+              action="{{ path("p4m_core_search") }}" autocomplete="off">
+            <input type="text" placeholder="{{ 'Find an articles, author..'|trans({}, 'menu') }}" name="k"
+                   class="menu-form-field"
+                   {% if keyword is defined and keyword|length>0 %}value="{{ keyword|trans({}, 'menu') }}"{% endif %}>
 
-                <select class="menu-form-select" name="where">
-                    <option data-icon="glyphicon star" value="all" >{{ 'All'|trans({}, 'menu') }}</option>
-                    <option data-icon="glyphicon user" value="user" >{{ 'People'|trans({}, 'menu') }}</option>
-                    <option data-icon="glyphicon show_thumbnails" value="strew" >{{ 'Strew'|trans({}, 'menu') }}</option>
-                    <option data-icon="glyphicon file" value="post">{{ 'Content'|trans({}, 'menu') }}</option>
-                </select>
-                <button class="menu-form-icon"><span class="glyphicon search"></span></button>
+            <select class="menu-form-select" name="where">
+                <option data-icon="glyphicon star" value="all">{{ 'All'|trans({}, 'menu') }}</option>
+                <option data-icon="glyphicon user" value="user">{{ 'People'|trans({}, 'menu') }}</option>
+                <option data-icon="glyphicon show_thumbnails" value="strew">{{ 'Strew'|trans({}, 'menu') }}</option>
+                <option data-icon="glyphicon file" value="post">{{ 'Content'|trans({}, 'menu') }}</option>
+            </select>
+            <button class="menu-form-icon"><span class="glyphicon search"></span></button>
         </form>
 
     </div>
-    
+
     <div id="center-menu">
         <div id="center-menu-left-zone">
             <ul class="p4m-menu">
                 <li class="menu-item hide-menu-item">
-                    <a class="menu-item-text" href="{{path('p4m_core_home')}}#resume">{{ 'Values'|trans({}, 'menu')}}</a>
-                        
+                    <a class="menu-item-text"
+                       href="{{ path('p4m_core_home') }}#resume">{{ 'Values'|trans({}, 'menu') }}</a>
+
                 </li>
                 <li class="menu-item hide-menu-item">
-                    <a class="menu-item-text" href="#follow-us" id="menu-social-links" data-html="true" 
-                        >{{ 'Follow Us'|trans({}, 'menu')}}</a>
-                       
-                       <div class="hidden">
-                           <a href='https://www.facebook.com/Pressformore' target='_blank'><img src='{{asset('images/social_icons/facebook-icon.png')}}' alt='Faceboook icon' /></a>
-                           <a href='https://twitter.com/pressformore_' target='_blank'><img src='{{asset('images/social_icons/twitter-icon.png')}}' alt='Twitter icon' /></a>
-                           <a href='http://www.pinterest.com/pressformore/' target='_blank'><img src='{{asset('images/social_icons/pinterest-icon.png')}}' alt='Pinterest icon' /></a>
-                           <a href='https://plus.google.com/101006798117217795155/' target='_blank'><img src='{{asset('images/social_icons/google+_icon.png')}}' alt='Google+ icon' /></a>
-                       </div>
+                    <a class="menu-item-text" href="#follow-us" id="menu-social-links" data-html="true"
+                    >{{ 'Follow Us'|trans({}, 'menu') }}</a>
+
+                    <div class="hidden">
+                        <a href='https://www.facebook.com/Pressformore' target='_blank'><img
+                                    src='{{ asset('images/social_icons/facebook-icon.png') }}'
+                                    alt='Faceboook icon'/></a>
+                        <a href='https://twitter.com/pressformore_' target='_blank'><img
+                                    src='{{ asset('images/social_icons/twitter-icon.png') }}' alt='Twitter icon'/></a>
+                        <a href='http://www.pinterest.com/pressformore/' target='_blank'><img
+                                    src='{{ asset('images/social_icons/pinterest-icon.png') }}'
+                                    alt='Pinterest icon'/></a>
+                        <a href='https://plus.google.com/101006798117217795155/' target='_blank'><img
+                                    src='{{ asset('images/social_icons/google+_icon.png') }}' alt='Google+ icon'/></a>
+                    </div>
                 </li>
             </ul>
         </div>
 
-        <div class="menu-item" id="menu-logo" >
-            <a class="menu-item-pic" href="{% if app.user %}{{path('p4_m_backoffice_homepage')}}{%else%}{{path('p4m_core_home')}}{%endif%}">
-                    <img alt="{{ 'Logo Pressformore, the first crowd-shaped media'|trans({}, 'menu')}}" src="{{asset('images/design/logo-big.png')}}">
+        <div class="menu-item" id="menu-logo">
+            <a class="menu-item-pic"
+               href="{% if app.user %}{{ path('p4_m_backoffice_homepage') }}{% else %}{{ path('p4m_core_home') }}{% endif %}">
+                <img alt="{{ 'Logo Pressformore, the first crowd-shaped media'|trans({}, 'menu') }}"
+                     src="{{ asset('images/design/logo-big.png') }}">
             </a>
         </div>
 
         <div id="center-menu-right-zone">
             <ul class="p4m-menu">
                 <li class="menu-item hide-menu-item">
-                        <a class="menu-item-text" href="{{path('p4m_core_home')}}#legal-mention">{{ 'Legal'|trans({}, 'menu')}}</a>
+                    <a class="menu-item-text"
+                       href="{{ path('p4m_core_home') }}#legal-mention">{{ 'Legal'|trans({}, 'menu') }}</a>
                 </li>
                 <li class="menu-item hide-menu-item">
-                        <a class="menu-item-text" href="{{path('p4m_core_home')}}#contact">{{ 'Contact'|trans({}, 'menu')}}</a>
+                    <a class="menu-item-text"
+                       href="{{ path('p4m_core_home') }}#contact">{{ 'Contact'|trans({}, 'menu') }}</a>
                 </li>
             </ul>
         </div>
     </div>
-            
+
     <div id="right-menu">
         <ul class="p4m-menu">
-            {%if user is defined and user %}
-            <li class="menu-item" id="user-menu-pic">
-                    <a class="menu-item-text  tooltip-menu-icon" title="{{ 'View your profile'|trans({},'menu')}}" href="{{path('p4m_social_profile',{username:user.username} )}}">
-                    <img class="thumb-align" src="{%if user.picture %}{{asset(user.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}" alt="{{user.username}}"/>
+            {% if user is defined and user %}
+                <li class="menu-item" id="user-menu-pic">
+                    <a class="menu-item-text  tooltip-menu-icon" title="{{ 'View your profile'|trans({},'menu') }}"
+                       href="{{ path('p4m_social_profile',{username:user.username} ) }}">
+                        <img class="thumb-align"
+                             src="{% if user.picture %}{{ asset(user.picture.webPath) }}{% else %}{{ asset('images/users/defaultUser.jpg') }}{% endif %}"
+                             alt="{{ user.username }}"/>
 
-                </a>
-            </li>
-            
-            {% include "P4MCoreBundle:Menu/Notification:notification-menu.html.twig"%}
-           
+                    </a>
+                </li>
 
-            <li class="menu-item">
-                    <a class="menu-item-icon   tooltip-menu-icon" title="{{ 'Help me!'|trans({}, 'menu')}}" id="help-me" href="#help">
+                {% include "P4MCoreBundle:Menu/Notification:notification-menu.html.twig" %}
+
+
+                <li class="menu-item">
+                    <a class="menu-item-icon   tooltip-menu-icon" title="{{ 'Help me!'|trans({}, 'menu') }}"
+                       id="help-me" href="#help">
                         <span class="glyphicon life_preserver"></span>
                     </a>
                 </li>
-                
+
                 <li class="menu-item">
-                <a class="menu-item-icon   tooltip-menu-icon" title="{{ 'Disconnect'|trans({}, 'menu')}}" href="{{path('fos_user_security_logout')}}">
-                    <span class="glyphicon power"></span>
-                </a>
-            </li>
-            {%else%}
-            {#<li class="menu-item">
-                <a class="menu-item-text" title="Login" href="{{path('fos_user_registration_register')}}">
-                    Register
-                </a>
-            </li>#}
-               
-{#            <li class="menu-item">#}
-{#                    <a class="main-button-link" id="join-beta" href="#beta-coming-soon"  data-toggle="modal" data-target="#modal-join-us">Request an access!</a>#}
-{#            </li>#}
-                
-                 <li class="menu-item">
-                   <a class="main-button-link"  href="{{path('fos_user_security_login')}}">{{ 'Log in'|trans({},'menu')}}</a>
-        
+                    <a class="menu-item-icon   tooltip-menu-icon" title="{{ 'Disconnect'|trans({}, 'menu') }}"
+                       href="{{ path('fos_user_security_logout') }}">
+                        <span class="glyphicon power"></span>
+                    </a>
                 </li>
-            {%endif%}
-            
-            
+            {% else %}
+                {#<li class="menu-item">
+                    <a class="menu-item-text" title="Login" href="{{path('fos_user_registration_register')}}">
+                        Register
+                    </a>
+                </li>#}
+
+                {#            <li class="menu-item">#}
+                {#                    <a class="main-button-link" id="join-beta" href="#beta-coming-soon"  data-toggle="modal" data-target="#modal-join-us">Request an access!</a>#}
+                {#            </li>#}
+
+                <li class="menu-item">
+                    <a class="main-button-link"
+                       href="{{ path('fos_user_security_login') }}">{{ 'Log in'|trans({},'menu') }}</a>
+
+                </li>
+            {% endif %}
+
+
         </ul>
     </div>
-    
+
 </div>
-       
+
 <!-- mainmenu-block-bg -->
 <!-- END MAIN MENU -->
 
