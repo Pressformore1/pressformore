@@ -54,7 +54,7 @@
         <div class="action-bar-block">
             <h1 class="action-bar-title text-center">{{ 'It seems like this content was well worth the read!'|trans({}, 'menu')}} </h1>
             <p class="middle text-center">
-                {{post.author.username}} {{ 'is the author'|trans({}, 'menu')}}. {{ 'Perhaps it\'s time to reward him for his duty work'|trans({}, 'menu')}}. <a href="{{path("p4m_core_home")}}#blog" class="faq-link external-link"><i class="glyphicon circle_question_mark"></i></a>
+                {{ '%name% is the author'|trans({'%name%': post.author.username}, 'menu')}}. {{ 'Perhaps it\'s time to reward him for his duty work'|trans({}, 'menu')}}. <a href="{{path("p4m_core_home")}}#blog" class="faq-link external-link"><i class="glyphicon circle_question_mark"></i></a>
             </p>
             {#<form action="" class="ajax_form" data-target="serialize" data-action="alertWalletEmpty" data-loader="none" data-key="{{'alertWalletEmpty'|sha512}}" data-url="{{path('p4m_ajax_action')}}">
                 <input type="checkbox" class="submitOnChange" name="alertEmptyWallet" id="alertEmptyWallet" /><label for="alertEmptyWallet"> Don't show me this message again</label></form>#}

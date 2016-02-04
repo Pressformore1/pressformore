@@ -22,7 +22,7 @@
 <li class="action-bar-item">
     <a class="action-bar-link content-modifier ajax_form_force" data-ajaxTarget="profile-wall-form"
        data-toggle="action-bar" data-target="#section-strews" href="#strews"
-       title="{{ '\'s strews'|trans({'%username%' : userDisplayed.username}, 'menu')}}">
+       title="{{ '%username%\'s strews'|trans({'%username%' : userDisplayed.username}, 'menu')}}">
         <span class="action-bar-icon icon-strew"></span>
     </a>
 </li>
@@ -31,7 +31,7 @@
 <li class="action-bar-item">
     <a class="action-bar-link content-modifier ajax_form_force" data-ajaxTarget="profile-community-form"
        data-toggle="action-bar" data-target="#section-community" href="#community"
-       title="{{ '\'s community'|trans({'%username%' : userDisplayed.username}, 'menu')}}">
+       title="{{ '%username%\'s community'|trans({'%username%' : userDisplayed.username}, 'menu')}}">
         <span class="action-bar-icon glyphicon group">
         </span>
     </a>
@@ -45,7 +45,7 @@
 
 <li class="action-bar-item">
     <a class="action-bar-link content-modifier ajax_form_force" data-toggle="action-bar" data-target="#section-posts"
-       data-ajaxTarget="action-bar-filters-posts" href="#posts" title="{{ '\'s activity'|trans({'%username%' : userDisplayed.username}, 'menu')}}">
+       data-ajaxTarget="action-bar-filters-posts" href="#posts" title="{{ '%username%\'s activity'|trans({'%username%' : userDisplayed.username}, 'menu')}}">
         <span class="action-bar-icon glyphicon cardio"></span>
     </a>
 </li>
@@ -58,7 +58,7 @@
 
 <li class="action-bar-item content-modifier">
     <a class="action-bar-link{% if userDisplayed.flag is null or flagged == true %} current-action-bar-item{% endif %}"
-       data-toggle="action-bar" data-target="#section-infos" href="#infos" title="{{ 'About'|trans({'%username%' : userDisplayed.username}, 'menu')}}">
+       data-toggle="action-bar" data-target="#section-infos" href="#infos" title="{{ 'About %username%'|trans({'%username%' : userDisplayed.username}, 'menu')}}">
         <span class="action-bar-icon glyphicon circle_info"></span>
     </a>
 </li>

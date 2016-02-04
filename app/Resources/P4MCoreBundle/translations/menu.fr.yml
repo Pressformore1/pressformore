@@ -1,185 +1,238 @@
-'Look for something': 'Cherchez quelque chose'
-'Log in': 'Connectez vous'
 Messages: Messages
 Notifications: Notifications
 'More notifications': 'Plus de  notifications'
+'Look for something': 'Cherchez quelque chose'
 'Add new content': 'Ajoutez un nouveau contenu'
-'Paste here any URL to share your favorite content on Pressformore': 'Coller une URL ici pour partager votre contenu favoris sur PressForMore'
+'Paste here any URL to share your favorite content on Pressformore': 'Coller une URL pour partager votre contenu favoris sur Pressformore'
 'Find an articles, author..': 'Trouvez un article, autheur ...'
 All: Tous
 People: Célébrité
-Strew: Strew
+Strew: __Strew
 Content: Contenu
 Values: Values
 'Follow Us': 'Suivez Nous'
-'Logo Pressformore, the first crowd-shaped media': '__Logo Pressformore, the first crowd-shaped media'
-Legal: Legal
+'Logo Pressformore, the first crowd-shaped media': 'Logo Pressformore, le premier crowd-shaped media'
+Legal: Legale
 Contact: Contact
 'View your profile': 'Voir votre profil'
-'Help me!': 'Aidez moi!'
+'Help me!': 'Aidez moi !'
 Disconnect: 'Se deconnecter'
+'Log in': 'Se connecter'
+Access: Accès
+'Picked some categories!': 'Choisisser des catégories!'
+'Picked some tags!': 'Choisisser des tags!'
+Resume!: 'Continuer !'
+'Create your own strew': 'Creez votre propre strew'
+'You are about to create a new strew (news feed on Pressformore), if you need some help, have a look at our': "Vous êtes en train de creer un nouveau strew (fil d'actualité Pressformore), Si vous avez besoin d'aide, venez voir notre\n"
+FAQ: FAQ
+'Next step': 'Étape suivante'
+"Note: You can blocks\n         cats or tags by clicking on the right upper corner of the tile.": "__Note: You can blocks\n         cats or tags by clicking on the right upper corner of the tile."
+'Picked Categories': 'Choisir Categories'
+'Banned Categories': 'bannir Categories'
+'Select Tags': 'Selectionner Tags'
+Resume: __Resume
+"Note: You can blocks\n        cats or tags by clicking on the right upper corner of the tile.": "__Note: You can blocks\n        cats or tags by clicking on the right upper corner of the tile."
+'Picked tags': 'Choisir tags'
+'Banned tags': 'Bannir tags'
+'Title of your wall': 'Titre de votre mur'
+'Description of your wall': 'Description de votre mur'
+'Choose a pic': 'Choisir une image'
+'Change Picture': 'Changer l''image'
+'Categories picked in your strew': 'Categories choisie dans votre strew'
+'Categories banned in your strew': 'Categories bannie dans votre strew'
+'Tags picked in your strew': 'Tags choisi dans votre strew'
+'Tags banned in your strew': 'Tags abanni dans votre strew'
+'See it!': 'Regarde ça !'
+'See the comments or add one!': 'Regarde les commentaire où ajoute en un !'
+'Read Later': 'Regarder plus tard'
+'Explore the content of your read-later posts': 'Explorer les contenu mis pour plus tard'
 'Leave a comment': 'Laisser un commentaire'
-'Content stats': Statistiques
-'You''re using an early access version, be patient!': 'You''re using an early access version, be patient!'
-'Report content': 'Signaler le  contenu'
+'Content stats': 'Statistique du contenu'
+'You''re using an early access version, be patient!': '__You''re using an early access version, be patient!'
+'Report content': 'Signaler le contenu'
 'You already report this content': 'Vous avez déjà signaler ce contenu'
-'Beware! this content has been reported as': 'Beware! contenu a été rapporté comme'
-'What do you think ?': 'Qu''est ce que vous en pensez ?'
+'Beware! this content has been reported as': 'Prudence! Ce contenu a bien été signaler comme'
+'What do you think ?': 'Qu''est ce que vous en penser ?'
 'I confirm': 'Je confirme'
 'I don''t confirm': 'Je ne confirme pas'
-'You want to report this content, please tell us why:': 'Vous voulez reporter ce contenu, s''il vous plait dite nous pourquoi:'
+'You want to report this content, please tell us why:': 'Vous voulez reporter ce contenu, S''il vous plait dite nous pourquoi:'
 Report: Signalez
 'Mettre le post en quarantaine': 'Mettre le post en quarantaine'
 'Sortir le post de la quarantaine': 'Sortir le post de la quarantaine'
-'Categories of this content': 'Catégorie du contenu'
-'Tags of this content': 'Tags du contenu'
-'Meta of this content': 'Meta du contenu'
+'Categories of this content': 'Categories de ce contenu'
+'Tags of this content': 'Tags de ce contenu'
+'Meta of this content': 'Meta de ce contenu'
 'added this content': 'ajoutez ce contenu'
-'Edit those info': 'Editez ces informations'
-'Share this content': 'Partagez ce contenu'
-'Discover how to contribute.': 'Decouvez comment contribuer.'
-'Vote up !': 'Vote up !'
-'Vote down !': 'Vote down !'
-'See the comments or add one!': 'Regarder les commentaires ou ajoutez en un !'
+'Edit those info': 'Éditez ces informations'
+'Share this content': 'Partager ce contenu'
+'Discover how to contribute.': 'Découvrer comment contribuer.'
+'Vote up !': 'Vote pour !'
+'Vote down !': 'Vote contre !'
 'About this content': 'Á propos de ce contenu'
-'This content will be rewarded in 25 sec. Want to know more about it? Click here': 'Ce contenu sera récompensé en 25 sec. Voulez-vous en savoir plus à ce sujet? Cliquez ici'
+'This content will be rewarded in 25 sec. Want to know more about it? Click here': 'Ce contenu peu être récompenser en 25s. Voulez vous en savoir plus a propos de cà? Cliquez ici'
 'Report an error': 'Signalez une erreur'
-'It seems like this content was well worth the read!': '__It seems like this content was well worth the read!'
-'is the author': 'est l''autheur'
-'Perhaps it''s time to reward him for his duty work.': 'Peu-être qu''il est temp de le récompenser pour son travaille.'
-'mandatory to rewards authors': 'mandatory to rewards authors'
-'You decided not to reward this author.': 'Vous décidez de ne pas récompenser cette autheur.'
+'It seems like this content was well worth the read!': 'Il semble que ce contenu en vaut la peine !'
+'Perhaps it''s time to reward him for his duty work.': 'Peu être est-il temp de le récompenser pour son travaille.'
+'mandatory to rewards authors': '__mandatory to rewards authors'
+'You decided not to reward this author.': 'Vous décidez de ne pas récompenser cette auteur.'
 'Thank you!': 'Merci !'
-'You just rewarded this author': 'Vous venez de récompenser cette autheur'
+'You just rewarded this author': 'Vous venez de récompenser cette auteur'
 'You are about to reward this content': 'Vous êtes sur le point de récompenser ce contenu'
-'You''ve chosen not to reward this content.': 'Vous svez choisi de ne pas récompenser ce contenu.'
-'May we know why?': 'Pouvons nous savoir pourquoi ?'
-'Thanks for your feedback': 'Merci pour votre avis'
-'we are working hard to provide you quality news': 'Nous travaillons dur pour vous fournir des nouvelles de qualité'
-'Perhaps it''s time to reward him for his duty work': 'Peu-être qu''il est temp de le récompenser pour son travaille.'
-'Load your wallet with the amount of your choice': 'Chargez votre portefeuille avec le montant de votre choix'
-'To retribute your favorite authors, we need to have more information about you. Your privacy will always matter to us.': 'Pour récompenser vos autheur préférer, nous avons besoin de plus d''information sur vous. Your privacy will always matter to us.'
+'You''ve chosen not to reward this content.': 'Vous avez choisi de ne pas récompenser ce contenu'
+'May we know why?': 'Pouvons-nous savoir pourquoi?'
+'Thanks for your feedback': 'Merci pour votre aviss'
+'we are working hard to provide you quality news': 'Nous travaillons dur pour vous fournir nouvelles de qualité'
+'Perhaps it''s time to reward him for his duty work': 'Peu être est-il temp de le récompenser pour son travaille'
+'Load your wallet with the amount of your choice': 'Charger votre portefeuille avec le montant de votre choix'
+'To retribute your favorite authors, we need to have more information about you. Your privacy will always matter to us.': 'Pour récompenser vos auteurs préférés, nous avons besoin de plus d''information a propos de vous. Le respect de la vie privée est important pour nous.'
 'Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': 'PressForMore vise a la juste retribution des journalistes et créateur numérique aux travers de micro don. Nous pensons que les autheurs de contenu de qualité doivent être récompenser.'
 'Fill Information': 'Remplissez les informations'
-'You liked this content and want to retribute the author?': 'Vous aimez ce contenu et souhaitez récompenser son autheur ?'
-'Let us know!': 'Laissez nous savoir!'
-'Tell this author you want to reward him': 'Dite a cette autheur que vous voulez le récompenser'
+'You liked this content and want to retribute the author?': 'Vous aimez ce contenu et voulez recompenser l''auteur ?'
+'Let us know!': 'Alissez nous savoir !'
+'Tell this author you want to reward him': 'Dites a l''auteur de que vous souhaitez le récompenser'
 Hi: Salut
 'I would love to reward your work on @Pressformore_ #joinpfm': 'Je serais ravis de récompenser votre travaille sur @Pressformore_ #joinpfm'
-'Thank you! We ’ll make our best to contact the author(s)': 'Merci ! Nous allons faire de notre mieux pour contacter l''autheur'
-'Maybe you want to help us further?': 'Voulez-vous nous aidez d''avantage?'
+'Thank you! We ’ll make our best to contact the author(s)': 'Merci ! Nous allons faire de notre mieux pour contacter l''auteur'
+'Maybe you want to help us further?': 'Souhaitez vous nous aider d''avantage ?'
 facultative: facultatif
-'Author twitter account': 'Twitter de l''autheur'
-'Author email': 'email de l''autheur'
+'Author twitter account': 'Compte twitter de l''auteur'
+'Author email': 'Email de l''auteur'
 'Send informations': 'Envoyez les informations'
-'We''ll make our best to contact the author as fast as possible.': 'Nous allons faire notre possible pour contacter l''autheur le plus vite possible.'
-'Your contribution is precious and will be rewarded in the future.': 'Votre contribution est précieuse et pourra etre récompenser a l''avenir.'
+'We''ll make our best to contact the author as fast as possible.': 'Nous allons faire de notre mieux pour contacter l''auteur'
+'Your contribution is precious and will be rewarded in the future.': 'Votre contribution est précieuse et peu être récompenser dans le futur'
 History: Historique
-'See the comments or add one': 'Voir les commentaires ou en ajoutez un'
-Time: __Time
-till: __till
-Rank: __Rank
+'See the comments or add one': 'Voir les commentaires ou ajouter en un'
+Time: Date
+till: 'jusqu''à'
+Rank: Rang
 Quality: Qualité
-Comments: Commentaire
+Comments: Commentaires
 View: Voir
 Type: Type
-'Action Type': 'Action Type'
-Evaluate: Evaluez
-Comment: Commentaire
+'Action Type': 'Type d''action'
+Evaluate: Évaluez
+Comment: Commentez
 Add: Ajoutez
 Categories: Categories
 Followers: Followers
-Like: Like
-Views: Vues
-'Manage your strews': '__Manage your strews'
-'Create, edit or filter your strews': '__Create, edit or filter your strews'
-'An historic of your notifications': 'Historique de vos notifications'
-'More Notifications': 'Plus de notification'
+Like: Aimez
+Views: Voir
+'Manage your strews': 'Gerez votre strews'
+'Create, edit or filter your strews': 'Creez, editez ou filtrez vos strews'
+'An historic of your notifications': 'Un historique de vos notifications'
+'More Notifications': 'Plus de notifications'
 'Your Messages': 'Vos messages'
-'Your Stats': 'Vos stats'
+'Your Stats': 'Vos statistiques'
 'Your Reputation': 'Votre réputation'
-'Wallet Settings': 'Paramètre du portefeuille'
+'Wallet Settings': 'Configuration du porte feuille'
 Congratulations!: 'Félicitation !'
-'You''ve correctly set up your wallet!': 'Vous avez correctement configurer votre protefeuille !'
-'But you can still edit your info by pressing the corresponding button below.': 'Mais vous pouvez toujours modifier vos informations en appuyant sur le bouton correspondant ci-dessous'
+'You''ve correctly set up your wallet!': 'Vous avez correctement configurer votre portefeuille !'
+'But you can still edit your info by pressing the corresponding button below.': 'Mais vous pouvez toujours éditez vos informations en pressant sur le bouton correspondant.'
 Please: 'S''il vous plait'
-'verify your informations and try again': 'verifiez vos informations et essayez a nouveau'
+'verify your informations and try again': 'Verifiez vos informations et essayez encore'
 Loading: Chargement
-'Choose a payment method': 'Choisissez un moyen de payement'
-'Use a registred card': 'Utilisez une carte valides'
-'You are about to load': 'Vous êtes sur le point de charger'
+'Choose a payment method': 'Choisissez une méthode de payement'
+'Use a registred card': 'Utilisez une carte enregistrer'
+'You are about to load': 'Vous êtes sur le point de regarcher'
 'euro for the following period': 'euro pour la période suivante'
-'Confirm your loading': 'Confirmez votre téléchargement'
-'Register a new method': 'Enregistrez une nouvelle méthode'
+'Confirm your loading': 'Confirmez votre chargement'
+'Register a new method': 'Enregistre une nouvelle méthode'
 'Credit Card': 'Carte de crédit'
-'Bank account details': 'Détails du compte en banque'
+'Bank account details': 'Détails de votre compte'
 Name: Nom
 Adress: Adresse
-Zip: 'Code Postal'
+Zip: 'Code Postale'
 City: Ville
 Send: Envoyez
 'Credit card details': 'Détails de la carte de crédit'
-'Card Number': 'N° de la carte'
+'Card Number': 'N° de carte'
 'Expiration Date': 'Date d''expiration'
-Load: Chargement
-'Powered By': '__Powered By'
-'Back to Summary': 'Retrouver a l''accueil'
+Load: Chargez
+'Powered By': 'Powered By'
+'Back to Summary': 'Retour au sommaire'
 Unfortunatly: Malheureusement
-'mandatory information about your account is missing': 'Des informations importante sur votre compte son manquante'
-'Complete my account informations': 'Completez les informations de mon compte'
-'': __
-In: __In
-Out: __Out
-'CREATE IBAN': 'CREATE IBAN'
+'mandatory information about your account is missing': 'Des informations obligatoires son manquante'
+'Complete my account informations': 'Completez mes informations'
+'Financial Info': 'Information financière'
+In: Entrez
+Out: Sortir
+'CREATE IBAN': 'Créez un IBAN'
 'Account Type': 'Type de compte'
-'Register Card': 'Enregistrez une carte'
+'Register Card': 'Carte enregistrer'
 'Visit your public profile': 'Visitez votre profil public'
-'Manage your settings': 'Gérer vos paramètres'
-Wallet: Porte-feuille
+'Manage your settings': 'Gérez vos paramètres'
+Wallet: 'Porte-feuille'
 'Check your notifications': 'Vérifiez vos notifications'
-'Control your reputation': 'Controlez votre réputation'
-Strews: Strews
-'Explore the strews created by': 'Explore the strews created by'
-Follow: Suivre
-'''s strews': '__''s strews'
-'''s community': '__''s community'
-'''s activity': 'Activitez de %username%'
-About: 'Á propos'
+'Control your reputation': 'Controllez votre réputation'
+'Strews %userWallsLength%': 'Strews %userWallsLength%'
+'Explore the strews created by %username%': 'Explorer les strews crée par %username%'
+'Follow %username%': 'Suivre %username%'
+'%username%''s strews': 'strews de %username%'
+'%username%''s community': 'Communauté de %username%'
+'%username%''s activity': 'activité de %username%'
+'About %username%': 'Á propos de  %username%'
 'Report user': 'Signalez l''utilisateur'
-'Manage your account': 'Gérez votre compte'
+'Manage your account': 'Gérer votre compte'
+Follow: Suivre
 Unfollow: 'Ne plus suivre'
-'Meta of this User': '__Meta of this User'
-Skills: Compétences
-'''s reputation': 'réputation de %username%'
-'''s stats': 'Statistique de %username%'
+'Meta of this User': 'Info sur l''utilisateur'
+Skills: Compétence
+'%username%''s reputation': 'Réputation de %username%'
+'%username%''s stats': 'Statistique de %username%'
 'You already report this user': 'Vous avez déjà signaler cette utilisateur'
-'Beware! this user has been reported as': 'Méfiez vous ! Cette utilisateur a été signalez comme'
-'Explore the community of': 'Explorez la communauté de %username%'
-Following: __Following
-'Content add': '__Content add'
-'Featured Content': '__Featured Content'
-'Trendy on PM': '__Trendy on PM'
-Blog: __Blog
-'Legal mention': '__Legal mention'
-Resume: __Resume
+'Beware! this user has been reported as': 'Méfiance ! cette utilisateur a été reporter comme '
+'Explore the community of %username%': 'Explorez la communauté de %username%'
+Following: Following
+Strews: Strews
+'Content add': 'Ajouter du contenu'
+'Filter on contents': 'Filter sur contenu'
+'Filter on peoples': 'Filtre sur célébrité'
+'Filter on strews': 'Filtre sur strews'
+'Filtering content': 'Filtrage de contenu'
+'results for you search, explore those results.': 'Resultats pour votre recherche, explorez ces resultats.'
+'Filtering people': 'Filtrage des célébrité'
+'Filtering strews': 'Filtrage des strews'
+'Featured Content': 'Contenu en vedette'
+'Trendy on PM': 'Bracher sur PM'
+Blog: Blog
+'Legal mention': 'Mention légale'
 'Contact Us': 'Contactez nous'
-'Welcome on Pressformore': 'Bienvenu sur PressForMore'
-'The first crowd-shaped media': '__The first crowd-shaped media'
-'we''re running an early access version': '__we''re running an early access version'
-'Read Later': '__Read Later'
-'Explore the content of your read-later posts': '__Explore the content of your read-later posts'
-'Filtering content': '__Filtering content'
-'results for you search, explore those results.': '%number% résultat pour votre recherche, explorer ces résultats.'
-'Filter on contents': '__Filter on contents'
-'Filter on peoples': '__Filter on peoples'
-'Filter on strews': '__Filter on strews'
-'Filtering people': '__Filtering people'
-'Filtering strews': '__Filtering strews'
-'strew content': '__strew content'
-'Explore the content of strew': '__Explore the content of strew'
-'strew community': '__strew community'
-'Explore the community of strew': '__Explore the community of strew'
-'Categories of this strew': '__Categories of this strew'
-'Tags of this strew': '__Tags of this strew'
-'Meta of this strew': '__Meta of this strew'
-'created this strew': '%wallUserUsername% created this strew'
+'Welcome on Pressformore': 'Bienvenu sur Pressformore'
+'The first crowd-shaped media': 'Le premier crowd-shaped media'
+'we''re running an early access version': 'we''re running an early access version'
+'Follow %wallName% strew': 'Suivre %wallName% strew'
+'%wallName% strew community': '%wallName% strew community'
+'%wallName% strew content': '%wallName% strew content'
+'Explore the content of %wallName% strew': 'Explore le contenu de  %wallName% strew'
+'Unfollow %wallName% strew': 'Ne plus suivre %wallName% strew'
+'Vote up for %wallName% strew': 'Vote pour %wallName% strew'
+'Vote down for %wallName% strew': 'Vote contre %wallName% strew'
+'About %wallName% strew': 'Á propos %wallName% strew'
+'Report strew': 'Signalez le strew'
++Follow: +Suivre
+'Categories of this wall': 'Catégories de ce mur'
+'Tags of this wall': 'Tags de ce mur'
+'Meta of this wall': 'Meta de ce mur'
+'Share this strew': 'Partage ce strew'
+'%wallName% strew stats': 'Statistique de %wallName% strew'
+'Categories of this strew': 'Categories de ce strew'
+'Tags of this strew': 'Tags de ce strew'
+Community: Communauté
+'What would you like to see?': 'Que souhaitez-vous voir ?'
+Followed: Suivi
+'You already report this strew': 'Vous avez deja signalez ce strew'
+'Beware! this strew has been reported as .': 'méfiance ce strew a été reporté comme .'
+'Meta of this strew': 'Meta de ce strew'
+'%name% created this strew': '%name% a crée strew'
+'Add to': 'ajouté à'
+'Ban to': 'interdire à'
+'Explore the community of %wallName% strew': 'Explorez la communauté de %wallName% strew'
+Home: Index
+'Your strews': 'Vos strews'
+'Followed strews': 'Suivre ce strews'
+'Suggested strews': 'Suggerez un strews'
+'Build a new strew': 'Construire un nouveau strew'
+'Strew settings': 'Configuration du strew'
+'Read later': 'Lisez plus tard'
+'Show this post on home page': 'Voir cet article sur la page d''accueil'
+'%name% is the author': '%name% est l''auteur'

@@ -7,7 +7,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">{{ ''|trans({}, 'Core')}}Add Post</h4>
+                <h4 class="modal-title" id="myModalLabel">{{ 'Add Post'|trans({}, 'Core')}}</h4>
             </div>
             <form class="post-form ajax_form" id="commentform" method="post" action="{{ path('p4m_core_addPost') }}"
                   data-action="addPostForm" data-url="{{ path('p4m_ajax_action') }}"

@@ -1,57 +1,58 @@
 {% block p4m_corebundle_usercategory_choice_widget_options %}
-{% spaceless %}
-{% for index, choice in options %}
-{% if choice is iterable %}
-<optgroup label="{{ index|trans({}, translation_domain) }}">
-    {% for nested_choice in choice %}
-    <option value="{{ nested_choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ nested_choice.label|trans({}, translation_domain) }}</option>
-    {% endfor %}
-</optgroup>
-{% else %}
-<option  data-img="{%if choice.data.iconColor%}{{asset(choice.data.iconColor)}}{%endif%}"  value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label|trans({}, translation_domain) }}</option>
-{% endif %}
-{% endfor %}
-{% endspaceless %}
+    {% spaceless %}
+        {% for index, choice in options %}
+            {% if choice is iterable %}
+                <optgroup label="{{ index|trans({}, translation_domain) }}">
+                    {% for nested_choice in choice %}
+                        <option value="{{ nested_choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ nested_choice.label|trans({}, translation_domain) }}</option>
+                    {% endfor %}
+                </optgroup>
+            {% else %}
+                <option data-img="{% if choice.data.iconColor %}{{ asset(choice.data.iconColor) }}{% endif %}"
+                        value="{{ choice.value }}"{% if choice is selectedchoice(value) %} selected="selected"{% endif %}>{{ choice.label|trans({}, translation_domain) }}</option>
+            {% endif %}
+        {% endfor %}
+    {% endspaceless %}
 {% endblock p4m_corebundle_usercategory_choice_widget_options %}
         
         
 
 {% block p4m_corebundle_usercategory_choice_widget_collapsed %}
-{% spaceless %}
-<select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
-    {% if empty_value is not none %}
-    <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
-    {% endif %}
-    {% if preferred_choices|length > 0 %}
-    {% set options = preferred_choices %}
-    {{ block('choice_widget_options') }}
-    {% if choices|length > 0 and separator is not none %}
-    <option disabled="disabled">{{ separator }}</option>
-    {% endif %}
-    {% endif %}
-    {% set options = choices %}
-    {{ block('p4m_corebundle_usercategory_choice_widget_options') }}
-</select>
-{% endspaceless %}
+    {% spaceless %}
+        <select {{ block('widget_attributes') }}{% if multiple %} multiple="multiple"{% endif %}>
+            {% if empty_value is not none %}
+                <option value="">{{ empty_value|trans({}, translation_domain) }}</option>
+            {% endif %}
+            {% if preferred_choices|length > 0 %}
+                {% set options = preferred_choices %}
+                {{ block('choice_widget_options') }}
+                {% if choices|length > 0 and separator is not none %}
+                    <option disabled="disabled">{{ separator }}</option>
+                {% endif %}
+            {% endif %}
+            {% set options = choices %}
+            {{ block('p4m_corebundle_usercategory_choice_widget_options') }}
+        </select>
+    {% endspaceless %}
 {% endblock p4m_corebundle_usercategory_choice_widget_collapsed %}
 
 
 
 
 {% block p4m_corebundle_usercategory_widget %}
-{% spaceless %}
-{% if expanded %}
-<ul {{ block('widget_container_attributes') }}>
-    {% for child in form %}
-    <li>
-        {{ form_widget(child) }}
-        {{ form_label(child) }}
-    </li>
-    {% endfor %}
-</ul>
-{% else %}
+    {% spaceless %}
+        {% if expanded %}
+            <ul {{ block('widget_container_attributes') }}>
+                {% for child in form %}
+                    <li>
+                        {{ form_widget(child) }}
+                        {{ form_label(child) }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
 
-{{ block('p4m_corebundle_usercategory_choice_widget_collapsed') }}
-{% endif %}
-{% endspaceless %}
+            {{ block('p4m_corebundle_usercategory_choice_widget_collapsed') }}
+        {% endif %}
+    {% endspaceless %}
 {% endblock %}

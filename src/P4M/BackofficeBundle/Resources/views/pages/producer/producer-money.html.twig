@@ -1,16 +1,13 @@
 {% extends "P4MBackofficeBundle::my-account.html.twig" %}
-
-
-
  {% block page %}
 <h2 class="form-title">Your pay-outs</h2>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
-          <th>Creation Date</th>
-          <th>Executed Date</th>
-          <th>Credited Funds</th>
-          <th>Status</th>
+          <th>{{ 'Creation Date'|trans({}, 'Backoffice')}}</th>
+          <th>{{ 'Executed Date'|trans({}, 'Backoffice')}}</th>
+          <th>{{ 'Credited Funds'|trans({}, 'Backoffice')}}</th>
+          <th>{{ 'Status'|trans({}, 'Backoffice')}}</th>
         </tr>
       </thead>
       <tbody>
@@ -21,31 +18,32 @@
                 <td>{{payout.CreditedFunds.Amount / 100}} {{payout.CreditedFunds.Currency}}</td>
                 <td>{{payout.Status}}</td>
             </tr>
-           
         {%endfor%}
-    
-     
       </tbody>
     </table>
-    
-    
 {%if payoutPending%}
     <div class="explanation-zone">
-        <p>Prior transfer is not complete yet. Please wait until it is fully processed </p>
+        <p>
+            {{ 'Prior transfer is not complete yet. Please wait until it is fully processed'|trans({}, 'Backoffice')}}
+        </p>
     </div>
 {%elseif wallet is null%}
         <div class="explanation-zone">
-            <p>Please <a href="{{path('p4_m_backoffice_producer_key')}}">activate your producer account.</a> </p>
+            <p>{{ 'Please <a href="%path%">activate your producer account.</a>'|trans({'%path%': path('p4_m_backoffice_producer_key')}, 'Backoffice')|raw }}
+            </p>
         </div>
 {%elseif wallet.Balance.Amount>=100%}
     {%if bankAccounts|length%}
     <form method="post" enctype="multipart/form-data"  class="form-horizontal" role="form" action="">
         <div class="explanation-zone">
-            <p>You can payout from your producer wallet to your registred bank account. <strong>{{wallet.Balance.Amount/100}} {{wallet.Balance.Currency}}</strong> will be transfered to your selected bank account</p>
+            <p>
+                {{ 'You can payout from your producer wallet to your registred bank account. <strong>%amount% %currency%</strong> will be transfered to your selected bank account'|trans({'%amount%': wallet.Balance.Amount/100, '%currency%': wallet.Balance.Currency}, 'Backoffice')|raw}}
+            </p>
         </div>
         <div class="form-group">
-            <label class="col-sm-20 control-label form-field-title" for="banckAccount">Choose a registred account *</label>
-
+            <label class="col-sm-20 control-label form-field-title" for="banckAccount">
+                {{ 'Choose a registred account'|trans({}, 'Backoffice')}} *
+            </label>
             <div class="col-sm-30">
                 <select name="bankAccount" id="bankAccount" class="form-control" required="required">
                     <option></option>
@@ -57,32 +55,21 @@
             </div>
             <div class="clear"></div>
         </div>
-        <button class="primary" type="submit">Pay Out</button>
+        <button class="primary" type="submit">{{ 'Pay Out'|trans({}, 'Backoffice')}}</button>
     </form>
     {%else%}
     <div class="explanation-zone">
-        <p>Please register a bank account in order to transfer the money.</p>
+        <p>{{ 'Please register a bank account in order to transfer the money.'|trans({}, 'Backoffice')}}</p>
     </div>
     {
     {%endif%}
 {%elseif wallet.Balance.Amount<100%}
        <div class="explanation-zone">
-            <p>To be able to wire the money to your external bank account, you need to have more than 1€ in your wallet. You actually have <strong>{{wallet.Balance.Amount/100}} {{wallet.Balance.Currency}}</strong></p>
-        </div> 
-        
-  
-    
-    
+            <p>
+                {{ 'To be able to wire the money to your external bank account, you need to have more than 1€ in your wallet. You actually have <strong>%amount% %currency%</strong>'|trans({'%amount%': wallet.Balance.Amount/100, '%currency%': wallet.Balance.Currency}, 'Backoffice')|raw}}
+            </p>
+        </div>
 {%endif%}
-
-
-        
-            
-
-
-
-
-
 {% endblock%}
 
 

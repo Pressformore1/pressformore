@@ -1,7 +1,7 @@
 {%extends 'P4MUserBundle:Social/Profile:my-account.html.twig'%}
 
 
-{%block accountTitle%}Change your profile picture{%endblock%}
+{%block accountTitle%}{{ 'Change your profile picture'|trans({}, 'user')}}{%endblock%}
 
 {%block accountNote%}
     {%if form_errors(form)|length %}
@@ -11,7 +11,7 @@
 
 {%block accountForm%}
 <div class="form-field">
-        <label class="required form-field-title" for="currentPassword">Current picture</label>
+        <label class="required form-field-title" for="currentPassword">{{ 'Current picture'|trans({}, 'user')}}</label>
 {#        {% if user.picture.webPath is defined%}#}
             <img id="profilePicImage" src="{%if user.picture %}{{asset(user.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}"/>
 {#        {%endif%}#}

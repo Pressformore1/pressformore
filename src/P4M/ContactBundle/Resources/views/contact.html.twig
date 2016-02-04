@@ -1,7 +1,7 @@
 <div class="row-fluid">
     <div class="span12">
         <div class="page-align-center">
-            <h1 class="page-align-center-title">Contact US</h1>
+            <h1 class="page-align-center-title">{{ 'Contact US'|trans({}, 'contact')}}</h1>
             
            
             
@@ -29,7 +29,7 @@
         
         {%else%}
             
-            <p class="page-align-center-content">Let us know what you think about PFM...</p>
+            <p class="page-align-center-content">{{ 'Let us know what you think about PFM...'|trans({}, 'contact')}}</p>
             <form method="post" {{ form_enctype(form) }} class="form-horizontal ajax_form" role="form" id="contact_form" data-target="serialize" data-url="{{path('p4_m_contact_submit')}}" >
             
                 <div class="explanation-zone"></div>
@@ -37,7 +37,7 @@
                 <div id="p4m_userbundle_user">
 
                     <div class="form-group">
-                        <label class="col-sm-8 control-label form-field-title" for="{{form.name.vars.id}}">Your name</label>
+                        <label class="col-sm-8 control-label form-field-title" for="{{form.name.vars.id}}">{{ 'Your name'|trans({}, 'contact')}}</label>
 
                         <div class="col-sm-30">
                             {{form_widget(form.name,{attr:{class:'form-control'} })}}
@@ -51,7 +51,7 @@
                  <div id="p4m_userbundle_user">
 
                     <div class="form-group">
-                        <label class="col-sm-8 control-label form-field-title" for="{{form.email.vars.id}}">Your email</label>
+                        <label class="col-sm-8 control-label form-field-title" for="{{form.email.vars.id}}">{{ 'Your email'|trans({}, 'contact')}}</label>
 
                         <div class="col-sm-30">
                             {{form_widget(form.email,{attr:{class:'form-control'} })}}
@@ -65,7 +65,7 @@
                  <div id="p4m_userbundle_user">
 
                     <div class="form-group">
-                        <label class="col-sm-8 control-label form-field-title" for="{{form.message.vars.id}}">Message</label>
+                        <label class="col-sm-8 control-label form-field-title" for="{{form.message.vars.id}}">{{ 'Message'|trans({}, 'contact')}}</label>
 
                         <div class="col-sm-30">
                             {{form_widget(form.message,{attr:{class:'form-control'} })}}
@@ -77,7 +77,7 @@
                 </div>
                 {{form_rest(form)}}
 
-                <button class="primary" type="submit">Send</button>
+                <button class="primary" type="submit">{{ 'Send'|trans({}, 'contact')}}</button>
            </form>
             {%endif%}
             <div class="clear"></div>

@@ -26,58 +26,61 @@
 {% endblock %}#}
 
 {% block content %}
-<div id="content-wrap">
-    <div id="loading-zone-content">
-                    
-                    <div class="bubblingG">
+    <div id="content-wrap">
+        <div id="loading-zone-content">
+
+            <div class="bubblingG">
                     <span id="bubblingG_1">
                     </span>
                     <span id="bubblingG_2">
                     </span>
                     <span id="bubblingG_3">
                     </span>
-                    </div> 
-    </div>
-    
-    <div role="main" class="container" id="content">
-        <div class="row-fluid">
-            <div class="span12">
-                <div class="page-align-center" id="sign-in-block">
-                    <h1 class="page-align-center-title">Wallet</h1>
-                    <p class="page-align-center-content">You pressed 265 articles this months!<br /><a href="wall.html">See the complete list here</a></p>
-                    
-                    <form id="wallet-load-amount">
-                        <input id="wallet-load-amount-field" class="knob" data-width="500" data-height="500" data-displayInput="true" value="5" data-max="300" data-fgColor="#ed3237">
-                        
-                        <p><input type="checkbox" name="" id="wallet-load-amount-monthly"><label for="wallet-load-amount-monthly">Charge this amount monthly</label></p>
-                    </form>
-                </div>
             </div>
         </div>
 
-    </div>
-    {#<div id="action-bar-sections-wrap" >
-            <a id="action-bar-remove" href="#closeSections"><span class="icon-remove"></span></a>
+        <div role="main" class="container" id="content">
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="page-align-center" id="sign-in-block">
+                        <h1 class="page-align-center-title">{{ 'Wallet'|trans({}, 'Backoffice')}}</h1>
+                        <p class="page-align-center-content">{{ 'You pressed 265 articles this months!'|trans({}, 'Backoffice')}}<br/><a
+                                    href="wall.html">{{ 'See the complete list here'|trans({}, 'Backoffice')}}</a></p>
 
-            <ul id="action-bar-sections">
-                <li class="action-bar-section" id="section-wallet">
-                    <div class="action-bar-block">
-                        <h1 class="action-bar-title">Financial Info</h1>
-                        <h4 class="action-bar-small-title"><span class="glyphicon money"></span> 25€ on your wallet at this time</h4>
-                        <p>Below see the list of yours payments</p>
+                        <form id="wallet-load-amount">
+                            <input id="wallet-load-amount-field" class="knob" data-width="500" data-height="500"
+                                   data-displayInput="true" value="5" data-max="300" data-fgColor="#ed3237">
 
-                        <ul>
-                            <li class="payment-history">
-                                <span class="payment-history-type">Mastercard</span> - <span class="payment-history-date">24/06/2014</span> <span class="payment-history-amount">25&euro;</span>
-                            </li>
-                        </ul>
+                            <p><input type="checkbox" name="" id="wallet-load-amount-monthly"><label
+                                        for="wallet-load-amount-monthly">{{ 'Charge this amount monthly'|trans({}, 'Backoffice')}}</label></p>
+                        </form>
                     </div>
+                </div>
+            </div>
 
-                    
+        </div>
+        {#<div id="action-bar-sections-wrap" >
+                <a id="action-bar-remove" href="#closeSections"><span class="icon-remove"></span></a>
 
-                </li>
-            </ul>
-        </div>  #} 
-    
-</div>
+                <ul id="action-bar-sections">
+                    <li class="action-bar-section" id="section-wallet">
+                        <div class="action-bar-block">
+                            <h1 class="action-bar-title">Financial Info</h1>
+                            <h4 class="action-bar-small-title"><span class="glyphicon money"></span> 25€ on your wallet at this time</h4>
+                            <p>Below see the list of yours payments</p>
+
+                            <ul>
+                                <li class="payment-history">
+                                    <span class="payment-history-type">Mastercard</span> - <span class="payment-history-date">24/06/2014</span> <span class="payment-history-amount">25&euro;</span>
+                                </li>
+                            </ul>
+                        </div>
+
+
+
+                    </li>
+                </ul>
+            </div>  #}
+
+    </div>
 {% endblock %}

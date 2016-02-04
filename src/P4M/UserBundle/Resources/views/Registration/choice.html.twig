@@ -8,36 +8,39 @@
 {% endblock %}
 
 {% block content %}
-<div id="fb-root"></div>
+    <div id="fb-root"></div>
     <script>
-        window.fbAsyncInit = function() {
+        window.fbAsyncInit = function () {
             // init the FB JS SDK
             FB.init({
-                appId      : '{{facebook_id}}',                        // App ID from the app dashboard
+                appId: '{{ facebook_id }}',                        // App ID from the app dashboard
                 {#channelUrl : '//yourdomain.com/channel.html',  #}    // Channel file for x-domain comms
-                status     : true,                                 // Check Facebook Login status
-                xfbml      : true                                  // Look for social plugins on the page
+                status: true,                                 // Check Facebook Login status
+                xfbml: true                                  // Look for social plugins on the page
             });
         };
 
         // Load the SDK asynchronously
-        (function(d, s, id){
+        (function (d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
             js.src = "//connect.facebook.net/en_US/all.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
         function fb_login() {
-            FB.getLoginStatus(function(response) {
+            FB.getLoginStatus(function (response) {
                 if (response.status === 'connected') {
                     // connected
                     alert('Already connected, redirect to login page to create token.');
                     document.location = "{{ url("hwi_oauth_service_redirect", {service: "facebook"}) }}";
                 } else {
                     // not_authorized
-                    FB.login(function(response) {
+                    FB.login(function (response) {
                         if (response.authResponse) {
                             document.location = "{{ url("hwi_oauth_service_redirect", {service: "facebook"}) }}";
                         } else {
@@ -48,37 +51,37 @@
             });
         }
     </script>
-<div class="span12">
-                <div class="page-align-center">
-                        <h1 class="page-align-center-title">Join Pressfomore</h1>
-                        <p class="page-align-center-content">Make a choice, betwen those connection! And make it right...</p>
-                        <ul id="connect-choices">
-                                <li class="connect-choice-item">
-                                        <a id="facebook-register" href="" onclick="fb_login();"><img src="{{asset('images/design/icon-facebook.png')}}" alt="" /><span>Facebook</span> </a>
-                                </li>	
-                                <li class="connect-choice-item">
-                                        <a id="twitter-register" href=""><img src="{{asset('images/design/icon-twitter.png')}}" alt="" /><span>Twitter</span></a>
-                                </li>
-                                <li class="connect-choice-item">
-                                        <a id="google-register" href=""><img src="{{asset("images/design/icon-google.png")}}" alt="" /><span>Google</span></a>
-                                </li>
-                                <li class="connect-choice-item">
-                                        <a id="email-register" href="{{path('fos_user_registration_register' )}}"><img src="{{asset('images/design/icon-email.png')}}" alt="" /><span>Email</span></a>
-                                </li>
-                        </ul>
-                        <div class="clear"></div>
-                </div>
+    <div class="span12">
+        <div class="page-align-center">
+            <h1 class="page-align-center-title">{{ 'Join Pressfomore'|trans({}, 'user') }}</h1>
+            <p class="page-align-center-content">{{ 'Make a choice, betwen those connection! And make it right...'|trans({}, 'user') }}</p>
+            <ul id="connect-choices">
+                <li class="connect-choice-item">
+                    <a id="facebook-register" href="" onclick="fb_login();"><img
+                                src="{{ asset('images/design/icon-facebook.png') }}" alt=""/><span>Facebook</span> </a>
+                </li>
+                <li class="connect-choice-item">
+                    <a id="twitter-register" href=""><img src="{{ asset('images/design/icon-twitter.png') }}"
+                                                          alt=""/><span>Twitter</span></a>
+                </li>
+                <li class="connect-choice-item">
+                    <a id="google-register" href=""><img src="{{ asset("images/design/icon-google.png") }}"
+                                                         alt=""/><span>Google</span></a>
+                </li>
+                <li class="connect-choice-item">
+                    <a id="email-register" href="{{ path('fos_user_registration_register' ) }}"><img
+                                src="{{ asset('images/design/icon-email.png') }}"
+                                alt=""/><span>{{ 'Email'|trans({}, 'user') }}</span></a>
+                </li>
+            </ul>
+            <div class="clear"></div>
+        </div>
         <div class="clear"></div>
-</div>
+    </div>
 {% endblock %}
-
-
 {% block pagination %}
-{#{% include "P4MCoreBundle:Core/MyWall:pagination.html.twig" %}#}
+    {#{% include "P4MCoreBundle:Core/MyWall:pagination.html.twig" %}#}
 {% endblock %}
-
-
 {% block scripts %}
-
-{% include "P4MCoreBundle:Core:scripts.html.twig" %}
+    {% include "P4MCoreBundle:Core:scripts.html.twig" %}
 {% endblock %}

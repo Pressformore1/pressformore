@@ -1,62 +1,72 @@
-{%extends 'P4MUserBundle:Social/Profile:my-account.html.twig'%}
+{% extends 'P4MUserBundle:Social/Profile:my-account.html.twig' %}
 
 
-{%block accountTitle%}Edit your informations{%endblock%}
+{% block accountTitle %}{{ 'Edit your informations'|trans({}, 'user')}}{% endblock %}
 
-{%block accountNote%}
-    {%if form_errors(form)|length %}
+{% block accountNote %}
+    {% if form_errors(form)|length %}
         <p><i class="icon-info-sign"></i>{{ form_errors(form) }}</p>
-    {%endif%}
-{%endblock%}
+    {% endif %}
+{% endblock %}
 
-{%block accountForm%}
-<div class="form-field">
-    <label for="{{form.username.vars.id}}" class="form-field-title">Username <small class="form-field-explanation">(Title of your profile)</small></label>
-    
-       {{form_widget(form.username)}} 
-{#        <input type="text" class="form-field-input" value="unmecduweb" required="required" name="p4m_userbundle_user[title]" id="p4m_userbundle_user_title">#}
-</div>
+{% block accountForm %}
+    <div class="form-field">
+        <label for="{{ form.username.vars.id }}" class="form-field-title">{{ 'Username'|trans({}, 'user')}}
+            <small class="form-field-explanation">({{ 'Title of your profile'|trans({}, 'user')}})</small>
+        </label>
 
-<div class="form-field">
-    {{form_label(form.email,label|default(null), { 'label_attr': { 'class': 'form-field-title' } }) }}
-{#    <label class="required  form-field-title" for="p4m_userbundle_user_email">Email</label>#}
-    {{form_widget(form.email)}}   
+        {{ form_widget(form.username) }}
+        {#        <input type="text" class="form-field-input" value="unmecduweb" required="required" name="p4m_userbundle_user[title]" id="p4m_userbundle_user_title">#}
+    </div>
+
+    <div class="form-field">
+        {{ form_label(form.email,label|default(null), { 'label_attr': { 'class': 'form-field-title' } }) }}
+        {#    <label class="required  form-field-title" for="p4m_userbundle_user_email">Email</label>#}
+        {{ form_widget(form.email) }}
         <div class="form-field-privacy">
-                <p><small>Who can see my e-email address</small></p>
-                {{form_widget(form.publicStatus.email)}}
-               
+            <p>
+                <small>{{ 'Who can see my e-email address'|trans({}, 'user')}}</small>
+            </p>
+            {{ form_widget(form.publicStatus.email) }}
+
         </div>
-</div>
-<div class="form-field">
-        {{form_label(form.surname,label|default(null), { 'label_attr': { 'class': 'form-field-title' } }) }}
-        {{form_widget(form.surname)}}
-        {{form_widget(form.firstName)}}
-       
+    </div>
+    <div class="form-field">
+        {{ form_label(form.surname,label|default(null), { 'label_attr': { 'class': 'form-field-title' } }) }}
+        {{ form_widget(form.surname) }}
+        {{ form_widget(form.firstName) }}
+
         <div class="form-field-privacy">
-                <p><small>Who can see your name</small></p>
-                {{form_widget(form.publicStatus.firstName)}}
+            <p>
+                <small>{{ 'Who can see your name'|trans({}, 'user')}}</small>
+            </p>
+            {{ form_widget(form.publicStatus.firstName) }}
         </div>
-</div>
+    </div>
 
-<div class="form-field">
-        {{form_label(form.website,label|default(null), { 'label_attr': { 'class': 'form-field-title' } }) }}
-        {{form_widget(form.website)}}
-         <div class="form-field-privacy">
-                <p><small>Who can see your website</small></p>
-                {{form_widget(form.publicStatus.website)}}
+    <div class="form-field">
+        {{ form_label(form.website,label|default(null), { 'label_attr': { 'class': 'form-field-title' } }) }}
+        {{ form_widget(form.website) }}
+        <div class="form-field-privacy">
+            <p>
+                <small>{{ 'Who can see your website'|trans({}, 'user')}}</small>
+            </p>
+            {{ form_widget(form.publicStatus.website) }}
         </div>
-        
-</div>
-<div class="form-field">
-        <label for="{{form.bio.vars.id}}" class="form-field-title">Bio <small class="form-field-explanation">(A short description of yourself)</label>
-        {{form_widget(form.bio)}}
-    
-</div>
-<div class="form-field">
-        {{form_label(form.skills,label|default(null), { 'label_attr': { 'class': 'form-field-title' } }) }}
-        {{form_widget(form.skills)}}
-</div>
-{{form_rest(form)}}
+
+    </div>
+    <div class="form-field">
+        <label for="{{ form.bio.vars.id }}" class="form-field-title">Bio
+            <small class="form-field-explanation">({{ 'A short description of yourself'|trans({}, 'user')}})
+        </label>
+        {{ form_widget(form.bio) }}
+
+    </div>
+    <div class="form-field">
+        {{ form_label(form.skills,label|default(null), { 'label_attr': { 'class': 'form-field-title' } }) }}
+        {{ form_widget(form.skills) }}
+    </div>
+    {{ form_rest(form) }}
 
 
-{%endblock%}
+{% endblock %}

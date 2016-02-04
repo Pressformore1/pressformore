@@ -4,5 +4,7 @@
 
 {% block fos_user_content %}
     <p>{{ 'registration.check_email'|trans({'%email%': user.email}) }}</p>
-    <p>Our e-mail may land in your <strong>spam folder</strong>, make sure to check it out, or <a href="{{path('p4m_core_home')}}#contact">contact us</a>.</p>
+    <p>
+        {{ 'Our e-mail may land in your <strong>spam folder</strong>, make sure to check it out, or <a href="%link%#contact">contact us</a>.'|trans({'%link%': path('p4m_core_home')}, 'user')|raw}}
+    </p>
 {% endblock fos_user_content %}

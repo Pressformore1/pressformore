@@ -1,116 +1,132 @@
 <section id="walletGraphs" class=" col-gd-30 col-gd-offset-15 col-md-30 col-md-offset-15 col-sm-30 col-sm-offset-15">
-    <h1>Monthly Activity</h1>
-    <h3><span id="lengendYou"> </span> You <span id="lengendAverage"> </span> Platform average</h3>
-    {%if wallet%}
-    {%set walletBalance = wallet.Balance.Amount / 100 %}
-    {%else%}
-    {%set walletBalance = 0%}
-    {%endif%}
+    <h1>{{ 'Monthly Activity'|trans({}, 'Backoffice') }}</h1>
+    <h3><span id="lengendYou"> </span> {{ 'You <span id="lengendAverage"> </span> Platform average'|trans({}, 'Backoffice')}}</h3>
+    {% if wallet %}
+        {% set walletBalance = wallet.Balance.Amount / 100 %}
+    {% else %}
+        {% set walletBalance = 0 %}
+    {% endif %}
     <div class="col-gd-17 col-gd-offset-3 col-md-17 col-md-offset-3 col-sm-17 col-sm-offset-3">
-        <canvas class="walletGraph" {#width="100" height="220"#} width="200" height="300" id="walletLoad" class="walletGraph" data-graphData="{{{'user' : walletBalance|round(1),'average':averageWalletBalance|round(1),'label':"Wallet amount",'type':'percent'}|json_encode()}}" ></canvas>
-        <p>Wallet Amount</p>
+        <canvas class="walletGraph" {#width="100" height="220"#} width="200" height="300" id="walletLoad"
+                class="walletGraph"
+                data-graphData="{{ {'user' : walletBalance|round(1),'average':averageWalletBalance|round(1),'label':"Wallet amount",'type':'percent'}|json_encode() }}"></canvas>
+        <p>{{ 'Wallet Amount'|trans({}, 'Backoffice')}}</p>
     </div>
     <div class="col-gd-17 col-gd-offset-3 col-md-17 col-md-offset-3 col-sm-17 col-sm-offset-3">
-        <canvas class="walletGraph" width="200" height="300"  id="postRead" class="walletGraph" data-graphData="{{{'user':userPostReadNumber|round(1),'average':averagePostReadNumber|round(1),'label':"# Post Read",'type':'normal'}|json_encode()}}"  ></canvas>
-        <p>#Post Read</p>
+        <canvas class="walletGraph" width="200" height="300" id="postRead" class="walletGraph"
+                data-graphData="{{ {'user':userPostReadNumber|round(1),'average':averagePostReadNumber|round(1),'label':"# Post Read",'type':'normal'}|json_encode() }}"></canvas>
+        <p>{{ '#Post Read'|trans({}, 'Backoffice')}}</p>
     </div>
     <div class="col-gd-17 col-gd-offset-3 col-md-17 col-md-offset-3 col-sm-17 col-sm-offset-3">
-        <canvas  class="walletGraph" width="200" height="300" id="pressRatio" class="walletGraph" data-graphData="{{{'user':userPressRatio|round(1),'average':averagePressRatio|round(1),'label':"# Press Ratio",'type':'percent'}|json_encode()}}" ></canvas>
-        <p>#Press Ratio</p>
+        <canvas class="walletGraph" width="200" height="300" id="pressRatio" class="walletGraph"
+                data-graphData="{{ {'user':userPressRatio|round(1),'average':averagePressRatio|round(1),'label':"# Press Ratio",'type':'percent'}|json_encode() }}"></canvas>
+        <p>{{ '#Press Ratio'|trans({}, 'Backoffice')}}</p>
     </div>
 </section>
 
-<section id="walletGlobalResume" class="flipBoard col-gd-50 col-gd-offset-5 col-md-50 col-md-offset-5 col-sm-50 col-sm-offset-5">
-{%if wallet and wallet.Balance.Amount%}
-    <div class="round-picture aligncenter">
-        <img class="thumb-align" src="{%if user.picture %}{{asset(user.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}" alt="{{user.username}}"/>
-    </div>
-    <div class="clear"></div>
-    <h3>and</h3>
-{%elseif wallet%}
-    <button class="main-button-link action-bar-btn graphButton" data-toggle="action-bar" data-target="#section-wallet-charge"><span class="big">Fill in your wallet</span><br />and start funding your favorite journalists</button>
-    <h2>For Now</h2>
-{%else%}
-    <a href="{{path('p4_m_backoffice_profile_infos')}}?goBack={{url('p4_m_backoffice_homepage')}}#wallet" class="main-button-link graphButton"><span class="big"> Complete my account informations</span><br />and start funding your favorite journalists</a>
-    <h2>For Now</h2>
-{%endif%}
-{%set length = pressformersNumber|length%}
+<section id="walletGlobalResume"
+         class="flipBoard col-gd-50 col-gd-offset-5 col-md-50 col-md-offset-5 col-sm-50 col-sm-offset-5">
+    {% if wallet and wallet.Balance.Amount %}
+        <div class="round-picture aligncenter">
+            <img class="thumb-align"
+                 src="{% if user.picture %}{{ asset(user.picture.webPath) }}{% else %}{{ asset('images/users/defaultUser.jpg') }}{% endif %}"
+                 alt="{{ user.username }}"/>
+        </div>
+        <div class="clear"></div>
+        <h3>and</h3>
+    {% elseif wallet %}
+        <button class="main-button-link action-bar-btn graphButton" data-toggle="action-bar"
+                data-target="#section-wallet-charge">
+            {{ '<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists'|trans({}, 'Backoffice')}}
+
+        </button>
+        <h2>{{ 'For Now'|trans({}, 'Backoffice')}}</h2>
+    {% else %}
+        <a href="{{ path('p4_m_backoffice_profile_infos') }}?goBack={{ url('p4_m_backoffice_homepage') }}#wallet"
+           class="main-button-link graphButton">
+            {{ '<span class="big"> Complete my account informations</span><br/>and start funding your favorite journalists'|trans({}, 'Backoffice')}}
+
+        </a>
+        <h2>{{ 'For Now'|trans({}, 'Backoffice')}}</h2>
+    {% endif %}
+    {% set length = pressformersNumber|length %}
 
     <div id="flipZone">
-        {%for i in 0..length-1%}
-        <ul class="flip">
-            <li>
-                <a href="#">
-                    <div class="up">
-                        <div class="shadow"></div>
-                        <div class="inn">{{pressformersNumber|slice(i,1)}}</div>
-                    </div>
-                    <div class="down">
-                        <div class="shadow"></div>
-                        <div class="inn">{{pressformersNumber|slice(i,1)}}</div>
-                    </div>
-                </a>
-            </li>
+        {% for i in 0..length-1 %}
+            <ul class="flip">
+                <li>
+                    <a href="#">
+                        <div class="up">
+                            <div class="shadow"></div>
+                            <div class="inn">{{ pressformersNumber|slice(i,1) }}</div>
+                        </div>
+                        <div class="down">
+                            <div class="shadow"></div>
+                            <div class="inn">{{ pressformersNumber|slice(i,1) }}</div>
+                        </div>
+                    </a>
+                </li>
 
-        </ul>
+            </ul>
 
-        {%endfor%}
-        <p class="inline-block pressformersP">Pressformers successfully fund </p>
-    {%set length = pressedContentNumber|length%}
-        {%for i in 0..length-1%}
-        <ul class="flip">
-            <li>
-                <a href="#">
-                    <div class="up">
-                        <div class="shadow"></div>
-                        <div class="inn">{{pressedContentNumber|slice(i,1)}}</div>
-                    </div>
-                    <div class="down">
-                        <div class="shadow"></div>
-                        <div class="inn">{{pressedContentNumber|slice(i,1)}}</div>
-                    </div>
-                </a>
-            </li>
+        {% endfor %}
+        <p class="inline-block pressformersP">
+            {{ 'Pressformers successfully fund '|trans({}, 'Backoffice')}}
+        </p>
+        {% set length = pressedContentNumber|length %}
+        {% for i in 0..length-1 %}
+            <ul class="flip">
+                <li>
+                    <a href="#">
+                        <div class="up">
+                            <div class="shadow"></div>
+                            <div class="inn">{{ pressedContentNumber|slice(i,1) }}</div>
+                        </div>
+                        <div class="down">
+                            <div class="shadow"></div>
+                            <div class="inn">{{ pressedContentNumber|slice(i,1) }}</div>
+                        </div>
+                    </a>
+                </li>
 
-        </ul>
-        {%endfor%}
-        <p class="inline-block pressformersP"> contents</p>
-        
-        
-
+            </ul>
+        {% endfor %}
+        <p class="inline-block pressformersP"> {{ 'contents'|trans({}, 'Backoffice')}}</p>
 
 
     </div>
-    
-     
-     
-    
-</section>
 
-{%if userPressForms|length%}
-<section id="walletGlobalPress" class="flipBoard col-gd-50 col-gd-offset-5 col-md-50 col-md-offset-5 col-sm-50 col-sm-offset-5">
-<h1>You've pressed <span class="red">{{userPressForms|length}}</span> contents so far</h1>
-     <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Title</th>
-          <th>Date</th>
-          <th>Author</th>
-        </tr>
-      </thead>
-      <tbody>
-    {%for press in userPressForms%}
-        <tr>
-            <td><a href="{{path('p4m_core_post',{postSlug:press.post.slug})}}">{{press.post.title}}</a></td>
-            <td>{{press.date.format('d/m/Y')}}</td>
-          <td>{{press.post.author.username}}</td>
-        </tr>
-    {%endfor%}
-              
-      </tbody>
-    </table>
 
 </section>
 
-{%endif%}
+{% if userPressForms|length %}
+    <section id="walletGlobalPress"
+             class="flipBoard col-gd-50 col-gd-offset-5 col-md-50 col-md-offset-5 col-sm-50 col-sm-offset-5">
+
+        <h1>
+            {{ 'You\'ve pressed <span class="red">%pressLength%</span> contents so far'|trans({'%pressLength%': userPressForms|length}, 'Backoffice')}}
+        </h1>
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>{{ 'Title'|trans({}, 'Backoffice')}}</th>
+                <th>{{ 'Date'|trans({}, 'Backoffice')}}</th>
+                <th>{{ 'Author'|trans({}, 'Backoffice')}}</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for press in userPressForms %}
+                <tr>
+                    <td><a href="{{ path('p4m_core_post',{postSlug:press.post.slug}) }}">{{ press.post.title }}</a></td>
+                    <td>{{ press.date.format('d/m/Y') }}</td>
+                    <td>{{ press.post.author.username }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+    </section>
+
+{% endif %}
 

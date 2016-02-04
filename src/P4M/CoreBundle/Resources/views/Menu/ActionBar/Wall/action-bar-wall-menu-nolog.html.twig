@@ -3,7 +3,7 @@
 {% if wall is defined %}
     <li id="action-bar-follow">
         <a class="to-follow action-bar-link " href="#meta"
-           title="{{ 'Follow strew'|trans({'wallName': wall.name }, 'menu') }}" data-toggle="modal"
+           title="{{ 'Follow %wallName% strew'|trans({'%wallName%': wall.name }, 'menu') }}" data-toggle="modal"
            data-target="#modal-register">
             <span class="action-bar-icon icon-strew-follow"></span>
         </a>
@@ -38,7 +38,7 @@
     </li>
     <li class="action-bar-item">
         <a class="action-bar-link content-modifier ajax_form_force" data-toggle="action-bar"
-           data-target="#section-community" href="#community" title=" {{ 'strew community'|trans({'wallName': wall.name }, 'menu')}}"
+           data-target="#section-community" href="#community" title=" {{ '%wallName% strew community'|trans({'%wallName%': wall.name}, 'menu')}}"
            data-ajaxTarget="wall-community-form">
                 <span class="action-bar-icon glyphicon group">
                 </span>
@@ -49,7 +49,7 @@
 {% endif %}
 <li class="action-bar-item">
     <a class="action-bar-link content-modifier" data-toggle="action-bar" data-target="#section-filters"
-       data-ajaxTarget="action-bar-filters-form" href="#filters" title=" {{ 'strew content'|trans({'wallName': wall.name }, 'menu')}}">
+       data-ajaxTarget="action-bar-filters-form" href="#filters" title=" {{ '%wallName% strew content'|trans({'%wallName%': wall.name}, 'menu')}}">
         <span class="action-bar-icon glyphicon file"></span>
     </a>
 </li>

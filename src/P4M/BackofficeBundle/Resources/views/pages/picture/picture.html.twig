@@ -1,66 +1,59 @@
 {% extends "P4MBackofficeBundle::my-account.html.twig" %}
 
-{%block page%}
+{% block page %}
 
-<h2 class="form-title">Edit your informations</h2>
-<form method="post" enctype="multipart/form-data"  class="form-horizontal" role="form">
-    <div class="explanation-zone">{{form_errors(form)}}</div>
-    
+    <h2 class="form-title">Edit your informations</h2>
+    <form method="post" enctype="multipart/form-data" class="form-horizontal" role="form">
+        <div class="explanation-zone">{{ form_errors(form) }}</div>
 
         <div id="p4m_userbundle_user">
             <div class="form-field">
-
-
             </div>
 
             <div class="form-field">
-
             </div>
 
-            <input type="hidden" value="bbf2d8a415a2e94e1d3d8d79972b0e7bb2e9acd5" name="p4m_userbundle_user[_token]" id="p4m_userbundle_user__token">
-
-
-
+            <input type="hidden" value="bbf2d8a415a2e94e1d3d8d79972b0e7bb2e9acd5" name="p4m_userbundle_user[_token]"
+                   id="p4m_userbundle_user__token">
 
         </div>
         <div id="p4m_userbundle_user">
 
             <div class="form-group">
-                <label for="currentPassword" class="col-sm-20 control-label form-field-title required">Current picture</label>
-
+                <label for="currentPassword" class="col-sm-20 control-label form-field-title required">
+                    {{ 'Current picture'|trans({}, 'Backoffice')}}
+                </label>
 
                 <div class="col-sm-30">
-                   <div class="account-pic-wrap">
-                       {% if user.picture %}
-                      <img class="thumb-align" src="{%if user.picture %}{{asset(user.picture.webPath)}}{%else%}{{asset('images/users/defaultUser.jpg')}}{%endif%}" id="profilePicImage">
-                      {% endif %}
-                   </div>
-                   <div class="clear"></div>
+                    <div class="account-pic-wrap">
+                        {% if user.picture %}
+                            <img class="thumb-align"
+                                 src="{% if user.picture %}{{ asset(user.picture.webPath) }}{% else %}{{ asset('images/users/defaultUser.jpg') }}{% endif %}"
+                                 id="profilePicImage">
+                        {% endif %}
+                    </div>
+                    <div class="clear"></div>
                 </div>
                 <div class="clear"></div>
             </div>
 
             <div class="form-group">
-                <label  class="col-sm-20 control-label form-field-title required">Picture</label>
-                <div class="col-sm-30"  id="p4m_userbundle_user_picture">
-                   <div>
-{#                      <label class="required" for="{{form.picture.vars.id}}">File</label>#}
-                      {{form_widget(form.picture)}}
-                   </div>
+                <label class="col-sm-20 control-label form-field-title required">{{ 'Picture'|trans({}, 'Backoffice')}}</label>
+                <div class="col-sm-30" id="p4m_userbundle_user_picture">
+                    <div>
+                        {#                      <label class="required" for="{{form.picture.vars.id}}">File</label>#}
+                        {{ form_widget(form.picture) }}
+                    </div>
                 </div>
-                {{form_rest(form)}}
-                   <div class="clear"></div>
-                </div>
+                {{ form_rest(form) }}
+                <div class="clear"></div>
             </div>
+        </div>
 
 
-
-
-
-
-            <button class="primary" type="submit">Send</button>
+        <button class="primary" type="submit">{{ 'Send'|trans({}, 'Backoffice')}}</button>
 
         </div>
-</form>
+    </form>
 
 {% endblock %}

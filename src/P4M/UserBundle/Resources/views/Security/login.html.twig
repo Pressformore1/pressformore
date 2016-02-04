@@ -4,7 +4,7 @@
 
 {% block fos_user_content %}
 
-<p class="page-align-center-content">You don't have an account <a href="{{path('fos_user_registration_register')}}">create one</a></p>
+<p class="page-align-center-content">{{ 'You don\'t have an account'|trans({}, 'user')}} <a href="{{path('fos_user_registration_register')}}">{{ 'create one'|trans({}, 'user')}}</a></p>
 {% if error %}
     <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 {% endif %}
@@ -20,11 +20,11 @@
         <div class="form-line">
             <div class="form-field">
 
-                <label class="required form-field-title" for="username">Username/Email</label>
+                <label class="required form-field-title" for="username">{{ 'Username/Email'|trans({}, 'user')}}</label>
                 <input type="text" class="form-field-input" value="{{ last_username }}" required="required" name="_username" id="username">
             </div>
             <div class="form-field">
-                <label class="required  form-field-title" for="password">Password</label>
+                <label class="required  form-field-title" for="password">{{ 'Password'|trans({}, 'user')}}</label>
                 <input type="password" class="form-field-input" required="required" name="_password" id="password">
                 <p><a href="{{path('fos_user_resetting_request')}}">Forgot your password?</a></p>
             </div>
@@ -39,7 +39,7 @@
     <div class="clear"></div>
     <footer class="form-footer">
 
-            <button class="primary" type="submit">Sign In</button>
+            <button class="primary" type="submit">{{ 'Sign In'|trans({}, 'user')}}</button>
             <div class="clear"></div>
     </footer>
 </form>

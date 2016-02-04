@@ -155,8 +155,8 @@
 
 <li class="action-bar-section" id="section-stats">
     <div class="action-bar-block">
-        <h1 class="action-bar-title"><span class="glyphicon charts">&nbsp;</span>{{ 'strew stats'|trans({'wallName': wall.name}, 'menu')}}</h1>
-        <p>{{ ''|trans({}, 'menu')}}You're using an early access version, be patient!</p>
+        <h1 class="action-bar-title"><span class="glyphicon charts">&nbsp;</span>{{ '%wallName% strew stats'|trans({'%wallName%': wall.name}, 'menu')}}</h1>
+        <p>{{ 'You\'re using an early access version, be patient!'|trans({}, 'menu')}}</p>
     </div>
 </li>
 
@@ -361,7 +361,7 @@
         {% else %}
             {% if wall.flag %}
                 <p>
-                    {{ 'Beware! this strew has been reported as .'|trans({'typeName': wall.flag.type.name}, 'menu')}}
+                    {{ 'Beware! this strew has been reported as %typeName%.'|trans({'%typeName%': wall.flag.type.name}, 'menu')}}
                     <br/>{{ 'What do you think ?'|trans({}, 'menu')}}
                 </p>
 

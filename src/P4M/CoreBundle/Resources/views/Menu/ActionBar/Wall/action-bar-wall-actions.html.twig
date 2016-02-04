@@ -66,7 +66,7 @@
                 <a class="post-meta post-footer-author"
                    href="{{ path('p4m_social_profile',{username:wall.user.username}) }}">
                     <span class="glyphicon user"></span>
-                    {{ 'created this strew'|trans({'wallUserUsername': wall.user.username}, 'menu') }}
+                    {{ '%name% created this strew'|trans({'%name%': wall.user.username}, 'menu') }}
                 </a>
             </p>
 
@@ -131,7 +131,7 @@
 <li class="action-bar-section" id="section-stats">
     <div class="action-bar-block">
         <h1 class="action-bar-title"><span
-                    class="glyphicon charts">&nbsp;</span>{{ 'strew stats'|trans({'wallName': wall.name}, 'menu') }}
+                    class="glyphicon charts">&nbsp;</span>{{ '%wallName% strew stats'|trans({'%wallName%': wall.name}, 'menu') }}
         </h1>
         <p>{{ 'You\'re using an early access version, be patient!'|trans({}, 'menu') }}</p>
     </div>
@@ -346,7 +346,7 @@
 </li>
 <li class="action-bar-section" id="section-wall-community">
     <div class="action-bar-block">
-        <h1 class="action-bar-title">{{ ''|trans({}, 'menu')}}Community</h1>
+        <h1 class="action-bar-title">{{ 'Community'|trans({}, 'menu')}}</h1>
     </div>
     <!--Category-->
     <div class="action-bar-block">
@@ -375,7 +375,7 @@
         {% else %}
             {% if wall.flag %}
                 <p>
-                    {{ 'Beware! this strew has been reported as .'|trans({'typeName': wall.flag.type.name}, 'menu')}}
+                    {{ 'Beware! this strew has been reported as %typeName%.'|trans({'%typeName%': wall.flag.type.name}, 'menu')}}
                     <br/>{{ 'What do you think ?'|trans({}, 'menu')}}
                 </p>
 
@@ -395,7 +395,7 @@
                     <button class="primary action-bar-btn" type="submit">{{ 'I don\'t confirm'|trans({}, 'menu')}}</button>
                 </form>
             {% else %}
-                <p>You want to report this content, please tell us why:</p>
+                <p>{{ 'You want to report this content, please tell us why:'|trans({}, 'menu') }}</p>
                 <form class="post-form ajax_form" id="commentform" data-action="reportWall"
                       data-url="{{ path('p4m_ajax_action') }}" data-key="{{ 'reportWall'|sha512 }}"
                       data-target="serialize">

@@ -15,7 +15,7 @@
         </h1>
         {%if post.author %}
         <p class="middle text-center">
-            {{post.author.username}} {{ 'is the author'|trans({}, 'menu')}}. {{ 'Perhaps it\'s time to reward him for his duty work.'|trans({}, 'menu')}}
+            {{ '%name% is the author'|trans({'%name%': post.author.username}, 'menu')}}. {{ 'Perhaps it\'s time to reward him for his duty work.'|trans({}, 'menu')}}
         </p>
         {%else%}
             

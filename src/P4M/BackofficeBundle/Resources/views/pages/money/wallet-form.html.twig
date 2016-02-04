@@ -4,30 +4,26 @@
         {% if wallet.Balance.Amount == 0 or walletFill is null %}
             {#        {% if wallet.Balance.Amount == 0 or wallet.Balance.Amount > 0%}#}
             <p class="regular-text">
-                {{ 'Your wallet seems to be empty at the moment.'|trans({}, 'Backoffice')}}
+                {{ 'Your wallet seems to be empty at the moment.'|trans({}, 'Backoffice') }}
             </p>
             <p class="regular-text">
-                {{ 'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.'|trans({}, 'Backoffice')}}
+                {{ 'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.'|trans({}, 'Backoffice') }}
             </p>
             <p class="regular-text">
-                {{ ''|trans({}, 'Backoffice')}}
-                You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.
+                {{ 'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.'|trans({}, 'Backoffice') }}
+
             </p>
-            <p class="regular-text">Beware: on {{ ("now")|date_modify("+1 month")|date("F d, Y") }}, this amount will be
-                distributed to your favorite authors.</p>
+            <p class="regular-text">
+                {{ 'Beware: on %date%, this amount will be distributed to your favorite authors.'|trans({'%date%': ("now")|date_modify("+1 month")|date("F d, Y")}, 'Backoffice')}}
+            </p>
 
         {% elseif walletFill and walletFill.recurrent %}
-            <p class="regular-text">Your wallet loading is recurrent. The next refill is planned on
-                <strong>{{ walletFill.dateExpire|date('F d') }}</strong>
-                <br/> You can change it by moving the cursor below. Changes will apply on next refill <br/>
-
+            <p class="regular-text">
+                {{ 'Your wallet loading is recurrent. The next refill is planned on <strong>%date%</strong><br/>You can change it by moving the cursor below. Changes will apply on next refill<br/>'|trans({'%date%': walletFill.dateExpire|date('F d')}, 'Backoffice')|raw}}
             </p>
         {% elseif walletFill %}
-            <p class="regular-text">This amount will be ENTIRELY distributed to journalists you like You will be able to
-                charge your wallet again on {{ walletFill.dateExpire|date('F d') }}. <br/>NB:Or you can make this amount
-                to be recurrently charged every month.
-                <br/>
-
+            <p class="regular-text">
+                {{ 'This amount will be ENTIRELY distributed to journalists you like You will be able to charge your wallet again on %date%. <br/>NB:Or you can make this amount to be recurrently charged every month.<br/>'|trans({'%date%': walletFill.dateExpire|date('F d')}, 'Backoffice')|raw}}
             </p>
         {% endif %}
 
@@ -42,9 +38,11 @@
                    data-height="500" data-displayInput="true"
                    value="{% if walletFill %}{{ walletFill.amount/100 }}{% else %}5{% endif %}" data-max="100">
             {% if wallet.Balance.Amount == 0 or walletFill is null %}
-                <p class="text-center lead">From now to {{ ("now")|date_modify("+1 month")|date("F d, Y") }}</p>
+                <p class="text-center lead">
+                    {{ 'From now to %date%'|trans({'%date': ("now")|date_modify("+1 month")|date("F d, Y")}, 'Backoffice')}}
+                </p>
                 <p><input type="checkbox" name="preAuthorisation" id="wallet-load-amount-monthly"><label
-                            for="wallet-load-amount-monthly">Load this amount monthly</label></p>
+                            for="wallet-load-amount-monthly">{{ 'Load this amount monthly'|trans({}, 'Backoffice')}}</label></p>
             {% endif %}
 
             {% if walletFill and walletFill.recurrent %}
@@ -52,14 +50,15 @@
                 <div class="{#form-line#}">
                     <div class="col-lg-22 col-md-22 col-xs-22 col-gd-22">
                         <button type="submit" id="change-amount" disabled="disabled" class="primary pfm-grey-button">
-                            Change amount <br/>It will take effect on {{ walletFill.dateExpire|date('F d') }}</button>
+                            {{ 'Change amount <br/>It will take effect on %date%'|trans({'%date': walletFill.dateExpire|date('F d')}, 'Backoffice')}}
+                        </button>
                     </div>
                     <div class="col-lg-10 col-md-10 col-xs-10 col-gd-10">
                         <button class="primary ajax_action" data-action="stopWalletRecurrency"
                                 data-url="{{ path('p4m_ajax_action') }}"
                                 data-key="{{ 'stopWalletRecurrency'|sha512() }}"
                                 data-params="{{ {callBack:'loadWalletForm'}|json_encode() }}" data-loader="content">
-                            <span class="">Stop recurrency</span></button>
+                            <span class="">{{ 'Stop recurrency'|trans({}, 'Backoffice')}}</span></button>
                     </div>
                 </div>
             {% elseif walletFill %}
@@ -67,7 +66,8 @@
                     <button class="primary ajax_action" data-action="startWalletRecurrency"
                             data-url="{{ path('p4m_ajax_action') }}" data-key="{{ 'startWalletRecurrency'|sha512() }}"
                             data-params="{{ {callBack:'loadWalletForm'}|json_encode() }}" data-loader="content"><span
-                                class="">Make it Recurrent</span></button>
+                                class="">{{ 'Make it Recurrent'|trans({}, 'Backoffice')}}</span>
+                    </button>
                 </div>
             {% endif %}
         </form>

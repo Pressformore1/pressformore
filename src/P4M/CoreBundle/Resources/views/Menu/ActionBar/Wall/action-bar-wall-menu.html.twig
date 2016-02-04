@@ -12,14 +12,14 @@
         <li id="action-bar-follow">
             {% set following = wall.hasFollower(user) %}
             <a class="to-follow action-bar-link ajax_action{% if following == true %} hidden{% endif %}{#Problème ? :D#}"
-               href="#meta" title="{{ 'Follow strew'|trans({'wallName': wall.name}, 'menu')}}" data-action="followWall"
+               href="#meta" title="{{ 'Follow %wallName% strew'|trans({'%wallName%': wall.name}, 'menu')}}" data-action="followWall"
                data-url="{{ path('p4m_ajax_action') }}"
                data-params="{{ {'wallId':wall.id,callBack:'follow-action',listener:'#action-bar-follow'}|json_encode() }}"
                data-key="{{ {'wallId':wall.id,callBack:'follow-action',listener:'#action-bar-follow'}|json_encode()|sha512 }}">
                 <span class="action-bar-icon icon-strew-follow"></span>
             </a>
             <a class="followed action-bar-link ajax_action{% if following == false %} hidden{% endif %}" href="#meta"
-               title="{{ 'Unfollow strew'|trans({'wallName': wall.name}, 'menu')}}" data-url="{{ path('p4m_ajax_action') }}"
+               title="{{ 'Unfollow %wallName% strew'|trans({'%wallName%': wall.name}, 'menu')}}" data-url="{{ path('p4m_ajax_action') }}"
                data-action="unfollowWall"
                data-params="{{ {'wallId':wall.id,callBack:'follow-action',listener:'#action-bar-follow'}|json_encode() }}"
                data-key="{{ {'wallId':wall.id,callBack:'follow-action',listener:'#action-bar-follow'}|json_encode()|sha512 }}">
@@ -43,7 +43,7 @@
         <div id="action-bar-vote-wrap">
             <a data-vote-number="{{ wall.positiveVoteNumber }}" id="rating_more"
                class="action-bar-link action-bar-rate-button ajax_action" data-target="#section-rating" href="#comments"
-               title="{{ 'Vote up for strew'|trans({'wallName': wall.name}, 'menu')}}" data-url="{{ path('p4m_ajax_action') }}"
+               title="{{ 'Vote up for %wallName% strew'|trans({'%wallName%': wall.name}, 'menu')}}" data-url="{{ path('p4m_ajax_action') }}"
                data-params="{{ {'score':1,'wallId':wall.id}|json_encode() }}" data-action="wallVote"
                data-key="{{ {'score':1,'wallId':wall.id}|json_encode()|sha512 }}">
                 <span class="action-bar-icon glyphicon plus"></span>
@@ -51,7 +51,7 @@
 
             <a data-vote-number="{{ wall.negativeVoteNumber }}" id="rating_less"
                class="action-bar-link action-bar-rate-button ajax_action" data-target="#section-rating" href="#comments"
-               title="{{ 'Vote down for strew'|trans({'wallName': wall.name}, 'menu')}}" data-url="{{ path('p4m_ajax_action') }}"
+               title="{{ 'Vote down for %wallName% strew'|trans({'%wallName%': wall.name}, 'menu')}}" data-url="{{ path('p4m_ajax_action') }}"
                data-params="{{ {'score':-1,'wallId':wall.id}|json_encode() }}" data-action="wallVote"
                data-key="{{ {'score':-1,'wallId':wall.id}|json_encode()|sha512 }}">
                 <span class="action-bar-icon glyphicon minus"></span>
@@ -72,7 +72,7 @@
 
     <li class="action-bar-item">
         <a class="action-bar-link content-modifier ajax_form_force" data-toggle="action-bar"
-           data-target="#section-community" href="#community" title="{{ 'strew community'|trans({'wallName': wall.name }, 'menu')}}"
+           data-target="#section-community" href="#community" title="{{ '%wallName% strew community'|trans({'%wallName%': wall.name}, 'menu')}}"
            data-ajaxTarget="wall-community-form">
                 <span class="action-bar-icon glyphicon group">
                 </span>
@@ -81,7 +81,7 @@
 {% endif %}
 <li class="action-bar-item">
     <a class="action-bar-link content-modifier" data-toggle="action-bar" data-target="#section-filters"
-       data-ajaxTarget="action-bar-filters-form" href="#filters" title="{{ 'strew content'|trans({'wallName': wall.name }, 'menu')}}{{ wall.name }}">
+       data-ajaxTarget="action-bar-filters-form" href="#filters" title="{{ '%wallName% strew content'|trans({'%wallName%': wall.name}, 'menu')}}{{ wall.name }}">
         <span class="action-bar-icon glyphicon file"></span>
     </a>
 </li>
@@ -96,7 +96,7 @@
     <li class="action-bar-item">
         <a class="action-bar-link{#{% if wall.flag is null or flagged == true%} current-action-bar-item{%endif%}#} content-modifier"
            data-ajaxTarget="action-bar-filters-form" data-toggle="action-bar" data-target="#section-infos" href="#infos"
-           title="{{ 'About strew'|trans({'wallName': wall.name }, 'menu')}}">
+           title="{{ 'About %wallName% strew'|trans({'%wallName%': wall.name}, 'menu')}}">
             <span class="action-bar-icon glyphicon circle_info"></span>
         </a>
     </li>

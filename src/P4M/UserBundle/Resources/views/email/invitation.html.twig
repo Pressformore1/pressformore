@@ -1,7 +1,7 @@
-<h1>{{invitation.user.username}} invited you to pressformore.com</h1>
+<h1>{{ '%user% invited you to pressformore.com'|trans({'%user%': invitation.user.username}, 'user')}}</h1>
+{{ 'if you want to register with your code, click <a href="%url%?token=%code%">here</a> or copy paste de link above in your favorite navigator'|trans({'%url%': url('fos_user_registration_register'), '%code%': invitation.code}, 'user')|raw}}
+{#if you want to register with your code, click <a href="%url%?token=%code%">here</a> or copy paste de link above in your favorite navigator#}
 
-if you want to register with your code, click <a href="{{url('fos_user_registration_register')}}?token={{invitation.code}}">here</a> or copy paste de link above in your favorite navigator
-
-<p>you can share your code with {{invitation.maxIterations - 1}} friends</p>
+<p>{{ 'you can share your code with %number% friends'|trans({'%number%': invitation.maxIterations - 1}, 'user')}}</p>
 
 {{url('fos_user_registration_register')}}?token={{invitation.code}}
