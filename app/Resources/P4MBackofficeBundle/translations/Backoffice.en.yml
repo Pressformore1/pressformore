@@ -1,0 +1,119 @@
+'your producer wallet balance': 'your producer wallet balance'
+'Your retributions': 'Your retributions'
+Date: Date
+Post: Post
+Status: Status
+Sender: Sender
+'not paid yet': 'not paid yet'
+'Creation Date': 'Creation Date'
+'Executed Date': 'Executed Date'
+'Credited Funds': 'Credited Funds'
+'Prior transfer is not complete yet. Please wait until it is fully processed': 'Prior transfer is not complete yet. Please wait until it is fully processed'
+'Please <a href="%path%">activate your producer account.</a>': 'Please <a href="%path%">activate your producer account.</a>'
+'You can payout from your producer wallet to your registred bank account. <strong>%amount% %currency%</strong> will be transfered to your selected bank account': 'You can payout from your producer wallet to your registred bank account. <strong>%amount% %currency%</strong> will be transfered to your selected bank account'
+'Choose a registred account': 'Choose a registred account'
+'Pay Out': 'Pay Out'
+'Please register a bank account in order to transfer the money.': 'Please register a bank account in order to transfer the money.'
+'To be able to wire the money to your external bank account, you need to have more than 1€ in your wallet. You actually have <strong>%amount% %currency%</strong>': 'To be able to wire the money to your external bank account, you need to have more than 1€ in your wallet. You actually have <strong>%amount% %currency%</strong>'
+'Unfortunatly, mandatory information about your account is missing.': 'Unfortunatly, mandatory information about your account is missing.'
+'Complete my account informations': 'Complete my account informations'
+'Your producer account is not activated.': 'Your producer account is not activated.'
+ACTIVATE: ACTIVATE
+'Your account Key : %key%': 'Your account Key : %key%'
+'': 
+'Put this code in the head part in the html of your website': 'Put this code in the head part in the html of your website'
+'If you are the owner of content on Youtube, Vimeo, Dailymotion or Soundcloud and you want to link these to your wallet, please enter this key as a tag : <strong>pfm-%userKey%</strong>': 'If you are the owner of content on Youtube, Vimeo, Dailymotion or Soundcloud and you want to link these to your wallet, please enter this key as a tag : <strong>pfm-%userKey%</strong>'
+'get html code': 'get html code'
+'Your producer wallet: %amount% %currency%': 'Your producer wallet: %amount% %currency%'
+'Your pay-outs': 'Your pay-outs'
+'Edit your informations': 'Edit your informations'
+Username: Username
+'Title of your profile': 'Title of your profile'
+Email: Email
+'Who can see my e-email address': 'Who can see my e-email address'
+'First Name': 'First Name'
+'Last Name': 'Last Name'
+'Who can see my name': 'Who can see my name'
+'Birth Date': 'Birth Date'
+Address: Address
+'Who can see my place': 'Who can see my place'
+Website: Website
+'Who can see your website': 'Who can see your website'
+Bio: Bio
+'A short description of yourself': 'A short description of yourself'
+Skills: Skills
+Send: Send
+'Monthly Activity': 'Monthly Activity'
+'You <span id="lengendAverage"> </span> Platform average': 'You <span id="lengendAverage"> </span> Platform average'
+'Wallet Amount': 'Wallet Amount'
+'#Post Read': '#Post Read'
+'#Press Ratio': '#Press Ratio'
+'<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists': '<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists'
+'For Now': 'For Now'
+'<span class="big"> Complete my account informations</span><br/>and start funding your favorite journalists': '<span class="big"> Complete my account informations</span><br/>and start funding your favorite journalists'
+'Pressformers successfully fund': 'Pressformers successfully fund'
+contents: contents
+'You''ve pressed <span class="red">%pressLength%</span> contents so far': 'You''ve pressed <span class="red">%pressLength%</span> contents so far'
+Title: Title
+Author: Author
+'Your wallet seems to be empty at the moment.': 'Your wallet seems to be empty at the moment.'
+'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': 'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.'
+'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.': 'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.'
+'Beware: on %date%, this amount will be distributed to your favorite authors.': 'Beware: on %date%, this amount will be distributed to your favorite authors.'
+'Your wallet loading is recurrent. The next refill is planned on <strong>%date%</strong><br/>You can change it by moving the cursor below. Changes will apply on next refill<br/>': 'Your wallet loading is recurrent. The next refill is planned on <strong>%date%</strong><br/>You can change it by moving the cursor below. Changes will apply on next refill<br/>'
+'This amount will be ENTIRELY distributed to journalists you like You will be able to charge your wallet again on %date%. <br/>NB:Or you can make this amount to be recurrently charged every month.<br/>': 'This amount will be ENTIRELY distributed to journalists you like You will be able to charge your wallet again on %date%. <br/>NB:Or you can make this amount to be recurrently charged every month.<br/>'
+'From now to %date%': 'From now to %date%'
+'Load this amount monthly': 'Load this amount monthly'
+'Change amount <br/>It will take effect on %date%': 'Change amount <br/>It will take effect on %date%'
+'Stop recurrency': 'Stop recurrency'
+'Make it Recurrent': 'Make it Recurrent'
+'Your bank accounts list': 'Your bank accounts list'
+'NEW IBAN': 'NEW IBAN'
+Label: Label
+Code: Code
+Type: Type
+'Owner Name': 'Owner Name'
+Wallet: Wallet
+'You pressed 265 articles this months!': 'You pressed 265 articles this months!'
+'See the complete list here': 'See the complete list here'
+'Charge this amount monthly': 'Charge this amount monthly'
+'Without spaces': 'Without spaces'
+'Owner Address': 'Owner Address'
+'Current password': 'Current password'
+'New password': 'New password'
+'Password are similar': 'Password are similar'
+'Password are not similar': 'Password are not similar'
+'Current picture': 'Current picture'
+Picture: Picture
+liked: liked
+unliked: unliked
+your: your
+post: post
+'your comment on this': 'your comment on this'
+'your stream': 'your stream'
+'<a href="%pathOne%">%username%</a> commented your <a href="%pathTwo%">post</a>': '<a href="%pathOne%">%username%</a> commented your <a href="%pathTwo%">post</a>'
+'Create a new wall': 'Create a new wall'
+'Wall name': 'Wall name'
+'Title of your wall': 'Title of your wall'
+Selected: Selected
+'Select people, categories, and tags that you want to have on your wall': 'Select people, categories, and tags that you want to have on your wall'
+Categories: Categories
+tags: tags
+User: User
+Blocked: Blocked
+'Block people, categories, and tags that you don''t want to have on your wall': 'Block people, categories, and tags that you don''t want to have on your wall'
+'Pick some category': 'Pick some category'
+'a few tags': 'a few tags'
+people: people
+'Block these category & tags': 'Block these category & tags'
+'Block Category': 'Block Category'
+'Block tags': 'Block tags'
+'Block people': 'Block people'
+Account: Account
+Password: Password
+'Profile Picture': 'Profile Picture'
+Producer: Producer
+'My key': 'My key'
+Retributions: Retributions
+'Money transfer': 'Money transfer'
+'Bank account information': 'Bank account information'

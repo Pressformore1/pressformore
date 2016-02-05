@@ -1,0 +1,138 @@
+'your producer wallet balance': 'Solde de votre porte-feuille'
+'Your retributions': 'Vos contributions'
+Date: Date
+Post: Post
+Status: Status
+Sender: Sender
+'not paid yet': 'Pas encore payé'
+'Creation Date': 'Date de création'
+'Executed Date': 'Date d''execution'
+'Credited Funds': 'Les fonds crédités'
+'Prior transfer is not complete yet. Please wait until it is fully processed': 'Le transfert n''est pas encore terminer. S''il vous plait attendez la fin du processus'
+'Please <a href="%path%">activate your producer account.</a>': 'S''il vous plait <a href="%path%">activez votre compte.</a>'
+'You can payout from your producer wallet to your registred bank account. <strong>%amount% %currency%</strong> will be transfered to your selected bank account': >
+  Vous pouvez versez l''argent de votre portefeuille.
+  <strong>%amount% %currency%</strong> peuvent être transferer vers le compt een banque choisi
+'Choose a registred account': 'Choisissez un compte enregistrer'
+'Pay Out': 'Paiement'
+'Please register a bank account in order to transfer the money.': 'S''il vous plaît enregistrer un compte bancaire afin de transférer de l''argent.'
+'To be able to wire the money to your external bank account, you need to have more than 1€ in your wallet. You actually have <strong>%amount% %currency%</strong>': >
+  Pour être en mesure de transférer de l'argent sur votre compte en banque,
+  Vous devez avoir au moin 1 € dans votre portfeuille.
+  Vous avez actuellement <strong>%amount% %currency%</strong>
+'Unfortunatly, mandatory information about your account is missing.': 'Malheureusement des informations sur votre compte son manquante.'
+'Complete my account informations': 'Completez les informations'
+'Your producer account is not activated.': 'Votre compte n''est pas activer.'
+ACTIVATE: __ACTIVATE
+'Your account Key : %key%': 'Votre clé : %key%'
+'Put this code in the head part in the html of your website': '__Put this code in the head part in the html of your website'
+'If you are the owner of content on Youtube, Vimeo, Dailymotion or Soundcloud and you want to link these to your wallet, please enter this key as a tag : <strong>pfm-%userKey%</strong>': >
+  Si vous êtes propriétaire de contenu sur Youtube, Vimeo, Dailymotion ou Soundcloud et vous voulez les liers a votre portefeuille,
+  s'il vous plait entré cette clé comme un tag : <strong>pfm-%userKey%</strong>
+'get html code': 'Récuperer le code HTML'
+'Your producer wallet: %amount% %currency%': 'Votre portefeuille : %amount% %currency%'
+'Your pay-outs': 'Vos paiements'
+'Edit your informations': 'Editez vos informations'
+Username: Pseudonyme
+'Title of your profile': 'Titre de votre profil'
+Email: Email
+'Who can see my e-email address': 'Qui peu voir mes adresses e-email'
+'First Name': 'Prénom'
+'Last Name': 'Nom'
+'Who can see my name': 'Qui peu voir mon nom'
+'Birth Date': 'Date de naissanec'
+Address: Adresse
+'Who can see my place': 'Qui peu voir mon adresse ?'
+Website: Site web
+'Who can see your website': 'Qui peu voir votre site web'
+Bio: Bio
+'A short description of yourself': 'Une petit description a propos de vous'
+Skills: Compétence
+Send: Envoyer
+'Monthly Activity': 'Activité du mois'
+'You <span id="lengendAverage"> </span> Platform average': 'Votre <span id="lengendAverage"> </span> moyenne sur la plateforme'
+'Wallet Amount': 'Montant du portefeuille'
+'#Post Read': '__#Post Read'
+'#Press Ratio': '__#Press Ratio'
+'<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists': >
+  <span class="big">Remlissez votre portefeuille</span><br/>et commencer a financer votre journaliste préferer
+'For Now': 'Pour maintenant'
+'<span class="big"> Complete my account informations</span><br/>and start funding your favorite journalists': >
+  <span class="big"> Completez vos informations banquaire</span><br/>et commencer a financer votre journaliste préferer
+'Pressformers successfully fund': 'Pressformers a été financer a avec succès'
+contents: Contenu
+'You''ve pressed <span class="red">%pressLength%</span> contents so far': 'Vous avez choisir <span class="red">%pressLength%</span> jusqu''a maintenant'
+Title: Titre
+Author: Auteur
+'Your wallet seems to be empty at the moment.': 'Votre portefeuille semble vide pour le moment.'
+'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': >
+  Bien que nos service resteront gratuit,
+  Pressformore vise financer équitablement les journalistes et les créateurs numérique par le biais des microdonations.
+  Nous croyons que les auteurs de contenu de qualité devraient être récompensés.
+'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.': >
+  Vous êtes libre de charger n'importe quel montant sur votre portefeuille, choisir quel contenu sera récompenser.
+  Ainsi, chaque mois, vos donations seront redistribuer équitablement envers les créateur de votre choix.
+'Beware: on %date%, this amount will be distributed to your favorite authors.': 'Attention: le %date%, ce montant sera redistribuer a vos auteurs favoris.'
+'Your wallet loading is recurrent. The next refill is planned on <strong>%date%</strong><br/>You can change it by moving the cursor below. Changes will apply on next refill<br/>': >
+  Votre portefeuille est recharger automatiquement. Le prochain rechargement est prévu pour le <strong>%date%</strong><br/>
+  Vous pouvez le modifier en déplaçant le curseur ci dessous. Les changements seront appliqués sur le prochain chargement<br/>
+'This amount will be ENTIRELY distributed to journalists you like You will be able to charge your wallet again on %date%. <br/>NB:Or you can make this amount to be recurrently charged every month.<br/>': >
+  Ce montant sera entièrement redistribuer au journalist que vous aimez.
+  Vous pourrez a nous charger votre portefeuille le %date%. <br/>
+  NB: Ou vous pouvez faire en sorte que ce montant soient charger tous les mois.<br/>
+'From now to %date%': 'De maintenant jusqu''à %date%'
+'Load this amount monthly': 'Charger se montant tout les mois'
+'Change amount <br/>It will take effect on %date%': 'Changez le montant<br/>Cela prendra effet le  %date%'
+'Stop recurrency': 'Arretez chargement automatique'
+'Make it Recurrent': 'Faire ça automatiquement'
+'Your bank accounts list': 'Votre liste de compte bancaire'
+'NEW IBAN': 'Nouvel IBAN'
+Label: Label
+Code: Code
+Type: Type
+'Owner Name': 'Nom du propriétaire'
+Wallet: Portefeuille
+'You pressed 265 articles this months!': '__You pressed 265 articles this months!'
+'See the complete list here': 'Voir la liste complète ici'
+'Charge this amount monthly': 'Chargez se montant tout le smois'
+'Without spaces': 'Sans espaces'
+'Owner Address': 'Adresse du propriétaire'
+'Current password': 'Password actuel'
+'New password': 'Nouveau password'
+'Password are similar': 'Les mots de passe sont identiques'
+'Password are not similar': 'Les mots de passe ne sont pas identiques'
+'Current picture': 'Image actuelle'
+Picture: Image
+liked: __liked
+unliked: __unliked
+your: votre
+post: __post
+'your comment on this': 'Votre commentaire sur ça'
+'your stream': 'votre stream'
+'<a href="%pathOne%">%username%</a> commented your <a href="%pathTwo%">post</a>': '<a href="%pathOne%">%username%</a> à commenter votre <a href="%pathTwo%">post</a>'
+'Create a new wall': 'Creez un nouveau mur'
+'Wall name': 'Nom du mur'
+'Title of your wall': 'Titre de votre mur'
+Selected: Choisi
+'Select people, categories, and tags that you want to have on your wall': 'Choisissez une célébriter, une categories, un tag que vous voulez avoir sur votre mur'
+Categories: Categories
+tags: tags
+User: Utilisateur
+Blocked: Bloquer
+'Block people, categories, and tags that you don''t want to have on your wall': 'Bloquez une célébriter, une categories, un tag que vous ne voulez pas avoir sur votre mur'
+'Pick some category': 'Choisissez plusieurs catégorie'
+'a few tags': 'Quelque tags'
+people: Célébriter
+'Block these category & tags': 'Bloquer ces categories & ces tags'
+'Block Category': 'Bloquez la catégorie'
+'Block tags': 'Bloquer le tag'
+'Block people': 'Bloquer une célébriter'
+Account: Compte
+Password: 'mot de passe'
+'Profile Picture': 'Image du profil'
+Producer: Propriétaire
+'My key': 'Ma clé'
+Retributions: Récompense
+'Money transfer': 'Transfert d''argent'
+'Bank account information': 'Informations sur le compte en banque'
+'Address ': 'Adresse '
