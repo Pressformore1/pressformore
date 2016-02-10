@@ -1,0 +1,40 @@
+'%user% invited you to pressformore.com': '__%user% invited you to pressformore.com'
+'if you want to register with your code, click <a href="%url%?token=%code%">here</a> or copy paste de link above in your favorite navigator': '__if you want to register with your code, click <a href="%url%?token=%code%">here</a> or copy paste de link above in your favorite navigator'
+'you can share your code with %number% friends': '__you can share your code with %number% friends'
+'Current password': '__Current password'
+'New password': '__New password'
+'Password are similar': '__Password are similar'
+'Password are not similar': '__Password are not similar'
+'Followed by': '__Followed by'
+people: __people
+Follow: __Follow
+Unfollow: __Unfollow
+Following: __Following
+Skills: __Skills
+Tags: __Tags
+Categories: __Categories
+Communauté: __Communauté
+'Manage your account': '__Manage your account'
+'Change your profile picture': '__Change your profile picture'
+'Current picture': '__Current picture'
+'Edit your informations': '__Edit your informations'
+Username: __Username
+'Title of your profile': '__Title of your profile'
+'Who can see my e-email address': '__Who can see my e-email address'
+'Who can see your name': '__Who can see your name'
+'Who can see your website': '__Who can see your website'
+'A short description of yourself': '__A short description of yourself'
+'Our e-mail may land in your <strong>spam folder</strong>, make sure to check it out, or <a href="%link%#contact">contact us</a>.': '__Our e-mail may land in your <strong>spam folder</strong>, make sure to check it out, or <a href="%link%#contact">contact us</a>.'
+'Join Pressfomore': '__Join Pressfomore'
+'Make a choice, betwen those connection! And make it right...': '__Make a choice, betwen those connection! And make it right...'
+Email: __Email
+'You already get an account': '__You already get an account'
+'sign in': '__sign in'
+'I acknowledge that I have read and accept the <a target="_blank" href="%link%#legal-mention">Terms of Use Agreement</a>.': '__I acknowledge that I have read and accept the <a target="_blank" href="%link%#legal-mention">Terms of Use Agreement</a>.'
+'Create Account': '__Create Account'
+'Request an access': '__Request an access'
+'You don''t have an account': '__You don''t have an account'
+'create one': '__create one'
+Username/Email: __Username/Email
+Password: __Password
+'Sign In': '__Sign In'

@@ -13,20 +13,17 @@
     <div class="login-illu col-lg-17 col-md-17 col-sm-17 hidden-xs">
         <span class="login-illu icon-logo"></span>
     </div>
-    
     <div class="form-blocks  col-lg-43 col-md-43 col-sm-43 col-xs-60">
         <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
-
         <div class="form-line">
             <div class="form-field">
-
                 <label class="required form-field-title" for="username">{{ 'Username/Email'|trans({}, 'user')}}</label>
                 <input type="text" class="form-field-input" value="{{ last_username }}" required="required" name="_username" id="username">
             </div>
             <div class="form-field">
                 <label class="required  form-field-title" for="password">{{ 'Password'|trans({}, 'user')}}</label>
                 <input type="password" class="form-field-input" required="required" name="_password" id="password">
-                <p><a href="{{path('fos_user_resetting_request')}}">Forgot your password?</a></p>
+                <p><a href="{{path('fos_user_resetting_request')}}"{{ 'Forgot your password?'|trans({}, 'user')}}></a></p>
             </div>
             <div class="form-field">
                 <input type="checkbox" id="remember_me" name="_remember_me" value="on" />
@@ -38,7 +35,6 @@
     </div>
     <div class="clear"></div>
     <footer class="form-footer">
-
             <button class="primary" type="submit">{{ 'Sign In'|trans({}, 'user')}}</button>
             <div class="clear"></div>
     </footer>

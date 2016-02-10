@@ -10,25 +10,18 @@ Sender: Sender
 'Credited Funds': 'Les fonds crédités'
 'Prior transfer is not complete yet. Please wait until it is fully processed': 'Le transfert n''est pas encore terminer. S''il vous plait attendez la fin du processus'
 'Please <a href="%path%">activate your producer account.</a>': 'S''il vous plait <a href="%path%">activez votre compte.</a>'
-'You can payout from your producer wallet to your registred bank account. <strong>%amount% %currency%</strong> will be transfered to your selected bank account': >
-  Vous pouvez versez l''argent de votre portefeuille.
-  <strong>%amount% %currency%</strong> peuvent être transferer vers le compt een banque choisi
+'You can payout from your producer wallet to your registred bank account. <strong>%amount% %currency%</strong> will be transfered to your selected bank account': "Vous pouvez versez l''argent de votre portefeuille. <strong>%amount% %currency%</strong> peuvent être transferer vers le compt een banque choisi\n"
 'Choose a registred account': 'Choisissez un compte enregistrer'
-'Pay Out': 'Paiement'
+'Pay Out': Paiement
 'Please register a bank account in order to transfer the money.': 'S''il vous plaît enregistrer un compte bancaire afin de transférer de l''argent.'
-'To be able to wire the money to your external bank account, you need to have more than 1€ in your wallet. You actually have <strong>%amount% %currency%</strong>': >
-  Pour être en mesure de transférer de l'argent sur votre compte en banque,
-  Vous devez avoir au moin 1 € dans votre portfeuille.
-  Vous avez actuellement <strong>%amount% %currency%</strong>
+'To be able to wire the money to your external bank account, you need to have more than 1€ in your wallet. You actually have <strong>%amount% %currency%</strong>': "Pour être en mesure de transférer de l'argent sur votre compte en banque, Vous devez avoir au moin 1 € dans votre portfeuille. Vous avez actuellement <strong>%amount% %currency%</strong>\n"
 'Unfortunatly, mandatory information about your account is missing.': 'Malheureusement des informations sur votre compte son manquante.'
 'Complete my account informations': 'Completez les informations'
 'Your producer account is not activated.': 'Votre compte n''est pas activer.'
 ACTIVATE: __ACTIVATE
 'Your account Key : %key%': 'Votre clé : %key%'
 'Put this code in the head part in the html of your website': '__Put this code in the head part in the html of your website'
-'If you are the owner of content on Youtube, Vimeo, Dailymotion or Soundcloud and you want to link these to your wallet, please enter this key as a tag : <strong>pfm-%userKey%</strong>': >
-  Si vous êtes propriétaire de contenu sur Youtube, Vimeo, Dailymotion ou Soundcloud et vous voulez les liers a votre portefeuille,
-  s'il vous plait entré cette clé comme un tag : <strong>pfm-%userKey%</strong>
+'If you are the owner of content on Youtube, Vimeo, Dailymotion or Soundcloud and you want to link these to your wallet, please enter this key as a tag : <strong>pfm-%userKey%</strong>': "Si vous êtes propriétaire de contenu sur Youtube, Vimeo, Dailymotion ou Soundcloud et vous voulez les liers a votre portefeuille, s'il vous plait entré cette clé comme un tag : <strong>pfm-%userKey%</strong>\n"
 'get html code': 'Récuperer le code HTML'
 'Your producer wallet: %amount% %currency%': 'Votre portefeuille : %amount% %currency%'
 'Your pay-outs': 'Vos paiements'
@@ -37,13 +30,13 @@ Username: Pseudonyme
 'Title of your profile': 'Titre de votre profil'
 Email: Email
 'Who can see my e-email address': 'Qui peu voir mes adresses e-email'
-'First Name': 'Prénom'
-'Last Name': 'Nom'
+'First Name': Prénom
+'Last Name': Nom
 'Who can see my name': 'Qui peu voir mon nom'
 'Birth Date': 'Date de naissanec'
 Address: Adresse
 'Who can see my place': 'Qui peu voir mon adresse ?'
-Website: Site web
+Website: 'Site web'
 'Who can see your website': 'Qui peu voir votre site web'
 Bio: Bio
 'A short description of yourself': 'Une petit description a propos de vous'
@@ -54,32 +47,20 @@ Send: Envoyer
 'Wallet Amount': 'Montant du portefeuille'
 '#Post Read': '__#Post Read'
 '#Press Ratio': '__#Press Ratio'
-'<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists': >
-  <span class="big">Remlissez votre portefeuille</span><br/>et commencer a financer votre journaliste préferer
+'<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists': "<span class=\"big\">Remlissez votre portefeuille</span><br/>et commencer a financer votre journaliste préferer\n"
 'For Now': 'Pour maintenant'
-'<span class="big"> Complete my account informations</span><br/>and start funding your favorite journalists': >
-  <span class="big"> Completez vos informations banquaire</span><br/>et commencer a financer votre journaliste préferer
+'<span class="big"> Complete my account informations</span><br/>and start funding your favorite journalists': "<span class=\"big\"> Completez vos informations banquaire</span><br/>et commencer a financer votre journaliste préferer\n"
 'Pressformers successfully fund': 'Pressformers a été financer a avec succès'
 contents: Contenu
 'You''ve pressed <span class="red">%pressLength%</span> contents so far': 'Vous avez choisir <span class="red">%pressLength%</span> jusqu''a maintenant'
 Title: Titre
 Author: Auteur
 'Your wallet seems to be empty at the moment.': 'Votre portefeuille semble vide pour le moment.'
-'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': >
-  Bien que nos service resteront gratuit,
-  Pressformore vise financer équitablement les journalistes et les créateurs numérique par le biais des microdonations.
-  Nous croyons que les auteurs de contenu de qualité devraient être récompensés.
-'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.': >
-  Vous êtes libre de charger n'importe quel montant sur votre portefeuille, choisir quel contenu sera récompenser.
-  Ainsi, chaque mois, vos donations seront redistribuer équitablement envers les créateur de votre choix.
+'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': "Bien que nos service resteront gratuit, Pressformore vise financer équitablement les journalistes et les créateurs numérique par le biais des microdonations. Nous croyons que les auteurs de contenu de qualité devraient être récompensés.\n"
+'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.': "Vous êtes libre de charger n'importe quel montant sur votre portefeuille, choisir quel contenu sera récompenser. Ainsi, chaque mois, vos donations seront redistribuer équitablement envers les créateur de votre choix.\n"
 'Beware: on %date%, this amount will be distributed to your favorite authors.': 'Attention: le %date%, ce montant sera redistribuer a vos auteurs favoris.'
-'Your wallet loading is recurrent. The next refill is planned on <strong>%date%</strong><br/>You can change it by moving the cursor below. Changes will apply on next refill<br/>': >
-  Votre portefeuille est recharger automatiquement. Le prochain rechargement est prévu pour le <strong>%date%</strong><br/>
-  Vous pouvez le modifier en déplaçant le curseur ci dessous. Les changements seront appliqués sur le prochain chargement<br/>
-'This amount will be ENTIRELY distributed to journalists you like You will be able to charge your wallet again on %date%. <br/>NB:Or you can make this amount to be recurrently charged every month.<br/>': >
-  Ce montant sera entièrement redistribuer au journalist que vous aimez.
-  Vous pourrez a nous charger votre portefeuille le %date%. <br/>
-  NB: Ou vous pouvez faire en sorte que ce montant soient charger tous les mois.<br/>
+'Your wallet loading is recurrent. The next refill is planned on <strong>%date%</strong><br/>You can change it by moving the cursor below. Changes will apply on next refill<br/>': "Votre portefeuille est recharger automatiquement. Le prochain rechargement est prévu pour le <strong>%date%</strong><br/> Vous pouvez le modifier en déplaçant le curseur ci dessous. Les changements seront appliqués sur le prochain chargement<br/>\n"
+'This amount will be ENTIRELY distributed to journalists you like You will be able to charge your wallet again on %date%. <br/>NB:Or you can make this amount to be recurrently charged every month.<br/>': "Ce montant sera entièrement redistribuer au journalist que vous aimez. Vous pourrez a nous charger votre portefeuille le %date%. <br/> NB: Ou vous pouvez faire en sorte que ce montant soient charger tous les mois.<br/>\n"
 'From now to %date%': 'De maintenant jusqu''à %date%'
 'Load this amount monthly': 'Charger se montant tout les mois'
 'Change amount <br/>It will take effect on %date%': 'Changez le montant<br/>Cela prendra effet le  %date%'
