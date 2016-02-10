@@ -1,7 +1,7 @@
 '%user% invited you to pressformore.com': '%user% vous à inviter sur pressformore.com'
 'if you want to register with your code, click <a href="%url%?token=%code%">here</a> or copy paste de link above in your favorite navigator': 'if you want to register with your code, click <a href="%url%?token=%code%">here</a> or copy paste de link above in your favorite navigator'
 'you can share your code with %number% friends': 'vous pouvez partager votre code avec %number% amis'
-'Current password': '__Current password'
+'Current password': 'Mot de passe actuel'
 'New password': 'Nouveau mot de passe'
 'Password are similar': '__Password are similar'
 'Password are not similar': '__Password are not similar'
@@ -18,18 +18,18 @@ Communauté: Communauté
 'Change your profile picture': 'Changez votre image de profil'
 'Current picture': 'image actuelle'
 'Edit your informations': 'Éditez vos informations'
-Username: Username
+Username: Identifiant
 'Title of your profile': 'Titre de vos profils'
 'Who can see my e-email address': 'Qui peu voir votre adresse email'
 'Who can see your name': 'Qui peu voir votre nom'
 'Who can see your website': 'Qui peu voir votre siteweb'
 'A short description of yourself': 'Une petite description de vous même'
 'Our e-mail may land in your <strong>spam folder</strong>, make sure to check it out, or <a href="%link%#contact">contact us</a>.': '__Our e-mail may land in your <strong>spam folder</strong>, make sure to check it out, or <a href="%link%#contact">contact us</a>.'
-'Join Pressfomore': '__Join Pressfomore'
+'Join Pressfomore': 'Join Pressfomore'
 'Make a choice, betwen those connection! And make it right...': '__Make a choice, betwen those connection! And make it right...'
 Email: Email
-'You already get an account': '__You already get an account'
-'sign in': '__sign in'
+'You already get an account': 'Vous avez déjà un compte'
+'sign in': Inscrivez-vous
 'I acknowledge that I have read and accept the <a target="_blank" href="%link%#legal-mention">Terms of Use Agreement</a>.': '__I acknowledge that I have read and accept the <a target="_blank" href="%link%#legal-mention">Terms of Use Agreement</a>.'
 'Create Account': '__Create Account'
 'Request an access': 'Demandé un acces'
@@ -38,3 +38,4 @@ Email: Email
 Username/Email: 'Identifiant / Email'
 Password: 'Mot de passe'
 'Sign In': 'Inscrivez vous'
+'Forgot your password?': 'Mot de passe oublié ?'

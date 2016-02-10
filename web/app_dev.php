@@ -18,7 +18,8 @@ $validIp = array
             '::1',
             '109.88.176.185', // Jona Maison
             '193.190.122.60', //JOna ECole
-            '92.148.142.18' //FAb
+            '92.148.142.18', //Fab
+	    '109.88.157.105' //Jeremie
         );
 
 if (isset($_SERVER['HTTP_CLIENT_IP'])

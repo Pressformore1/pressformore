@@ -7,8 +7,11 @@ jQuery(document).ready(function(){
     modalConfirm();
     loading();
     homeManage();
-        
+
     var $ = jQuery;
+
+    $.cookieBar();
+
     
     //Plugin timeago
     
