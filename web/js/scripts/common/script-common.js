@@ -10,7 +10,11 @@ jQuery(document).ready(function(){
 
     var $ = jQuery;
 
-    $.cookieBar();
+    $.cookieBar({
+        fixed: true,
+        bottom: true,
+        zindex: 10000
+    });
 
     
     //Plugin timeago
