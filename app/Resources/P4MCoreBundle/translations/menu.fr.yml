@@ -161,7 +161,7 @@ Out: Sortir
 'Register Card': 'Carte enregistrer'
 'Visit your public profile': 'Visitez votre profil public'
 'Manage your settings': 'Gérez vos paramètres'
-Wallet: 'Porte-feuille'
+Wallet: Porte-feuille
 'Check your notifications': 'Vérifiez vos notifications'
 'Control your reputation': 'Controllez votre réputation'
 'Strews %userWallsLength%': 'Strews %userWallsLength%'
@@ -236,3 +236,4 @@ Home: Index
 'Read later': 'Lisez plus tard'
 'Show this post on home page': 'Voir cet article sur la page d''accueil'
 '%name% is the author': '%name% est l''auteur'
+'Beware! this strew has been reported as %typeName%.': '__Beware! this strew has been reported as %typeName%.'

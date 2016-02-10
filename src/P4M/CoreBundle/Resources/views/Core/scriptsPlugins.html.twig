@@ -1,3 +1,8 @@
+<script type="text/javascript">
+    {# Initialisation des variable pour la cookiesBar #}
+    messageCookie = '{{ 'We use cookies to track usage and preferences'|trans({}, 'Core') }}';
+    acceptTextCookie = '{{ 'I understand'|trans({}, 'Core') }}';
+</script>
 {% javascripts 'js/plugin/common/*.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}

@@ -13,7 +13,9 @@ jQuery(document).ready(function(){
     $.cookieBar({
         fixed: true,
         bottom: true,
-        zindex: 10000
+        zindex: 10,
+        message: messageCookie,
+        acceptText: acceptTextCookie
     });
 
     
@@ -93,7 +95,7 @@ function iconColor(img, status){
     if($(img).length){
         if(status===1){
                 $(img).attr('src',$(img).attr('data-selected'));
-                
+
         }else if(status===0){
                $(img).attr('src',$(img).attr('data-unselected'));
         }
