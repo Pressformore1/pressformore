@@ -6,9 +6,12 @@
 #menu{background: #fff; z-index:15; width: 100%; border-top: 0px solid #a3a6a8 !important; border-bottom: 1px solid #a3a6a8 !important; height: 48px;	-webkit-transform: translateZ(0); -moz-transform: translateZ(0);-ms-transform: translateZ(0);transform: translateZ(0); right: 0px;  top: 0;;}  
 
 #left-menu{position: absolute; height: 48px; left: 0; top: 0; width: 80%;}
-#center-menu{height: 48px; width: 404px; margin: auto; position: relative; z-index: 10;}
-#center-menu-left-zone{width: 170px; float:left; height: 48px;}
-#center-menu-right-zone{width: 170px; float: left; height: 48px;}
+#center-menu{height: 48px; width: 564px; margin: auto; position: relative; z-index: 10;}
+#center-menu-left-zone{width: 250px; float:left; height: 48px;}
+#center-menu-left-zone .menu-item{
+    float: right;
+}
+#center-menu-right-zone{width: 250px; float: left; height: 48px;}
 .hide-menu-item{display: none;}
 
 /*#center-menu .menu-item-text{opacity: 0;}*/
