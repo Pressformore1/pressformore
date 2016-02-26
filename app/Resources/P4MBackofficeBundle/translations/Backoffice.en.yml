@@ -20,7 +20,6 @@ Sender: Sender
 'Your producer account is not activated.': 'Your producer account is not activated.'
 ACTIVATE: ACTIVATE
 'Your account Key : %key%': 'Your account Key : %key%'
-'': 
 'Put this code in the head part in the html of your website': 'Put this code in the head part in the html of your website'
 'If you are the owner of content on Youtube, Vimeo, Dailymotion or Soundcloud and you want to link these to your wallet, please enter this key as a tag : <strong>pfm-%userKey%</strong>': 'If you are the owner of content on Youtube, Vimeo, Dailymotion or Soundcloud and you want to link these to your wallet, please enter this key as a tag : <strong>pfm-%userKey%</strong>'
 'get html code': 'get html code'
