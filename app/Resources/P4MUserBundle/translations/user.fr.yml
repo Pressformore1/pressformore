@@ -18,7 +18,7 @@ Communauté: Communauté
 'Change your profile picture': 'Changez votre image de profil'
 'Current picture': 'image actuelle'
 'Edit your informations': 'Éditez vos informations'
-Username: Identifiant
+Username: 'Identifiant (Titre de votre profil)'
 'Title of your profile': 'Titre de vos profils'
 'Who can see my e-email address': 'Qui peu voir votre adresse email'
 'Who can see your name': 'Qui peu voir votre nom'
@@ -28,14 +28,13 @@ Username: Identifiant
 'Join Pressfomore': 'Join Pressfomore'
 'Make a choice, betwen those connection! And make it right...': '__Make a choice, betwen those connection! And make it right...'
 Email: Email
-'You already get an account': 'Vous avez déjà un compte'
-'sign in': Inscrivez-vous
-'I acknowledge that I have read and accept the <a target="_blank" href="%link%#legal-mention">Terms of Use Agreement</a>.': '__I acknowledge that I have read and accept the <a target="_blank" href="%link%#legal-mention">Terms of Use Agreement</a>.'
-'Create Account': '__Create Account'
-'Request an access': 'Demandé un acces'
-'You don''t have an account': 'Vous n''avez pas de compte'
-'create one': 'Creez en un'
+'You already get an account': 'Déjà membre ?'
+'sign in': Connectez-Vous
+'I acknowledge that I have read and accept the <a target="_blank" href="%link%#legal-mention">Terms of Use Agreement</a>.': 'Je reconnais avoir pris connaissance des <a target="_blank" href="%link%#legal-mention">conditions générales d''utilisation</a>.'
+'Create Account': 'Créer un compte'
+'Request an access': 'Demander un acces'
 Username/Email: 'Identifiant / Email'
 Password: 'Mot de passe'
-'Sign In': 'Inscrivez vous'
 'Forgot your password?': 'Mot de passe oublié ?'
+'Sign In': 'S''enregistrer'
+'You don''t have an account. <a href="%link%">create one.</a>': 'Vous n''avez pas encore de compte. <a href="%link%">Créez-en un.</a>'

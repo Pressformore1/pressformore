@@ -1,7 +1,7 @@
 <div class="action-bar-block">
-<p class="middle text-center">By helping us to <strong>find the author</strong>, you would help the</p>
+<p class="middle text-center">{{ 'By helping us to <strong>find the author</strong>, you would help the'|trans({}, 'menu')|raw }}</p>
 <p class="big text-center" id="pressformersCount">{{post.wantPressforms|length}}</p>
-<p class="middle text-center">other readers who are ready to fund him.</p>
+<p class="middle text-center">{{ 'other readers who are ready to fund him.'|trans({}, 'menu') }}</p>
 {% if post.wantPressforms|length%}
     <ul class="pressformersList list-unstyled">
     {%set maxPressformers = 4%}

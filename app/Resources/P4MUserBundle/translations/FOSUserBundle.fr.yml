@@ -1,2 +1,8 @@
-Password: Mot de passe
+Password: 'Mot de passe'
 'Confirm your password': 'Confirmez votre mot de passe'
+registration.check_email: __registration.check_email
+registration.confirmed: __registration.confirmed
+registration.back: __registration.back
+registration.email.subject: __registration.email.subject
+registration.email.message: __registration.email.message
+security.login.remember_me: __security.login.remember_me

@@ -4,7 +4,7 @@
     {% if wall.user.id == user.id %}
         <li id="action-bar-edit-wall" class="action-bar-item">
             <a class="action-bar-link" href="{{ path('p4m_backoffice_wall_edit',{wallSlug:wall.slug}) }}"
-               title="Edit this wall">
+               title="{{ 'Edit this wall'|trans({}, 'menu')}}">
                 <span class="action-bar-icon glyphicon edit"></span>
             </a>
         </li>
