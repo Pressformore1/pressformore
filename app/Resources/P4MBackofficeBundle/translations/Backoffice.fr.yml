@@ -18,7 +18,7 @@ Sender: Sender
 'Unfortunatly, mandatory information about your account is missing.': 'Malheureusement des informations sur votre compte son manquante.'
 'Complete my account informations': 'Completez les informations'
 'Your producer account is not activated.': 'Votre compte n''est pas activer.'
-ACTIVATE: __ACTIVATE
+ACTIVATE: ACTIVATE
 'Your account Key : %key%': 'Votre clé : %key%'
 'Put this code in the head part in the html of your website': 'Mettre cette clé entre les balises <head></head> de votre page HTML'
 'If you are the owner of content on Youtube, Vimeo, Dailymotion or Soundcloud and you want to link these to your wallet, please enter this key as a tag : <strong>pfm-%userKey%</strong>': "Si vous êtes propriétaire de contenu sur Youtube, Vimeo, Dailymotion ou Soundcloud et vous voulez les liers a votre portefeuille, s'il vous plait entré cette clé comme un tag : <strong>pfm-%userKey%</strong>\n"
@@ -76,8 +76,8 @@ Label: Label
 Code: Code
 Type: Type
 'Owner Name': 'Nom du propriétaire'
-Wallet: Portefeuille
-'You pressed 265 articles this months!': '__You pressed 265 articles this months!'
+Wallet: 'Votre porte-feuille '
+'You pressed 265 articles this months!': 'You pressed 265 articles this months!'
 'See the complete list here': 'Voir la liste complète ici'
 'Charge this amount monthly': 'Chargez se montant tout le smois'
 'Without spaces': 'Sans espaces'
@@ -89,9 +89,9 @@ Wallet: Portefeuille
 'Current picture': 'Image actuelle'
 Picture: Image
 liked: aime
-unliked: __unliked
+unliked: unliked
 your: votre
-post: __post
+post: post
 'your comment on this': 'Votre commentaire sur ça'
 'your stream': 'votre mur d''info'
 '<a href="%pathOne%">%username%</a> commented your <a href="%pathTwo%">post</a>': '<a href="%pathOne%">%username%</a> à commenté votre <a href="%pathTwo%">post</a>'

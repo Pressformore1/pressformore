@@ -26,12 +26,12 @@ Resume!: 'Continuer !'
 'You are about to create a new strew (news feed on Pressformore), if you need some help, have a look at our': "Vous êtes en train de creer un nouveau mur (fil d'actualité Pressformore), Si vous avez besoin d'aide, venez voir notre\n"
 FAQ: FAQ
 'Next step': 'Étape suivante'
-"Note: You can blocks\n         cats or tags by clicking on the right upper corner of the tile.": "__Note: You can blocks\n         cats or tags by clicking on the right upper corner of the tile."
+"Note: You can blocks\n         cats or tags by clicking on the right upper corner of the tile.": "Note: You can blocks\n         cats or tags by clicking on the right upper corner of the tile."
 'Picked Categories': 'Choisir Categories'
 'Banned Categories': 'bannir Categories'
 'Select Tags': 'Selectionner Tags'
 Resume: 'Le projet PressForMore'
-"Note: You can blocks\n        cats or tags by clicking on the right upper corner of the tile.": "__Note: You can blocks\n        cats or tags by clicking on the right upper corner of the tile."
+"Note: You can blocks\n        cats or tags by clicking on the right upper corner of the tile.": "Note: You can blocks\n        cats or tags by clicking on the right upper corner of the tile."
 'Picked tags': 'Choisir tags'
 'Banned tags': 'Bannir tags'
 'Title of your wall': 'Titre de votre mur'
@@ -48,7 +48,7 @@ Resume: 'Le projet PressForMore'
 'Explore the content of your read-later posts': 'Explorer les contenu mis pour plus tard'
 'Leave a comment': 'Laisser un commentaire'
 'Content stats': 'Statistique du contenu'
-'You''re using an early access version, be patient!': '__You''re using an early access version, be patient!'
+'You''re using an early access version, be patient!': 'You''re using an early access version, be patient!'
 'Report content': 'Signaler le contenu'
 'You already report this content': 'Vous avez déjà signaler ce contenu'
 'Beware! this content has been reported as': 'Prudence! Ce contenu a bien été signaler comme'
@@ -73,7 +73,7 @@ Report: Signalez
 'Report an error': 'Signalez une erreur'
 'It seems like this content was well worth the read!': 'Ce contenu a l''air interessant !'
 'Perhaps it''s time to reward him for his duty work.': 'Peu être est-il temp de le récompenser pour son travaille.'
-'mandatory to rewards authors': '__mandatory to rewards authors'
+'mandatory to rewards authors': 'mandatory to rewards authors'
 'You decided not to reward this author.': 'Vous décidez de ne pas récompenser cette auteur.'
 'Thank you!': 'Merci !'
 'You just rewarded this author': 'Vous venez de récompenser cette auteur'
@@ -236,7 +236,7 @@ Home: Index
 'Read later': 'Á lire plus tard'
 'Show this post on home page': 'Voir cet article sur la page d''accueil'
 '%name% is the author': '%name% est l''auteur'
-'Beware! this strew has been reported as %typeName%.': '__Beware! this strew has been reported as %typeName%.'
+'Beware! this strew has been reported as %typeName%.': 'Beware! this strew has been reported as %typeName%.'
 'Edit this wall': 'Éditer ce mur'
 'By helping us to <strong>find the author</strong>, you would help the': 'En nous aidant à <strong>trouver cet auteur</strong>, vous aideriez les'
 'other readers who are ready to fund him.': 'autres utilisateurs qui ont également apprécié ce contenu.'

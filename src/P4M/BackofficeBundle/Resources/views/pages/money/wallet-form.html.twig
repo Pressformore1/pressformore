@@ -1,6 +1,6 @@
 <div class="span12">
     <div class="page-align-center" id="sign-in-block">
-        <h1 class="page-align-center-title">Wallet</h1>
+        <h1 class="page-align-center-title">{{ 'Wallet'|trans({}, 'Backoffice') }}</h1>
         {% if wallet.Balance.Amount == 0 or walletFill is null %}
             {#        {% if wallet.Balance.Amount == 0 or wallet.Balance.Amount > 0%}#}
             <p class="regular-text">
