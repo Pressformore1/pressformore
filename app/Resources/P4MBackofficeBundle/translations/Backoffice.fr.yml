@@ -1,5 +1,5 @@
 'your producer wallet balance': 'Solde de votre porte-feuille'
-'Your retributions': 'Vos contributions'
+'Your retributions': 'Vos soutiens financiers'
 Date: Date
 Post: Post
 Status: Status
@@ -20,53 +20,57 @@ Sender: Sender
 'Your producer account is not activated.': 'Votre compte n''est pas activer.'
 ACTIVATE: __ACTIVATE
 'Your account Key : %key%': 'Votre clé : %key%'
-'Put this code in the head part in the html of your website': '__Put this code in the head part in the html of your website'
+'Put this code in the head part in the html of your website': 'Mettre cette clé entre les balises <head></head> de votre page HTML'
 'If you are the owner of content on Youtube, Vimeo, Dailymotion or Soundcloud and you want to link these to your wallet, please enter this key as a tag : <strong>pfm-%userKey%</strong>': "Si vous êtes propriétaire de contenu sur Youtube, Vimeo, Dailymotion ou Soundcloud et vous voulez les liers a votre portefeuille, s'il vous plait entré cette clé comme un tag : <strong>pfm-%userKey%</strong>\n"
 'get html code': 'Récuperer le code HTML'
 'Your producer wallet: %amount% %currency%': 'Votre portefeuille : %amount% %currency%'
-'Your pay-outs': 'Vos paiements'
+'Your pay-outs': 'Vos versements'
 'Edit your informations': 'Editez vos informations'
-Username: Pseudonyme
+Username: Pseudo
 'Title of your profile': 'Titre de votre profil'
 Email: Email
 'Who can see my e-email address': 'Qui peu voir mes adresses e-email'
 'First Name': Prénom
 'Last Name': Nom
 'Who can see my name': 'Qui peu voir mon nom'
-'Birth Date': 'Date de naissanec'
+'Birth Date': 'Date de naissance'
 Address: Adresse
 'Who can see my place': 'Qui peu voir mon adresse ?'
 Website: 'Site web'
 'Who can see your website': 'Qui peu voir votre site web'
 Bio: Bio
-'A short description of yourself': 'Une petit description a propos de vous'
-Skills: Compétence
+Skills: Compétence(s)
 Send: Envoyer
 'Monthly Activity': 'Activité du mois'
-'You <span id="lengendAverage"> </span> Platform average': 'Votre <span id="lengendAverage"> </span> moyenne sur la plateforme'
+'You <span id="lengendAverage"> </span> Platform average': 'Votre <span id="lengendAverage"> </span> activité moyenne sur la plateforme'
 'Wallet Amount': 'Montant du portefeuille'
-'#Post Read': '__#Post Read'
-'#Press Ratio': '__#Press Ratio'
-'<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists': "<span class=\"big\">Remlissez votre portefeuille</span><br/>et commencer a financer votre journaliste préferer\n"
+'#Post Read': '	Articles consultés'
+'#Press Ratio': 'Contenus financés'
+'<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists': "<span class=\"big\">Remplissez votre portefeuille</span><br/>et commencer a financer votre journaliste préferer\n"
 'For Now': 'Pour maintenant'
 '<span class="big"> Complete my account informations</span><br/>and start funding your favorite journalists': "<span class=\"big\"> Completez vos informations banquaire</span><br/>et commencer a financer votre journaliste préferer\n"
-'Pressformers successfully fund': 'Pressformers a été financer a avec succès'
+'Pressformers successfully fund': 'Utilisateurs ont récompensés '
 contents: Contenu
-'You''ve pressed <span class="red">%pressLength%</span> contents so far': 'Vous avez choisir <span class="red">%pressLength%</span> jusqu''a maintenant'
+'You''ve pressed <span class="red">%pressLength%</span> contents so far': 'Vous avez choisi <span class="red">%pressLength%</span> jusque maintenant'
 Title: Titre
 Author: Auteur
 'Your wallet seems to be empty at the moment.': 'Votre portefeuille semble vide pour le moment.'
-'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': "Bien que nos service resteront gratuit, Pressformore vise financer équitablement les journalistes et les créateurs numérique par le biais des microdonations. Nous croyons que les auteurs de contenu de qualité devraient être récompensés.\n"
-'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.': "Vous êtes libre de charger n'importe quel montant sur votre portefeuille, choisir quel contenu sera récompenser. Ainsi, chaque mois, vos donations seront redistribuer équitablement envers les créateur de votre choix.\n"
+'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': >
+  Bien que nos services et la consultation d'articles restent gratuits,
+  Pressformore vise à offrir un moyen de financement équitable pour les journalistes et autres créateurs numériques.
+  Nous croyons que les auteurs de contenu devraient être récompensés en fonction de la qualité et de l'engagement que leurs contenus génèrent. \n
+'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.': >
+  Vous êtes donc libres de charger n'importe quel montant sur votre porte-feuille.
+  Chaque mois, vos donations seront redistribuées équitablement envers les créateur de votre choix.\n
 'Beware: on %date%, this amount will be distributed to your favorite authors.': 'Attention: le %date%, ce montant sera redistribuer a vos auteurs favoris.'
 'Your wallet loading is recurrent. The next refill is planned on <strong>%date%</strong><br/>You can change it by moving the cursor below. Changes will apply on next refill<br/>': "Votre portefeuille est recharger automatiquement. Le prochain rechargement est prévu pour le <strong>%date%</strong><br/> Vous pouvez le modifier en déplaçant le curseur ci dessous. Les changements seront appliqués sur le prochain chargement<br/>\n"
 'This amount will be ENTIRELY distributed to journalists you like You will be able to charge your wallet again on %date%. <br/>NB:Or you can make this amount to be recurrently charged every month.<br/>': "Ce montant sera entièrement redistribuer au journalist que vous aimez. Vous pourrez a nous charger votre portefeuille le %date%. <br/> NB: Ou vous pouvez faire en sorte que ce montant soient charger tous les mois.<br/>\n"
-'From now to %date%': 'De maintenant jusqu''à %date%'
+'From now to %date%': 'De maintenant jusqu''au %date%'
 'Load this amount monthly': 'Charger se montant tout les mois'
 'Change amount <br/>It will take effect on %date%': 'Changez le montant<br/>Cela prendra effet le  %date%'
 'Stop recurrency': 'Arretez chargement automatique'
 'Make it Recurrent': 'Faire ça automatiquement'
-'Your bank accounts list': 'Votre liste de compte bancaire'
+'Your bank accounts list': 'Votre liste de comptes bancaires'
 'NEW IBAN': 'Nouvel IBAN'
 Label: Label
 Code: Code
@@ -84,13 +88,13 @@ Wallet: Portefeuille
 'Password are not similar': 'Les mots de passe ne sont pas identiques'
 'Current picture': 'Image actuelle'
 Picture: Image
-liked: __liked
+liked: aime
 unliked: __unliked
 your: votre
 post: __post
 'your comment on this': 'Votre commentaire sur ça'
-'your stream': 'votre stream'
-'<a href="%pathOne%">%username%</a> commented your <a href="%pathTwo%">post</a>': '<a href="%pathOne%">%username%</a> à commenter votre <a href="%pathTwo%">post</a>'
+'your stream': 'votre mur d''info'
+'<a href="%pathOne%">%username%</a> commented your <a href="%pathTwo%">post</a>': '<a href="%pathOne%">%username%</a> à commenté votre <a href="%pathTwo%">post</a>'
 'Create a new wall': 'Creez un nouveau mur'
 'Wall name': 'Nom du mur'
 'Title of your wall': 'Titre de votre mur'
@@ -108,12 +112,14 @@ people: Célébriter
 'Block Category': 'Bloquez la catégorie'
 'Block tags': 'Bloquer le tag'
 'Block people': 'Bloquer une célébriter'
-Account: Compte
-Password: 'mot de passe'
+Account: 'Paramètre du compte'
+Password: 'Mot de passe'
 'Profile Picture': 'Image du profil'
 Producer: Propriétaire
 'My key': 'Ma clé'
-Retributions: Récompense
+Retributions: 'Soutiens financiers'
 'Money transfer': 'Transfert d''argent'
-'Bank account information': 'Informations sur le compte en banque'
+'Bank account information': 'Paramètres du compte bancaire'
 'Address ': 'Adresse '
+'(A short description of yourself)': 'Une petit description a propos de vous'
+Producing: 'Votre clé producteur'

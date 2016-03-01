@@ -526,6 +526,11 @@ services:
         
     hwi_oauth.user.provider.entity:
             class:  HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUserProvider
+
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags:
+            - { name: twig.extension }
             
             
 parameters:

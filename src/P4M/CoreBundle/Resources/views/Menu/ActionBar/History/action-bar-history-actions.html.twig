@@ -72,13 +72,13 @@
       </div>#}
       {%set following = wall.hasFollower(user)%}
 {#      {{following}}#}
-      <button class="user-follow primary ajax_action{%if following == 'oui'%} hidden{%endif%}" data-action="followWall" data-url="{{path('p4m_ajax_action')}}"  data-params="{{{'wallId':wall.id}|json_encode()}}" data-key="{{{'wallId':wall.id}|json_encode()|sha512}}" >+Follow</button>
-      <button class="user-unfollow primary ajax_action{%if following == 'non'%} hidden{%endif%}" data-hover-text="-Unfollow"  data-url="{{path('p4m_ajax_action')}}"  data-action="unfollowWall" data-params="{{{'wallId':wall.id}|json_encode()}}" data-key="{{{'wallId':wall.id}|json_encode()|sha512}}">Unfollow</button>
+      <button class="user-follow primary ajax_action{%if following == 'oui'%} hidden{%endif%}" data-action="followWall" data-url="{{path('p4m_ajax_action')}}"  data-params="{{{'wallId':wall.id}|json_encode()}}" data-key="{{{'wallId':wall.id}|json_encode()|sha512}}" >{{ '+Follow'|trans({}, 'menu')}}</button>
+      <button class="user-unfollow primary ajax_action{%if following == 'non'%} hidden{%endif%}" data-hover-text="-Unfollow"  data-url="{{path('p4m_ajax_action')}}"  data-action="unfollowWall" data-params="{{{'wallId':wall.id}|json_encode()}}" data-key="{{{'wallId':wall.id}|json_encode()|sha512}}">{{ 'Unfollow'|trans({}, 'menu')}}</button>
       {%endif%}
 </div>	
       <div class="action-bar-block">
 
-        <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-book"></span>Categories of this wall</h4>
+        <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-book"></span>{{ 'Categories of this wall'|trans({}, 'menu')}}</h4>
 
         <ul class="section-post-meta-categories-list">
         {% if wall is defined %}
@@ -90,7 +90,7 @@
         <div class="clear"></div>
       </div>
     <div class="action-bar-block">
-        <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-tags"></span>Tags of this wall</h4>	
+        <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-tags"></span>{{ 'Tags of this wall'|trans({}, 'menu')}}</h4>
 
         <ul class="tags-list">
         {% if wall is defined %}
@@ -128,7 +128,7 @@
     <div class="action-bar-block">
         {% if wall is defined %}
               <!--Date-->
-        <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-info-sign"></span>Meta of this wall</h4>	
+        <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-info-sign"></span>{{ 'Meta of this wall'|trans({}, 'menu')}}</h4>
 
         <div class="action-bar-block">
                 <p><a class="post-meta post-footer-author" href="{{path('p4m_social_profile',{'username':wall.user.username})}}"><span class="glyphicon glyphicon-user"></span> {{wall.user.username}}</a></p>
@@ -140,7 +140,7 @@
     </div>
 
       <div class="action-bar-block">
-              <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-share"></span>Share this wall</a></h4>
+              <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-share"></span>{{ 'Share this wall'|trans({}, 'menu')}}</h4>
 
               <div class="shareIt action-bar-block">
                       <span class='st_facebook_large' displayText='Facebook'></span>
@@ -161,15 +161,15 @@
 </li>
 <li class="action-bar-section" id="section-wall-community">
       <div class="action-bar-block">
-              <h1 class="action-bar-title">Community</h1>
+              <h1 class="action-bar-title">{{ 'Community'|trans({}, 'menu')}}</h1>
       </div>
       <!--Category-->
       <div class="action-bar-block">
               <div id="action-bar-wall-community-type">
-                      <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-eye"></span>What would you like to see?</h4>
+                      <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-eye"></span>{{ 'What would you like to see?'|trans({}, 'menu')}}</h4>
                       <ul id="wall-community-type">
-                              <li class="wall-community-type"><img src="images/design/icons/megaphone2-gray-color.png" />Following</li>
-                              <li class="wall-community-type"><img src="images/design/icons/shoeprints-gray-color.png" />Followed</li>
+                              <li class="wall-community-type"><img src="images/design/icons/megaphone2-gray-color.png" />{{ 'Following'|trans({}, 'menu')}}</li>
+                              <li class="wall-community-type"><img src="images/design/icons/shoeprints-gray-color.png" />{{ 'Followed'|trans({}, 'menu')}}</li>
 
                       </ul>
                       <div class="clear"></div>
@@ -196,7 +196,7 @@
 #}
     <div class="clear"></div>
     <div id="action-bar-filters-time">
-          <h4 class="action-bar-small-title"><span class="glyphicon clock"></span>Time</h4>	
+          <h4 class="action-bar-small-title"><span class="glyphicon clock"></span>{{ 'Time'|trans({}, 'menu')}}</h4>
         <div class="filter-time"></div>
 
         <form class="filter-time-form">
@@ -229,7 +229,7 @@
       <div class="clear"></div>#}
       <!--Category-->
       <div id="action-bar-filters-categories">
-              <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-book"></span>Categories</h4>
+              <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-book"></span>{{ 'Categories'|trans({}, 'menu')}}</h4>
               <ul id="filters-categories">
             {% if route == 'p4m_core_showWall' %}
                 {%set categories = wall.includedCategories%}
@@ -256,15 +256,15 @@
 </li>
 <li class="action-bar-section" id="section-wall-community">
       <div class="action-bar-block">
-              <h1 class="action-bar-title">Community</h1>
+              <h1 class="action-bar-title">{{ 'Community'|trans({}, 'menu')}}</h1>
       </div>
       <!--Category-->
       <div class="action-bar-block">
               <div id="action-bar-wall-community-type">
-                      <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-eye"></span>What would you like to see?</h4>
+                      <h4 class="action-bar-small-title"><span class="glyphicon glyphicon-eye"></span>{{ 'What would you like to see?'|trans({}, 'menu')}}</h4>
                       <ul id="wall-community-type">
-                              <li class="wall-community-type"><img src="images/design/icons/megaphone2-gray-color.png" />Following</li>
-                              <li class="wall-community-type"><img src="images/design/icons/shoeprints-gray-color.png" />Followed</li>
+                              <li class="wall-community-type"><img src="images/design/icons/megaphone2-gray-color.png" />{{ 'Following'|trans({}, 'menu')}}</li>
+                              <li class="wall-community-type"><img src="images/design/icons/shoeprints-gray-color.png" />{{ 'Followed'|trans({}, 'menu')}}</li>
 
                       </ul>
                       <div class="clear"></div>

@@ -14,7 +14,7 @@
 
             </p>
             <p class="regular-text">
-                {{ 'Beware: on %date%, this amount will be distributed to your favorite authors.'|trans({'%date%': ("now")|date_modify("+1 month")|date("F d, Y")}, 'Backoffice')}}
+                {{ 'Beware: on %date%, this amount will be distributed to your favorite authors.'|trans({'%date%': ("now")|date_modify("+1 month")|localizeddate('long', 'none')}, 'Backoffice')}}
             </p>
 
         {% elseif walletFill and walletFill.recurrent %}
@@ -39,7 +39,7 @@
                    value="{% if walletFill %}{{ walletFill.amount/100 }}{% else %}5{% endif %}" data-max="100">
             {% if wallet.Balance.Amount == 0 or walletFill is null %}
                 <p class="text-center lead">
-                    {{ 'From now to %date%'|trans({'%date': ("now")|date_modify("+1 month")|date("F d, Y")}, 'Backoffice')}}
+                    {{ 'From now to %date%'|trans({'%date%': ("now")|date_modify("+1 month")|localizeddate('long', 'none')}, 'Backoffice')}}
                 </p>
                 <p><input type="checkbox" name="preAuthorisation" id="wallet-load-amount-monthly"><label
                             for="wallet-load-amount-monthly">{{ 'Load this amount monthly'|trans({}, 'Backoffice')}}</label></p>
@@ -50,7 +50,7 @@
                 <div class="{#form-line#}">
                     <div class="col-lg-22 col-md-22 col-xs-22 col-gd-22">
                         <button type="submit" id="change-amount" disabled="disabled" class="primary pfm-grey-button">
-                            {{ 'Change amount <br/>It will take effect on %date%'|trans({'%date': walletFill.dateExpire|date('F d')}, 'Backoffice')}}
+                            {{ 'Change amount <br/>It will take effect on %date%'|trans({'%date': walletFill.dateExpire|localizeddate('long', 'none')}, 'Backoffice')}}
                         </button>
                     </div>
                     <div class="col-lg-10 col-md-10 col-xs-10 col-gd-10">

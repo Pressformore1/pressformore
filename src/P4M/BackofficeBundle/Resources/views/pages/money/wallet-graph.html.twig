@@ -1,6 +1,6 @@
 <section id="walletGraphs" class=" col-gd-30 col-gd-offset-15 col-md-30 col-md-offset-15 col-sm-30 col-sm-offset-15">
     <h1>{{ 'Monthly Activity'|trans({}, 'Backoffice') }}</h1>
-    <h3><span id="lengendYou"> </span> {{ 'You <span id="lengendAverage"> </span> Platform average'|trans({}, 'Backoffice')}}</h3>
+    <h3><span id="lengendYou"> </span> {{ 'You <span id="lengendAverage"> </span> Platform average'|trans({}, 'Backoffice')|raw}}</h3>
     {% if wallet %}
         {% set walletBalance = wallet.Balance.Amount / 100 %}
     {% else %}
@@ -37,14 +37,14 @@
     {% elseif wallet %}
         <button class="main-button-link action-bar-btn graphButton" data-toggle="action-bar"
                 data-target="#section-wallet-charge">
-            {{ '<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists'|trans({}, 'Backoffice')}}
+            {{ '<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists'|trans({}, 'Backoffice')|raw}}
 
         </button>
         <h2>{{ 'For Now'|trans({}, 'Backoffice')}}</h2>
     {% else %}
         <a href="{{ path('p4_m_backoffice_profile_infos') }}?goBack={{ url('p4_m_backoffice_homepage') }}#wallet"
            class="main-button-link graphButton">
-            {{ '<span class="big"> Complete my account informations</span><br/>and start funding your favorite journalists'|trans({}, 'Backoffice')}}
+            {{ '<span class="big"> Complete my account informations</span><br/>and start funding your favorite journalists'|trans({}, 'Backoffice')|raw}}
 
         </a>
         <h2>{{ 'For Now'|trans({}, 'Backoffice')}}</h2>
@@ -104,7 +104,7 @@
              class="flipBoard col-gd-50 col-gd-offset-5 col-md-50 col-md-offset-5 col-sm-50 col-sm-offset-5">
 
         <h1>
-            {{ 'You\'ve pressed <span class="red">%pressLength%</span> contents so far'|trans({'%pressLength%': userPressForms|length}, 'Backoffice')}}
+            {{ 'You\'ve pressed <span class="red">%pressLength%</span> contents so far'|trans({'%pressLength%': userPressForms|length}, 'Backoffice')|raw}}
         </h1>
         <table class="table table-striped">
             <thead>

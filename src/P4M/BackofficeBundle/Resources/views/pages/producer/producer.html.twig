@@ -3,7 +3,7 @@
 
 
  {% block page %}
-     <h2 class="form-title">Producing</h2>
+     <h2 class="form-title">{{ 'Producing'|trans({}, 'Backoffice')}}</h2>
 
      {% if user.producerEnabled == false %}
          <p>{{ 'Your producer account is not activated. '|trans({}, 'Backoffice')}}

@@ -3,7 +3,7 @@ Notifications: Notifications
 'More notifications': 'Plus de  notifications'
 'Look for something': 'Cherchez quelque chose'
 'Add new content': 'Ajoutez un nouveau contenu'
-'Paste here any URL to share your favorite content on Pressformore': 'Coller une URL pour partager votre contenu favoris sur Pressformore'
+'Paste here any URL to share your favorite content on Pressformore': 'Coller l''URL de vos contenus favoris pour les diffuser sur Pressformore'
 'Find an articles, author..': 'Trouvez un article, autheur ...'
 All: Tous
 People: Célébrité
@@ -124,19 +124,19 @@ Views: Voir
 'Your Messages': 'Vos messages'
 'Your Stats': 'Vos statistiques'
 'Your Reputation': 'Votre réputation'
-'Wallet Settings': 'Configuration du porte feuille'
+'Wallet Settings': 'Configuration du porte-feuille'
 Congratulations!: 'Félicitation !'
-'You''ve correctly set up your wallet!': 'Vous avez correctement configurer votre portefeuille !'
+'You''ve correctly set up your wallet!': 'Vous avez correctement configurer votre porte-feuille !'
 'But you can still edit your info by pressing the corresponding button below.': 'Mais vous pouvez toujours éditez vos informations en pressant sur le bouton correspondant.'
 Please: 'S''il vous plait'
 'verify your informations and try again': 'Verifiez vos informations et essayez encore'
 Loading: Chargement
 'Choose a payment method': 'Choisissez une méthode de payement'
-'Use a registred card': 'Utilisez une carte enregistrer'
+'Use a registred card': 'Utiliser une carte enregistrer'
 'You are about to load': 'Vous êtes sur le point de regarcher'
 'euro for the following period': 'euro pour la période suivante'
 'Confirm your loading': 'Confirmez votre chargement'
-'Register a new method': 'Enregistre une nouvelle méthode'
+'Register a new method': 'Enregistre une nouvelle carte'
 'Credit Card': 'Carte de crédit'
 'Bank account details': 'Détails de votre compte'
 Name: Nom
@@ -153,7 +153,7 @@ Load: Chargez
 Unfortunatly: Malheureusement
 'mandatory information about your account is missing': 'Des informations obligatoires son manquante'
 'Complete my account informations': 'Completez mes informations'
-'Financial Info': 'Information financière'
+'Financial Info': 'Montant Charge'
 In: Entrez
 Out: Sortir
 'CREATE IBAN': 'Créez un IBAN'

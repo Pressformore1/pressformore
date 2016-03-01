@@ -31,7 +31,7 @@
 
              <div class="form-group">
                  <label class="col-sm-20 control-label form-field-title"
-                        for="{{ form.username.vars.id }}"{{ 'Username'|trans({}, 'Backoffice')}}> {% if form.username.vars.required %}*{% endif %}<br/>
+                        for="{{ form.username.vars.id }}">{{ 'Username'|trans({}, 'Backoffice')}} {% if form.username.vars.required %}*{% endif %}<br/>
                      <small class="form-field-explanation">({{ 'Title of your profile'|trans({}, 'Backoffice')}})</small>
                  </label>
 
@@ -141,7 +141,7 @@
              </div>
              <div class="form-group">
                  <label class="col-sm-20 control-label form-field-title required" for="{{ form.bio.vars.id }}">{{ 'Bio'|trans({}, 'Backoffice')}}
-                     <small class="form-field-explanation">({{ 'A short description of yourself'|trans({}, 'Backoffice')}})</small>
+                     <small class="form-field-explanation">{{ '(A short description of yourself)'|trans({}, 'Backoffice')}}</small>
                  </label>
                  <small class="form-field-explanation">
 
