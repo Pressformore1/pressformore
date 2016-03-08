@@ -1,10 +1,16 @@
 Reply: Répondre
 'Signal this comment': 'Signalez ce commentaire'
-'Thanks, you''re about to feed Pressformore with a content worth sharing. In order to enhance its visibility, help us to better classify it by filling these fields.': "Thanks, you''re about to feed Pressformore with a content worth sharing. In order to enhance its visibility, help us to better classify it by filling these fields.\n"
-'The picture that will be displayed on your tile': 'L''image qui sera affiché sur votre tile'
-'NB: Prefer a large picure than a small one': 'NB: Préférez une grande image plutot qu''une petite'
-'The language used in your content': 'La langue utilisé dans votre contenu'
+'Thanks, you''re about to feed Pressformore with a content worth sharing. In order to enhance its visibility, help us to better classify it by filling these fields.': "Vous êtes sur le point de partager un contenu à la communauté Pressformore. Afin de le partager aux internautes, veuillez nous aider à le catégoriser correctement en remplissant les informations ci-dessous.\n"
+'The picture that will be displayed on your tile': 'Voici l''illustration de votre contenu'
+'NB: Prefer a large picure than a small one': 'Préférez une grande image plutôt qu''une petite'
+'The language used in your content': 'La langue utilisée dans votre contenu'
 'The type of your content': 'Le type de votre contenu'
-'Classify your content by categories...': 'Classez votre contenu par categories...'
+'Classify your content by categories...': 'Classez votre contenu par centre d''intérêt'
 '... and by tags': '... et par tags'
-'To add a new tag, just write it, and click enter': 'Pour ajouter un nouveau tag, il suffit d''écrire, et cliquez sur Enter'
+'To add a new tag, just write it, and click enter': 'Pour ajouter un nouveau tag, il suffit d''écrire, appuyez ensuite sur la touche ''Entrée'''
+'Content title :': 'Titre du contenu :'
+'Picture :': 'Illustration :'
+'Abstract :': 'Résumé :'
+'Language :': 'Langue du contenu :'
+'Content type :': 'Format du contenu :'
+'Categories :': 'Centres d''intérêts :'

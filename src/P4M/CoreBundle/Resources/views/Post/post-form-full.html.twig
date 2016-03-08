@@ -4,7 +4,7 @@
 
 
 <div class="form-group">
-    {{ form_label(form.title, 'Content title :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+    {{ form_label(form.title, 'Content title :'|trans({}, 'post'), {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
 
     <div class="col-sm-45">
         {{ form_widget(form.title,{attr:{class:'col-sm-60'}} ) }}
@@ -14,7 +14,7 @@
 </div>
 
 <div class="form-group">
-    {{ form_label(form.picture, 'Picture :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+    {{ form_label(form.picture, 'Picture :'|trans({}, 'post'), {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
 
     <div class="col-sm-45">
         <p class="form-field-explanation">{{ 'The picture that will be displayed on your tile'|trans({}, 'post')}}<br/>
@@ -27,7 +27,7 @@
 </div>
 
 <div class="form-group">
-    {{ form_label(form.content, 'Abstract :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+    {{ form_label(form.content, 'Abstract :'|trans({}, 'post'), {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
 
     <div class="col-sm-45">
         {{ form_widget(form.content,{attr:{class:'col-sm-60'}} ) }}
@@ -39,7 +39,7 @@
 </div>
 
 <div class="form-group">
-    {{ form_label(form.lang, 'Language :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+    {{ form_label(form.lang, 'Language :'|trans({}, 'post'), {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
 
     <div class="col-sm-45">
         <p class="form-field-explanation">{{ 'The language used in your content'|trans({}, 'post')}}</p>
@@ -50,7 +50,7 @@
 </div>
 
 <div class="form-group">
-    {{ form_label(form.type, 'Content type :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+    {{ form_label(form.type, 'Content type :'|trans({}, 'post'), {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
 
     <div class="col-sm-45">
         <p class="form-field-explanation">{{ 'The type of your content'|trans({}, 'post')}}</p>
@@ -63,7 +63,7 @@
 
 <div class="form-group">
 
-    {{ form_label(form.categories, 'Categories :', {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
+    {{ form_label(form.categories, 'Categories :'|trans({}, 'post'), {label_attr:{class:'col-sm-15 control-label form-field-title'}}) }}
 
     <div class="col-sm-45">
         <p class="form-field-explanation">{{ 'Classify your content by categories...'|trans({}, 'post')}}</p>

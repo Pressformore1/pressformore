@@ -11,7 +11,7 @@ Video: Vidéo
 '© 2013 Copyright. All Rights Reserved.': '© 2013 Copyright. Tous droits réservés.'
 'Category :': 'Catégorie :'
 'nouveau média participatif.': 'nouveau média participatif.'
-'Add Post': 'Ajouté un post'
+'Add Post': 'Votre contenu est en passe d''être partagé'
 Cancel: Annuler
 'Report Post': 'Signaler le post'
 'This post has been reported as': 'Ce post a bien été signalier comme'
@@ -23,4 +23,5 @@ Confirm: Confirmez
 Register: Inscription
 Reply: Répondre
 'We use cookies to track usage and preferences': 'Nous utilisons les cookies pour suivre l''utilisation et les préférences'
-'I understand': 'I understand'
+'I understand': 'Je comprends'
+Add.Post.Btn: 'Partager le contenu'

@@ -4,19 +4,19 @@ Notifications: Notifications
 'Look for something': 'Cherchez quelque chose'
 'Add new content': 'Ajoutez un nouveau contenu'
 'Paste here any URL to share your favorite content on Pressformore': 'Coller l''URL de vos contenus favoris pour les diffuser sur Pressformore'
-'Find an articles, author..': 'Trouvez un article, autheur ...'
+'Find an articles, author..': 'Trouvez un article, auteur ...'
 All: Tous
-People: Célébrité
+People: Utilisateur
 Strew: Mur
 Content: Contenu
-Values: Values
+Values: Valeurs
 'Follow Us': 'Nous suivre'
 'Logo Pressformore, the first crowd-shaped media': 'Logo Pressformore, le premier crowd-shaped media'
 Legal: 'Mentions légales'
 Contact: Contact
 'View your profile': 'Voir votre profil'
 'Help me!': 'Besoin d''aide ?'
-Disconnect: 'Se deconnecter'
+Disconnect: 'Se déconnecter'
 'Log in': 'Se connecter'
 Access: Accès
 'Picked some categories!': 'Choisisser des catégories!'
@@ -85,7 +85,7 @@ Report: Signalez
 'Perhaps it''s time to reward him for his duty work': 'Peu être est-il temp de le récompenser pour son travaille'
 'Load your wallet with the amount of your choice': 'Charger votre portefeuille avec le montant de votre choix'
 'To retribute your favorite authors, we need to have more information about you. Your privacy will always matter to us.': 'Pour récompenser vos auteurs préférés, nous avons besoin de plus d''information a propos de vous. Le respect de la vie privée est important pour nous.'
-'Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': 'PressForMore vise a la juste retribution des journalistes et créateur numérique aux travers de micro don. Nous pensons que les autheurs de contenu de qualité doivent être récompenser.'
+'Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': "PressForMore vise a la juste retribution des journalistes et créateur numérique aux travers de micro don. Nous pensons que les auteurs de contenu de qualité doivent être récompenser.\n"
 'Fill Information': 'Remplissez les informations'
 'You liked this content and want to retribute the author?': 'Vous auriez aimé récompensé son auteur?'
 'Let us know!': 'Faites-le nous savoir !'
@@ -227,16 +227,18 @@ Followed: Suivi
 'Add to': 'ajouté à'
 'Ban to': 'interdire à'
 'Explore the community of %wallName% strew': 'Explorez la communauté du mur %wallName%'
-Home: Index
+Home: 'Consulter mon mur d''info'
 'Your strews': 'Vos murs d''info'
 'Followed strews': 'Murs d''info suivis'
 'Suggested strews': 'Suggerez un murs'
-'Build a new strew': 'Construire un nouveau mur'
+'Build a new strew': 'Nouveau mur'
 'Strew settings': 'Configurer vos murs'
-'Read later': 'Á lire plus tard'
+'Read later': 'Consulter ma liste de lecture'
 'Show this post on home page': 'Voir cet article sur la page d''accueil'
 '%name% is the author': '%name% est l''auteur'
 'Beware! this strew has been reported as %typeName%.': 'Beware! this strew has been reported as %typeName%.'
 'Edit this wall': 'Éditer ce mur'
 'By helping us to <strong>find the author</strong>, you would help the': 'En nous aidant à <strong>trouver cet auteur</strong>, vous aideriez les'
 'other readers who are ready to fund him.': 'autres utilisateurs qui ont également apprécié ce contenu.'
+'Share this wall': 'Partagez ce mur'
+Cancel: Cancel

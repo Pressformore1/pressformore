@@ -133,7 +133,7 @@
                 {#                    {{wall.picture.id}}#}
                 {% if wall.picture and wall.picture.id|length and error|length == 0 %}
                     <div id="changePicture"
-                         data-prototype='{{ pictureField }} <br /> <button id="changePictureCancel">Cancel</button>'>
+                         data-prototype='{{ pictureField }} <br /> <button id="changePictureCancel">{{ 'Cancel'|trans({}, 'menu') }}</button>'>
                         <div id="changePictureWrapper">
                             <img src="{{ asset(wall.picture.webPath) }}" class="edit-wall-picture"
                                  alt="picture of{{ wall.name }}"/>

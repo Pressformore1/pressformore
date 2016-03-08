@@ -40,7 +40,7 @@
 
                     {% if tilesEdit is defined %}
                         <span class="tile-remove" class=""><span class="glyphicon remove confirm_ajax_action"
-                                                                 data-confirm-text="Do you really want to remove this strew?"
+                                                                 data-confirm-text="{{ 'Do you really want to remove this strew?'|trans({}, 'wall')}}"
                                                                  data-url="{{ path('p4m_ajax_action') }}"
                                                                  data-params="{{ {'wallId':wall.id}|json_encode() }}"
                                                                  data-action="deleteWall"

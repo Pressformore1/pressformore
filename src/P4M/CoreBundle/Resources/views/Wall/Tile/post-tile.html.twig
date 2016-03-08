@@ -201,7 +201,7 @@
                                     <a href="#read-later" class="read-later ajax_action"
                                        data-url="{{ path('p4m_ajax_action') }}"
                                        data-params="{{ {'postId':post.id}|json_encode() }}" data-action="readPostLater"
-                                       data-key="{{ {'postId':post.id}|json_encode()|sha512 }}" title="Read it later">
+                                       data-key="{{ {'postId':post.id}|json_encode()|sha512 }}" title="{{ 'Read it later'|trans({}, 'wall')}}">
                                         <span class="glyphicon clock"></span>
                                     </a>
                                 </div>
@@ -218,8 +218,6 @@
                                 <span class="rating-horizontal-bar-less"
                                       style="width:{{ post.negativeVoteNumber|percentVote(post.votes|length) }}%;"></span>
                             </div>
-
-
                         {% endif %}
                     </footer>
                 </div>

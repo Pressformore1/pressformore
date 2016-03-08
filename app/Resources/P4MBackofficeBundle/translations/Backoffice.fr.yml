@@ -44,7 +44,7 @@ Send: Envoyer
 'Monthly Activity': 'Activité du mois'
 'You <span id="lengendAverage"> </span> Platform average': 'Votre <span id="lengendAverage"> </span> activité moyenne sur la plateforme'
 'Wallet Amount': 'Montant du portefeuille'
-'#Post Read': '	Articles consultés'
+'#Post Read': "\tArticles consultés"
 '#Press Ratio': 'Contenus financés'
 '<span class="big">Fill in your wallet</span><br/>and start funding your favorite journalists': "<span class=\"big\">Remplissez votre portefeuille</span><br/>et commencer a financer votre journaliste préferer\n"
 'For Now': 'Pour maintenant'
@@ -59,9 +59,7 @@ Author: Auteur
   Bien que nos services et la consultation d'articles restent gratuits,
   Pressformore vise à offrir un moyen de financement équitable pour les journalistes et autres créateurs numériques.
   Nous croyons que les auteurs de contenu devraient être récompensés en fonction de la qualité et de l'engagement que leurs contenus génèrent.
-'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.': >
-  Vous êtes donc libres de charger n'importe quel montant sur votre porte-feuille.
-  Chaque mois, vos donations seront redistribuées équitablement envers les créateur de votre choix.
+'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.': "Vous êtes donc libres de charger n'importe quel montant sur votre porte-feuille. Chaque mois, vos donations seront redistribuées équitablement envers les créateur de votre choix.\n"
 'Beware: on %date%, this amount will be distributed to your favorite authors.': 'Attention: le %date%, ce montant sera redistribuer a vos auteurs favoris.'
 'Your wallet loading is recurrent. The next refill is planned on <strong>%date%</strong><br/>You can change it by moving the cursor below. Changes will apply on next refill<br/>': "Votre portefeuille est recharger automatiquement. Le prochain rechargement est prévu pour le <strong>%date%</strong><br/> Vous pouvez le modifier en déplaçant le curseur ci dessous. Les changements seront appliqués sur le prochain chargement<br/>\n"
 'This amount will be ENTIRELY distributed to journalists you like You will be able to charge your wallet again on %date%. <br/>NB:Or you can make this amount to be recurrently charged every month.<br/>': "Ce montant sera entièrement redistribuer au journalist que vous aimez. Vous pourrez a nous charger votre portefeuille le %date%. <br/> NB: Ou vous pouvez faire en sorte que ce montant soient charger tous les mois.<br/>\n"
