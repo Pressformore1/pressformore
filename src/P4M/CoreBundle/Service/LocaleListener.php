@@ -38,35 +38,6 @@ class LocaleListener implements EventSubscriberInterface
 
     }
 
-    /*public function onKernelRequest(GetResponseEvent $event)
-    {
-
-        if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
-            return;
-        }
-
-        $request = $event->getRequest();
-
-        // try to see if the locale has been set as a _locale routing parameter
-
-        if($this->container->get('security.token_storage')->getToken()->isAuthenticated()){
-            $user = $this->container->get('security.token_storage')->getToken()->getUser();
-            $locale = $user->getLanguage();
-            $request->setLocale($locale);
-        }
-
-        if($this->token->getToken()){
-
-        }
-        elseif ($locale = $request->attributes->get('_locale')) {
-            $request->getSession()->set('_locale', $locale);
-        } else {
-            // if no explicit locale has been set on this request, use one from the session
-
-            $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
-        }
-    }*/
-
     public static function getSubscribedEvents()
     {
         return array(
