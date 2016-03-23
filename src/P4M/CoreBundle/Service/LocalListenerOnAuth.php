@@ -19,17 +19,20 @@ class LocalListenerOnAuth implements AuthenticationSuccessHandlerInterface
         $this->router = $router;
     }
 
+    /**
+     * @param Request $request
+     * @param TokenInterface $token
+     * @return RedirectResponse
+     */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token)
     {
         $route = $request->get('_route');
         $user = $token->getUser();
         $locale = $user->getLanguage();
         $request->setLocale($locale);
-        $route = $this->router->generate('p4m_core_wall', [ '_locale' => $locale ]);
+        $route = $this->router->generate('p4m_core_wall', [ '_locale' => $locale ], true);
 
         $response = new RedirectResponse($route);
         return $response;
-
-
     }
 }
