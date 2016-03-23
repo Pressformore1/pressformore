@@ -171,4 +171,27 @@ class UserLink
     {
         return $this->activities;
     }
+
+    /**
+     * Add activities
+     *
+     * @param \P4M\TrackingBundle\Entity\UserActivity $activities
+     * @return UserLink
+     */
+    public function addActivity(\P4M\TrackingBundle\Entity\UserActivity $activities)
+    {
+        $this->activities[] = $activities;
+
+        return $this;
+    }
+
+    /**
+     * Remove activities
+     *
+     * @param \P4M\TrackingBundle\Entity\UserActivity $activities
+     */
+    public function removeActivity(\P4M\TrackingBundle\Entity\UserActivity $activities)
+    {
+        $this->activities->removeElement($activities);
+    }
 }

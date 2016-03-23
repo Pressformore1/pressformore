@@ -297,8 +297,13 @@ class User extends BaseUser
      * @ORM\Column(name="alertWalletEmpty",type="boolean")
      */
     private $alertWalletEmpty;
+
+    /**
+     * @var string
+     * @ORM\Column(name="language", type="string")
+     */
     
-    
+    private $language = "en";
 
     public function __construct()
     {
@@ -1668,5 +1673,28 @@ class User extends BaseUser
     public function getAlertWalletEmpty()
     {
         return $this->alertWalletEmpty;
+    }
+
+    /**
+     * Set language
+     *
+     * @param string $language
+     * @return User
+     */
+    public function setLanguage($language)
+    {
+        $this->language = $language;
+
+        return $this;
+    }
+
+    /**
+     * Get language
+     *
+     * @return string 
+     */
+    public function getLanguage()
+    {
+        return $this->language;
     }
 }

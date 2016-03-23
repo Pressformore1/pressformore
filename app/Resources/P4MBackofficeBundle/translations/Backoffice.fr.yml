@@ -55,10 +55,7 @@ contents: Contenu
 Title: Titre
 Author: Auteur
 'Your wallet seems to be empty at the moment.': 'Votre portefeuille semble vide pour le moment.'
-'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': >
-  Bien que nos services et la consultation d'articles restent gratuits,
-  Pressformore vise à offrir un moyen de financement équitable pour les journalistes et autres créateurs numériques.
-  Nous croyons que les auteurs de contenu devraient être récompensés en fonction de la qualité et de l'engagement que leurs contenus génèrent.
+'Although our services will always be free, Pressformore aims at fair funding journalists and digital creators through microdonations. We believe authors of quality content should be rewarded.': "Bien que nos services et la consultation d'articles restent gratuits, Pressformore vise à offrir un moyen de financement équitable pour les journalistes et autres créateurs numériques. Nous croyons que les auteurs de contenu devraient être récompensés en fonction de la qualité et de l'engagement que leurs contenus génèrent.\n"
 'You are free to load any amount on your e-wallet, choose which content should be rewarded. Hence, your donation will be equally distributed, each month, amongst the creators of your choice.': "Vous êtes donc libres de charger n'importe quel montant sur votre porte-feuille. Chaque mois, vos donations seront redistribuées équitablement envers les créateur de votre choix.\n"
 'Beware: on %date%, this amount will be distributed to your favorite authors.': 'Attention: le %date%, ce montant sera redistribuer a vos auteurs favoris.'
 'Your wallet loading is recurrent. The next refill is planned on <strong>%date%</strong><br/>You can change it by moving the cursor below. Changes will apply on next refill<br/>': "Votre portefeuille est recharger automatiquement. Le prochain rechargement est prévu pour le <strong>%date%</strong><br/> Vous pouvez le modifier en déplaçant le curseur ci dessous. Les changements seront appliqués sur le prochain chargement<br/>\n"
@@ -121,3 +118,4 @@ Retributions: 'Soutiens financiers'
 'Address ': 'Adresse '
 '(A short description of yourself)': 'Une petit description a propos de vous'
 Producing: 'Votre clé producteur'
+'Your language': '__Your language'

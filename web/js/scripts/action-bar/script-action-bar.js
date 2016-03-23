@@ -533,37 +533,37 @@ function filterTimeChange(filterTime){
 	switch(parseInt(endObj.val()))
 		{
 		case 11:
-			endText.html('For ever');
+			endText.html(messageActionBar['forever_short']);
 			break;
 		case 10:
-			endText.html('5 years ago');
+			endText.html(messageActionBar['5yearsago']);
 			break;
 		case 9:
-			endText.html('1 years ago');
+			endText.html(messageActionBar['1yearsago']);
 			break;
 		case 8:
-			endText.html('6 months ago');
+			endText.html(messageActionBar['6monthsago']);
 			break;
 		case 7:
-			endText.html('3 months ago');
+			endText.html(messageActionBar['3monthsago']);
 			break;
 		case 6:
-			endText.html('1 months ago');
+			endText.html(messageActionBar['1monthsago']);
 			break;
 		case 5:
-			endText.html('2 weeks ago');
+			endText.html(messageActionBar['2weeksago']);
 			break;
 		case 4:
-			endText.html('1 weeks ago');
+			endText.html(messageActionBar['1weeksago']);
 			break;
 		case 3:
-			endText.html('3 days ago');
+			endText.html(messageActionBar['3daysago']);
 			break;
 		case 2:
-			endText.html('2 days ago');
+			endText.html(messageActionBar['2daysago']);
 			break;
 		case 1:
-			endText.html('Yesterday');
+			endText.html(messageActionBar['Yesterday']);
 			break;
 		case 0:
 			endText.html('');
@@ -574,40 +574,40 @@ function filterTimeChange(filterTime){
 		switch(parseInt(startObj.val()))
 		{
 			case 11:
-				startText.html('forever... Sorry but it`s gonna be hard for me!');
+				startText.html(messageActionBar['forever_long']);
 				break;
 			case 10:
-				startText.html('5 years ago');
+				startText.html(messageActionBar['5yearsago']);
 				break;
 			case 9:
-				startText.html('1 year ago');
+				startText.html(messageActionBar['1yearago']);
 				break;
 			case 8:
-				startText.html('6 months ago');
+				startText.html(messageActionBar['6monthsago']);
 				break;
 			case 7:
-				startText.html('3 months ago');
+				startText.html(messageActionBar['3monthsago']);
 				break;
 			case 6:
-				startText.html('1 month ago');
+				startText.html(messageActionBar['1monthago']);
 				break;
 			case 5:
-				startText.html('2 weeks ago');
+				startText.html(messageActionBar['2weeksago']);
 				break;
 			case 4:
-				startText.html('1 week ago');
+				startText.html(messageActionBar['1weekago']);
 				break;
 			case 3:
-				startText.html('3 days ago');
+				startText.html(messageActionBar['3daysago']);
 				break;
 			case 2:
-				startText.html('2 days ago');
+				startText.html(messageActionBar['2daysago']);
 				break;
 			case 1:
-				startText.html('yesterday');
+				startText.html(messageActionBar['yesterday']);
 				break;
 			case 0:
-				startText.html('today');
+				startText.html(messageActionBar['today']);
 				break;
 			default:
 		}

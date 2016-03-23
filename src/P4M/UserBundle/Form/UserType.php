@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 use P4M\CoreBundle\Form\ImageType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class UserType extends AbstractType
 {
@@ -20,6 +21,14 @@ class UserType extends AbstractType
             ->add('email','email')
             ->add('firstName','text')
             ->add('lastName','text')
+            ->add('language', 'choice', [
+                'choices' => [
+                    'en' => 'English',
+                    'fr' => 'Français'
+                ],
+                'multiple' => false
+
+            ])
             ->add('title','text')
             ->add('website','url')
 //                ->add('categories')

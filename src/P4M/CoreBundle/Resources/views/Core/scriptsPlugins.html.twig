@@ -1,12 +1,25 @@
-<script type="text/javascript">
-    {# Initialisation des variable pour la cookiesBar #}
-    messageCookie = '{{ 'We use cookies to track usage and preferences'|trans({}, 'Core') }}';
-    acceptTextCookie = '{{ 'I understand'|trans({}, 'Core') }}';
-</script>
 {% javascripts 'js/plugin/common/*.js' %}
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% javascripts 'js/plugin/action-bar/*.js' %}
+    <script>
+        messageActionBar = {
+            'forever_short': "{{ 'For ever'|trans({}, 'actionBar') }}",
+            '5yearsago': "{{ '5 years ago'|trans({}, 'actionBar') }}",
+            '1yearsago': "{{ '1 years ago'|trans({}, 'actionBar') }}",
+            '6monthsago': "{{ '6 months ago'|trans({}, 'actionBar') }}",
+            '3monthsago': "{{ '3 months ago'|trans({}, 'actionBar') }}",
+            '1monthsago': "{{ '1 months ago'|trans({}, 'actionBar') }}",
+            '2weeksago': "{{ '2 weeks ago'|trans({}, 'actionBar') }}",
+            '1weeksago': "{{ '1 weeks ago'|trans({}, 'actionBar') }}",
+            '3daysago': "{{ '3 days ago'|trans({}, 'actionBar') }}",
+            '2daysago': "{{ '2 days ago'|trans({}, 'actionBar') }}",
+            'Yesterday': "{{ 'Yesterday'|trans({}, 'actionBar') }}",
+            'forever_long': "{{ 'forever... Sorry but it`s gonna be hard for me!'|trans({}, 'actionBar') }}",
+            'today': "{{ 'today'|trans({}, 'actionBar') }}",
+        }
+        {# Initialisation des variable pour l'action-bar et les traductions #}
+    </script>
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}    
 {% javascripts 'js/plugin/menu/*.js' %}
@@ -16,6 +29,11 @@
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% javascripts 'js/plugin/cookie-bar/*.js' %}
+    <script type="text/javascript">
+
+        messageCookie = '{{ 'We use cookies to track usage and preferences'|trans({}, 'Core') }}';
+        acceptTextCookie = '{{ 'I understand'|trans({}, 'Core') }}';
+    </script>
     <script type="text/javascript" src="{{ asset_url }}"></script>
 {% endjavascripts %}
 

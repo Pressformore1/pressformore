@@ -20,9 +20,6 @@ use Symfony\Component\DependencyInjection\Container;
 
 class PostUtils 
 {
-    
-                    
-    
 //    private $encoding;
 //    
 //    private $container;
@@ -67,11 +64,6 @@ class PostUtils
         {
             $postMeta['sourcePictureList'][] = $this->container->get('templating.helper.assets')->getUrl('images/design/default-pic.jpg');
         }
-
-       
-
-        
-        
         return $postMeta;
     }
     
@@ -88,17 +80,4 @@ class PostUtils
         $this->analyser->load($sourceUrl);
         return $this->analyser->getEmbed();
                 }
-                
-                    
-                
-            
-        
-    
-    
-
-
-        
-        
-
-        
     }
