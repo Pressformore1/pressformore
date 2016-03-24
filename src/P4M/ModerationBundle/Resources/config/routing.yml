@@ -1,3 +1,1 @@
-p4_m_moderation_homepage:
-    path:  /hello/{name}
-    defaults: { _controller: P4MModerationBundle:Default:index }
+

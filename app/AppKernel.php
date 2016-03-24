@@ -23,7 +23,7 @@ class AppKernel extends Kernel
             new P4M\AdminBundle\P4MAdminBundle(),
             new P4M\ModerationBundle\P4MModerationBundle(),
             new P4M\TrackingBundle\P4MTrackingBundle(),
-            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            //new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Ivory\CKEditorBundle\IvoryCKEditorBundle(),
             new FM\ElfinderBundle\FMElfinderBundle(),
             new P4M\BackofficeBundle\P4MBackofficeBundle(),

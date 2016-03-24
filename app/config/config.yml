@@ -144,32 +144,32 @@ fm_elfinder:
                         upload_max_size: 4M
 
 
-hwi_oauth:
-    # name of the firewall in which this bundle is active, this setting MUST be set
-    firewall_name: secure_area
-    connect:
-        confirmation: true
-        #account_connector: hwi_oauth.user.provider.fosub_bridge
-        #registration_form_handler: hwi_oauth.registration.form.handler.fosub_bridge
-        #registration_form: fos_user.registration.form
-    resource_owners:
-        facebook:
-            type: facebook
-            client_id: "%facebook_app_id%"
-            client_secret: "%facebook_app_secret%"
-            scope: ""
-        google:
-            type: google
-            client_id: "%google_app_id%"
-            client_secret: "%google_app_secret%"
-            scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
-
-    fosub:
-        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
-        username_iterations: 30
-        # mapping between resource owners (see below) and properties
-        properties:
-            github: githubID
+#hwi_oauth:
+#    # name of the firewall in which this bundle is active, this setting MUST be set
+#    firewall_name: secure_area
+#    connect:
+#        confirmation: true
+#        #account_connector: hwi_oauth.user.provider.fosub_bridge
+#        #registration_form_handler: hwi_oauth.registration.form.handler.fosub_bridge
+#        #registration_form: fos_user.registration.form
+#    resource_owners:
+#        facebook:
+#            type: facebook
+#            client_id: "%facebook_app_id%"
+#            client_secret: "%facebook_app_secret%"
+#            scope: ""
+#        google:
+#            type: google
+#            client_id: "%google_app_id%"
+#            client_secret: "%google_app_secret%"
+#            scope: "https://www.googleapis.com/auth/userinfo.email https://www.googleapis.com/auth/userinfo.profile"
+#
+#    fosub:
+#        # try 30 times to check if a username is available (foo, foo1, foo2 etc)
+#        username_iterations: 30
+#        # mapping between resource owners (see below) and properties
+#        properties:
+#            github: githubID
 
 
                 
@@ -531,8 +531,8 @@ services:
             - { name: twig.extension }
             
             
-parameters:
-    fos_user.template.engine: 'twig'
+#parameters:
+#    fos_user.template.engine: 'twig'
 
 skcms_locale:
     locales: [en, fr]
@@ -550,6 +550,23 @@ nelmio_api_doc: ~
 
 fos_rest:
     routing_loader:
-        default_format: json                            # All responses should be JSON formated
-        include_format: false
+        default_format: json
+        include_format: true
+    param_fetcher_listener: true
+    body_listener:          true
+    view:
+        view_response_listener: true
+        formats:
+            json: true
+            xml: true
+            jsonp: false
+            rss: false
+            html: false
+    exception:
+        messages:
+            'Exception': true
+    format_listener:
+            enabled: true
+            rules:
+                - { path: '^/api', priorities: ['json', 'xml'] }
 

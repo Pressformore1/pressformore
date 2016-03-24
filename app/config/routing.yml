@@ -1,6 +1,6 @@
 p4_mapi:
     resource: "@P4MAPIBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /api
 
 skcms_locale:
     resource: "@SKCMSLocaleBundle/Resources/config/routing-translations.yml"
@@ -106,32 +106,32 @@ p4_m_moderation:
     resource: "@P4MModerationBundle/Resources/config/routing.yml"
     prefix:   /
 
-hwi_oauth_redirect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
-    prefix:   /{_locale}/secure_area/connect
-    requirements:
-      _locale: en|fr
-    defaults:
-      _locale: %locale%
-
-hwi_oauth_login:
-    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
-    prefix:   /{_locale}/secure_area/connect
-    requirements:
-      _locale: en|fr
-    defaults:
-      _locale: %locale%
-
-hwi_oauth_connect:
-    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
-    prefix:   /{_locale}/secure_area/connect
-    requirements:
-      _locale: en|fr
-    defaults:
-      _locale: %locale%
-
-hwi_facebook_login:
-    path: /secure_area/login/check-facebook
+#hwi_oauth_redirect:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/redirect.xml"
+#    prefix:   /{_locale}/secure_area/connect
+#    requirements:
+#      _locale: en|fr
+#    defaults:
+#      _locale: %locale%
+#
+#hwi_oauth_login:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/login.xml"
+#    prefix:   /{_locale}/secure_area/connect
+#    requirements:
+#      _locale: en|fr
+#    defaults:
+#      _locale: %locale%
+#
+#hwi_oauth_connect:
+#    resource: "@HWIOAuthBundle/Resources/config/routing/connect.xml"
+#    prefix:   /{_locale}/secure_area/connect
+#    requirements:
+#      _locale: en|fr
+#    defaults:
+#      _locale: %locale%
+#
+#hwi_facebook_login:
+#    path: /secure_area/login/check-facebook
 
 p4_m_admin:
     resource: "@P4MAdminBundle/Resources/config/routing.yml"
@@ -205,7 +205,3 @@ fos_oauth_server_authorize:
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
     prefix:   /api/doc
-
-p4_m_api:
-    resource: "@P4MAPIBundle/Resources/config/routing.yml"
-    prefix:   /api

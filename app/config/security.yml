@@ -33,16 +33,16 @@ security:
             anonymous: true # On autorise alors les anonymes sur ce pare-feu
 
         secure_area:
-            pattern: ^[/]*
-            oauth:
-                failure_path: hwi_oauth_connect
-                login_path: fos_user_security_login
-                check_path: fos_user_security_check
-                provider: fos_userbundle
-                resource_owners:
-                    facebook:           "/secure_area/login/check-facebook"
-                oauth_user_provider:
-                    service: hwi_oauth.user.provider.fosub_bridge
+            pattern: ^[/](?!.*api).*
+#            oauth:
+#                failure_path: hwi_oauth_connect
+#                login_path: fos_user_security_login
+#                check_path: fos_user_security_check
+#                provider: fos_userbundle
+#                resource_owners:
+#                    facebook:           "/secure_area/login/check-facebook"
+#                oauth_user_provider:
+#                    service: hwi_oauth.user.provider.fosub_bridge
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
@@ -93,7 +93,7 @@ security:
         - { path: ^/secure_area, roles: ROLE_USER }
         - { path: ^/my-account, roles: ROLE_USER }
         - { path: ^/api, roles: [ IS_AUTHENTICATED_FULLY ] }
-        
+
 #        - { path: ^/*, roles: ROLE_USER }
 
         #- { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
