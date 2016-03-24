@@ -28,7 +28,12 @@
         "friendsofsymfony/elastica-bundle": "3.0.x",
         "white-october/pagerfanta-bundle": "dev-master",
         "kayue/kayue-essence-bundle": "dev-master",
-        "SKCMS/locale-bundle": "0.2.x-dev"
+        "SKCMS/locale-bundle": "0.2.x-dev",
+        "friendsofsymfony/oauth-server-bundle": "^1.5",
+        "willdurand/propel-typehintable-behavior": "^1.0",
+        "friendsofsymfony/rest-bundle": "^1.7",
+        "jms/serializer-bundle": "^1.1",
+        "nelmio/api-doc-bundle": "^2.12"
     },
     "scripts": {
         "post-install-cmd": [

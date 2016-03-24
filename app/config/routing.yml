@@ -1,3 +1,7 @@
+p4_mapi:
+    resource: "@P4MAPIBundle/Resources/config/routing.yml"
+    prefix:   /
+
 skcms_locale:
     resource: "@SKCMSLocaleBundle/Resources/config/routing-translations.yml"
     prefix:   /{_locale}
@@ -192,3 +196,16 @@ fos_user_change_password:
 elfinder:
      resource: "@FMElfinderBundle/Resources/config/routing.yml"
 
+fos_oauth_server_token:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/token.xml"
+
+fos_oauth_server_authorize:
+    resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
+
+NelmioApiDocBundle:
+    resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
+    prefix:   /api/doc
+
+p4_m_api:
+    resource: "@P4MAPIBundle/Resources/config/routing.yml"
+    prefix:   /api

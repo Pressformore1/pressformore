@@ -15,9 +15,7 @@ class RegistrationFormType extends BaseType
         $builder
           ->add('firstName', 'text')
           ->add('lastName', 'text')
-          ->add('termsAccepted','checkbox')        
-
-          
+          ->add('termsAccepted','checkbox')
         ;
 //        $builder->add('invitation', 'p4m_invitation_type');
     }

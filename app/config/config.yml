@@ -88,7 +88,7 @@ swiftmailer:
     
 fos_user:
     db_driver:     orm                        # Le type de BDD à utiliser, nous utilisons l'ORM Doctrine depuis le début
-    firewall_name: secure_area                       # Le nom du firewall derrière lequel on utilisera ces utilisateurs
+    firewall_name: api                       # Le nom du firewall derrière lequel on utilisera ces utilisateurs
     user_class:    P4M\UserBundle\Entity\User
     service:
         mailer: fos_user.mailer.default
@@ -152,7 +152,6 @@ hwi_oauth:
         #account_connector: hwi_oauth.user.provider.fosub_bridge
         #registration_form_handler: hwi_oauth.registration.form.handler.fosub_bridge
         #registration_form: fos_user.registration.form
-
     resource_owners:
         facebook:
             type: facebook
@@ -168,7 +167,6 @@ hwi_oauth:
     fosub:
         # try 30 times to check if a username is available (foo, foo1, foo2 etc)
         username_iterations: 30
-
         # mapping between resource owners (see below) and properties
         properties:
             github: githubID
@@ -538,3 +536,20 @@ parameters:
 
 skcms_locale:
     locales: [en, fr]
+
+fos_oauth_server:
+    db_driver: orm
+    client_class:        P4M\APIBundle\Entity\Client
+    access_token_class:  P4M\APIBundle\Entity\AccessToken
+    refresh_token_class: P4M\APIBundle\Entity\RefreshToken
+    auth_code_class:     P4M\APIBundle\Entity\AuthCode
+    service:
+        user_provider: fos_user.user_provider.username
+
+nelmio_api_doc: ~
+
+fos_rest:
+    routing_loader:
+        default_format: json                            # All responses should be JSON formated
+        include_format: false
+

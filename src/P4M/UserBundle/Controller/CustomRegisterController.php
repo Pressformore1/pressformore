@@ -19,9 +19,4 @@ class CustomRegisterController extends Controller
       $params = array();
       return $this->render('P4MUserBundle:Registration:choice.html.twig',$params);
   }
-  
- 
-  
-  
-  
 }

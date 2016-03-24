@@ -31,9 +31,29 @@ security:
         register:
             pattern:   ^/secure_area/register
             anonymous: true # On autorise alors les anonymes sur ce pare-feu
+#        home:
+#            pattern:   ^/$
+#            anonymous: true
+#            provider:  fos_userbundle
+#        home:
+#            pattern:   ^/$
+#            anonymous: false
+#            provider: fos_userbundle
+#            form_login:
+#                login_path: fos_user_security_login
+#                check_path: fos_user_security_check
+#            logout:
+#                path:       fos_user_security_logout
+#                target:     /
+#        console:
+#            pattern:   ^/console
+#            anonymous: true
+#            provider:  fos_userbundle
+       
 
         secure_area:
             pattern: ^[/]*
+
             oauth:
                 failure_path: hwi_oauth_connect
                 login_path: fos_user_security_login
@@ -43,6 +63,7 @@ security:
                     facebook:           "/secure_area/login/check-facebook"
                 oauth_user_provider:
                     service: hwi_oauth.user.provider.fosub_bridge
+
             form_login:
                 provider: fos_userbundle
                 csrf_provider: form.csrf_provider
@@ -50,6 +71,7 @@ security:
                 login_path: fos_user_security_login
                 default_target_path: p4m_core_wall #default location to redirect after successful login
                 #success_handler: P4M_core.locale_listener_onauth
+
             anonymous: ~
             logout:
                 path: fos_user_security_logout
@@ -66,12 +88,24 @@ security:
 #                provider: webserver
 #                check_path: /oauth/v2/auth_login_check
 #                login_path: /oauth/v2/auth_login
+
         api:
             pattern:    ^/api
             fos_oauth:  true
             stateless:  true
             anonymous:  false # can be omitted as its default value
 
+#        main:
+#            pattern:   ^[/]*
+#            anonymous: true
+#            provider: fos_userbundle
+#            form_login:
+#                login_path: fos_user_security_login
+#                check_path: fos_user_security_check
+#            logout:
+#                path:       fos_user_security_logout
+#                target:     /
+            
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }

@@ -40,6 +40,11 @@ class AppKernel extends Kernel
             new Kayue\EssenceBundle\KayueEssenceBundle(),
             new SKCMS\LocaleBundle\SKCMSLocaleBundle(),
             new P4M\LocaleBundle\P4MLocaleBundle(),
+            new FOS\RestBundle\FOSRestBundle(),
+            new FOS\OAuthServerBundle\FOSOAuthServerBundle(),
+            new JMS\SerializerBundle\JMSSerializerBundle(),
+            new Nelmio\ApiDocBundle\NelmioApiDocBundle(),
+            new P4M\APIBundle\P4MAPIBundle(),
             );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
