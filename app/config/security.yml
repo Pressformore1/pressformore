@@ -64,7 +64,7 @@ security:
             security: false
 
         api:
-            pattern:    ^/api(?!.*doc)
+            pattern:    ^/api/?!(register|doc)
             fos_oauth:  true
             stateless:  true
             anonymous:  false # can be omitted as its default value

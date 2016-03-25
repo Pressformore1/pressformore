@@ -70,14 +70,6 @@ skcms_admin:
     defaults:
       _locale: %locale%
 
-skcms_admin:
-    resource: "@SKCMSAdminBundle/Resources/config/routing.yml"
-    prefix:   /{_locale}/admin
-    requirements:
-      _locale: en|fr
-    defaults:
-      _locale: %locale%
-
 p4_m_notification:
     resource: "@P4MNotificationBundle/Resources/config/routing.yml"
     prefix:   /{_locale}
@@ -201,6 +193,7 @@ fos_oauth_server_token:
 
 fos_oauth_server_authorize:
     resource: "@FOSOAuthServerBundle/Resources/config/routing/authorize.xml"
+
 
 NelmioApiDocBundle:
     resource: "@NelmioApiDocBundle/Resources/config/routing.yml"
