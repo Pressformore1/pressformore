@@ -545,6 +545,8 @@ fos_oauth_server:
     auth_code_class:     P4M\APIBundle\Entity\AuthCode
     service:
         user_provider: fos_user.user_provider.username
+        options:
+            access_token_lifetime: 2592000
 
 nelmio_api_doc: ~
 
