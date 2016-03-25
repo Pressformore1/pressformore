@@ -554,19 +554,8 @@ fos_rest:
         include_format: true
     param_fetcher_listener: true
     body_listener:          true
-    view:
-        view_response_listener: true
-        formats:
-            json: true
-            xml: true
-            jsonp: false
-            rss: false
-            html: false
+
     exception:
         messages:
             'Exception': true
-    format_listener:
-            enabled: true
-            rules:
-                - { path: '^/api', priorities: ['json', 'xml'] }
 

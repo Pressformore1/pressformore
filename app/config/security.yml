@@ -33,7 +33,7 @@ security:
             anonymous: true # On autorise alors les anonymes sur ce pare-feu
 
         secure_area:
-            pattern: ^[/](?!.*api).*
+            pattern: ^[/](?!.*api|!.*oauth).*
 #            oauth:
 #                failure_path: hwi_oauth_connect
 #                login_path: fos_user_security_login
@@ -59,13 +59,10 @@ security:
             pattern:    ^/oauth/v2/token
             security:   false
 
-#        oauth_authorize:
-#            pattern:    ^/oauth/v2/auth
-#            security: false
-#            form_login:
-#                provider: webserver
-#                check_path: /oauth/v2/auth_login_check
-#                login_path: /oauth/v2/auth_login
+        oauth_authorize:
+            pattern:    ^/oauth/v2/auth
+            security: false
+
         api:
             pattern:    ^/api
             fos_oauth:  true
