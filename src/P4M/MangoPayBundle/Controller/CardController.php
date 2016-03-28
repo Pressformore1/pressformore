@@ -69,7 +69,7 @@ class CardController extends Controller
                      ];
              
              
-            $session = $request->getSession();
+             $session = $request->getSession();
              $session->getFlashBag()->add(
                     'chargeError',
                     $errorCodes[$request->query->get('errorCode')]

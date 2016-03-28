@@ -61,13 +61,15 @@ security:
 
         oauth_authorize:
             pattern:    ^/oauth/v2/auth
+            pattern: ^/api/doc
             security: false
 
         api:
-            pattern:    ^/api/?!(register|doc)
+            pattern:    ^/api(?!/register|/doc).*
             fos_oauth:  true
             stateless:  true
             anonymous:  false # can be omitted as its default value
+
 
 
     access_control:
