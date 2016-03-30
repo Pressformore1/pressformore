@@ -4,6 +4,8 @@ namespace P4M\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Put;
+use P4M\CoreBundle\Entity\Post;
+use P4M\CoreBundle\Form\PostType;
 use P4M\UserBundle\Entity\User;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\Security\Acl\Exception\Exception;
@@ -11,6 +13,16 @@ use DateTime;
 
 class DefaultController extends FOSRestController
 {
+    private $response = array();
+
+    public function __construct()
+    {
+        $this->response = [
+            'message' => '',
+            'status_codes' => ''
+        ];
+    }
+
     public function getDefaultAction()
     {
         $data = array("hello" => "world");
@@ -27,9 +39,72 @@ class DefaultController extends FOSRestController
         return $this->handleView($view);
     }
 
-    public function getChargeWallet()
-    {
 
+    /**
+     * @ApiDoc(
+     *     description="add a post"
+     * )
+     */
+    public function getAddPostAction(){
+        $em = $this->getDoctrine()->getManager();
+        $userUtils = $this->get('p4mCore.post_utils');
+        $request = $this->get('request');
+
+        $post = new Post();
+        $form = $this->get('form.factory')->create(new PostType(), $post);
+        $form->remove('blogPost')
+            ->remove('anchors');
+        if(!empty($url = $request->query->get('url'))){
+            $this->response['url']= $url;
+            $postRepo = $em->getRepository('P4MCoreBundle:Post');
+            $langueRepo = $em->getRepository('P4MCoreBundle:Lang');
+
+            $post = $postRepo->findOneBySourceUrl($url);
+
+            if(null === $post){
+                $metas = $userUtils->grabMetas($url);
+            }
+            $this->response['metas'] = $metas;
+            $this->response['form'] = $form;
+
+            $view = $this->view($this->response);
+            return $this->handleView($view);
+        }
+
+
+
+        $response = [
+            'message' => '',
+            'status_codes' => '',
+            'form' => $form,
+        ];
+        $view = $this->view($response);
+        return $this->handleView($view);
+    }
+
+    /**
+     * @ApiDoc(
+     *  method="GET",
+     *  resource=true,
+     *  description="Load a wallet",
+     *  parameters={
+     *      {"name"="cardNumber", "dataType"="string", "required"=true, "description"="card number"},
+     *      {"name"="cardExpirationDate", "dataType"="string", "required"=true, "description"="card expiration date"},
+     *      {"name"="cardCvx", "dataType"="string", "required"=true, "description"="card Cvx"},
+     *     }
+     * )
+     */
+    public function getChargeWalletAction()
+    {
+        $user = $this->getUser();
+        $response = [
+            'message' => '',
+            'status_codes' => '',
+            'user' => $user->getUsername()
+        ];
+        $view = $this->view($response);
+
+        return $this->handleView($view);
     }
 
     /**
@@ -172,13 +247,13 @@ class DefaultController extends FOSRestController
             'message' => '',
             'status_codes' => ''
         ];
-
+        //hydrate les données reçues
         $data = [
             'address' => ($request->query->get('address')) ? $request->query->get('address') : $user->getAddress(),
             'city' => ($request->query->get('city')) ? $request->query->get('city') : $user->getCity(),
             'country' => $request->query->get('country'),
             'birth_date' => ($request->query->get('birth_date')) ? new DateTime($request->query->get('birth_date')) : $user->getBirthDate(),
-            'language' => $request->query->get('language'),
+            'language' => ($request->query->get('language')) ? $request->query->get('language') : 'en',
             'email' => ($request->query->get('email')) ? $request->query->get('email') : $user->getEmail(),
             'first_name' => ($request->query->get('first_name')) ? $request->query->get('last_name') : $user->getFirstName(),
             'last_name' => ($request->query->get('last_name')) ? $request->query->get('last_name') : $user->getLastName(),
@@ -188,13 +263,14 @@ class DefaultController extends FOSRestController
         ];
         $response = $this->checkData($data, $response);
 
+        // sauvegarde les données utilisateurs
         if(empty($response['status_codes'])){
-            $user->setAdress($data['address']);
+            $user->setAddress($data['address']);
             $user->setCity($data['city']);
             if(!empty($data['country'])){
                 $user->setCountry($em->getRepository('P4MUserBundle:Country')->find($data['country']));
             }
-            $user->setBirthDay($data['birth_date']);
+            $user->setBirthDate($data['birth_date']);
             $user->setLanguage($data['language']);
             $user->setEmail($data['email']);
             $user->setFirstName($data['first_name']);
@@ -227,6 +303,8 @@ class DefaultController extends FOSRestController
         return $this->handleView($view);
     }
 
+
+    // Vérifie si les donnés son correctement remplies
     public function checkData($data, $response){
         foreach ($data as $key => $value) {
             if ($value == null) {
