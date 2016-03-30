@@ -42,6 +42,7 @@ class DefaultController extends FOSRestController
 
     /**
      * @ApiDoc(
+     *     resource=True,
      *     description="add a post"
      * )
      */
