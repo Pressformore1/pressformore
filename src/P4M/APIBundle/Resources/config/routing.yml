@@ -1,3 +1,9 @@
 P4M_api:
     type: rest
     resource: P4M\APIBundle\Controller\DefaultController
+P4M_api_list:
+    type: rest
+    resource: P4M\APIBundle\Controller\ListController
+P4M_api_post:
+    type: rest
+    resource: P4M\APIBundle\Controller\PostController
