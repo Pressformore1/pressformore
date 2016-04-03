@@ -12,11 +12,11 @@ class CardController extends Controller
         $mango = $this->container->get('p4_m_mango_pay.util');
         
         $user = $this->getUser();
-        
+        $mangoUser= $user->getMangoUserNatural();
         $registerCard = new \P4M\MangoPayBundle\Entity\CardRegistration();
         $registerCard->setCurrency('EUR');
         $registerCard->setTag('Main Card');
-        $registerCard->setMangoUser($user->getMangoUserNatural());
+        $registerCard->setMangoUser($mangoUser);
         
         
         $CreatedCardRegister = $mango->registerCard($registerCard);
@@ -24,6 +24,8 @@ class CardController extends Controller
         $request = $this->getRequest();
         
         $ammount = $request->request->get('ammount');
+
+        //verifie si l'utilisateur souhaite une domiciliation
         $preAuthorisation = $request->request->get('preAuthorisation');
         
         $jsonResponse = 

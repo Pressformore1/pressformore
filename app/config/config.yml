@@ -556,7 +556,8 @@ fos_rest:
         include_format: true
     param_fetcher_listener: true
     body_listener:          true
-
+    view:
+      view_response_listener: true
     exception:
         messages:
             'Exception': true

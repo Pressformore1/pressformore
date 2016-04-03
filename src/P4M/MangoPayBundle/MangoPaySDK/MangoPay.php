@@ -13,6 +13,7 @@ namespace P4M\MangoPayBundle\MangoPaySDK;
  * @author Jona
  */
 
+use P4M\MangoPayBundle\MangoPaySDK\Entities\CardRegistration;
 use P4M\UserBundle\Entity\User;
 use P4M\MangoPayBundle\MangoPaySDK\Entities\UserNatural;
 use P4M\MangoPayBundle\MangoPaySDK\Entities\Wallet;
@@ -278,7 +279,36 @@ class MangoPay
         
         return $UpdatedCardRegister;
     }
-    
+
+    /**
+     * Get registration data from Payline service
+     * @param $cardRegistration
+     * @return mixed
+     * @throws \Exception
+     */
+    protected function getPaylineCorrectRegistartionData($cardRegistration) {
+
+        /*
+         ****** DO NOT use this code in a production environment - it is just for unit tests. In production you are not allowed to have the user's card details pass via your server (which is what is required to use this code here) *******
+         */
+        $data = 'data=' . $cardRegistration->PreregistrationData .
+            '&accessKeyRef=' . $cardRegistration->AccessKey .
+            '&cardNumber=4970100000000154' .
+            '&cardExpirationDate=1224' .
+            '&cardCvx=123';
+        $curlHandle = curl_init($cardRegistration->CardRegistrationURL);
+        curl_setopt($curlHandle, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curlHandle, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($curlHandle, CURLOPT_POST, true);
+        curl_setopt($curlHandle, CURLOPT_POSTFIELDS, $data);
+        $response = curl_exec($curlHandle);
+        if ($response === false && curl_errno($curlHandle) != 0)
+            throw new \Exception('cURL error: ' . curl_error($curlHandle));
+        curl_close($curlHandle);
+        return $response;
+    }
+
+
     public function getUserCards(MangoUserNatural $mangoUser)
     {
         return $this->api->Users->GetCards($mangoUser->getMangoId());
@@ -468,4 +498,6 @@ class MangoPay
         
         return $toReturn;
     }
+
+
 }

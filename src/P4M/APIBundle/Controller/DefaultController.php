@@ -2,12 +2,14 @@
 
 namespace P4M\APIBundle\Controller;
 
+use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Put;
 use P4M\CoreBundle\Entity\Post;
 use P4M\CoreBundle\Form\PostType;
 use P4M\UserBundle\Entity\User;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Acl\Exception\Exception;
 use DateTime;
 
@@ -30,7 +32,11 @@ class DefaultController extends FOSRestController
         return $this->handleView($view);
     }
 
-    public function getTestAction()
+    /**
+     * @param Request $request
+     * @return Response
+     */
+    public function getTestAction(Request $request)
     {
         $user = $this->getUser();
         $data = array("test" => "test",
@@ -41,6 +47,8 @@ class DefaultController extends FOSRestController
 
 
     /**
+     * @param Request $request
+     * @return Response
      * @ApiDoc(
      *  method="GET",
      *  resource=true,
@@ -49,19 +57,38 @@ class DefaultController extends FOSRestController
      *      {"name"="cardNumber", "dataType"="string", "required"=true, "description"="card number"},
      *      {"name"="cardExpirationDate", "dataType"="string", "required"=true, "description"="card expiration date"},
      *      {"name"="cardCvx", "dataType"="string", "required"=true, "description"="card Cvx"},
+     *      {"name"="ammount", "dataType"="integer", "required"=true, "description"="ammount"},
+     *      {"name"="preAuthorisation", "dataType"="boolean", "required"=true, "description"="collect this amount each month"},
      *     }
      * )
      */
-    public function getChargeWalletAction()
+    public function getChargeWalletAction(Request $request)
     {
+        $mango = $this->container->get('p4_m_mango_pay.util');
         $user = $this->getUser();
-        $response = [
-            'message' => '',
-            'status_codes' => '',
-            'user' => $user->getUsername()
-        ];
-        $view = $this->view($response);
+        $mangoUser= $user->getMangoUserNatural();
 
+        $registerCard = new \P4M\MangoPayBundle\Entity\CardRegistration();
+        $registerCard->setCurrency('EUR');
+        $registerCard->setTag('Main Card');
+        $registerCard->setMangoUser($mangoUser);
+
+        $CreatedCardRegister = $mango->registerCard($registerCard);
+        $ammount = 5;  //$request->request->get('ammount');
+        $preAuthorisation = false; //$request->request->get('preAuthorisation');
+        $updatedCardRegister = null;
+        if ($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)){
+            $this->response['message'] = $updatedCardRegister->Status;
+            $this->response['status_codes'] = $updatedCardRegister->ResultCode;
+        }
+        else{
+            $this->response['message'] = 'tout c\'est bien passer ?';
+            $this->response['status_codes'] = 200;
+        }
+
+
+
+        $view = $this->view($this->response);
         return $this->handleView($view);
     }
 
@@ -92,11 +119,11 @@ class DefaultController extends FOSRestController
      *     }
      *
      * )
-     * @return $Response
+     * @param Request $request
+     * @return Response
      */
-    public function getRegisterAction()
+    public function getRegisterAction(Request $request)
     {
-        $request = $this->get('request');
         $em = $this->getDoctrine()->getManager();
         $response = [
             'message' => '',
@@ -175,12 +202,12 @@ class DefaultController extends FOSRestController
      *              615="Bad email format"
      *     }
      * )
-     * @return $Response
+     * @param Request $request
+     * @return Response
      */
-    public function getCompleteRegisterAction(){
+    public function getCompleteRegisterAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $user =$this->getUser();
-        $request = $this->container->get('request_stack')->getCurrentRequest();
 
 
         // Envoie les donnée de base concernant l'utilisateur

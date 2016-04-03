@@ -1991,7 +1991,7 @@ class AjaxController extends Controller
             {
                 $cat->addPost($post);
                 $em->persist($cat);
-             }
+            }
              
 //             $score = new \P4M\PinocchioBundle\Entity\PostScore();
 //             $score->setScore(1);

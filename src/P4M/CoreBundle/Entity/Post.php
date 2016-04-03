@@ -4,6 +4,7 @@ namespace P4M\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Post
@@ -29,8 +30,9 @@ class Post
     
     /**
      *
+     * @Assert\Length(min = 20)
      * @var string
-     * 
+     *
      * @ORM\Column(name="title",type="string",length=255)
      */
     
@@ -40,7 +42,7 @@ class Post
     /**
      * @var string
      *
-     * @ORM\Column(name="picture", type="string", length=128)
+     * @ORM\Column(name="picture", type="string", length=255)
      */
     private $picture;
     
@@ -96,7 +98,6 @@ class Post
      *
      * @ORM\ManyToMany(targetEntity="P4M\CoreBundle\Entity\Tag",cascade="persist",mappedBy="posts")
      * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="CASCADE")
-
      * 
      */
     private $tags;
@@ -1476,6 +1477,20 @@ class Post
     public function getTempAuthor()
     {
         return $this->tempAuthor;
+    }
+
+    public function toArray(){
+        $data['slug'] = $this->getSlug();
+        $data['title'] = $this->getTitle();
+        $data['content'] = $this->getContent();
+        $data['lang'] = $this->getLang()->getCode();
+        $data['picture'] = $this->getPicture();
+        $data['SourceUrl'] = $this->getSourceUrl();
+        $pictureList = $this->getPictureList();
+        foreach($pictureList as $key => $value){
+            $data['pictureList'][$key] = $value;
+        }
+        return $data;
     }
 
 }

@@ -27,14 +27,15 @@ class PostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('title', null, array(
-                'attr' => array( 'class'=>"col-xs-20")
-            ))
-            ->add('picture','choice',array(
+            ->add('title', null, [
+                'attr' => ['class'=>"col-xs-20"],
+                'required' => true
+            ])
+            ->add('picture','choice', [
                 'choices'   => $this->selectNameToValue($this->pictureList),
                 'data' => $this->picture,
                 'multiple'  => false
-                ))
+            ])
             ->add('content', null, array(
                 'attr' => array( 'class'=>"col-xs-20", 'rows'=>'6','maxlength'=>320)
             ))
@@ -55,7 +56,7 @@ class PostType extends AbstractType
                 //'property' => 'CategoryTypeTitle'
             ))
             ->add('tags','posttags', array(
-                'attr' => array( 'class'=>"col-xs-20")
+                'attr' => array( 'class'=>"col-xs-20"),
             ))
             ->add('pictureList','collection',array(
                 'allow_add' => true, 
@@ -89,10 +90,10 @@ class PostType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'P4M\CoreBundle\Entity\Post',
             'csrf_protection'   => false,
-        ));
+        ]);
     }
 //    
 //    public function getDefaultOptions(array $options)
