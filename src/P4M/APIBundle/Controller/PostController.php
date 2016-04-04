@@ -3,6 +3,7 @@
 namespace P4M\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use P4M\BackofficeBundle\Entity\ReadPostLater;
 use P4M\CoreBundle\Entity\Post;
 use P4M\CoreBundle\Form\PostType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -124,27 +125,27 @@ class PostController extends FOSRestController
         return $this->response;
     }
 
-    /**
-     * @param Request $request
-     * @ApiDoc(
-     *     resource=true,
-     *     description="Edit a post"
-     * )
-     */
-    public function putPostAction(Request $request){
-
-    }
-
-    /**
-     * @param Request $request
-     * @ApiDoc(
-     *     resource=true,
-     *     description="Delete a post"
-     * )
-     */
-    public function deletePostAction(Request $request){
-
-    }
+//    /**
+//     * @param Request $request
+//     * @ApiDoc(
+//     *     resource=true,
+//     *     description="Edit a post"
+//     * )
+//     */
+//    public function putPostAction(Request $request){
+//
+//    }
+//
+//    /**
+//     * @param Request $request
+//     * @ApiDoc(
+//     *     resource=true,
+//     *     description="Delete a post"
+//     * )
+//     */
+//    public function deletePostAction(Request $request){
+//
+//    }
 
     /**
      * @param Request $request
@@ -229,6 +230,82 @@ class PostController extends FOSRestController
         $view = $this->view($this->response);
         return $this->handleView($view);
     }
+
+    /**
+     * @Rest\Post("/post/readlater")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Rest\View()
+     * @ApiDoc(
+     *     resource=True,
+     *     description="Add a post in read later",
+     *     requirements={
+     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *     }
+     * )
+     */
+    public function postPostReadlaterAction(Request $request){
+
+        $user =$this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $post_id = $request->request->get('id');
+        $check_if_exists = $em->getRepository('P4MBackofficeBundle:ReadPostLater')->findBy(['id' => $post_id, 'user' => $user]);
+
+        if($check_if_exists === null){
+            $post = $em->getRepository('P4MCoreBundle:Post')->find($post_id);
+            if($post !== null){
+                $readPostLater = new ReadPostLater();
+                $readPostLater->setUser($user);
+                $readPostLater->setPost($post);
+                $post->addReadLater($readPostLater);
+                $em->persist($post);
+                $em->persist($readPostLater);
+                $em->flush();
+                $this->response['status_codes'] = 200;
+                $this->response['message'] = 'Post as been added for read later';
+                return $this->response;
+            }
+            $this->response['status_codes'] = 500;
+            $this->response['message'] = 'Post Doesn\'t exist';
+            return $this->response;
+        }
+        $this->response['status_codes'] = 501;
+        $this->response['message'] = 'This post is already on read later';
+        return $this->response;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Rest\View()
+     * @ApiDoc(
+     *     resource=True,
+     *     description="Remove a post in read later",
+     *     requirements={
+     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *     },
+     * )
+     */
+    public function deletePostReadlaterAction(Request $request){
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $post_id = $request->request->get('id');
+        $readPostLater = $em->getRepository('P4MBackofficeBundle:ReadPostLater')->findOneBy(['id' => $post_id, 'user' => $user]);
+        if($readPostLater !== null){
+            $post = $em->getRepository('P4MCoreBundle:Post')->find($post_id);
+            $post->removeReadLater($readPostLater);
+            $em->persist($post);
+            $em->remove($readPostLater);
+            $em->flush();
+            $this->response['status_codes'] = 200;
+            $this->response['message'] = 'This post is not more on read later';
+            return $this->response;
+        }
+        $this->response['status_codes'] = 500;
+        $this->response['message'] = 'This post is not on read later';
+        return $this->response;
+    }
+
 
     private function checkKey(array $data){
         foreach($data as $key => $value){
