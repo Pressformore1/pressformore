@@ -45,6 +45,12 @@ class MangoPay
 
         $this->api->Config->BaseUrl = 'https://api.sandbox.mangopay.com/';
     }
+    public function getClientId(){
+        return $this->api->Config->ClientId;
+    }
+    public function getBaseUrl(){
+        return $this->api->Config->BaseUrl;
+    }
     
     
     public function createUser(User $user)

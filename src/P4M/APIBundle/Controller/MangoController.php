@@ -67,7 +67,8 @@ class MangoController extends FOSRestController
     }
 
     /**
-     * @Rest\Post("bank/loadbycard")
+     * @Rest\Get("bank/loadbycard")
+     * @Rest\View()
      * @param Request $request
      * @return Response
      * @ApiDoc(
@@ -83,7 +84,7 @@ class MangoController extends FOSRestController
      *     }
      * )
      */
-    public function getChargeWalletAction(Request $request)
+    public function getLoadByCardAction(Request $request)
     {
         $mango = $this->container->get('p4_m_mango_pay.util');
         $user = $this->getUser();
@@ -93,24 +94,18 @@ class MangoController extends FOSRestController
         $registerCard->setCurrency('EUR');
         $registerCard->setTag('Main Card');
         $registerCard->setMangoUser($mangoUser);
-
         $CreatedCardRegister = $mango->registerCard($registerCard);
-        $ammount = 5;  //$request->request->get('ammount');
-        $preAuthorisation = false; //$request->request->get('preAuthorisation');
-        $updatedCardRegister = null;
-        if ($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)){
-            $this->response['message'] = $updatedCardRegister->Status;
-            $this->response['status_codes'] = $updatedCardRegister->ResultCode;
-        }
-        else{
-            $this->response['message'] = 'tout c\'est bien passer ?';
-            $this->response['status_codes'] = 200;
-        }
 
+        $this->response['clientId'] = $mango->getClientId();
+        $this->response['baseURL'] = $mango->getBaseUrl();
+        $this->response['cardId'] = $CreatedCardRegister->Id;
+        $this->response['cardRegistrationURL'] = $CreatedCardRegister->CardRegistrationURL;
+        $this->response['preregistrationData'] = $CreatedCardRegister->PreregistrationData;
+        $this->response['accessKey'] = $CreatedCardRegister->AccessKey;
+        $this->response['status_codes'] = 200;
 
+        return $this->response;
 
-        $view = $this->view($this->response);
-        return $this->handleView($view);
     }
 
     private function CheckKey($data, $type = null){
