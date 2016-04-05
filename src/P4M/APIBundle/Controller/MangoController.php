@@ -24,7 +24,6 @@ class MangoController extends FOSRestController
         ];
     }
 
-
     /**
      * @Rest\Post("/bank/createiban")
      * @param Request $request
@@ -167,7 +166,6 @@ class MangoController extends FOSRestController
         return $this->response;
 
     }
-
 
     private function CheckKey($data, $type = null){
         if($type == null)

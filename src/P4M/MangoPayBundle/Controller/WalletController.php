@@ -6,64 +6,61 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class WalletController extends Controller
 {
+    /**
+     * @param $cardId
+     * @param $ammount
+     * @param $preAuthorisation
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function chargeAction($cardId,$ammount,$preAuthorisation)
     {
-        
-        
         $user = $this->getUser();
         $mango = $this->container->get('p4_m_mango_pay.util');
         $mangoUser= $user->getMangoUserNatural();
         $returnURL = $this->generateUrl("p4_m_backoffice_homepage",[],true).'#wallet';
-        
         $wallets = $mango->getUserWallets($mangoUser);
         $wallet = $wallets[0];
-        
         return $this->reallyCharge($mangoUser,$cardId,$wallet,$returnURL,$ammount*100,$preAuthorisation);
-        
     }
-    
+
+    /**
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     public function chargePostAction()
     {
-        
-        
         $user = $this->getUser();
         $mango = $this->container->get('p4_m_mango_pay.util');
         $mangoUser= $user->getMangoUserNatural();
-        
-        
-        
         $returnURL = $this->generateUrl("p4_m_backoffice_homepage",[],true).'#wallet';
-        
         $wallet = $mango->getCustommerWallet($mangoUser);
-        
 //        die(print_r($wallet));
-        
         $request = $this->getRequest();
-        
         $cardId = $request->request->get('cardId');
         $preAuthorisation = false;
         if ($request->request->has('preAuthorisation'))
         {
             $preAuthorisation = true;
         }
-        
         $ammount = intval(str_replace('€','', $request->request->get('ammount')))*100;
-        
         return $this->reallyCharge($mangoUser,$cardId,$wallet,$returnURL,$ammount,$preAuthorisation);
-
-
     }
-    
+
+    /**
+     * @param $mangoUser
+     * @param $cardId
+     * @param $wallet
+     * @param $returnURL
+     * @param $ammount
+     * @param bool $preAuthorisation
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse
+     */
     private function reallyCharge($mangoUser,$cardId,$wallet,$returnURL,$ammount,$preAuthorisation = false)
     {
-        
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        
         $mango = $this->container->get('p4_m_mango_pay.util');
         $result = $mango->chargeWallet($mangoUser,$cardId,$wallet,$returnURL,$ammount);
-        
-        
+
         if ($result->Status == 'SUCCEEDED')
         {
             $walletFill = new \P4M\MangoPayBundle\Entity\WalletFill();
@@ -86,8 +83,6 @@ class WalletController extends Controller
 //            die(print_r($result,true));
 //            $this->getRequest()->s
         }
-        
-
          return $this->redirect($this->generateUrl("p4_m_backoffice_homepage").$hash);
     }
 }
