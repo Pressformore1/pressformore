@@ -5,9 +5,11 @@ namespace P4M\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use P4M\MangoPayBundle\Entity\BankAccountIBAN;
+use P4M\MangoPayBundle\Entity\WalletFill;
 use P4M\MangoPayBundle\Form\BankAccountIBANType;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\HttpFoundation\Response;
 
 class MangoController extends FOSRestController
 {
@@ -26,7 +28,7 @@ class MangoController extends FOSRestController
     /**
      * @Rest\Post("/bank/createiban")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @Rest\View()
      * @ApiDoc(
      *     resource="bank",
@@ -69,22 +71,14 @@ class MangoController extends FOSRestController
     /**
      * @Rest\Get("bank/loadbycard")
      * @Rest\View()
-     * @param Request $request
      * @return Response
      * @ApiDoc(
      *  method="GET",
-     *  description="Load a wallet",
-     *  resource="bank",
-     *  parameters={
-     *      {"name"="cardNumber", "dataType"="string", "required"=true, "description"="card number"},
-     *      {"name"="cardExpirationDate", "dataType"="string", "required"=true, "description"="card expiration date"},
-     *      {"name"="cardCvx", "dataType"="string", "required"=true, "description"="card Cvx"},
-     *      {"name"="ammount", "dataType"="integer", "required"=true, "description"="ammount"},
-     *      {"name"="preAuthorisation", "dataType"="boolean", "required"=true, "description"="collect this amount each month"},
-     *     }
+     *  description="Get information for load a wallet",
+     *  resource="bank"
      * )
      */
-    public function getLoadByCardAction(Request $request)
+    public function getLoadByCardAction()
     {
         $mango = $this->container->get('p4_m_mango_pay.util');
         $user = $this->getUser();
@@ -107,6 +101,73 @@ class MangoController extends FOSRestController
         return $this->response;
 
     }
+
+    /**
+     * @Rest\Post("bank/loadbycard")
+     * @Rest\View()
+     * @param Request $request
+     * @return Response
+     * @ApiDoc(
+     *  method="GET",
+     *  description="Load a wallet",
+     *  resource="bank",
+     *  parameters={
+     *      {"name"="ammount", "dataType"="integer", "required"=true, "description"="ammount"},
+     *      {"name"="preAuthorisation", "dataType"="boolean", "required"=true, "description"="collect this amount each month"},
+     *      {"name"="cardId", "dataType"="integer", "required"=true, "description"="card Id"},
+     *      {"name"="data", "dataType"="integer", "required"=true, "description"="information payement"},
+     *     }
+     * )
+     */
+    public function postLoadByCardAction(Request $request){
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $mango = $this->container->get('p4_m_mango_pay.util');
+        $cardId = $request->request->get('cardId');
+        $mangoUser = $user->getMangoUserNatural();
+
+        $ammount = $request->request->get('ammount');
+        $ammount *= 100;
+        $preAuthorisation = $request->request->get('preAuhtorization');
+        $data['data'] = $request->request->get('data');
+
+        if(empty($data['data'])){
+            $this->response['status_codes'] = '500';
+            $this->response['message'] = 'need data information';
+            return $this->response;
+        }
+        $updatedCardRegister = $mango->getCardRegistration($cardId,$data);
+        if($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)){
+            $this->response['status_codes'] = '501';
+            $this->response['message'] = 'Something is not Valid,';
+            return $this->response;
+        }
+        $wallets = $mango->getUserWallets($mangoUser);
+        $wallet = $wallets[0];
+        $returnURL = $this->generateUrl("p4_m_backoffice_homepage",[],true).'#wallet';
+
+        $result = $mango->chargeWallet($mangoUser,$cardId,$wallet,$returnURL,$ammount);
+
+        if($result->Status != 'SUCCEEDED'){
+            $this->response['message'] = $result->ResultMessage;
+            $this->response['status_codes'] = $result->Status;
+            return $this->response;
+        }
+
+        $walletFill = new WalletFill();
+        $walletFill->setRecurrent($preAuthorisation);
+        $walletFill->setUser($user);
+        $walletFill->setCardId($cardId);
+        $walletFill->setAmount($ammount);
+        $em->persist($walletFill);
+        $em->flush();
+
+        $this->response['message'] = 'Tout c\'est bien terminer';
+        $this->response['status_codes'] = 200;
+        return $this->response;
+
+    }
+
 
     private function CheckKey($data, $type = null){
         if($type == null)
