@@ -9,7 +9,7 @@ class ListController extends FOSRestController
 {
     /**
      * @ApiDoc(
-     *     resource=true,
+     *     resource="List",
      *     description="Get list of category"
      * )
      */
@@ -22,7 +22,7 @@ class ListController extends FOSRestController
     }
     /**
      * @ApiDoc(
-     *     resource=true,
+     *     resource="List",
      *     description="Get list of Type"
      * )
      */
@@ -35,7 +35,7 @@ class ListController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     resource=true,
+     *     resource="List",
      *     description="Get list of Country"
      * )
      */

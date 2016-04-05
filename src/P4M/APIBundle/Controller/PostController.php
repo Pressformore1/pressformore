@@ -23,9 +23,11 @@ class PostController extends FOSRestController
     }
 
     /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
      * @Rest\Post("/post")
      * @ApiDoc(
-     *     resource=True,
+     *     resource="Post",
      *     description="add a post",
      *     requirements={
      *          {"name"="title", "dataType"="string", "required"=true, "description"="Title"},
@@ -107,7 +109,7 @@ class PostController extends FOSRestController
      * @return \Symfony\Component\HttpFoundation\Response
      * @param Request $request
      * @ApiDoc(
-     *     resource=false,
+     *     resource="Post",
      *     description="Get a post"
      * )
      * @Rest\View()
@@ -151,7 +153,7 @@ class PostController extends FOSRestController
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @ApiDoc(
-     *     resource=True,
+     *     resource="Post",
      *     description="Preview a post before add",
      *     requirements={
      *          {"name"="url", "dataType"="string", "required"=true, "description"="an url for analyze"},
@@ -180,7 +182,7 @@ class PostController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     resource=True,
+     *     resource=false,
      *     description="test the form",
      *     input="PostType"
      * )
@@ -237,7 +239,7 @@ class PostController extends FOSRestController
      * @return \Symfony\Component\HttpFoundation\Response
      * @Rest\View()
      * @ApiDoc(
-     *     resource=True,
+     *     resource="Post",
      *     description="Add a post in read later",
      *     requirements={
      *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
@@ -279,7 +281,7 @@ class PostController extends FOSRestController
      * @return \Symfony\Component\HttpFoundation\Response
      * @Rest\View()
      * @ApiDoc(
-     *     resource=True,
+     *     resource="Post",
      *     description="Remove a post in read later",
      *     requirements={
      *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},

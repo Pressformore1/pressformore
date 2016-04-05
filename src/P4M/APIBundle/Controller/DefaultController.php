@@ -46,56 +46,12 @@ class DefaultController extends FOSRestController
     }
 
 
-    /**
-     * @param Request $request
-     * @return Response
-     * @ApiDoc(
-     *  method="GET",
-     *  resource=true,
-     *  description="Load a wallet",
-     *  parameters={
-     *      {"name"="cardNumber", "dataType"="string", "required"=true, "description"="card number"},
-     *      {"name"="cardExpirationDate", "dataType"="string", "required"=true, "description"="card expiration date"},
-     *      {"name"="cardCvx", "dataType"="string", "required"=true, "description"="card Cvx"},
-     *      {"name"="ammount", "dataType"="integer", "required"=true, "description"="ammount"},
-     *      {"name"="preAuthorisation", "dataType"="boolean", "required"=true, "description"="collect this amount each month"},
-     *     }
-     * )
-     */
-    public function getChargeWalletAction(Request $request)
-    {
-        $mango = $this->container->get('p4_m_mango_pay.util');
-        $user = $this->getUser();
-        $mangoUser= $user->getMangoUserNatural();
 
-        $registerCard = new \P4M\MangoPayBundle\Entity\CardRegistration();
-        $registerCard->setCurrency('EUR');
-        $registerCard->setTag('Main Card');
-        $registerCard->setMangoUser($mangoUser);
-
-        $CreatedCardRegister = $mango->registerCard($registerCard);
-        $ammount = 5;  //$request->request->get('ammount');
-        $preAuthorisation = false; //$request->request->get('preAuthorisation');
-        $updatedCardRegister = null;
-        if ($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)){
-            $this->response['message'] = $updatedCardRegister->Status;
-            $this->response['status_codes'] = $updatedCardRegister->ResultCode;
-        }
-        else{
-            $this->response['message'] = 'tout c\'est bien passer ?';
-            $this->response['status_codes'] = 200;
-        }
-
-
-
-        $view = $this->view($this->response);
-        return $this->handleView($view);
-    }
 
     /**
      * @ApiDoc(
      *  method="GET",
-     *  resource=true,
+     *  resource="Register",
      *  description="Create an user",
      *  parameters={
      *          {"name"="username", "dataType"="string", "required"=true, "description"="your username"},
@@ -178,7 +134,7 @@ class DefaultController extends FOSRestController
     /**
      * @ApiDoc(
      *     method="GET",
-     *     resource=true,
+     *     resource="Register",
      *     description="Complete your inscription",
      *     parameters={
      *          {"name"="address", "dataType"="string", "required"=true, "description"="your adress"},
