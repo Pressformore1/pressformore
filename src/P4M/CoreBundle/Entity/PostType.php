@@ -3,6 +3,7 @@
 namespace P4M\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * PostType
@@ -18,6 +19,7 @@ class PostType
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"json"})
      */
     private $id;
 
@@ -25,6 +27,7 @@ class PostType
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=128)
+     * @Groups({"json"})
      */
     private $name;
 

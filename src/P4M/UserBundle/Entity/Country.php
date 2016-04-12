@@ -3,6 +3,7 @@
 namespace P4M\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Country
@@ -18,6 +19,7 @@ class Country
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"json"})
      */
     private $id;
 
@@ -25,6 +27,7 @@ class Country
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Groups({"json"})
      */
     private $name;
 
@@ -32,6 +35,7 @@ class Country
      * @var string
      *
      * @ORM\Column(name="alpha2", type="string", length=255)
+     * @Groups({"json"})
      */
     private $alpha2;
 
@@ -39,6 +43,7 @@ class Country
      * @var string
      *
      * @ORM\Column(name="alpha3", type="string", length=255)
+     * @Groups({"json"})
      */
     private $alpha3;
 
@@ -46,6 +51,7 @@ class Country
      * @var string
      *
      * @ORM\Column(name="countryCode", type="string", length=255)
+     * @Groups({"json"})
      */
     private $countryCode;
 
@@ -53,6 +59,7 @@ class Country
      * @var string
      *
      * @ORM\Column(name="iso", type="string", length=255)
+     * @Groups({"json"})
      */
     private $iso;
 
@@ -60,6 +67,7 @@ class Country
      * @var string
      *
      * @ORM\Column(name="regionCode", type="string", length=255,nullable=true)
+     * @Groups({"json"})
      */
     private $regionCode;
 
@@ -67,6 +75,7 @@ class Country
      * @var string
      *
      * @ORM\Column(name="subRegionCode", type="string", length=255,nullable=true)
+     * @Groups({"json"})
      */
     private $subRegionCode;
 

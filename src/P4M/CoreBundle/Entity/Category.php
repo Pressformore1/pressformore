@@ -3,6 +3,8 @@
 namespace P4M\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
+
 
 /**
  * Category
@@ -18,6 +20,7 @@ class Category
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"json"})
      */
     private $id;
 
@@ -25,6 +28,7 @@ class Category
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=128)
+     * @Groups({"json"})
      */
     private $name;
 
@@ -57,6 +61,7 @@ class Category
      * @var text
      * 
      * @ORM\Column(name="description",type="text",nullable=true)
+     * @Groups({"json"})
      */
     private $description;
     
@@ -345,5 +350,8 @@ class Category
     public function getIconGrey()
     {
         return $this->iconGrey;
+    }
+    public function toArray(){
+
     }
 }

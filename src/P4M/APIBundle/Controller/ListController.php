@@ -2,6 +2,7 @@
 
 namespace P4M\APIBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
@@ -12,25 +13,23 @@ class ListController extends FOSRestController
      *     resource="List",
      *     description="Get list of category"
      * )
+     * @View(serializerGroups={"json"})
      */
     public function getListCategoryAction()
     {
         $categorys = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Category')->findAll();
-
-        $response = $this->view($categorys);
-        return $this->handleView($response);
+        return $categorys;
     }
     /**
      * @ApiDoc(
      *     resource="List",
      *     description="Get list of Type"
      * )
+     * @View(serializerGroups={"json"})
      */
     public function getListTypeAction(){
         $types = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:PostType')->findAll();
-
-        $response = $this->view($types);
-        return $this->handleView($response);
+        return $types;
     }
 
     /**
@@ -40,9 +39,9 @@ class ListController extends FOSRestController
      * )
      */
     public function getListCountryAction(){
+
         $countrys = $this->getDoctrine()->getManager()->getRepository('P4MUserBundle:Country')->findAll();
 
-        $response = $this->view($countrys);
-        return $this->handleView($response);
+        return $countrys;
     }
 }
