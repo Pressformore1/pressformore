@@ -2,6 +2,7 @@ parameters:
 #    p4_mapi.example.class: P4M\APIBundle\Example
 
 services:
-#    p4_mapi.example:
-#        class: %p4_mapi.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+  p4m_core.header_listener:
+      class:      P4M\APIBundle\Listener\HeaderListener
+      tags:
+         - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }

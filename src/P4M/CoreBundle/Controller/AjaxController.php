@@ -326,7 +326,7 @@ class AjaxController extends Controller
         
         if (null !== $wantPressform)
         {
-//            $request = $this->getRequest();
+//          $request = $this->getRequest();
             $wantPressform->setEmail($params->email);
             $wantPressform->setTwitter($params->twitter);
 
@@ -1593,8 +1593,7 @@ class AjaxController extends Controller
         
         
     }
-    
-    
+
     private function updatePostView($params)
     {
         $user = $this->getUser();

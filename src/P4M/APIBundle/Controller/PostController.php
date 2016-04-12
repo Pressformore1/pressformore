@@ -5,6 +5,8 @@ namespace P4M\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use P4M\BackofficeBundle\Entity\ReadPostLater;
 use P4M\CoreBundle\Entity\Post;
+use P4M\CoreBundle\Entity\Vote;
+use P4M\CoreBundle\Entity\WantPressform;
 use P4M\CoreBundle\Form\PostType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
@@ -181,59 +183,6 @@ class PostController extends FOSRestController
     }
 
     /**
-     * @ApiDoc(
-     *     resource=false,
-     *     description="test the form",
-     *     input="PostType"
-     * )
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function putTestFormAction(Request $request){
-        $post = new Post();
-        $data = [
-            'title' => '"La FINANCIARISATION détruit l\'emploi, l\'économie et la démocratie : il faut vite réagir et AGIR ! - AgoraVox le média citoyen"',
-            'content' => "\"Mon ennemi c'est la finance\" clamait le prétendant socialo-libéral au poste suprême. Cet ennemi coule des jours heureux en (...)",
-            'picture' => "http://i.agoravox.fr/local/cache-vignettes/L318xH90/siteon0-f4356.png",
-            'pictureList' => ["http://i.agoravox.fr/local/cache-vignettes/L318xH90/siteon0-f4356.png"],
-            'lang' => '27',
-            'iframeAllowed' => 1,
-            'sourceUrl' => "http://www.agoravox.fr/tribune-libre/article/la-financiarisation-detruit-l-178325",
-            'type' => '1',
-            'embed' => ""
-        ];
-        $data['tags'] = 'israel';
-
-
-        if($request->getMethod() === 'PUT'){
-            $data = array_merge($data, $request->request->all());
-            if($this->checkKey($data)){
-                $form = $this->get('form.factory')->create(new PostType($data['pictureList']), $post, ['method' => 'PUT' ]);
-                $form->submit($data);
-                if($form->isValid()){
-                    $this->response['error'] = 'valid';
-                    $post->setUser($this->getUser());
-                    $em = $this->getDoctrine()->getManager();
-                    $em->persist($post);
-                    $em->flush();
-                    $this->response['post'] = $post;
-                }else{
-                    $this->response['error'] = 'no Valid';
-                    $this->response['fkd'] = $request->request->all();
-                    $this->response['errorMessage'] = $form->getErrors();
-                    $this->response['data'] = $form->getName();
-                }
-            }
-            else{
-                $this->response['status_codes'] = '500';
-                $this->response['message'] = 'Des données son manquante';
-            }
-        }
-        $view = $this->view($this->response);
-        return $this->handleView($view);
-    }
-
-    /**
      * @Rest\Post("/post/readlater")
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
@@ -305,6 +254,125 @@ class PostController extends FOSRestController
         }
         $this->response['status_codes'] = 500;
         $this->response['message'] = 'This post is not on read later';
+        return $this->response;
+    }
+
+    /**
+     * @Rest\Post("post/press")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Rest\View()
+     * @ApiDoc(
+     *     resource="Post",
+     *     description="Press a post",
+     *     requirements={
+     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *     }
+     * )
+     */
+    public function postPostPressAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $id = $request->request->get('id');
+        $view = $em->getRepository('P4MTrackingBundle:PostView')->find($id);
+        if (($view->getUser() != null && $user === $view->getUser()) || ($view->getUser() === null && !$user instanceof \P4M\UserBundle\Entity\User))
+        {
+            $view->setDateout(new \DateTime());
+        }
+
+        $em->persist($view);
+        try{
+            $em->flush();
+            $this->response['status_codes'] = 200;
+            $this->response['message'] = 'Post been pressed';
+        }catch(\Exception $e){
+
+        }
+        return $this->response;
+    }
+
+    /**
+     * @Rest\Post("post/vote")
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Rest\View()
+     * @ApiDoc(
+     *     resource="Post",
+     *     description="Vote for a post",
+     *     requirements={
+     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *          {"name"="score", "dataType"="integer", "required"=true, "description"="id post"},
+     *     }
+     * )
+     */
+    public function postPostVoteAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $id = $request->request->get('id');
+        $score = $request->request->get('score');
+        $post = $em->getRepository('P4MCoreBundle:Post')->find($id);
+        $userVote = $em->getRepository('P4MCoreBundle:Vote')->findOneBy(array('post'=>$id,'user'=>$user->getId()));
+        if (null === $userVote)
+        {
+            $userVote = new Vote();
+            $userVote->setUser($user);
+            $userVote->setPost($post);
+        }
+
+        $userVote->setScore($score);
+
+        $em->persist($userVote);
+        $em->flush();
+
+        $postitiveVotesNumber = $em->getRepository('P4MCoreBundle:Post')->countPositive($post);
+        $negativeVotesNumber = $em->getRepository('P4MCoreBundle:Post')->countNegative($post);
+
+        $this->response['status_codes'] = 200;
+        $this->response['message'] = 'Vote has been added';
+        $this->response['positiveVotesNumber'] = $postitiveVotesNumber;
+        $this->response['negativeVotesNumber'] = $negativeVotesNumber;
+        $this->response['scoreVoted'] = $userVote->getScore();
+        return $this->response;
+    }
+
+    /**
+     * @param Request $request
+     * @Rest\Post("post/infoauthor")
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Rest\View()
+     * @ApiDoc(
+     *     resource="Post",
+     *     description="Help us for find an author",
+     *     requirements={
+     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *          {"name"="email", "dataType"="email", "required"=false, "description"="author email"},
+     *          {"name"="tweeter", "dataType"="tweeter_account", "required"=false, "description"="author twetter account"},
+     *     }
+     * )
+     */
+    public function postInfoAuthorAction(Request $request){
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $id = $request->request->get('id');
+        $email = $request->request->get('email');
+        $twitter = $request->request->get('twitter');
+        $post = $em->getRepository('P4MCoreBundle:Post')->find($id);
+        $wantPressForm = $em->getRepository('P4MCoreBundle:WantPressform')->findOneBy(['user'=>$user,'post'=>$post]);
+        if(null === $wantPressForm)
+        {
+            $wantPressForm = new WantPressform();
+            $wantPressForm->setPost($post);
+            $wantPressForm->setUser($user);
+            $wantPressForm->setEmail($email);
+            $wantPressForm->setTwitter($twitter);
+
+            $em->persist($wantPressForm);
+            $em->flush();
+            $this->response['status_codes'] = 200;
+        }
+        else{
+            $this->response['status_codes'] = 500;
+        }
         return $this->response;
     }
 
