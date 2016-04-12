@@ -14,6 +14,7 @@ class ListController extends FOSRestController
      *     description="Get list of category"
      * )
      * @View(serializerGroups={"json"})
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getListCategoryAction()
     {
@@ -26,6 +27,7 @@ class ListController extends FOSRestController
      *     description="Get list of Type"
      * )
      * @View(serializerGroups={"json"})
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getListTypeAction(){
         $types = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:PostType')->findAll();
@@ -38,6 +40,7 @@ class ListController extends FOSRestController
      *     description="Get list of Country"
      * )
      * @View(serializerGroups={"json"})
+     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getListCountryAction(){
 
