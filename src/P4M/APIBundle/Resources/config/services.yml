@@ -6,7 +6,7 @@ services:
       class:      P4M\APIBundle\Listener\HeaderListener
       tags:
          - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
-  api.fix_authentication_header_listener:
+  #api.fix_authentication_header_listener:
       class: P4M\APIBundle\Listener\AuthenticationHeaderListener
       tags:
           - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 255 }
