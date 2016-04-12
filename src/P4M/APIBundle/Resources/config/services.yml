@@ -2,7 +2,11 @@ parameters:
 #    p4_mapi.example.class: P4M\APIBundle\Example
 
 services:
-  p4m_core.header_listener:
+  api.header_listener:
       class:      P4M\APIBundle\Listener\HeaderListener
       tags:
          - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
+  api.fix_authentication_header_listener:
+      class: My\Project\Frontend\EventListener\AuthenticationHeaderListener
+      tags:
+          - { name: kernel.event_listener, event: kernel.request, method: onKernelRequest, priority: 255 }

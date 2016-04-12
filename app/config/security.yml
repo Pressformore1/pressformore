@@ -59,10 +59,8 @@ security:
             pattern:    ^/oauth/v2/token
             security:   false
 
-        oauth_authorize:
-            pattern:    ^/oauth/v2/auth
-            pattern: ^/api/doc
-            security: false
+        #oauth_authorize:
+            #pattern:    ^/oauth/v2/auth
 
         api:
             pattern:    ^/api(?!/register|/doc).*
