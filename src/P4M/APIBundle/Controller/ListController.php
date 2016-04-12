@@ -37,6 +37,7 @@ class ListController extends FOSRestController
      *     resource="List",
      *     description="Get list of Country"
      * )
+     * @View(serializerGroups={"json"})
      */
     public function getListCountryAction(){
 
