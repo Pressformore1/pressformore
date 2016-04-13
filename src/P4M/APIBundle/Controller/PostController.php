@@ -162,24 +162,24 @@ class PostController extends FOSRestController
      *
      *     }
      * )
+     * @Rest\View()
      */
     public function getPostPreviewAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $userUtils = $this->get('p4mCore.post_utils');
-
         if(!empty($url = $request->query->get('url'))){
             $postRepo = $em->getRepository('P4MCoreBundle:Post');
-            $langueRepo = $em->getRepository('P4MCoreBundle:Lang');
-
             $post = $postRepo->findOneBySourceUrl($url);
-
             if(null === $post){
                 $metas = $userUtils->grabMetas($url);
             }
-            $this->response['metas'] = $metas;
+            if(!empty($metas)) {$this->response['metas'] = $metas;}
+            else{
+                $this->response['status_codes'] = 500;
+                $this->message['Il n\'y pas d\'information a extraire'];
+            }
         }
-        $view = $this->view($this->response);
-        return $this->handleView($view);
+        return $this->response;
     }
 
     /**
@@ -271,23 +271,8 @@ class PostController extends FOSRestController
      * )
      */
     public function postPostPressAction(Request $request){
-        $em = $this->getDoctrine()->getManager();
-        $user = $this->getUser();
-        $id = $request->request->get('id');
-        $view = $em->getRepository('P4MTrackingBundle:PostView')->find($id);
-        if (($view->getUser() != null && $user === $view->getUser()) || ($view->getUser() === null && !$user instanceof \P4M\UserBundle\Entity\User))
-        {
-            $view->setDateout(new \DateTime());
-        }
-
-        $em->persist($view);
-        try{
-            $em->flush();
-            $this->response['status_codes'] = 200;
-            $this->response['message'] = 'Post been pressed';
-        }catch(\Exception $e){
-
-        }
+        $this->response['status_codes'] = 200;
+        $this->response['message'] = 'Building';
         return $this->response;
     }
 
@@ -318,15 +303,11 @@ class PostController extends FOSRestController
             $userVote->setUser($user);
             $userVote->setPost($post);
         }
-
         $userVote->setScore($score);
-
         $em->persist($userVote);
         $em->flush();
-
         $postitiveVotesNumber = $em->getRepository('P4MCoreBundle:Post')->countPositive($post);
         $negativeVotesNumber = $em->getRepository('P4MCoreBundle:Post')->countNegative($post);
-
         $this->response['status_codes'] = 200;
         $this->response['message'] = 'Vote has been added';
         $this->response['positiveVotesNumber'] = $postitiveVotesNumber;
@@ -375,7 +356,6 @@ class PostController extends FOSRestController
         }
         return $this->response;
     }
-
 
     private function checkKey(array $data){
         foreach($data as $key => $value){

@@ -2,9 +2,10 @@
 
 namespace P4M\APIBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
-use FOS\RestBundle\Controller\Annotations\Put;
 use P4M\CoreBundle\Entity\Post;
 use P4M\CoreBundle\Form\PostType;
 use P4M\UserBundle\Entity\User;
@@ -25,32 +26,9 @@ class DefaultController extends FOSRestController
         ];
     }
 
-    public function getDefaultAction()
-    {
-        $data = array("hello" => "world");
-        $view = $this->view($data);
-        return $this->handleView($view);
-    }
-
     /**
-     * @param Request $request
-     * @return Response
-     */
-    public function getTestAction(Request $request)
-    {
-        $user = $this->getUser();
-        $data = array("test" => "test",
-            "user" => $user->getUsername());
-        $view = $this->view($data);
-        return $this->handleView($view);
-    }
-
-
-
-
-    /**
+     * @Rest\Post("register")
      * @ApiDoc(
-     *  method="GET",
      *  resource="Register",
      *  description="Create an user",
      *  parameters={
@@ -77,34 +55,30 @@ class DefaultController extends FOSRestController
      * )
      * @param Request $request
      * @return Response
+     * @View()
      */
-    public function getRegisterAction(Request $request)
+    public function postRegisterAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
-        $response = [
-            'message' => '',
-            'status_codes' => ''
-        ];
-        $data = [
-            'username' => $request->query->get('username'),
-            'email' => $request->query->get('email'),
-            'first_name' => $request->query->get('first_name'),
-            'last_name' => $request->query->get('last_name'),
-            'password' => $request->query->get('password'),
-            'term_accepted' => $request->query->get('term_accepted')
-        ];
-        // Vérifie si les donnée requies son remplie
-        $response = $this->checkData($data, $response);
-
+        $data = $request->request->all();
 
         // Vérifie si les termes son accepté
-        if(!$data['term_accepted'] && empty($response['status_codes'])){
-            $response['status_codes'] = 640;
-            $response['message'] = 'Les termes du contract doivent être accepter';
+        if(!$data['term_accepted']){
+            $this->response['status_codes'] = 640;
+            $this->response['message'] = 'Les termes du contract doivent être accepter';
+            return $this->response;
+        }
+        if(!empty($data['email'])){
+            $test_user = $em->getRepository('P4MUserBundle:User')->findOneBy(['email' => $data['email']]);
+            if($test_user !== null){
+                $this->response['status_codes'] = 621;
+                $this->response['message'] = 'Cette adresse email existe déjà';
+                return $this->response;
+            }
         }
 
         // Crée un utilisateur
-        if (empty($response['status_codes'])) {
+        if ($this->checkData($data, 'REGISTER')) {
             $user = new User();
             $encoder = $this->get('security.encoder_factory')->getEncoder($user);
             $user->setUsername($data['username']);
@@ -120,26 +94,24 @@ class DefaultController extends FOSRestController
             $em->persist($user);
             try {
                 $em->flush();
-                $response['message'] = 'L\utilisateur a bien été crée';
-                $response['status_codes'] = 200;
+                $this->response['message'] = 'L\utilisateur a bien été crée';
+                $this->response['status_codes'] = 200;
             } catch (Exception $e) {
-                $response['message'] = 'Une erreur s\'est produite';
+                $this->response['message'] = 'Une erreur s\'est produite';
             }
         }
-        $view = $this->view($response);
-
-        return $this->handleView($view);
+        return $this->response;
     }
 
     /**
+     * @Rest\Post("complete/register")
      * @ApiDoc(
-     *     method="GET",
      *     resource="Register",
      *     description="Complete your inscription",
      *     parameters={
      *          {"name"="address", "dataType"="string", "required"=true, "description"="your adress"},
      *          {"name"="city", "dataType"="string", "required"=true, "description"="your city"},
-     *          {"name"="country", "dataType"="object()", "required"=true, "description"="your country"},
+     *          {"name"="country", "dataType"="object", "required"=true, "description"="your country"},
      *          {"name"="birth_date", "dataType"="date('Year-Month-Day')", "required"=true, "description"="your birth date"},
      *          {"name"="language", "dataType"="string", "required"=false, "description"="Default en can be en or fr"},
      *          {"name"="email", "dataType"="email", "required"=false, "description"="your email"},
@@ -160,66 +132,30 @@ class DefaultController extends FOSRestController
      * )
      * @param Request $request
      * @return Response
+     * @View()
      */
-    public function getCompleteRegisterAction(Request $request){
+    public function postCompleteRegisterAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $user =$this->getUser();
-
-
-        // Envoie les donnée de base concernant l'utilisateur
-        if($request->query->count() == 0){
-            $data = [
-                'address' => $user->getAddress(),
-                'city' => $user->getCity(),
-                'country' => $user->getCountry(),
-                'birth_date' => $user->getBirthDate(),
-                'language' => $user->getLanguage(),
-                'email' => $user->getEmail(),
-                'first_name' => $user->getFirstName(),
-                'last_name' => $user->getLastName(),
-                'website' => $user->getWebsite(),
-                'bio' => $user->getBio(),
-                'skills' => $user->getSkills(),
-            ];
-            $view = $this->view($data);
-            return $this->handleView($view);
-        }
-        $response= [
-            'message' => '',
-            'status_codes' => ''
-        ];
         //hydrate les données reçues
-        $data = [
-            'address' => ($request->query->get('address')) ? $request->query->get('address') : $user->getAddress(),
-            'city' => ($request->query->get('city')) ? $request->query->get('city') : $user->getCity(),
-            'country' => $request->query->get('country'),
-            'birth_date' => ($request->query->get('birth_date')) ? new DateTime($request->query->get('birth_date')) : $user->getBirthDate(),
-            'language' => ($request->query->get('language')) ? $request->query->get('language') : 'en',
-            'email' => ($request->query->get('email')) ? $request->query->get('email') : $user->getEmail(),
-            'first_name' => ($request->query->get('first_name')) ? $request->query->get('last_name') : $user->getFirstName(),
-            'last_name' => ($request->query->get('last_name')) ? $request->query->get('last_name') : $user->getLastName(),
-            'website' => $request->query->get('website'),
-            'bio' => $request->query->get('bio'),
-            'skills' => $request->query->get('skills'),
-        ];
-        $response = $this->checkData($data, $response);
-
+        $data = $request->request->all();
         // sauvegarde les données utilisateurs
-        if(empty($response['status_codes'])){
+        if($this->checkData($data, 'FULL_REGISTER')){
             $user->setAddress($data['address']);
             $user->setCity($data['city']);
-            if(!empty($data['country'])){
+            if(!empty($data['country']))
                 $user->setCountry($em->getRepository('P4MUserBundle:Country')->find($data['country']));
-            }
-            $user->setBirthDate($data['birth_date']);
-            $user->setLanguage($data['language']);
+
+            $user->setBirthDate(new DateTime($data['birth_date']));
+            if(!empty($data['language']))
+                $user->setLanguage($data['language']);
             $user->setEmail($data['email']);
             $user->setFirstName($data['first_name']);
             $user->setLastName($data['last_name']);
-            $user->setWebsite($data['website']);
-            $user->setBio($data['bio']);
-
-
+            if(!empty($data['website']))
+                $user->setWebsite($data['website']);
+            if(!empty($data['bio']))
+                $user->setBio($data['bio']);
             //crée un utilisateur mango s'il n'existe pas
             $mangoUser = $user->getMangoUserNatural();
             $userUtil = $this->container->get('p4mUser.user_utils');
@@ -232,65 +168,87 @@ class DefaultController extends FOSRestController
             try{
                 $em->persist($user);
                 $em->flush();
-                $response['status_codes'] = 200;
-                $response['message'] = 'Votre compte a bien été mis à jour';
+                $this->response['status_codes'] = 200;
+                $this->response['message'] = 'Votre compte a bien été mis à jour';
             }catch(Exception $e){
-                $response['status_codes'] = 'unknown';
-                $response['message'] = "Votre compte n'a pas été mis à jour";
+                $this->response['status_codes'] = 'unknown';
+                $this->response['message'] = "Votre compte n'a pas été mis à jour";
             }
         }
-
-        $view = $this->view($response);
-        return $this->handleView($view);
+        return $this->response;
     }
 
+    /**
+     * @ApiDoc(
+     *     resource="register",
+     *     description="get information about current user"
+     * )
+     * @View(serializerGroups={"json"})
+     * @return Response
+     */
+    public function getCompleteRegisterAction(){
+        $user =$this->getUser();
+        return $user;
+    }
 
     // Vérifie si les donnés son correctement remplies
-    public function checkData($data, $response){
-        foreach ($data as $key => $value) {
-            if ($value == null) {
-                switch($key){
-                    case 'username':
-                        $response['status_codes'] = 601;
-                        break;
-                    case 'email':
-                        $response['status_codes'] = 602;
-                        break;
-                    case 'first_name':
-                        $response['status_codes'] = 603;
-                        break;
-                    case 'last_name':
-                        $response['status_codes'] = 604;
-                        break;
-                    case 'password':
-                        $response['status_codes'] = 605;
-                        break;
-                    case 'address':
-                        $response['status_codes'] = 606;
-                        break;
-                    case 'city':
-                        $response['status_codes'] = 607;
-                        break;
-                    case 'country':
-                        $response['status_codes'] = 608;
-                        break;
-                    case 'birth_date':
-                        $response['status_codes'] = 609;
-                        break;
+    public function checkData($data, $type){
+        switch($type){
+            case 'FULL_REGISTER':
+                $this->response['data'] = $data;
+                if(!array_key_exists('address', $data)){
+                    $this->response['message'] = 'Empty Address';
+                    $this->response['status_codes'] = 606;
+                    return false;
                 }
-                if(!empty($response['status_codes'])){
-                    $response['message'] = $key . ' ne peu pas etre vide';
-                    return $response;
+                if(!array_key_exists('city', $data)){
+                    $this->response['message'] = 'Empty City';
+                    $this->response['status_codes'] = 607;
+                    return false;
                 }
-            }
+                if(!array_key_exists('country', $data)){
+                    $this->response['message'] = 'Empty Country';
+                    $this->response['status_codes'] = 608;
+                    return false;
+                }
+                if(!array_key_exists('birth_date', $data)){
+                    $this->response['message'] = 'Empty Birth Date';
+                    $this->response['status_codes'] = 609;
+                    return false;
+                }
+            case 'REGISTER':
+                if(!array_key_exists('username', $data) && $type !== 'FULL_REGISTER'){
+                    $this->response['message'] = 'Empty Username';
+                    $this->response['status_codes'] = 601;
+                    return false;
+                }
+                if(!array_key_exists('email', $data)){
+                    $this->response['message'] = 'Empty email';
+                    $this->response['status_codes'] = 602;
+                    return false;
+                }
+                if(!array_key_exists('password', $data) && $type !== 'FULL_REGISTER'){
+                    $this->response['message'] = 'Empty password';
+                    $this->response['status_codes'] = 605;
+                    return false;
+                }
+                if(!array_key_exists('first_name', $data)){
+                    $this->response['message'] = 'Empty first name';
+                    $this->response['status_codes'] = 603;
+                    return false;
+                }
+                if(!array_key_exists('last_name', $data)){
+                    $this->response['message'] = 'Empty last name';
+                    $this->response['status_codes'] = 604;
+                    return false;
+                }
+                if(!array_key_exists('term_accepted', $data) && $type !== 'FULL_REGISTER'){
+                    $this->response['message'] = 'Empty term accepted';
+                    $this->response['status_codes'] = 609;
+                    return false;
+                }
+                break;
         }
-
-        // Vérifie si l'émail est valide
-        if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL) && empty($response['status_codes'])) {
-            $response['message'] = 'l\'adresse email n\'est pas dans un format correct';
-            $response['status_codes'] = 615;
-        }
-
-        return $response;
+        return true;
     }
 }

@@ -4,9 +4,7 @@ namespace P4M\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use FOS\UserBundle\Model\User as BaseUser;
-//use FOS\UserBundle\Entity\User
-//
-//use Symfony\Component\Security\Core\User\UserInterface;
+use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * User
@@ -24,13 +22,24 @@ class User extends BaseUser
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
-    
+
+    /**
+     * @var string
+     * @Groups({"json"})
+     */
+    protected $email;
+
+    /**
+     * @var string
+     * @Groups({"json"})
+     */
+    protected $username;
 
     /**
      *
      * @var string
      * @ORM\Column(name="name",type="string")
+     * @Groups({"json"})
      */
     private $firstName;
     
@@ -38,6 +47,7 @@ class User extends BaseUser
      *
      * @var string
      * @ORM\Column(name="surname",type="string")
+     * @Groups({"json"})
      */
     private $lastName;
     
@@ -45,6 +55,7 @@ class User extends BaseUser
      *
      * @var string
      * @ORM\Column(name="title",type="string", nullable=true)
+     * @Groups({"json"})
      */
     private $title;
     
@@ -53,6 +64,7 @@ class User extends BaseUser
      *
      * @var string
      * @ORM\Column(name="website",type="string", nullable=true)
+     * @Groups({"json"})
      */
     private $website;
     
@@ -60,6 +72,7 @@ class User extends BaseUser
      *
      * @var text
      * @ORM\Column(name="bio",type="text", nullable=true)
+     * @Groups({"json"})
      */
     private $bio;
    
@@ -67,6 +80,7 @@ class User extends BaseUser
      *
      * @var text
      * @ORM\Column(name="city",type="text", nullable=true)
+     * @Groups({"json"})
      */
     private $city;
     
@@ -74,6 +88,7 @@ class User extends BaseUser
      *
      * @var text
      * @ORM\Column(name="address",type="text", nullable=true)
+     * @Groups({"json"})
      */
     private $address;
     
@@ -81,16 +96,17 @@ class User extends BaseUser
      *
      * @var text
      * @ORM\ManyToOne(targetEntity="P4M\UserBundle\Entity\Country")
+     * @Groups({"json"})
      */
     private $country;
     
     
     
-   /**
-     *
+    /**
      * @var String
      * 
      * @ORM\Column(name="url",type="string",length=255, nullable=true)
+     * @Groups({"json"})
      */
     protected $url;
     
