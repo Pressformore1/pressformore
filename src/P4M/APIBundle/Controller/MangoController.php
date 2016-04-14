@@ -30,7 +30,7 @@ class MangoController extends FOSRestController
      * @return Response
      * @Rest\View()
      * @ApiDoc(
-     *     resource="bank",
+     *     resource="Bank",
      *     description="add a post",
      *     requirements={
      *          {"name"="iban", "dataType"="string", "required"=true, "description"="iban of your account"},
@@ -74,7 +74,7 @@ class MangoController extends FOSRestController
      * @ApiDoc(
      *  method="GET",
      *  description="Get information for load a wallet",
-     *  resource="bank"
+     *  resource="Bank"
      * )
      */
     public function getLoadByCardAction()
@@ -109,7 +109,7 @@ class MangoController extends FOSRestController
      * @ApiDoc(
      *  method="GET",
      *  description="Load a wallet",
-     *  resource="bank",
+     *  resource="Bank",
      *  parameters={
      *      {"name"="ammount", "dataType"="integer", "required"=true, "description"="ammount"},
      *      {"name"="preAuthorisation", "dataType"="boolean", "required"=true, "description"="collect this amount each month"},

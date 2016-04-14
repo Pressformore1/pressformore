@@ -5,12 +5,14 @@ namespace P4M\APIBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use P4M\BackofficeBundle\Entity\ReadPostLater;
 use P4M\CoreBundle\Entity\Post;
+use P4M\CoreBundle\Entity\Pressform;
 use P4M\CoreBundle\Entity\Vote;
 use P4M\CoreBundle\Entity\WantPressform;
 use P4M\CoreBundle\Form\PostType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use Symfony\Component\HttpFoundation\Response;
 
 class PostController extends FOSRestController
 {
@@ -101,7 +103,6 @@ class PostController extends FOSRestController
             $this->response['message'] = 'des arguments son manquant';
             $this->response['data'] = $request->request->all();
         }
-
         $view = $this->view($this->response);
         return $this->handleView($view);
     }
@@ -170,13 +171,16 @@ class PostController extends FOSRestController
         if(!empty($url = $request->query->get('url'))){
             $postRepo = $em->getRepository('P4MCoreBundle:Post');
             $post = $postRepo->findOneBySourceUrl($url);
-            if(null === $post){
-                $metas = $userUtils->grabMetas($url);
+            if(null !== $post){
+                $this->response['status_codes'] = 500;
+                $this->response['message']= 'Cette article a déjà été partagé';
+                return $this->response;
             }
+            $metas = $userUtils->grabMetas($url);
             if(!empty($metas)) {$this->response['metas'] = $metas;}
             else{
                 $this->response['status_codes'] = 500;
-                $this->message['Il n\'y pas d\'information a extraire'];
+                $this->response['message']= 'Il n\'y pas d\'information a extraire';
             }
         }
         return $this->response;
@@ -260,7 +264,7 @@ class PostController extends FOSRestController
     /**
      * @Rest\Post("post/press")
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      * @Rest\View()
      * @ApiDoc(
      *     resource="Post",
@@ -271,8 +275,101 @@ class PostController extends FOSRestController
      * )
      */
     public function postPostPressAction(Request $request){
+
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository('P4MCoreBundle:Post')->find($request->request->get('id'));
+
+        $pressForm = $em->getRepository('P4MCoreBundle:Pressform')->findOneBy(['post'=>$post,'sender'=>$user,'payed'=>false]);
+
+        if( null !== $pressForm){
+            $this->response['status_codes'] = 500;
+            $this->response['message'] = 'post already press';
+            return $this->response;
+        }
+
+        $unpressForm = $em->getRepository('P4MCoreBundle:Unpressform')->findOneBy(['post'=>$post,'user'=>$user]);
+        if(null !== $unpressForm)
+            $em->remove($unpressForm);
+
+        $pressForm = new Pressform();
+        $pressForm->setSender($user);
+        $pressForm->setPost($post);
+        $em->persist($pressForm);
+        $em->flush();
         $this->response['status_codes'] = 200;
-        $this->response['message'] = 'Building';
+        $this->response['message'] = 'post has been pressed';
+        return $this->response;
+    }
+
+    /**
+     * @Rest\Put("post/press")
+     * @param Request $request
+     * @return Response
+     * @Rest\View()
+     * @ApiDoc(
+     *     resource="Post",
+     *     description="mean us why you unpress this content",
+     *     requirements={
+     *          {"name"="type", "dataType"="integer", "required"=true, "description"="type"},
+     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *     }
+     * )
+     */
+    public function putPostPressAction(Request $request){
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $data = $request->request->all();
+        $post = $em->getRepository('P4MCoreBundle:Post')->find($data['id']);
+        $unpressform = $em->getRepository('P4MCoreBundle:Unpressform')->findOneBy(['post'=>$post,'user'=>$user]);
+        $type = $em->getRepository('P4MCoreBundle:UnpressformType')->find($data['type']);
+        if($unpressform === null OR $type === null){
+            $this->response['status_codes'] = 500;
+            $this->response['message'] = 'something is wrong';
+            return $this->response;
+        }
+        $unpressform->setType($type);
+        $em->persist($unpressform);
+        $em->flush();
+        $this->response['status_codes'] = 200;
+        $this->response['message'] = 'reason of unpress has been added';
+        return $this->response;
+
+    }
+
+    /**
+     * @Rest\Delete("post/press")
+     * @param Request $request
+     * @return Response
+     * @Rest\View()
+     * @ApiDoc(
+     *     resource="Post",
+     *     description="Unpress a post",
+     *     requirements={
+     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *     }
+     * )
+     */
+    public function deletePostPressAction(Request $request){
+        $user = $this->getUser();
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository('P4MCoreBundle:Post')->find($request->request->get('id'));
+        $pressForm = $em->getRepository('P4MCoreBundle:Pressform')->findOneBy(['post'=>$post,'sender'=>$user,'payed'=>false]);
+
+        if(null == $pressForm){
+            $this->response['status_codes'] = 500;
+            $this->response['message'] = 'This post is not pressed';
+            return $this->response;
+        }
+        $unpress = new \P4M\CoreBundle\Entity\Unpressform();
+        $unpress->setPost($post);
+        $unpress->setUser($user);
+        $em->persist($unpress);
+        $em->remove($pressForm);
+        $em->flush();
+
+        $this->response['status_codes'] = 200;
+        $this->response['message'] = 'This post is not pressed anymore';
         return $this->response;
     }
 

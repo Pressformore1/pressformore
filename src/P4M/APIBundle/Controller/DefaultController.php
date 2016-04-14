@@ -180,7 +180,7 @@ class DefaultController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     resource="register",
+     *     resource="Register",
      *     description="get information about current user"
      * )
      * @View(serializerGroups={"json"})
