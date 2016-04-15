@@ -90,7 +90,7 @@ class ListController extends FOSRestController
 
         if($wall === null){
             $this->response['status_codes'] = 500;
-            $this->response['message'] = 'this wall don\'t exist';
+            $this->response['message'] = 'This user have no Strew';
             return $this->response;
         }
         $view = new \P4M\TrackingBundle\Entity\WallView();

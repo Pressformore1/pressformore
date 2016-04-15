@@ -1483,6 +1483,7 @@ class Post
         return $this->tempAuthor;
     }
 
+
     public function toArray(){
         $data['slug'] = $this->getSlug();
         $data['title'] = $this->getTitle();

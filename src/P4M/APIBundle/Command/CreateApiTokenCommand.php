@@ -1,5 +1,5 @@
 <?php
-namespace P4M\ConsoleBundle\Command;
+namespace P4M\APIBundle\Command;
 
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
 use Symfony\Component\Console\Input\InputArgument;
