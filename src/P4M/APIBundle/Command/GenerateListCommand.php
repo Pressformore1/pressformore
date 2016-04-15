@@ -34,7 +34,7 @@ class GenerateListCommand extends ContainerAwareCommand
         $router= $container->get('router');
         foreach($posts as $post){
             $data[$post->getId()]['sourceUrl'] = $post->getSourceUrl();
-            $data[$post->getId()]['url'] = $router->generate('p4m_core_post', ['postSlug' => $post->getSlug()], true);
+            $data[$post->getId()]['slug'] = $post->getSlug();
         }
         $list = json_encode($data);
         file_put_contents($file_root, $list);

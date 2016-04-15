@@ -50,7 +50,7 @@ class ListUpdaterSuscriber implements EventSubscriber
             $data = json_decode($list, true);
             $data[$entity_id]['sourceUrl'] = $entity->getSourceUrl();
             $router= $this->container->get('router');
-            $data[$entity_id]['url'] = $router->generate('p4m_core_post', $entity->getSlug());
+            $data[$entity_id]['slug'] = $entity->getSlug();
 
             $new_list = json_encode($data);
             file_put_contents($file_root, $new_list);
