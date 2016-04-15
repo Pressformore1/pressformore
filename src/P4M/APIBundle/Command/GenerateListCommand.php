@@ -28,7 +28,7 @@ class GenerateListCommand extends ContainerAwareCommand
         $context->setHost('sandbox.pressformore.com');
         $context->setScheme('http');
         $container = $this->getContainer();
-        $file_root = $container->get('kernel')->getRootDir() . '/../web/api/list.json';
+        $file_root = $container->get('kernel')->getRootDir() . '/../web/api/Rewardlist.json';
         $em = $container->get('doctrine')->getManager();
         $posts = $em->getRepository('P4MCoreBundle:Post')->createQueryBuilder('P')->where('P.author IS NOT NULL')->getQuery()->getResult();
         $router= $container->get('router');
