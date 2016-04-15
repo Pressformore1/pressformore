@@ -24,14 +24,10 @@ class GenerateListCommand extends ContainerAwareCommand
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        $context = $this->getContainer()->get('router')->getContext();
-        $context->setHost('sandbox.pressformore.com');
-        $context->setScheme('http');
         $container = $this->getContainer();
         $file_root = $container->get('kernel')->getRootDir() . '/../web/list/Rewardlist.json';
         $em = $container->get('doctrine')->getManager();
         $posts = $em->getRepository('P4MCoreBundle:Post')->createQueryBuilder('P')->where('P.author IS NOT NULL')->getQuery()->getResult();
-        $router= $container->get('router');
         foreach($posts as $post){
             $data[$post->getId()]['sourceUrl'] = $post->getSourceUrl();
             $data[$post->getId()]['slug'] = $post->getSlug();
