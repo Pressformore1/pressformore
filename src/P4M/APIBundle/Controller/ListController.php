@@ -76,7 +76,6 @@ class ListController extends FOSRestController
      *     resource="List",
      *     description="Get list post of wall",
      *     parameters={
-     *              {"name"="slug", "dataType"="string", "required"=true, "description"="slug of a wall"},
      *              {"name"="page", "dataType"="integer", "required"=false, "description"="page of a wall"},
      *              {"name"="nb_by_page", "dataType"="integer", "required"=false, "description"="how many post you want"},
      *     }
@@ -85,10 +84,10 @@ class ListController extends FOSRestController
     public function getListPostInwallAction(Request $request){
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $slug = $request->query->get('slug');
+        $wall = $em->getRepository('P4MCoreBundle:Wall')->findOneByUser($user);
         $page = (!empty($request->request->get('page'))) ? $request->request->get('page') : 1;
         $nb_by_page = (!empty($request->request->get('nb_by_page'))) ? $request->request->get('nb_by_page') : 30;
-        $wall = $em->getRepository('P4MCoreBundle:Wall')->findOneBySlug($slug);
+
         if($wall === null){
             $this->response['status_codes'] = 500;
             $this->response['message'] = 'this wall don\'t exist';
