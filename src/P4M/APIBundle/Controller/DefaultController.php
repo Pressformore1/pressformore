@@ -192,6 +192,10 @@ class DefaultController extends FOSRestController
         return $user;
     }
 
+    public function getForgetPassword(){
+
+    }
+
     // Vérifie si les donnés son correctement remplies
     public function checkData($data, $type){
         switch($type){

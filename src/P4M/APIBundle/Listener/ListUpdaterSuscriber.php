@@ -12,7 +12,6 @@ use Symfony\Component\HttpFoundation\Request;
 
 class ListUpdaterSuscriber implements EventSubscriber
 {
-
     private $container;
     /**
      * Returns an array of events this subscriber wants to listen to.
@@ -30,12 +29,10 @@ class ListUpdaterSuscriber implements EventSubscriber
     {
         $this->index($args);
     }
-
     public function postPersist(LifecycleEventArgs $args)
     {
         $this->index($args);
     }
-
     public function index(LifecycleEventArgs $args)
     {
         $entity = $args->getEntity();
@@ -51,12 +48,10 @@ class ListUpdaterSuscriber implements EventSubscriber
             $data[$entity_id]['sourceUrl'] = $entity->getSourceUrl();
             $router= $this->container->get('router');
             $data[$entity_id]['slug'] = $entity->getSlug();
-
             $new_list = json_encode($data);
             file_put_contents($file_root, $new_list);
         }
     }
-
     public function setContainer(ContainerInterface $container){
         $this->container = $container;
     }
