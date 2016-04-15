@@ -44,7 +44,7 @@ class ListUpdaterSuscriber implements EventSubscriber
         if ($entity instanceof Post) {
             if($entity->getAuthor() == null)
                 return ;
-            $file_root = $this->container->get('kernel')->getRootDir() . '/../web/api/Rewardlist.json';
+            $file_root = $this->container->get('kernel')->getRootDir() . '/../web/list/Rewardlist.json';
             $entity_id = $entity->getId();
             $list = file_get_contents($file_root);
             $data = json_decode($list, true);
