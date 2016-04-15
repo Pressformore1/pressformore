@@ -31,7 +31,7 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @Groups({"json"})
+     * @Groups({"json", "list"})
      */
     protected $username;
 

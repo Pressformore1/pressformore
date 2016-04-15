@@ -23,7 +23,7 @@
             <div class="form-field">
                 <label class="required  form-field-title" for="password">{{ 'Password'|trans({}, 'user')}}</label>
                 <input type="password" class="form-field-input" required="required" name="_password" id="password">
-                <p><a href="{{path('fos_user_resetting_request')}}"{{ 'Forgot your password?'|trans({}, 'user')}}></a></p>
+                <p><a href="{{path('fos_user_resetting_request')}}">{{ 'Forgot your password?'|trans({}, 'user')}}</a></p>
             </div>
             <div class="form-field">
                 <input type="checkbox" id="remember_me" name="_remember_me" value="on" />

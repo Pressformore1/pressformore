@@ -4,6 +4,7 @@ namespace P4M\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -25,6 +26,7 @@ class Post
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"list"})
      */
     private $id;
     
@@ -34,6 +36,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title",type="string",length=255)
+     * @Groups({"list"})
      */
     
     private $title;
@@ -41,8 +44,8 @@ class Post
     
     /**
      * @var string
-     *
      * @ORM\Column(name="picture", type="string", length=255)
+     * @Groups({"list"})
      */
     private $picture;
     
@@ -57,6 +60,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="content", type="text")
+     * @Groups({"list"})
      */
     private $content;
 
@@ -64,12 +68,12 @@ class Post
      * @var string
      *
      * @ORM\Column(name="sourceUrl", type="string", length=255,unique = true)
+     * @Groups({"list"})
      */
     private $sourceUrl;
 
     /**
      * @var \DateTime
-     *
      * @ORM\Column(name="dateAdded", type="datetime")
      */
     private $dateAdded;
@@ -163,7 +167,7 @@ class Post
     private $confirmedFlag;
     
     /**
-     *
+     * @Groups({"list"})
      * @ORM\OneToMany(targetEntity="\P4M\BackofficeBundle\Entity\ReadPostLater",mappedBy="post",cascade="remove") 
      */
     private $readLater;

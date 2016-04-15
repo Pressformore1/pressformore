@@ -71,6 +71,7 @@ class DefaultController extends FOSRestController
         if(!empty($data['email'])){
             $test_user = $em->getRepository('P4MUserBundle:User')->findOneBy(['email' => $data['email']]);
             if($test_user !== null){
+                $this->
                 $this->response['status_codes'] = 621;
                 $this->response['message'] = 'Cette adresse email existe déjà';
                 return $this->response;

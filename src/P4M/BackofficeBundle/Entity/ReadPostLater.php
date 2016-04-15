@@ -3,6 +3,7 @@
 namespace P4M\BackofficeBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * ReadPostLater
@@ -30,7 +31,7 @@ class ReadPostLater
 
     
     /**
-     *
+     * @Groups({"list"})
      * @ORM\ManyToOne(targetEntity="\P4M\UserBundle\Entity\User",inversedBy="readLater")
      */
     private $user;

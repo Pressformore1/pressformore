@@ -82,13 +82,16 @@ class MangoController extends FOSRestController
         $mango = $this->container->get('p4_m_mango_pay.util');
         $user = $this->getUser();
         $mangoUser= $user->getMangoUserNatural();
-
+        if(null === $mangoUser){
+            $this->response['status_codes'] = 500;
+            $this->response['message'] = 'vous devez terminez votre inscription';
+            return $this->response;
+        }
         $registerCard = new \P4M\MangoPayBundle\Entity\CardRegistration();
         $registerCard->setCurrency('EUR');
         $registerCard->setTag('Main Card');
         $registerCard->setMangoUser($mangoUser);
         $CreatedCardRegister = $mango->registerCard($registerCard);
-
         $this->response['clientId'] = $mango->getClientId();
         $this->response['baseURL'] = $mango->getBaseUrl();
         $this->response['cardId'] = $CreatedCardRegister->Id;
@@ -96,9 +99,7 @@ class MangoController extends FOSRestController
         $this->response['preregistrationData'] = $CreatedCardRegister->PreregistrationData;
         $this->response['accessKey'] = $CreatedCardRegister->AccessKey;
         $this->response['status_codes'] = 200;
-
         return $this->response;
-
     }
 
     /**
@@ -107,7 +108,6 @@ class MangoController extends FOSRestController
      * @param Request $request
      * @return Response
      * @ApiDoc(
-     *  method="GET",
      *  description="Load a wallet",
      *  resource="Bank",
      *  parameters={
@@ -147,7 +147,7 @@ class MangoController extends FOSRestController
 
         $result = $mango->chargeWallet($mangoUser,$cardId,$wallet,$returnURL,$ammount);
 
-        if($result->Status != 'SUCCEEDED'){
+        if($result->Status !== 'SUCCEEDED'){
             $this->response['message'] = $result->ResultMessage;
             $this->response['status_codes'] = $result->Status;
             return $this->response;

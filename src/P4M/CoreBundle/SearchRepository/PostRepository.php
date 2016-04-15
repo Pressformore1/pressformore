@@ -379,6 +379,10 @@ class PostRepository extends Repository
             $query_part->addShould(
                 new \Elastica\Query\Term(array('categories.name' => array('value' => strtolower($searchText))))
             );
+            $query_part->addShould(
+                new \Elastica\Query\Term(array('readLater.user.username' => array('value' => strtolower($searchText))))
+            );
+
             
             
         }
