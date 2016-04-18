@@ -114,7 +114,7 @@ class MangoController extends FOSRestController
      *      {"name"="amount", "dataType"="integer", "required"=true, "description"="amount"},
      *      {"name"="preAuthorisation", "dataType"="boolean", "required"=true, "description"="collect this amount each month"},
      *      {"name"="cardId", "dataType"="integer", "required"=true, "description"="card Id"},
-     *      {"name"="data", "dataType"="integer", "required"=true, "description"="information payement"},
+     *      {"name"="data", "dataType"="string", "required"=true, "description"="information payement"},
      *     }
      * )
      */

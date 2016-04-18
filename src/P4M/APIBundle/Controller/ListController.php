@@ -81,7 +81,7 @@ class ListController extends FOSRestController
      *     }
      * )
      */
-    public function getListPostInwallAction(Request $request){
+    public function getListPostAction(Request $request){
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $wall = $em->getRepository('P4MCoreBundle:Wall')->findOneByUser($user);
