@@ -23,6 +23,7 @@ class ListController extends FOSRestController
     }
 
     /**
+     * @Get("list/category")
      * @ApiDoc(
      *     resource="List",
      *     description="Get list of category"
@@ -36,6 +37,7 @@ class ListController extends FOSRestController
         return $categorys;
     }
     /**
+     * @Get("list/type")
      * @ApiDoc(
      *     resource="List",
      *     description="Get list of Type"
@@ -49,6 +51,7 @@ class ListController extends FOSRestController
     }
 
     /**
+     * @Get("list/country")
      * @ApiDoc(
      *     resource="List",
      *     description="Get list of Country"
@@ -57,15 +60,10 @@ class ListController extends FOSRestController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getListCountryAction(){
-
         $countrys = $this->getDoctrine()->getManager()->getRepository('P4MUserBundle:Country')->findAll();
-
         return $countrys;
     }
 
-    public function getListUrlAction(){
-
-    }
 
     /**
      * @Get("list/post")
