@@ -21,7 +21,6 @@ class ListController extends FOSRestController
         ];
     }
 
-
     /**
      * @Get("list/category")
      * @ApiDoc(
