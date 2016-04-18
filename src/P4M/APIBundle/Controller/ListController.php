@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ListController extends FOSRestController
 {
-
     private $response = array();
 
     public function __construct()

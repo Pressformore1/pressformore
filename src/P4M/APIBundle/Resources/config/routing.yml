@@ -7,7 +7,6 @@ P4M_api_list:
 P4M_api_post:
     type: rest
     resource: P4M\APIBundle\Controller\PostController
-
 P4M_api_mango:
     type: rest
     resource: @P4MAPIBundle/Controller/MangoController.php
