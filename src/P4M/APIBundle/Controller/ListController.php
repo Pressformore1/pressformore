@@ -64,7 +64,7 @@ class ListController extends FOSRestController
     }
 
 
- /*   /**
+    /**
      * @Get("list/post")
      * @param Request $request
      * @return Response
@@ -78,7 +78,7 @@ class ListController extends FOSRestController
      *     }
      * )
      */
- /*   public function getListPostAction(Request $request){
+    public function getListPostAction(Request $request){
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $wall = $em->getRepository('P4MCoreBundle:Wall')->findOneByUser($user);
@@ -117,5 +117,5 @@ class ListController extends FOSRestController
         $this->response['nbr_post'] = $searchResult['count'];
         $this->response['posts'] = $posts;
         return $this->response;
-    }*/
+    }
 }
