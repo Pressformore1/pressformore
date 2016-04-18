@@ -111,7 +111,7 @@ class MangoController extends FOSRestController
      *  description="Load a wallet",
      *  resource="Bank",
      *  parameters={
-     *      {"name"="ammount", "dataType"="integer", "required"=true, "description"="ammount"},
+     *      {"name"="amount", "dataType"="integer", "required"=true, "description"="ammount"},
      *      {"name"="preAuthorisation", "dataType"="boolean", "required"=true, "description"="collect this amount each month"},
      *      {"name"="cardId", "dataType"="integer", "required"=true, "description"="card Id"},
      *      {"name"="data", "dataType"="integer", "required"=true, "description"="information payement"},
@@ -125,8 +125,8 @@ class MangoController extends FOSRestController
         $cardId = $request->request->get('cardId');
         $mangoUser = $user->getMangoUserNatural();
 
-        $ammount = $request->request->get('ammount');
-        $ammount *= 100;
+        $amount = $request->request->get('amount');
+        $amount *= 100;
         $preAuthorisation = $request->request->get('preAuhtorization');
         $data['data'] = $request->request->get('data');
 
@@ -145,7 +145,7 @@ class MangoController extends FOSRestController
         $wallet = $wallets[0];
         $returnURL = $this->generateUrl("p4_m_backoffice_homepage",[],true).'#wallet';
 
-        $result = $mango->chargeWallet($mangoUser,$cardId,$wallet,$returnURL,$ammount);
+        $result = $mango->chargeWallet($mangoUser,$cardId,$wallet,$returnURL,$amount);
 
         if($result->Status !== 'SUCCEEDED'){
             $this->response['message'] = $result->ResultMessage;
@@ -157,7 +157,7 @@ class MangoController extends FOSRestController
         $walletFill->setRecurrent($preAuthorisation);
         $walletFill->setUser($user);
         $walletFill->setCardId($cardId);
-        $walletFill->setAmount($ammount);
+        $walletFill->setAmount($amount);
         $em->persist($walletFill);
         $em->flush();
 
