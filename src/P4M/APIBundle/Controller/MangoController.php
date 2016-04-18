@@ -111,7 +111,7 @@ class MangoController extends FOSRestController
      *  description="Load a wallet",
      *  resource="Bank",
      *  parameters={
-     *      {"name"="amount", "dataType"="integer", "required"=true, "description"="ammount"},
+     *      {"name"="amount", "dataType"="integer", "required"=true, "description"="amount"},
      *      {"name"="preAuthorisation", "dataType"="boolean", "required"=true, "description"="collect this amount each month"},
      *      {"name"="cardId", "dataType"="integer", "required"=true, "description"="card Id"},
      *      {"name"="data", "dataType"="integer", "required"=true, "description"="information payement"},
