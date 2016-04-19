@@ -84,7 +84,6 @@ class ListController extends FOSRestController
         $wall = $em->getRepository('P4MCoreBundle:Wall')->findOneByUser($user);
         $page = (!empty($request->request->get('page'))) ? $request->request->get('page') : 1;
         $nb_by_page = (!empty($request->request->get('nb_by_page'))) ? $request->request->get('nb_by_page') : 30;
-
         if($wall === null){
             $this->response['status_codes'] = 500;
             $this->response['message'] = 'This user have no Strew';

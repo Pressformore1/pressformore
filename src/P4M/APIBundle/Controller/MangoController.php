@@ -114,7 +114,6 @@ class MangoController extends FOSRestController
      *      {"name"="amount", "dataType"="integer", "required"=true, "description"="amount"},
      *      {"name"="preAuthorisation", "dataType"="boolean", "required"=true, "description"="collect this amount each month"},
      *      {"name"="cardId", "dataType"="integer", "required"=true, "description"="card Id"},
-     *      {"name"="data", "dataType"="string", "required"=true, "description"="information payement"},
      *     }
      * )
      */
@@ -127,20 +126,14 @@ class MangoController extends FOSRestController
 
         $amount = $request->request->get('amount');
         $amount *= 100;
-        $preAuthorisation = $request->request->get('preAuhtorization');
-        $data['data'] = $request->request->get('data');
+        $preAuthorisation = $request->request->get('preAuthorisation');
 
-        if(empty($data['data'])){
-            $this->response['status_codes'] = '500';
-            $this->response['message'] = 'need data information';
-            return $this->response;
-        }
-        $updatedCardRegister = $mango->getCardRegistration($cardId,$data);
-        if($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)){
-            $this->response['status_codes'] = '501';
-            $this->response['message'] = 'Something is not Valid,';
-            return $this->response;
-        }
+        //$updatedCardRegister = $mango->getCardRegistration($cardId,$data);
+//        if($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)){
+//            $this->response['status_codes'] = '501';
+//            $this->response['message'] = 'Something is not Valid,';
+//            return $this->response;
+//        }
         $wallets = $mango->getUserWallets($mangoUser);
         $wallet = $wallets[0];
         $returnURL = $this->generateUrl("p4_m_backoffice_homepage",[],true).'#wallet';
