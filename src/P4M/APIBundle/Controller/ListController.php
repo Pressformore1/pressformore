@@ -140,6 +140,11 @@ class ListController extends FOSRestController
             ->setParameter('sender', $user)
             ->getQuery()
             ->getResult();
+        if(empty($data)){
+            $this->response['status_codes'] = 501;
+            $this->response['message'] = 'you don\'t have press post';
+            return $this->response;
+        }
         return $data;
     }
 }
