@@ -81,27 +81,27 @@ class ListController extends FOSRestController
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $wall = $em->getRepository('P4MCoreBundle:Wall')->findOneByUser($user);
+        $repositoryManager = $this->container->get('fos_elastica.manager.orm');
+        $repository = $repositoryManager->getRepository('P4MCoreBundle:Post');
         $page = (!empty($request->request->get('page'))) ? $request->request->get('page') : 1;
         $nb_by_page = (!empty($request->request->get('nb_by_page'))) ? $request->request->get('nb_by_page') : 30;
         if($wall === null){
-            $this->response['status_codes'] = 500;
-            $this->response['message'] = 'This user have no Strew';
-            return $this->response;
+            $searchResult = $repository->findPressablePosts(null,$page,$nb_by_page);
+
+        }else{
+            $view = new \P4M\TrackingBundle\Entity\WallView();
+            $view->setWall($wall);
+            $view->setUser($user);
+            $em->persist($view);
+            $em->flush();
+            $bannedPostId = $em->getRepository('P4MBackofficeBundle:BannedPost')->findIdsByUser($user);
+            $postData['categories'] = $wall->getIncludedCatsId();
+            $postData['tags'] = $wall->getIncludedTagsId();
+            $postData['excludedCategories']=$wall->getExcludedCatsId();
+            $postData['excludedTags']=$wall->getExcludedTagsId();
+            $postData['bannedPost']=$bannedPostId;
+            $searchResult = $repository->findCustom(null,$postData, $page, $nb_by_page);
         }
-        $view = new \P4M\TrackingBundle\Entity\WallView();
-        $view->setWall($wall);
-        $view->setUser($user);
-        $em->persist($view);
-        $em->flush();
-        $repositoryManager = $this->container->get('fos_elastica.manager.orm');
-        $repository = $repositoryManager->getRepository('P4MCoreBundle:Post');
-        $bannedPostId = $em->getRepository('P4MBackofficeBundle:BannedPost')->findIdsByUser($user);
-        $postData['categories'] = $wall->getIncludedCatsId();
-        $postData['tags'] = $wall->getIncludedTagsId();
-        $postData['excludedCategories']=$wall->getExcludedCatsId();
-        $postData['excludedTags']=$wall->getExcludedTagsId();
-        $postData['bannedPost']=$bannedPostId;
-        $searchResult = $repository->findCustom(null,$postData, $page, $nb_by_page);
         $posts = $searchResult['entities'];
         foreach($posts as $key => $value){
             $read_later = $value->getReadLater();
