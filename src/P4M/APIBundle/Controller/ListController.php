@@ -86,7 +86,7 @@ class ListController extends FOSRestController
         $page = (!empty($request->request->get('page'))) ? $request->request->get('page') : 1;
         $nb_by_page = (!empty($request->request->get('nb_by_page'))) ? $request->request->get('nb_by_page') : 30;
         if($wall === null){
-            $searchResults = $repository->findPressablePosts([],$page,$nb_by_page);
+            $searchResult = $repository->findPressablePosts([],$page,$nb_by_page);
 
         }else{
             $view = new \P4M\TrackingBundle\Entity\WallView();
