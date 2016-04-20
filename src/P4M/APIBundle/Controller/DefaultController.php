@@ -110,9 +110,9 @@ class DefaultController extends FOSRestController
      *     resource="Register",
      *     description="Complete your inscription",
      *     parameters={
-     *          {"name"="address", "dataType"="string", "required"=true, "description"="your adress"},
+     *          {"name"="address", "dataType"="string", "required"=true, "description"="your address"},
      *          {"name"="city", "dataType"="string", "required"=true, "description"="your city"},
-     *          {"name"="country", "dataType"="object", "required"=true, "description"="your country"},
+     *          {"name"="country", "dataType"="integer", "required"=true, "description"="your country"},
      *          {"name"="birth_date", "dataType"="date('Year-Month-Day')", "required"=true, "description"="your birth date"},
      *          {"name"="language", "dataType"="string", "required"=false, "description"="Default en can be en or fr"},
      *          {"name"="email", "dataType"="email", "required"=false, "description"="your email"},
@@ -140,13 +140,13 @@ class DefaultController extends FOSRestController
         $user =$this->getUser();
         //hydrate les données reçues
         $data = $request->request->all();
+        $this->response['count'] = $request->request->count();
         // sauvegarde les données utilisateurs
         if($this->checkData($data, 'FULL_REGISTER')){
             $user->setAddress($data['address']);
             $user->setCity($data['city']);
             if(!empty($data['country']))
                 $user->setCountry($em->getRepository('P4MUserBundle:Country')->find($data['country']));
-
             $user->setBirthDate(new DateTime($data['birth_date']));
             if(!empty($data['language']))
                 $user->setLanguage($data['language']);
