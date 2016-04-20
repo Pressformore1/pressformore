@@ -6,8 +6,6 @@ use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
-use P4M\CoreBundle\Entity\Post;
-use P4M\CoreBundle\Form\PostType;
 use P4M\UserBundle\Entity\User;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Response;
@@ -105,31 +103,9 @@ class DefaultController extends FOSRestController
     }
 
     /**
-     * @Rest\Post("complete/register")
      * @ApiDoc(
      *     resource="Register",
      *     description="Complete your inscription",
-     *     parameters={
-     *          {"name"="address", "dataType"="string", "required"=true, "description"="your address"},
-     *          {"name"="city", "dataType"="string", "required"=true, "description"="your city"},
-     *          {"name"="country", "dataType"="integer", "required"=true, "description"="your country"},
-     *          {"name"="birth_date", "dataType"="date('Year-Month-Day')", "required"=true, "description"="your birth date"},
-     *          {"name"="language", "dataType"="string", "required"=false, "description"="Default en can be en or fr"},
-     *          {"name"="email", "dataType"="email", "required"=false, "description"="your email"},
-     *          {"name"="first_name", "dataType"="string", "required"=false, "description"="your first name"},
-     *          {"name"="last_name", "dataType"="string", "required"=false, "description"="your last name"},
-     *          {"name"="website", "dataType"="string", "required"=false, "description"="your website"},
-     *          {"name"="bio", "dataType"="text", "required"=false, "description"="your biography"},
-     *          {"name"="skills", "dataType"="text", "required"=false, "description"="your skills"},
-     *     },
-     *     statusCodes={
-     *              200="User Correctly updated",
-     *              606="Empty Adresse",
-     *              607="Empty City",
-     *              608="Empty Country",
-     *              609="Bad birth date",
-     *              615="Bad email format"
-     *     }
      * )
      * @param Request $request
      * @return Response
