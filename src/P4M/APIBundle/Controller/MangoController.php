@@ -173,15 +173,15 @@ class MangoController extends FOSRestController
         $cards = $mango->getUserCards($mangoUser);
         $last_card = null;
         foreach($cards as $card){
-            if($last_card == null)
+            if($last_card == null && $card->Validity == 'VALID')
                 $last_card = $card;
-            elseif($last_card->CreationDate < $card->CreationDate)
+            elseif($last_card->CreationDate < $card->CreationDate && $card->Validity == 'VALID')
                 $last_card = $card;
         }
         $wallets = $mango->getUserWallets($mangoUser);
         $wallet = $wallets[0];
         $this->response['wallet'] = $wallet;
-        $this->response['last_card'] = $card;
+        $this->response['last_card'] = $cards;
         $this->response['status_codes'] = 200;
         return $this->response;
     }
