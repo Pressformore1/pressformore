@@ -239,6 +239,9 @@ class PostController extends FOSRestController
      *     requirements={
      *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
      *     },
+     *     statusCodes={
+     *              500="This post is not on read later",
+     *     }
      * )
      */
     public function deletePostReadlaterAction(Request $request){
@@ -271,6 +274,9 @@ class PostController extends FOSRestController
      *     description="Press a post",
      *     requirements={
      *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *     },
+     *     statusCodes={
+     *              500="post already press",
      *     }
      * )
      */
@@ -313,6 +319,10 @@ class PostController extends FOSRestController
      *     requirements={
      *          {"name"="type", "dataType"="integer", "required"=true, "description"="type"},
      *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *     },
+     *     statusCodes={
+     *              500="This post is not unpressed",
+     *              501="The type is not valid",
      *     }
      * )
      */
@@ -323,9 +333,14 @@ class PostController extends FOSRestController
         $post = $em->getRepository('P4MCoreBundle:Post')->find($data['id']);
         $unpressform = $em->getRepository('P4MCoreBundle:Unpressform')->findOneBy(['post'=>$post,'user'=>$user]);
         $type = $em->getRepository('P4MCoreBundle:UnpressformType')->find($data['type']);
-        if($unpressform === null OR $type === null){
+        if($unpressform === null){
             $this->response['status_codes'] = 500;
-            $this->response['message'] = 'something is wrong';
+            $this->response['message'] = 'This post is not unpressed';
+            return $this->response;
+        }
+        elseif($type === null){
+            $this->response['status_codes'] = 501;
+            $this->response['message'] = 'The type is not valid';
             return $this->response;
         }
         $unpressform->setType($type);
@@ -347,6 +362,9 @@ class PostController extends FOSRestController
      *     description="Unpress a post",
      *     requirements={
      *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *     },
+     *     statusCodes={
+     *              500="This post is not pressed",
      *     }
      * )
      */
@@ -425,6 +443,9 @@ class PostController extends FOSRestController
      *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
      *          {"name"="email", "dataType"="email", "required"=false, "description"="author email"},
      *          {"name"="tweeter", "dataType"="tweeter_account", "required"=false, "description"="author twetter account"},
+     *     },
+     *     statusCodes={
+     *              500="You have already post information about this post/author",
      *     }
      * )
      */

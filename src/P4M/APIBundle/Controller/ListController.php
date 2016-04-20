@@ -2,8 +2,7 @@
 
 namespace P4M\APIBundle\Controller;
 
-use FOS\RestBundle\Controller\Annotations\Get;
-use FOS\RestBundle\Controller\Annotations\View;
+use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,12 +21,12 @@ class ListController extends FOSRestController
     }
 
     /**
-     * @Get("list/category")
+     * @Rest\Get("list/category")
      * @ApiDoc(
      *     resource="List",
      *     description="Get list of category"
      * )
-     * @View(serializerGroups={"json"})
+     * @Rest\View(serializerGroups={"json"})
      * @return Response
      */
     public function getListCategoryAction()
@@ -36,12 +35,12 @@ class ListController extends FOSRestController
         return $categorys;
     }
     /**
-     * @Get("list/type")
+     * @Rest\Get("list/type")
      * @ApiDoc(
      *     resource="List",
      *     description="Get list of Type"
      * )
-     * @View(serializerGroups={"json"})
+     * @Rest\View(serializerGroups={"json"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getListTypeAction(){
@@ -50,12 +49,12 @@ class ListController extends FOSRestController
     }
 
     /**
-     * @Get("list/country")
+     * @Rest\Get("list/country")
      * @ApiDoc(
      *     resource="List",
      *     description="Get list of Country"
      * )
-     * @View(serializerGroups={"json"})
+     * @Rest\View(serializerGroups={"json"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function getListCountryAction(){
@@ -65,10 +64,10 @@ class ListController extends FOSRestController
 
 
     /**
-     * @Get("list/post")
+     * @Rest\Get("list/post")
      * @param Request $request
      * @return Response
-     * @View(serializerGroups={"list"})
+     * @Rest\View(serializerGroups={"list"})
      * @ApiDoc(
      *     resource="List",
      *     description="Get list post of wall",
