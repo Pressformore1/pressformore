@@ -128,8 +128,7 @@ class ListController extends FOSRestController
     public function getListPressedAction(){
         $user = $this->getUser();
         $repo = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Pressform');
-        $now = new \DateTime('now');
-        $last_month = $now->modify('first day of last month midnight');
+
         $data['pressedPayed'] = $repo->createQueryBuilder('P')->where('P.payed = true')
             ->andWhere('P.sender = :sender')
             ->setParameter('sender', $user)
