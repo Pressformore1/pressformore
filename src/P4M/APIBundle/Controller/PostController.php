@@ -365,6 +365,7 @@ class PostController extends FOSRestController
      *     },
      *     statusCodes={
      *              500="This post is not pressed",
+     *              501="You cant unpress a post already payed"
      *     }
      * )
      */
@@ -377,6 +378,11 @@ class PostController extends FOSRestController
         if(null == $pressForm){
             $this->response['status_codes'] = 500;
             $this->response['message'] = 'This post is not pressed';
+            return $this->response;
+        }
+        if($pressForm->getPayed() == true){
+            $this->response['status_codes'] = 501;
+            $this->response['message'] = 'You cant unpress a post already payed';
             return $this->response;
         }
         $unpress = new \P4M\CoreBundle\Entity\Unpressform();
