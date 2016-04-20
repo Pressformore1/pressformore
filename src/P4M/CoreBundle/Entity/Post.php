@@ -26,7 +26,7 @@ class Post
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"list"})
+     * @Groups({"list", "json"})
      */
     private $id;
     
@@ -36,7 +36,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title",type="string",length=255)
-     * @Groups({"list"})
+     * @Groups({"list", "json"})
      */
     
     private $title;
@@ -134,6 +134,7 @@ class Post
     /**
     * @Gedmo\Slug(fields={"title"})
     * @ORM\Column(length=128, unique=true)
+    * @Groups("json")
     */
     private $slug;
     
@@ -227,6 +228,7 @@ class Post
     
     /**
      * @ORM\ManyToOne(targetEntity="P4M\UserBundle\Entity\User",inversedBy="productions",cascade="remove")
+     * @Groups({"list", "json"})
      */
     private $author;
     

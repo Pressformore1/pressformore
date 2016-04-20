@@ -3,6 +3,7 @@
 namespace P4M\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Pressform
@@ -25,6 +26,7 @@ class Pressform
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date")
+     * @Groups("json")
      */
     private $date;
 
@@ -37,6 +39,7 @@ class Pressform
     
     /**
      * @ORM\ManyToOne(targetEntity="\P4M\CoreBundle\Entity\Post", inversedBy="pressforms")
+     * @Groups("json")
      */
     private $post;
     
@@ -44,6 +47,7 @@ class Pressform
     /**
      *
      * @var boolean
+     * @Groups("json")
      * @ORM\Column(name="payed",type="boolean")
      */
     private $payed;

@@ -116,4 +116,30 @@ class ListController extends FOSRestController
         $this->response['posts'] = $posts;
         return $this->response;
     }
+
+    /**
+     * @return Response
+     * @Rest\View(serializerGroups={"json"})
+     * @ApiDoc(
+     *     resource="List",
+     *     description="Get list of post pressed"
+     * )
+     */
+    public function getListPressedAction(){
+        $user = $this->getUser();
+        $repo = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Pressform');
+        $now = new \DateTime('now');
+        $last_month = $now->modify('first day of last month midnight');
+        $data['pressedPayed'] = $repo->createQueryBuilder('P')->where('P.payed = true')
+            ->andWhere('P.sender = :sender')
+            ->setParameter('sender', $user)
+            ->getQuery()
+            ->getResult();
+        $data['pressed'] = $repo->createQueryBuilder('P')->where('P.payed = false')
+            ->andWhere('P.sender = :sender')
+            ->setParameter('sender', $user)
+            ->getQuery()
+            ->getResult();
+        return $data;
+    }
 }
