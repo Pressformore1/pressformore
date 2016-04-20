@@ -7,6 +7,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use P4M\MangoPayBundle\Entity\BankAccountIBAN;
 use P4M\MangoPayBundle\Entity\WalletFill;
 use P4M\MangoPayBundle\Form\BankAccountIBANType;
+use P4M\MangoPayBundle\MangoPaySDK\Entities\Card;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Component\HttpFoundation\Response;
@@ -173,15 +174,15 @@ class MangoController extends FOSRestController
         $cards = $mango->getUserCards($mangoUser);
         $last_card = null;
         foreach($cards as $card){
-            if($last_card == null && $card->Validity == 'VALID')
+            if($card->Validity == 'VALID')
                 $last_card = $card;
-            elseif($last_card->CreationDate < $card->CreationDate && $card->Validity == 'VALID')
+            elseif($last_card instanceof Card && $last_card->CreationDate < $card->CreationDate && $card->Validity == 'VALID')
                 $last_card = $card;
         }
         $wallets = $mango->getUserWallets($mangoUser);
         $wallet = $wallets[0];
         $this->response['wallet'] = $wallet;
-        $this->response['last_card'] = $cards;
+        $this->response['last_card'] = $last_card;
         $this->response['status_codes'] = 200;
         return $this->response;
     }
