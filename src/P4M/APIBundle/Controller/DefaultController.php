@@ -24,35 +24,6 @@ class DefaultController extends FOSRestController
         ];
     }
 
-    /**
-     * @ApiDoc(
-     *     resource="Register",
-     *     description="Complete your inscription",
-     *     parameters={
-     *          {"name"="address", "dataType"="string", "required"=true, "description"="your address"},
-     *          {"name"="city", "dataType"="string", "required"=true, "description"="your city"},
-     *          {"name"="country", "dataType"="integer", "required"=true, "description"="your country"},
-     *          {"name"="birth_date", "dataType"="Year-Month-Day", "required"=true, "description"="your birth date"},
-     *          {"name"="language", "dataType"="string", "required"=false, "description"="Default en can be en or fr"},
-     *          {"name"="email", "dataType"="email", "required"=false, "description"="your email"},
-     *          {"name"="first_name", "dataType"="string", "required"=false, "description"="your first name"},
-     *          {"name"="last_name", "dataType"="string", "required"=false, "description"="your last name"},
-     *          {"name"="website", "dataType"="string", "required"=false, "description"="your website"},
-     *          {"name"="bio", "dataType"="text", "required"=false, "description"="your biography"},
-     *          {"name"="skills", "dataType"="text", "required"=false, "description"="your skills"},
-     *     }
-     * )
-     * @param Request $request
-     * @return Response
-     * @View()
-     */
-    public function postFullRegisterAction(Request $request)
-    {
-        $data = $request->request->all();
-        $this->response['count'] = $request->request->count();
-        $this->response['data'] = $data;
-        return $this->response;
-    }
 
     /**
      * @Rest\Post("register")
@@ -79,7 +50,6 @@ class DefaultController extends FOSRestController
      *          621="Email already exist",
      *          640="Terms need to be accepted"
      *     }
-     *
      * )
      * @param Request $request
      * @return Response
@@ -137,7 +107,7 @@ class DefaultController extends FOSRestController
     /**
      * @Rest\Post("complete/register")
      * @ApiDoc(
-     *     resource="Register",
+     *     resource="complete",
      *     description="Complete your inscription",
      *     parameters={
      *          {"name"="address", "dataType"="string", "required"=true, "description"="your address"},
