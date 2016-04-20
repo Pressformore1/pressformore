@@ -29,12 +29,17 @@ class DefaultController extends FOSRestController
      *     resource="Register",
      *     description="Complete your inscription",
      *     parameters={
-     *          {"name"="username", "dataType"="string", "required"=true, "description"="your username"},
-     *          {"name"="email", "dataType"="email", "required"=true, "description"="your email"},
-     *          {"name"="password", "dataType"="password", "required"=true, "description"="your password"},
-     *          {"name"="first_name", "dataType"="string", "required"=true, "description"="your first name"},
-     *          {"name"="last_name", "dataType"="string", "required"=true, "description"="your last name"},
-     *          {"name"="term_accepted", "dataType"="boolean", "required"=true, "description"="term accepted"},
+     *          {"name"="address", "dataType"="string", "required"=true, "description"="your address"},
+     *          {"name"="city", "dataType"="string", "required"=true, "description"="your city"},
+     *          {"name"="country", "dataType"="integer", "required"=true, "description"="your country"},
+     *          {"name"="birth_date", "dataType"="Year-Month-Day", "required"=true, "description"="your birth date"},
+     *          {"name"="language", "dataType"="string", "required"=false, "description"="Default en can be en or fr"},
+     *          {"name"="email", "dataType"="email", "required"=false, "description"="your email"},
+     *          {"name"="first_name", "dataType"="string", "required"=false, "description"="your first name"},
+     *          {"name"="last_name", "dataType"="string", "required"=false, "description"="your last name"},
+     *          {"name"="website", "dataType"="string", "required"=false, "description"="your website"},
+     *          {"name"="bio", "dataType"="text", "required"=false, "description"="your biography"},
+     *          {"name"="skills", "dataType"="text", "required"=false, "description"="your skills"},
      *     }
      * )
      * @param Request $request
