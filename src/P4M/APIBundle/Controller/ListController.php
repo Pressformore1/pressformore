@@ -100,7 +100,7 @@ class ListController extends FOSRestController
             $postData['excludedCategories']=$wall->getExcludedCatsId();
             $postData['excludedTags']=$wall->getExcludedTagsId();
             $postData['bannedPost']=$bannedPostId;
-            $searchResult = $repository->findCustom(null,$postData, $page, $nb_by_page);
+            $searchResult = $repository->findCustom([],$postData, $page, $nb_by_page);
         }
         $posts = $searchResult['entities'];
         foreach($posts as $key => $value){
