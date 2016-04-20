@@ -128,6 +128,7 @@ class MangoController extends FOSRestController
         $amount *= 100;
         $preAuthorisation = $request->request->get('preAuthorisation');
 
+        // DONT NEED THIS WEB JAVASCRIPT TOOLKIT !!!
         //$updatedCardRegister = $mango->getCardRegistration($cardId,$data);
 //        if($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)){
 //            $this->response['status_codes'] = '501';
@@ -137,15 +138,12 @@ class MangoController extends FOSRestController
         $wallets = $mango->getUserWallets($mangoUser);
         $wallet = $wallets[0];
         $returnURL = $this->generateUrl("p4_m_backoffice_homepage",[],true).'#wallet';
-
         $result = $mango->chargeWallet($mangoUser,$cardId,$wallet,$returnURL,$amount);
-
         if($result->Status !== 'SUCCEEDED'){
             $this->response['message'] = $result->ResultMessage;
             $this->response['status_codes'] = $result->Status;
             return $this->response;
         }
-
         $walletFill = new WalletFill();
         $walletFill->setRecurrent($preAuthorisation);
         $walletFill->setUser($user);
@@ -153,11 +151,39 @@ class MangoController extends FOSRestController
         $walletFill->setAmount($amount);
         $em->persist($walletFill);
         $em->flush();
-
         $this->response['message'] = 'Tout c\'est bien terminer';
         $this->response['status_codes'] = 200;
         return $this->response;
+    }
 
+    /**
+     * @return Response
+     * @Rest\View()
+     * @ApiDoc(
+     *  description="get Bank Info",
+     *  resource="Bank",
+     * )
+     */
+    public function getBankInfoAction(){
+        $mango = $this->container->get('p4_m_mango_pay.util');
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+        $mangoUser = $user->getMangoUserNatural();
+        $walletFill =  $em->getRepository('P4MMangoPayBundle:WalletFill')->findOneBy(['user' => $user]);
+        $cards = $mango->getUserCards($mangoUser);
+        $last_card = null;
+        foreach($cards as $card){
+            if($last_card == null)
+                $last_card = $card;
+            elseif($last_card->CreationDate < $card->CreationDate)
+                $last_card = $card;
+        }
+        $wallets = $mango->getUserWallets($mangoUser);
+        $wallet = $wallets[0];
+        $this->response['wallet'] = $wallet;
+        $this->response['last_card'] = $card;
+        $this->response['status_codes'] = 200;
+        return $this->response;
     }
 
     private function CheckKey($data, $type = null){
