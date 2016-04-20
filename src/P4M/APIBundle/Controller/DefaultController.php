@@ -59,6 +59,8 @@ class DefaultController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $data = $request->request->all();
+        $this->response['data'] = $data;
+
 
         // Vérifie si les termes son accepté
         if (!$data['term_accepted']) {
