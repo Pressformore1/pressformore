@@ -25,6 +25,31 @@ class DefaultController extends FOSRestController
     }
 
     /**
+     * @ApiDoc(
+     *     resource="Register",
+     *     description="Complete your inscription",
+     *     parameters={
+     *          {"name"="username", "dataType"="string", "required"=true, "description"="your username"},
+     *          {"name"="email", "dataType"="email", "required"=true, "description"="your email"},
+     *          {"name"="password", "dataType"="password", "required"=true, "description"="your password"},
+     *          {"name"="first_name", "dataType"="string", "required"=true, "description"="your first name"},
+     *          {"name"="last_name", "dataType"="string", "required"=true, "description"="your last name"},
+     *          {"name"="term_accepted", "dataType"="boolean", "required"=true, "description"="term accepted"},
+     *     }
+     * )
+     * @param Request $request
+     * @return Response
+     * @View()
+     */
+    public function postFullRegisterAction(Request $request)
+    {
+        $data = $request->request->all();
+        $this->response['count'] = $request->request->count();
+        $this->response['data'] = $data;
+        return $this->response;
+    }
+
+    /**
      * @Rest\Post("register")
      * @ApiDoc(
      *  resource="Register",
@@ -179,22 +204,7 @@ class DefaultController extends FOSRestController
         return $this->response;
     }
 
-    /**
-     * @ApiDoc(
-     *     resource="Register",
-     *     description="Complete your inscription",
-     * )
-     * @param Request $request
-     * @return Response
-     * @View()
-     */
-    public function postFullRegisterAction(Request $request)
-    {
-        $data = $request->request->all();
-        $this->response['count'] = $request->request->count();
-        $this->response['data'] = $data;
-        return $this->response;
-    }
+
 
     /**
      * @ApiDoc(
