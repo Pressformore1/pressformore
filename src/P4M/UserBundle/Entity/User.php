@@ -237,6 +237,7 @@ class User extends BaseUser
      * @var date
      * 
      * @ORM\Column(name="birthDate",type="date",nullable=true)
+     * @Groups({"json"})
      */
     private $birthDate;
     

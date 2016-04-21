@@ -116,14 +116,16 @@ class DefaultController extends FOSRestController
      *          {"name"="birth_date", "dataType"="Year-Month-Day", "required"=true, "description"="your birth date"},
      *          {"name"="language", "dataType"="string", "required"=false, "description"="Default en can be en or fr"},
      *          {"name"="email", "dataType"="email", "required"=false, "description"="your email"},
-     *          {"name"="first_name", "dataType"="string", "required"=false, "description"="your first name"},
-     *          {"name"="last_name", "dataType"="string", "required"=false, "description"="your last name"},
+     *          {"name"="first_name", "dataType"="string", "required"=true, "description"="your first name"},
+     *          {"name"="last_name", "dataType"="string", "required"=true, "description"="your last name"},
      *          {"name"="website", "dataType"="string", "required"=false, "description"="your website"},
      *          {"name"="bio", "dataType"="text", "required"=false, "description"="your biography"},
      *          {"name"="skills", "dataType"="text", "required"=false, "description"="your skills"},
      *     },
      *     statusCodes={
      *              200="User Correctly updated",
+     *              603="Empty First Name",
+     *              604="Empty Last Name",
      *              606="Empty Adresse",
      *              607="Empty City",
      *              608="Empty Country",
@@ -178,9 +180,7 @@ class DefaultController extends FOSRestController
         }
         return $this->response;
     }
-
-
-
+    
     /**
      * @ApiDoc(
      *     resource="Register",
