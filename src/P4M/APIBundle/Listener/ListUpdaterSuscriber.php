@@ -48,6 +48,9 @@ class ListUpdaterSuscriber implements EventSubscriber
             $data[$entity_id]['sourceUrl'] = $entity->getSourceUrl();
             $router= $this->container->get('router');
             $data[$entity_id]['slug'] = $entity->getSlug();
+            $author = $entity->getAuthor();
+            $data[$entity_id]['author']['username'] = $author->getUsername();
+            $data[$entity_id]['author']['producerKey'] = $author->getProducerKey();
             $new_list = json_encode($data);
             file_put_contents($file_root, $new_list);
         }
