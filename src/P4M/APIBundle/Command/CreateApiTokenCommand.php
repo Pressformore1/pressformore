@@ -20,7 +20,7 @@ class CreateApiTokenCommand extends ContainerAwareCommand
     {
         $clientManager = $this->getContainer()->get('fos_oauth_server.client_manager.default');
         $client = $clientManager->createClient();
-        $client->setAllowedGrantTypes(array('password'));
+        $client->setAllowedGrantTypes(array('password', 'refresh_token'));
         $reponse = $clientManager->updateClient($client);
         $output->writeln('Le client et le token on été générer pour l\'api');
 
