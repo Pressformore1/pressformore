@@ -25,7 +25,7 @@ class GenerateListCommand extends ContainerAwareCommand
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $container = $this->getContainer();
-        $file_root = $container->get('kernel')->getRootDir() . '/../web/list/Rewardlist.json';
+        $file_root = $container->get('kernel')->getRootDir() . '/../web/api/list/Rewardlist.json';
         $em = $container->get('doctrine')->getManager();
         $posts = $em->getRepository('P4MCoreBundle:Post')->createQueryBuilder('P')->where('P.author IS NOT NULL')->getQuery()->getResult();
         foreach($posts as $post){
