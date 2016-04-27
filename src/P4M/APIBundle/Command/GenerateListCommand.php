@@ -36,6 +36,7 @@ class GenerateListCommand extends ContainerAwareCommand
                 if($author !== null ){
                     $data[$post->getId()]['author']['username'] = $author->getUsername();
                     $data[$post->getId()]['author']['producerKey'] = $author->getProducerKey();
+                    $data[$post->getId()]['author']['picture'] = $author->getPicture();
                 }
         }
         $list = json_encode($data);

@@ -222,6 +222,7 @@ class ProfileController extends Controller
                   ->remove('username')
                   ->remove('title')
                    ->remove('address')
+                ->remove('language')
                 ->remove('birthDate')
                   ;
 
