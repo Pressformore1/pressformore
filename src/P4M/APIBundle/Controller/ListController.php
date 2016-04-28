@@ -118,8 +118,8 @@ class ListController extends FOSRestController
 
     /**
      * @ApiDoc(
-     *     resource="Donator",
-     *     description="get information about donator",
+     *     resource="List",
+     *     description="get list donator about an author",
      *     parameters={
      *        {"name"="author", "dataType"="string", "required"=true, "description"="Author"},
      *     }
