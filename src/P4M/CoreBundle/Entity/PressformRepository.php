@@ -15,12 +15,10 @@ class PressformRepository extends EntityRepository
     public function findByRecipient($user)
     {
         $qb = $this->createQueryBuilder('p');
-    
         $qb->innerJoin('p.post', 'pp','WITH','pp.author=:user')
             ->setParameter('user', $user);
         
         $qb->orderBy('p.date', 'DESC');
-        
         return $qb->getQuery()->getResult();
     }
     
@@ -83,8 +81,25 @@ class PressformRepository extends EntityRepository
         
         $qb ->where('p.date>:lastMonth')
             ->setParameter('lastMonth', $lastMonth );
-        
-        
         return $qb->getQuery()->getSingleScalarResult();
+    }
+    public function findDonatorForAnAuthor($author){
+        $qb = $this->createQueryBuilder('PF')
+            ->join('PF.sender', 'S')
+            ->leftJoin('PF.post', 'P')
+            ->leftJoin('P.author', 'A')
+            ->leftJoin('P.tempAuthor', 'T')
+            ->addSelect('S.username as sender')
+            ->addSelect('P.slug')
+            ->addSelect('A.username as author')
+            ->addSelect('T.twitter')
+            ->addSelect('T.email')
+            ->where('A.username = :author')
+            ->orWhere('T.twitter = :author')
+            ->orWhere('T.email = :author')
+            ->setParameter('author', $author)
+            ->getQuery()->getArrayResult();
+
+        return $qb;
     }
 }

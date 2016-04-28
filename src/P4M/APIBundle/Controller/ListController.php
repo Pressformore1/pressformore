@@ -117,6 +117,32 @@ class ListController extends FOSRestController
     }
 
     /**
+     * @ApiDoc(
+     *     resource="Donator",
+     *     description="get information about donator",
+     *     parameters={
+     *        {"name"="author", "dataType"="string", "required"=true, "description"="Author"},
+     *     }
+     * )
+     * @param Request $request
+     * @return Response
+     * @Rest\View()
+     */
+    public function getListDonatorAuthorAction(Request $request){
+        $author = $request->query->get('author');
+        $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonatorForAnAuthor($author);
+        if(null == $list){
+            $this->response['status_codes'] = 201;
+            $this->response['message'] = 'resultat is empty';
+        }
+        else{
+            $this->response['status_codes'] = 200;
+            $this->response['data'] = $list;
+        }
+        return $this->response;
+    }
+
+    /**
      * @return Response
      * @Rest\View(serializerGroups={"json"})
      * @ApiDoc(

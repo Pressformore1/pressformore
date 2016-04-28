@@ -103,7 +103,7 @@ class UserRepository extends EntityRepository
         $qb ->join('u.mangoUserNatural','m')
               ->addSelect('m')
                 ;
-        
         return $qb->getQuery()->getResult();
     }
+
 }
