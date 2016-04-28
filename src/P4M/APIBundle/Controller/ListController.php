@@ -34,6 +34,7 @@ class ListController extends FOSRestController
         $categorys = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Category')->findAll();
         return $categorys;
     }
+
     /**
      * @Rest\Get("list/type")
      * @ApiDoc(
@@ -43,7 +44,8 @@ class ListController extends FOSRestController
      * @Rest\View(serializerGroups={"json"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getListTypeAction(){
+    public function getListTypeAction()
+    {
         $types = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:PostType')->findAll();
         return $types;
     }
@@ -57,7 +59,8 @@ class ListController extends FOSRestController
      * @Rest\View(serializerGroups={"json"})
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function getListCountryAction(){
+    public function getListCountryAction()
+    {
         $countrys = $this->getDoctrine()->getManager()->getRepository('P4MUserBundle:Country')->findAll();
         return $countrys;
     }
@@ -70,7 +73,8 @@ class ListController extends FOSRestController
      *     description="Get list post of wall",
      *  )
      */
-    public function getListLangAction(){
+    public function getListLangAction()
+    {
         $lang = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Lang')->findAll();
         return $lang;
     }
@@ -90,7 +94,8 @@ class ListController extends FOSRestController
      *     }
      * )
      */
-    public function getListPostAction(Request $request){
+    public function getListPostAction(Request $request)
+    {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $wall = $em->getRepository('P4MCoreBundle:Wall')->findOneByUser($user);
@@ -98,9 +103,9 @@ class ListController extends FOSRestController
         $repository = $repositoryManager->getRepository('P4MCoreBundle:Post');
         $page = (!empty($request->request->get('page'))) ? $request->request->get('page') : 1;
         $nb_by_page = (!empty($request->request->get('nb_by_page'))) ? $request->request->get('nb_by_page') : 30;
-        if($wall === null){
-            $searchResult = $repository->findPressablePosts([],$page,$nb_by_page);
-        }else{
+        if ($wall === null) {
+            $searchResult = $repository->findPressablePosts([], $page, $nb_by_page);
+        } else {
             $view = new \P4M\TrackingBundle\Entity\WallView();
             $view->setWall($wall);
             $view->setUser($user);
@@ -109,16 +114,16 @@ class ListController extends FOSRestController
             $bannedPostId = $em->getRepository('P4MBackofficeBundle:BannedPost')->findIdsByUser($user);
             $postData['categories'] = $wall->getIncludedCatsId();
             $postData['tags'] = $wall->getIncludedTagsId();
-            $postData['excludedCategories']=$wall->getExcludedCatsId();
-            $postData['excludedTags']=$wall->getExcludedTagsId();
-            $postData['bannedPost']=$bannedPostId;
-            $searchResult = $repository->findCustom(null,$postData, $page, $nb_by_page);
+            $postData['excludedCategories'] = $wall->getExcludedCatsId();
+            $postData['excludedTags'] = $wall->getExcludedTagsId();
+            $postData['bannedPost'] = $bannedPostId;
+            $searchResult = $repository->findCustom(null, $postData, $page, $nb_by_page);
         }
         $posts = $searchResult['entities'];
-        foreach($posts as $key => $value){
+        foreach ($posts as $key => $value) {
             $read_later = $value->getReadLater();
-            foreach($read_later as $k => $v){
-                if($v->getUser()->getUsername() !== $user->getUsername()){
+            foreach ($read_later as $k => $v) {
+                if ($v->getUser()->getUsername() !== $user->getUsername()) {
                     $v->getUser()->setUsername('');
                 }
             }
@@ -134,24 +139,36 @@ class ListController extends FOSRestController
      *     resource="List",
      *     description="get list donator about an author",
      *     parameters={
-     *        {"name"="author", "dataType"="string", "required"=true, "description"="Author"},
+     *        {"name"="author", "dataType"="string", "required"=false, "description"="Author"},
+     *        {"name"="slug", "dataType"="string", "required"=false, "description"="slug of post"},
      *     }
      * )
      * @param Request $request
      * @return Response
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"json"})
      */
-    public function getListDonatorAuthorAction(Request $request){
+    public function getListDonatorAction(Request $request)
+    {
         $author = $request->query->get('author');
-        $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonatorForAnAuthor($author);
-        if(null == $list){
-            $this->response['status_codes'] = 201;
-            $this->response['message'] = 'resultat is empty';
+        $slug = $request->query->get('slug');
+        if (!empty($author)) {
+            $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonatorForAnAuthor($author);
+        }
+        elseif (!empty($slug)){
+            $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonatorForAPost($slug);
         }
         else{
+            $user = $this->getUser();
+            $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonationByUser($user);
+        }
+        if (null == $list) {
+            $this->response['status_codes'] = 201;
+            $this->response['message'] = 'resultat is empty';
+        } else {
             $this->response['status_codes'] = 200;
             $this->response['data'] = $list;
         }
+
         return $this->response;
     }
 
@@ -163,7 +180,8 @@ class ListController extends FOSRestController
      *     description="Get list of post pressed"
      * )
      */
-    public function getListPressedAction(){
+    public function getListPressedAction()
+    {
         $user = $this->getUser();
         $repo = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Pressform');
 
@@ -177,7 +195,7 @@ class ListController extends FOSRestController
             ->setParameter('sender', $user)
             ->getQuery()
             ->getResult();
-        if(empty($data['pressedPayed']) && empty($data['pressed'])){
+        if (empty($data['pressedPayed']) && empty($data['pressed'])) {
             $this->response['status_codes'] = 501;
             $this->response['message'] = 'you don\'t have press post';
             return $this->response;
