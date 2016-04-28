@@ -26,7 +26,9 @@ class GenerateListCommand extends ContainerAwareCommand
     {
         $count = 0;
         $container = $this->getContainer();
-        $file_root = $container->get('kernel')->getRootDir() . '/../web/api/list/Rewardlist.json';
+        $file_root = $container->get('kernel')->getRootDir() . '/../web/api/list/rewardlist.json';
+        $file_root_full = $container->get('kernel')->getRootDir() . '/../web/api/list/rewardlistfull.json';
+        $file_root_tmp = $container->get('kernel')->getRootDir() . '/../web/api/list/rewardlisttmp.json';
         $em = $container->get('doctrine')->getManager();
         $posts = $em->getRepository('P4MCoreBundle:Post')
             ->createQueryBuilder('P')
@@ -49,18 +51,22 @@ class GenerateListCommand extends ContainerAwareCommand
             $count++;
         }
         foreach ($posts_tmpAuthor as $post) {
-            $data[$post->getId()]['sourceUrl'] = $post->getSourceUrl();
-            $data[$post->getId()]['slug'] = $post->getSlug();
+            $data_tmp[$post->getId()]['sourceUrl'] = $post->getSourceUrl();
+            $data_tmp[$post->getId()]['slug'] = $post->getSlug();
             $TempAuthor = $post->getTempAuthor();
             if($TempAuthor !== null ){
-                $data[$post->getId()]['author']['email'] = $TempAuthor->getEmail();
-                $data[$post->getId()]['author']['twitter'] = $TempAuthor->getTwitter();
+                $data_tmp[$post->getId()]['author']['email'] = $TempAuthor->getEmail();
+                $data_tmp[$post->getId()]['author']['twitter'] = $TempAuthor->getTwitter();
             }
             $count++;
         }
 
         $list = json_encode($data);
+        $list_tmp = json_encode($data_tmp);
+        $list_full = json_encode(array_merge($data, $data_tmp));
         file_put_contents($file_root, $list);
+        file_put_contents($file_root_tmp, $list_tmp);
+        file_put_contents($file_root_full, $list_full);
         $output->writeln($count.' articles on été généré dans la liste');
 
     }

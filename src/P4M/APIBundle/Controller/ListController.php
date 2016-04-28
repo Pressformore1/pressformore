@@ -79,7 +79,6 @@ class ListController extends FOSRestController
         return $lang;
     }
 
-
     /**
      * @Rest\Get("list/post")
      * @param Request $request

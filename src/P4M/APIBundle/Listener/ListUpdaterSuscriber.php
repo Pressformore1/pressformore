@@ -41,7 +41,8 @@ class ListUpdaterSuscriber implements EventSubscriber
         if ($entity instanceof Post) {
             if($entity->getAuthor() == null)
                 return ;
-            $file_root = $this->container->get('kernel')->getRootDir() . '/../web/api/list/Rewardlist.json';
+            $file_root = $this->container->get('kernel')->getRootDir() . '/../web/api/list/rewardlist.json';
+            $file_root_full = $this->container->get('kernel')->getRootDir() . '/../web/api/list/rewardlistfull.json';
             $entity_id = $entity->getId();
             $list = file_get_contents($file_root);
             $data = json_decode($list, true);
@@ -51,8 +52,28 @@ class ListUpdaterSuscriber implements EventSubscriber
             $data[$entity_id]['author']['username'] = $author->getUsername();
             $data[$entity_id]['author']['producerKey'] = $author->getProducerKey();
             $data[$entity_id]['author']['picture'] = $author->getPicture()->getFile();
+            if(!empty($data[$entity_id]['author']['twitter']))
+                unset($data[$entity_id]['author']['twitter']);
+            if(!empty($data[$entity_id]['author']['email']))
+                unset($data[$entity_id]['author']['email']);
             $new_list = json_encode($data);
             file_put_contents($file_root, $new_list);
+
+            $list_full = file_get_contents($file_root_full);
+            $data_full = json_decode($list_full, true);
+            $data_full[$entity_id]['sourceUrl'] = $entity->getSourceUrl();
+            $data_full[$entity_id]['slug'] = $entity->getSlug();
+            $author = $entity->getAuthor();
+            $data_full[$entity_id]['author']['username'] = $author->getUsername();
+            $data_full[$entity_id]['author']['producerKey'] = $author->getProducerKey();
+            $data_full[$entity_id]['author']['picture'] = $author->getPicture()->getFile();
+            if(!empty($data_full[$entity_id]['author']['twitter']))
+                unset($data_full[$entity_id]['author']['twitter']);
+            if(!empty($data_full[$entity_id]['author']['email']))
+                unset($data_full[$entity_id]['author']['email']);
+            $new_list_full = json_encode($data_full);
+            file_put_contents($file_root_full, $new_list_full);
+
         }
     }
     public function setContainer(ContainerInterface $container){

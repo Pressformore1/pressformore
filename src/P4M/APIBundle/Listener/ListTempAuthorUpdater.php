@@ -37,17 +37,28 @@ class ListTempAuthorUpdater implements EventSubscriber
 
         // perhaps you only want to act on some "Product" entity
         if ($entity instanceof TempAuthor) {
-            $file_root = $this->container->get('kernel')->getRootDir() . '/../web/api/list/Rewardlist.json';
+            $file_root_full = $this->container->get('kernel')->getRootDir() . '/../web/api/list/rewardlistfull.json';
+            $file_root_tmp = $this->container->get('kernel')->getRootDir() . '/../web/api/list/rewardlisttmp.json';
             $post = $entity->getPost();
             $entity_id = $post->getId();
-            $list = file_get_contents($file_root);
-            $data = json_decode($list, true);
-            $data[$entity_id]['sourceUrl'] = $post->getSourceUrl();
-            $data[$entity_id]['slug'] = $post->getSlug();
-            $data[$entity_id]['author']['email'] = $entity->getEmail();
-            $data[$entity_id]['author']['twitter'] = $entity->getTwitter();
-            $new_list = json_encode($data);
-            file_put_contents($file_root, $new_list);
+            $list_full = file_get_contents($file_root_full);
+            $data_full = json_decode($list_full, true);
+            $data_full[$entity_id]['sourceUrl'] = $post->getSourceUrl();
+            $data_full[$entity_id]['slug'] = $post->getSlug();
+            $data_full[$entity_id]['author']['email'] = $entity->getEmail();
+            $data_full[$entity_id]['author']['twitter'] = $entity->getTwitter();
+            $new_list_full = json_encode($data_full);
+            file_put_contents($file_root_full, $new_list_full);
+
+            $list_tmp = file_get_contents($file_root_full);
+            $data_tmp = json_decode($list_tmp, true);
+            $data_tmp[$entity_id]['sourceUrl'] = $post->getSourceUrl();
+            $data_tmp[$entity_id]['slug'] = $post->getSlug();
+            $data_tmp[$entity_id]['author']['email'] = $entity->getEmail();
+            $data_tmp[$entity_id]['author']['twitter'] = $entity->getTwitter();
+            $new_list_tmp = json_encode($data_full);
+            file_put_contents($file_root_full, $new_list_tmp);
+
         }
     }
     public function setContainer(ContainerInterface $container){
