@@ -141,6 +141,7 @@ class ListController extends FOSRestController
      *     parameters={
      *        {"name"="author", "dataType"="string", "required"=false, "description"="Author"},
      *        {"name"="slug", "dataType"="string", "required"=false, "description"="slug of post"},
+     *        {"name"="url", "dataType"="string", "required"=false, "description"="Source url of post"},
      *     }
      * )
      * @param Request $request
@@ -151,11 +152,15 @@ class ListController extends FOSRestController
     {
         $author = $request->query->get('author');
         $slug = $request->query->get('slug');
+        $url = $request->query->get('url');
         if (!empty($author)) {
             $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonatorForAnAuthor($author);
         }
         elseif (!empty($slug)){
             $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonatorForAPost($slug);
+        }
+        elseif(!empty($url)){
+            $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonationBySourceURL($url);
         }
         else{
             $user = $this->getUser();

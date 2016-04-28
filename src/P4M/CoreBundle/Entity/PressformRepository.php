@@ -133,4 +133,21 @@ class PressformRepository extends EntityRepository
             ->getQuery()->getArrayResult();
         return $qb;
     }
+    public function findDonationBySourceURL($url){
+        $qb = $this->createQueryBuilder('PF')
+            ->join('PF.sender', 'S')
+            ->leftJoin('PF.post', 'P')
+            ->leftJoin('P.author', 'A')
+            ->leftJoin('P.tempAuthor', 'T')
+            ->addSelect('S.username as sender')
+            ->addSelect('P.slug')
+            ->addSelect('A.username as author')
+            ->addSelect('T.twitter')
+            ->addSelect('T.email')
+            ->where('P.sourceUrl = :url')
+            ->setParameter('user', $url)
+            ->getQuery()->getArrayResult();
+        return $qb;
+    }
+
 }
