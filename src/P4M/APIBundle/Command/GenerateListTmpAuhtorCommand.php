@@ -33,6 +33,7 @@ class GenerateListTmpAuhtorCommand extends ContainerAwareCommand
             ->join('P.tempAuthor', 'T')
             ->where('T.id IS NOT NULL')
             ->getQuery()->getResult();
+
         foreach($posts as $post){
                 $data[$post->getId()]['sourceUrl'] = $post->getSourceUrl();
                 $data[$post->getId()]['slug'] = $post->getSlug();
@@ -44,7 +45,7 @@ class GenerateListTmpAuhtorCommand extends ContainerAwareCommand
         }
         $list = json_encode($data);
         file_put_contents($file_root, $list);
-        $output->writeln('La list des auteurs temporaires a bien été généré');
+        $output->writeln('La list des auteurs temporaires a bien été généré', $count);
 
     }
 

@@ -46,11 +46,11 @@ class ListUpdaterSuscriber implements EventSubscriber
             $list = file_get_contents($file_root);
             $data = json_decode($list, true);
             $data[$entity_id]['sourceUrl'] = $entity->getSourceUrl();
-            $router= $this->container->get('router');
             $data[$entity_id]['slug'] = $entity->getSlug();
             $author = $entity->getAuthor();
             $data[$entity_id]['author']['username'] = $author->getUsername();
             $data[$entity_id]['author']['producerKey'] = $author->getProducerKey();
+            $data[$entity_id]['author']['picture'] = $author->getPicture()->getFile();
             $new_list = json_encode($data);
             file_put_contents($file_root, $new_list);
         }

@@ -37,7 +37,7 @@ class ListTempAuthorUpdater implements EventSubscriber
 
         // perhaps you only want to act on some "Product" entity
         if ($entity instanceof TempAuthor) {
-            $file_root = $this->container->get('kernel')->getRootDir() . '/../web/api/list/rewardlisttmp.json';
+            $file_root = $this->container->get('kernel')->getRootDir() . '/../web/api/list/Rewardlist.json';
             $post = $entity->getPost();
             $entity_id = $post->getId();
             $list = file_get_contents($file_root);
