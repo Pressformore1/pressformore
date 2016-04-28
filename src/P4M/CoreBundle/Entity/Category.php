@@ -36,6 +36,7 @@ class Category
      *
      * @var type string
      * @ORM\Column(name="iconColor",type="string",length=255)
+     * @Groups({"json"})
      */
     private $iconColor;
     
@@ -43,6 +44,7 @@ class Category
      *
      * @var type string
      * @ORM\Column(name="iconGrey",type="string",length=255)
+     * @Groups({"json"})
      */
     private $iconGrey;
     

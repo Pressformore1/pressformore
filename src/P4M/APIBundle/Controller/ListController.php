@@ -62,6 +62,19 @@ class ListController extends FOSRestController
         return $countrys;
     }
 
+    /**
+     * @Rest\View(serializerGroups={"list"})
+     * @return Response
+     * @ApiDoc(
+     *     resource="List",
+     *     description="Get list post of wall",
+     *  )
+     */
+    public function getListLangAction(){
+        $lang = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Lang')->findAll();
+        return $lang;
+    }
+
 
     /**
      * @Rest\Get("list/post")

@@ -3,6 +3,7 @@
 namespace P4M\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Lang
@@ -18,6 +19,7 @@ class Lang
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups("list")
      */
     private $id;
 
@@ -25,6 +27,7 @@ class Lang
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255,unique=true)
+     * @Groups("list")
      */
     private $name;
     
@@ -32,6 +35,7 @@ class Lang
      * @var string
      *
      * @ORM\Column(name="nativeName", type="string", length=255,unique=true,nullable=true)
+     * @Groups("list")
      */
     private $nativeName;
     
@@ -40,6 +44,7 @@ class Lang
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255,unique=true)
+     *
      */
     private $code;
     
@@ -47,6 +52,7 @@ class Lang
      *
      * @var type string
      * @ORM\Column(name="iconColor",type="string",length=255)
+     * @Groups("list")
      */
     private $iconColor;
     
@@ -54,6 +60,7 @@ class Lang
      *
      * @var type string
      * @ORM\Column(name="iconGrey",type="string",length=255)
+     * @Groups("json")
      */
     private $iconGrey;
     
