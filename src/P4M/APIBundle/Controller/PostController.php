@@ -158,7 +158,7 @@ class PostController extends FOSRestController
      * @ApiDoc(
      *     resource="Post",
      *     description="Preview a post before add",
-     *     requirements={
+     *     parameters={
      *          {"name"="url", "dataType"="string", "required"=true, "description"="an url for analyze"},
      *
      *     }
