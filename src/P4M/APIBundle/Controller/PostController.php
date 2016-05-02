@@ -237,7 +237,7 @@ class PostController extends FOSRestController
      *     resource="Post",
      *     description="Remove a post in read later",
      *     requirements={
-     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
      *     },
      *     statusCodes={
      *              500="This post is not on read later",
@@ -247,10 +247,10 @@ class PostController extends FOSRestController
     public function deletePostReadlaterAction(Request $request){
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $post_id = $request->request->get('id');
-        $readPostLater = $em->getRepository('P4MBackofficeBundle:ReadPostLater')->findOneBy(['id' => $post_id, 'user' => $user]);
+        $slug = $request->request->get('$slug');
+        $readPostLater = $em->getRepository('P4MBackofficeBundle:ReadPostLater')->findOneBy(['slug' => $slug, 'user' => $user]);
         if($readPostLater !== null){
-            $post = $em->getRepository('P4MCoreBundle:Post')->find($post_id);
+            $post = $em->getRepository('P4MCoreBundle:Post')->find($slug);
             $post->removeReadLater($readPostLater);
             $em->persist($post);
             $em->remove($readPostLater);
@@ -272,7 +272,7 @@ class PostController extends FOSRestController
      * @ApiDoc(
      *     resource="Post",
      *     description="Press a post",
-     *     requirements={
+     *     parameters={
      *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
      *     },
      *     statusCodes={
@@ -318,7 +318,7 @@ class PostController extends FOSRestController
      *     description="mean us why you unpress this content",
      *     requirements={
      *          {"name"="type", "dataType"="integer", "required"=true, "description"="type"},
-     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"}
      *     },
      *     statusCodes={
      *              500="This post is not unpressed",
@@ -330,7 +330,7 @@ class PostController extends FOSRestController
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $data = $request->request->all();
-        $post = $em->getRepository('P4MCoreBundle:Post')->find($data['id']);
+        $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($data['slug']);
         $unpressform = $em->getRepository('P4MCoreBundle:Unpressform')->findOneBy(['post'=>$post,'user'=>$user]);
         $type = $em->getRepository('P4MCoreBundle:UnpressformType')->find($data['type']);
         if($unpressform === null){
@@ -406,7 +406,7 @@ class PostController extends FOSRestController
      *     resource="Post",
      *     description="Vote for a post",
      *     requirements={
-     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
      *          {"name"="score", "dataType"="integer", "required"=true, "description"="id post"},
      *     }
      * )
@@ -414,10 +414,10 @@ class PostController extends FOSRestController
     public function postPostVoteAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $id = $request->request->get('id');
+        $slug = $request->request->get('slug');
         $score = $request->request->get('score');
-        $post = $em->getRepository('P4MCoreBundle:Post')->find($id);
-        $userVote = $em->getRepository('P4MCoreBundle:Vote')->findOneBy(array('post'=>$id,'user'=>$user->getId()));
+        $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($slug);
+        $userVote = $em->getRepository('P4MCoreBundle:Vote')->findOneBy(array('post'=>$post,'user'=>$user->getId()));
         if (null === $userVote)
         {
             $userVote = new Vote();
@@ -446,7 +446,7 @@ class PostController extends FOSRestController
      *     resource="Post",
      *     description="Help us for find an author",
      *     requirements={
-     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
      *          {"name"="email", "dataType"="email", "required"=false, "description"="author email"},
      *          {"name"="tweeter", "dataType"="tweeter_account", "required"=false, "description"="author twetter account"},
      *     },
@@ -458,10 +458,10 @@ class PostController extends FOSRestController
     public function postInfoAuthorAction(Request $request){
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $id = $request->request->get('id');
+        $slug = $request->request->get('slug');
         $email = $request->request->get('email');
         $twitter = $request->request->get('twitter');
-        $post = $em->getRepository('P4MCoreBundle:Post')->find($id);
+        $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($slug);
         $wantPressForm = $em->getRepository('P4MCoreBundle:WantPressform')->findOneBy(['user'=>$user,'post'=>$post]);
         if(null === $wantPressForm)
         {
