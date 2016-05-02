@@ -273,7 +273,7 @@ class PostController extends FOSRestController
      *     resource="Post",
      *     description="Press a post",
      *     requirements={
-     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
      *     },
      *     statusCodes={
      *              500="post already press",
@@ -284,7 +284,7 @@ class PostController extends FOSRestController
 
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository('P4MCoreBundle:Post')->find($request->request->get('id'));
+        $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($request->request->get('slug'));
 
         $pressForm = $em->getRepository('P4MCoreBundle:Pressform')->findOneBy(['post'=>$post,'sender'=>$user,'payed'=>false]);
 
@@ -361,7 +361,7 @@ class PostController extends FOSRestController
      *     resource="Post",
      *     description="Unpress a post",
      *     requirements={
-     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
      *     },
      *     statusCodes={
      *              500="This post is not pressed",
@@ -372,7 +372,7 @@ class PostController extends FOSRestController
     public function deletePostPressAction(Request $request){
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository('P4MCoreBundle:Post')->find($request->request->get('id'));
+        $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($request->request->get('slug'));
         $pressForm = $em->getRepository('P4MCoreBundle:Pressform')->findOneBy(['post'=>$post,'sender'=>$user,'payed'=>false]);
 
         if(null == $pressForm){

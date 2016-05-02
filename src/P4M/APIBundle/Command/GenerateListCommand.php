@@ -21,7 +21,6 @@ class GenerateListCommand extends ContainerAwareCommand
         $this->setName('api:generate:list')
             ->setDescription('Génère la list d\'url pour l\'api');
     }
-
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $count = 0;
@@ -39,6 +38,7 @@ class GenerateListCommand extends ContainerAwareCommand
             ->join('P.tempAuthor', 'T')
             ->where('T.id IS NOT NULL')
             ->getQuery()->getResult();
+        
         foreach ($posts as $post) {
             $data[$post->getId()]['sourceUrl'] = $post->getSourceUrl();
             $data[$post->getId()]['slug'] = $post->getSlug();
@@ -60,7 +60,6 @@ class GenerateListCommand extends ContainerAwareCommand
             }
             $count++;
         }
-
         $list = json_encode($data);
         $list_tmp = json_encode($data_tmp);
         $list_full = json_encode(array_merge($data, $data_tmp));
