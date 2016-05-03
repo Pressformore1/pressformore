@@ -33,7 +33,7 @@ class PostController extends FOSRestController
      * @ApiDoc(
      *     resource="Post",
      *     description="add a post",
-     *     requirements={
+     *     parameters={
      *          {"name"="title", "dataType"="string", "required"=true, "description"="Title"},
      *          {"name"="content", "dataType"="text", "required"=true, "description"="Content"},
      *          {"name"="picture", "dataType"="url", "required"=true, "description"="Picture"},
@@ -194,8 +194,8 @@ class PostController extends FOSRestController
      * @ApiDoc(
      *     resource="Post",
      *     description="Add a post in read later",
-     *     requirements={
-     *          {"name"="id", "dataType"="integer", "required"=true, "description"="id post"},
+     *     parameters={
+     *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
      *     }
      * )
      */
@@ -203,11 +203,11 @@ class PostController extends FOSRestController
 
         $user =$this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $post_id = $request->request->get('id');
-        $check_if_exists = $em->getRepository('P4MBackofficeBundle:ReadPostLater')->findBy(['id' => $post_id, 'user' => $user]);
+        $slug = $request->request->get('slug');
+        $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($slug);
+        $check_if_exists = $em->getRepository('P4MBackofficeBundle:ReadPostLater')->findOneBy(['post' => $post, 'user' => $user]);
 
         if($check_if_exists === null){
-            $post = $em->getRepository('P4MCoreBundle:Post')->find($post_id);
             if($post !== null){
                 $readPostLater = new ReadPostLater();
                 $readPostLater->setUser($user);
@@ -236,7 +236,7 @@ class PostController extends FOSRestController
      * @ApiDoc(
      *     resource="Post",
      *     description="Remove a post in read later",
-     *     requirements={
+     *     parameters={
      *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
      *     },
      *     statusCodes={
@@ -247,7 +247,7 @@ class PostController extends FOSRestController
     public function deletePostReadlaterAction(Request $request){
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
-        $slug = $request->request->get('$slug');
+        $slug = $request->request->get('slug');
         $readPostLater = $em->getRepository('P4MBackofficeBundle:ReadPostLater')->findOneBy(['slug' => $slug, 'user' => $user]);
         if($readPostLater !== null){
             $post = $em->getRepository('P4MCoreBundle:Post')->find($slug);
@@ -281,23 +281,18 @@ class PostController extends FOSRestController
      * )
      */
     public function postPostPressAction(Request $request){
-
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($request->request->get('slug'));
-
         $pressForm = $em->getRepository('P4MCoreBundle:Pressform')->findOneBy(['post'=>$post,'sender'=>$user,'payed'=>false]);
-
         if( null !== $pressForm){
             $this->response['status_codes'] = 500;
             $this->response['message'] = 'post already press';
             return $this->response;
         }
-
         $unpressForm = $em->getRepository('P4MCoreBundle:Unpressform')->findOneBy(['post'=>$post,'user'=>$user]);
         if(null !== $unpressForm)
             $em->remove($unpressForm);
-
         $pressForm = new Pressform();
         $pressForm->setSender($user);
         $pressForm->setPost($post);
@@ -316,7 +311,7 @@ class PostController extends FOSRestController
      * @ApiDoc(
      *     resource="Post",
      *     description="mean us why you unpress this content",
-     *     requirements={
+     *     parameters={
      *          {"name"="type", "dataType"="integer", "required"=true, "description"="type"},
      *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"}
      *     },
@@ -360,7 +355,7 @@ class PostController extends FOSRestController
      * @ApiDoc(
      *     resource="Post",
      *     description="Unpress a post",
-     *     requirements={
+     *     parameters={
      *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
      *     },
      *     statusCodes={
@@ -405,9 +400,8 @@ class PostController extends FOSRestController
      * @ApiDoc(
      *     resource="Post",
      *     description="Vote for a post",
-     *     requirements={
+     *     parameters={
      *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
-     *          {"name"="score", "dataType"="integer", "required"=true, "description"="id post"},
      *     }
      * )
      */
@@ -417,14 +411,14 @@ class PostController extends FOSRestController
         $slug = $request->request->get('slug');
         $score = $request->request->get('score');
         $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($slug);
-        $userVote = $em->getRepository('P4MCoreBundle:Vote')->findOneBy(array('post'=>$post,'user'=>$user->getId()));
+        $userVote = $em->getRepository('P4MCoreBundle:Vote')->findOneBy(array('post'=>$post,'user'=>$user));
         if (null === $userVote)
         {
             $userVote = new Vote();
             $userVote->setUser($user);
             $userVote->setPost($post);
         }
-        $userVote->setScore($score);
+        $userVote->setScore(1);
         $em->persist($userVote);
         $em->flush();
         $postitiveVotesNumber = $em->getRepository('P4MCoreBundle:Post')->countPositive($post);
@@ -445,7 +439,7 @@ class PostController extends FOSRestController
      * @ApiDoc(
      *     resource="Post",
      *     description="Help us for find an author",
-     *     requirements={
+     *     parameters={
      *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
      *          {"name"="email", "dataType"="email", "required"=false, "description"="author email"},
      *          {"name"="tweeter", "dataType"="tweeter_account", "required"=false, "description"="author twetter account"},

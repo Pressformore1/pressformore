@@ -33,7 +33,7 @@ class MangoController extends FOSRestController
      * @ApiDoc(
      *     resource="Bank",
      *     description="add a post",
-     *     requirements={
+     *     parameters={
      *          {"name"="iban", "dataType"="string", "required"=true, "description"="iban of your account"},
      *          {"name"="bic", "dataType"="string", "required"=true, "description"="bic of your account"},
      *          {"name"="ownerName", "dataType"="string", "required"=true, "description"="owner name"},
