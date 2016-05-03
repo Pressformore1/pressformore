@@ -401,7 +401,7 @@ class PostController extends FOSRestController
      *     description="Vote for a post",
      *     parameters={
      *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
-     *          {"name"="score", "dataType"="integer", "required"=true, "description"="score +1 or -1"},
+     *          {"name"="score", "dataType"="integer", "required"=true, "description"="score 1 or -1"},
      *     }
      * )
      */
@@ -421,8 +421,8 @@ class PostController extends FOSRestController
         $userVote->setScore(1);
         $em->persist($userVote);
         $em->flush();
-        $postitiveVotesNumber = $em->getRepository('P4MCoreBundle:Post')->countPositive($post);
-        $negativeVotesNumber = $em->getRepository('P4MCoreBundle:Post')->countNegative($post);
+        $postitiveVotesNumber = $post->getPositiveVoteNumber();
+        $negativeVotesNumber = $post->getNegativeVoteNumber();
         $this->response['status_codes'] = 200;
         $this->response['message'] = 'Vote has been added';
         $this->response['positiveVotesNumber'] = $postitiveVotesNumber;
