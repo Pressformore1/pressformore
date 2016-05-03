@@ -160,7 +160,6 @@ class PostController extends FOSRestController
      *     description="Preview a post before add",
      *     parameters={
      *          {"name"="url", "dataType"="string", "required"=true, "description"="an url for analyze"},
-     *
      *     }
      * )
      * @Rest\View()
@@ -402,6 +401,7 @@ class PostController extends FOSRestController
      *     description="Vote for a post",
      *     parameters={
      *          {"name"="slug", "dataType"="string", "required"=true, "description"="slug post"},
+     *          {"name"="score", "dataType"="integer", "required"=true, "description"="score +1 or -1"},
      *     }
      * )
      */
