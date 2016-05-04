@@ -74,7 +74,7 @@ class ProfileController extends Controller
                 
                 $this->get('session')->getFlashBag()->add(
                 'success',
-                'Your informations has been successfully updated.'
+                $this->get('translator')->trans('Your informations has been successfully updated.')
                 );
                 $url = $this->generateUrl('p4_m_backoffice_profile_infos');
                     return $this->redirect($url);
@@ -83,7 +83,7 @@ class ProfileController extends Controller
             {
                 $this->get('session')->getFlashBag()->add(
                 'error',
-                'Oops, something gone wrong, please try again'
+                $this->get('translator')->trans('Oops, something gone wrong, please try again')
                 );
             }
         }
