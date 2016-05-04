@@ -31,16 +31,16 @@ services:
         arguments: ["@doctrine.orm.entity_manager"]
         tags:
             - { name: form.type, alias: userskills }
-#    P4M_Core.locale_listener:
-#        class: P4M\CoreBundle\Service\MyLocaleListener
-#        arguments:
-#          - %kernel.default_locale%
-#          - @security.token_storage
-#          - @router
-#          - @security.authorization_checker
-#        tags:
-#            - { name: kernel.event_listener, event: kernel.request ,method: setLocal }
-#            - { name: kernel.event_subscriber, event: kernel.request, priority: 99}
+    P4M_Core.locale_listener:
+        class: P4M\CoreBundle\Service\MyLocaleListener
+        arguments:
+          - %kernel.default_locale%
+          - @security.token_storage
+          - @router
+          - @security.authorization_checker
+        tags:
+            # - { name: kernel.event_listener, event: kernel.request ,method: setLocal }
+            - { name: kernel.event_subscriber, event: kernel.request, priority: 99}
 #    P4M_core.locale_listener_onauth:
 #        class: P4M\CoreBundle\Service\LocalListenerOnAuth
 #        arguments:

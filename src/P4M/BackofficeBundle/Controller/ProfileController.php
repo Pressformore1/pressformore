@@ -159,6 +159,7 @@ class ProfileController extends Controller
                 ->remove('title')
                  ->remove('address')
                 ->remove('birthDate')
+            ->remove('language')
                 ;
         
        $dispatcher = $this->container->get('event_dispatcher');
