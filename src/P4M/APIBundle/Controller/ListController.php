@@ -70,7 +70,7 @@ class ListController extends FOSRestController
      * @return Response
      * @ApiDoc(
      *     resource="List",
-     *     description="Get list post of wall",
+     *     description="Get list post of language",
      *  )
      */
     public function getListLangAction()

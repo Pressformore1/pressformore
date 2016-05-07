@@ -32,7 +32,7 @@ class MangoController extends FOSRestController
      * @Rest\View()
      * @ApiDoc(
      *     resource="Bank",
-     *     description="add a post",
+     *     description="Create an Iban account",
      *     parameters={
      *          {"name"="iban", "dataType"="string", "required"=true, "description"="iban of your account"},
      *          {"name"="bic", "dataType"="string", "required"=true, "description"="bic of your account"},

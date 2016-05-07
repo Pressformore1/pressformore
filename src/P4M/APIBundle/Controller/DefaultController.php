@@ -107,7 +107,7 @@ class DefaultController extends FOSRestController
     /**
      * @Rest\Post("complete/register")
      * @ApiDoc(
-     *     resource="complete",
+     *     resource="Register",
      *     description="Complete your inscription",
      *     parameters={
      *          {"name"="address", "dataType"="string", "required"=true, "description"="your address"},
