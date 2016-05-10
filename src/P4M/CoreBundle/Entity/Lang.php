@@ -44,6 +44,7 @@ class Lang
      * @var string
      *
      * @ORM\Column(name="code", type="string", length=255,unique=true)
+     * @Groups("list")
      *
      */
     private $code;
