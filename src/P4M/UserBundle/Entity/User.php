@@ -317,7 +317,7 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @ORM\Column(name="language", type="string")
+     * @ORM\Column(name="language", type="string", options={"default":"en"}, nullable=False)
      */
     
     private $language = "en";

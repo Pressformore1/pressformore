@@ -21,9 +21,10 @@ class GenerateListCommand extends ContainerAwareCommand
 {
     protected function configure()
     {
-        $this->setName('api:generate:list')
+        $this->setName('api:generate:list')->setAliases(['generate:list:api'])
             ->setDescription('Génère la list d\'url pour l\'api');
     }
+
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $count = 0;
@@ -31,9 +32,12 @@ class GenerateListCommand extends ContainerAwareCommand
         $file_root = $container->get('kernel')->getRootDir() . '/../web/api/list/rewardlist.json';
         $file_root_full = $container->get('kernel')->getRootDir() . '/../web/api/list/rewardlistfull.json';
         $file_root_tmp = $container->get('kernel')->getRootDir() . '/../web/api/list/rewardlisttmp.json';
-        unlink($file_root);
-        unlink($file_root_full);
-        unlink($file_root_tmp);
+        if (file_exists($file_root))
+            unlink($file_root);
+        if (file_exists($file_root_full))
+            unlink($file_root_full);
+        if (file_exists($file_root_tmp))
+            unlink($file_root_tmp);
         $em = $container->get('doctrine')->getManager();
         $posts = $em->getRepository('P4MCoreBundle:Post')
             ->createQueryBuilder('P')
@@ -45,8 +49,16 @@ class GenerateListCommand extends ContainerAwareCommand
             ->where('T.id IS NOT NULL')
             ->getQuery()->getResult();
 
-        $posts_proposal = $em->getRepository('P4MCoreBundle:WantPressform')->findAll();
-        
+        // $posts_proposal = $em->getRepository('P4MCoreBundle:WantPressform')->findAll();
+
+        $posts_proposal = $em->getRepository('P4MCoreBundle:WantPressform')
+            ->createQueryBuilder('W')
+            ->select('W')
+            ->join('W.post', 'post')
+            ->leftJoin('post.tempAuthor', 'T')
+            ->where('T.id IS NULL')
+            ->getQuery()->getResult();
+
         foreach ($posts as $post) {
             $data[$post->getId()]['sourceUrl'] = $post->getSourceUrl();
             $data[$post->getId()]['slug'] = $post->getSlug();
@@ -63,24 +75,21 @@ class GenerateListCommand extends ContainerAwareCommand
             $data_tmp[$post->getId()]['sourceUrl'] = $post->getSourceUrl();
             $data_tmp[$post->getId()]['slug'] = $post->getSlug();
             $TempAuthor = $post->getTempAuthor();
-            if($TempAuthor !== null ){
-                $data_tmp[$post->getId()]['statuss'] = 'VALIDATE';
+            if ($TempAuthor !== null) {
+                $data_tmp[$post->getId()]['status'] = 'VALIDATE';
                 $data_tmp[$post->getId()]['author']['email'] = $TempAuthor->getEmail();
                 $data_tmp[$post->getId()]['author']['twitter'] = $TempAuthor->getTwitter();
             }
             $count++;
         }
-        $p=0;
-        foreach ($posts_proposal as $want){
-            if(!($want->getPost()->getAuthor() instanceof User) && !($want->getPost()->getTempAuthor() instanceof  TempAuthor)){
-                $post_id = $want->getPost()->getId();
-                $data_tmp[$post_id]['sourceUrl'] = $want->getPost()->getSourceUrl();
-                $data_tmp[$post_id]['slug'] = $want->getPost()->getSlug();
-                $data_tmp[$post_id]['status'] = 'NO VALIDATE';
-                $data_tmp[$post_id]['wantpress'][$want->getUser()->getId()]['email'] = $want->getEmail();
-                $data_tmp[$post_id]['wantpress'][$want->getUser()->getId()]['twitter'] = $want->getTwitter();
-                $p++;
-            }
+        foreach ($posts_proposal as $want) {
+            $post_id = $want->getPost()->getId();
+            $data_tmp[$post_id]['sourceUrl'] = $want->getPost()->getSourceUrl();
+            $data_tmp[$post_id]['slug'] = $want->getPost()->getSlug();
+            $data_tmp[$post_id]['status'] = 'NO VALIDATE';
+            $data_tmp[$post_id]['wantpress'][$want->getUser()->getUsername()]['email'] = $want->getEmail();
+            $data_tmp[$post_id]['wantpress'][$want->getUser()->getUsername()]['twitter'] = $want->getTwitter();
+            $count++;
         }
         $list = json_encode($data);
         $list_tmp = json_encode($data_tmp);
@@ -88,7 +97,10 @@ class GenerateListCommand extends ContainerAwareCommand
         file_put_contents($file_root, $list);
         file_put_contents($file_root_tmp, $list_tmp);
         file_put_contents($file_root_full, $list_full);
-        $output->writeln($count.' articles on été généré dans la liste'. 'et '.$p);
+        $output->writeln('Les listes ont été générer avec '. $count . ' articles
+        '.$file_root .'
+        ' .$file_root_full. '
+        ' .$file_root_tmp);
 
     }
 
