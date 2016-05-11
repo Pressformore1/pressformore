@@ -34,8 +34,6 @@ class PostViewRepository extends EntityRepository
 //                    ->;
 //        
 //        $qb->where($qb)
-        
-        
     }
     
     public function findLastMonthPostReadNumberByUser($user)

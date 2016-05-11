@@ -369,11 +369,6 @@ class AjaxController extends Controller
             $em->flush();
         }
         
-        
-        
-        
-        
-        
         $json_response = 
             [
                 'status'=>1,

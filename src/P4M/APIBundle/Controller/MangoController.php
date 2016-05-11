@@ -124,36 +124,36 @@ class MangoController extends FOSRestController
         $mango = $this->container->get('p4_m_mango_pay.util');
         $cardId = $request->request->get('cardId');
         $mangoUser = $user->getMangoUserNatural();
-
-        $amount = $request->request->get('amount');
-        $amount *= 100;
-        $preAuthorisation = $request->request->get('preAuthorisation');
-
-        // DONT NEED THIS WEB JAVASCRIPT TOOLKIT !!!
-        //$updatedCardRegister = $mango->getCardRegistration($cardId,$data);
-//        if($updatedCardRegister->Status != 'VALIDATED' || !isset($updatedCardRegister->CardId)){
-//            $this->response['status_codes'] = '501';
-//            $this->response['message'] = 'Something is not Valid,';
-//            return $this->response;
-//        }
-        $wallets = $mango->getUserWallets($mangoUser);
-        $wallet = $wallets[0];
-        $returnURL = $this->generateUrl("p4_m_backoffice_homepage",[],true).'#wallet';
-        $result = $mango->chargeWallet($mangoUser,$cardId,$wallet,$returnURL,$amount);
-        if($result->Status !== 'SUCCEEDED'){
-            $this->response['message'] = $result->ResultMessage;
-            $this->response['status_codes'] = $result->Status;
-            return $this->response;
+        $refill = $this->getDoctrine()->getRepository('P4MMangoPayBundle:WalletFill')->findOneByUser($user);
+        $wallet = $mango->getCustommerWallet($mangoUser);
+        if($wallet->Balance->Amount == 0 OR $refill == NULL){
+            $amount = $request->request->get('amount');
+            $amount *= 100;
+            $preAuthorisation = $request->request->get('preAuthorisation');
+            /*        $wallets = $mango->getUserWallets($mangoUser);
+                    $wallet = $wallets[0];*/
+            $returnURL = $this->generateUrl("p4_m_backoffice_homepage",[],true).'#wallet';
+            $result = $mango->chargeWallet($mangoUser,$cardId,$wallet,$returnURL,$amount);
+            if($result->Status !== 'SUCCEEDED'){
+                $this->response['message'] = $result->ResultMessage;
+                $this->response['status_codes'] = $result->Status;
+                return $this->response;
+            }
+            $walletFill = new WalletFill();
+            $walletFill->setRecurrent($preAuthorisation);
+            $walletFill->setUser($user);
+            $walletFill->setCardId($cardId);
+            $walletFill->setAmount($amount);
+            $em->persist($walletFill);
+            $em->flush();
+            $this->response['message'] = 'Tout c\'est bien terminer';
+            $this->response['status_codes'] = 200;
         }
-        $walletFill = new WalletFill();
-        $walletFill->setRecurrent($preAuthorisation);
-        $walletFill->setUser($user);
-        $walletFill->setCardId($cardId);
-        $walletFill->setAmount($amount);
-        $em->persist($walletFill);
-        $em->flush();
-        $this->response['message'] = 'Tout c\'est bien terminer';
-        $this->response['status_codes'] = 200;
+        else{
+            $this->response['message'] = "Vous avez déjà de l'argent sur votre compte";
+            $this->response['status_codes'] = 1;
+        }
+
         return $this->response;
     }
 
