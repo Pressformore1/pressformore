@@ -32,7 +32,7 @@ class Pressform
 
     
     /**
-     * @Groups("json")
+     * @Groups({"json", "donator"})
      * @ORM\ManyToOne(targetEntity="\P4M\UserBundle\Entity\User", inversedBy="sentPressforms")
      */
     private $sender;
@@ -48,7 +48,7 @@ class Pressform
     /**
      *
      * @var boolean
-     * @Groups("json")
+     * @Groups({"json", "donator"})
      * @ORM\Column(name="payed",type="boolean")
      */
     private $payed;

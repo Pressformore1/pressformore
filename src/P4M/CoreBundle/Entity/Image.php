@@ -2,6 +2,7 @@
 
 namespace P4M\CoreBundle\Entity;
 
+use JMS\Serializer\Annotation\Accessor;
 use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,7 +28,8 @@ class Image
 
     /**
      * @var string
-     * @Groups({"json"})
+     * @Groups({"json", "donator"})
+     * @Accessor(getter="getWebPath")
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;

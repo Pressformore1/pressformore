@@ -21,10 +21,10 @@ class PostRepository extends EntityRepository
     public function getFullActivity(User $user)
     {
         $qb = new \Doctrine\DBAL\Query\QueryBuilder();
-        
-        
-        
-        
+
+
+
+
         $qb = $this->createQueryBuilder('p');
         $qb = $this->addComments($qb);
         $qb = $this->addVotes($qb);
@@ -584,6 +584,6 @@ class PostRepository extends EntityRepository
                     ->addSelect('sc')
                     ;
     }
-    
+
     
 }

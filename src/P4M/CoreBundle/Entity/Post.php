@@ -26,7 +26,7 @@ class Post
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"list", "json"})
+     * @Groups({"list", "json", "donator"})
      */
     private $id;
     
@@ -36,7 +36,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title",type="string",length=255)
-     * @Groups({"list", "json"})
+     * @Groups({"list", "json", "donator"})
      */
     
     private $title;
@@ -45,7 +45,7 @@ class Post
     /**
      * @var string
      * @ORM\Column(name="picture", type="string", length=255)
-     * @Groups({"list"})
+     * @Groups({"list", "donator"})
      */
     private $picture;
     
@@ -234,13 +234,13 @@ class Post
     
     /**
      * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Pressform",mappedBy="post")
-     * 
+     * @Groups({"donator"})
      */
     private $pressforms;
     
     /**
      * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\WantPressform",mappedBy="post")
-     * 
+     * @Groups({"donator"})
      */
     private $wantPressforms;
     

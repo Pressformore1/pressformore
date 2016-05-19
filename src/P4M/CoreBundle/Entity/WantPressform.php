@@ -3,6 +3,7 @@
 namespace P4M\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * WantPressform
@@ -46,6 +47,7 @@ class WantPressform
     private $post;
     
     /**
+     * @Groups({"donator"})
      * @ORM\ManyToOne(targetEntity="\P4M\UserBundle\Entity\User")
      */
     private $user;

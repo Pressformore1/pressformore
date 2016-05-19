@@ -145,7 +145,7 @@ class ListController extends FOSRestController
      * )
      * @param Request $request
      * @return Response
-     * @Rest\View(serializerGroups={"json"})
+     * @Rest\View(serializerGroups={"donator"})
      */
     public function getListDonatorAction(Request $request)
     {
@@ -156,7 +156,7 @@ class ListController extends FOSRestController
             $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonatorForAnAuthor($author);
         }
         elseif (!empty($slug)){
-            $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonatorForAPost($slug);
+            $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Post')->findBySlug($slug);
         }
         elseif(!empty($url)){
             $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonationBySourceURL($url);

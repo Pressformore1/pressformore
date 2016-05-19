@@ -32,6 +32,7 @@ class User extends BaseUser
     /**
      * @var string
      * @Groups({"json", "list"})
+     * @Groups({"donator"})
      */
     protected $username;
 
@@ -148,7 +149,7 @@ class User extends BaseUser
     /**
      *
      * @ORM\OneToOne(targetEntity="P4M\CoreBundle\Entity\Image",cascade={"persist","remove"})
-     * @Groups({"json"})
+     * @Groups({"json", "donator"})
      */
     private $picture;
     
