@@ -170,7 +170,7 @@ class ListController extends FOSRestController
             $this->response['message'] = 'resultat is empty';
         } else {
             $this->response['status_codes'] = 200;
-            $this->response['data'] = $list;
+            return $list;
         }
 
         return $this->response;

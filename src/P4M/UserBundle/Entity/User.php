@@ -148,6 +148,7 @@ class User extends BaseUser
     /**
      *
      * @ORM\OneToOne(targetEntity="P4M\CoreBundle\Entity\Image",cascade={"persist","remove"})
+     * @Groups({"json"})
      */
     private $picture;
     

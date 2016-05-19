@@ -32,6 +32,7 @@ class Pressform
 
     
     /**
+     * @Groups("json")
      * @ORM\ManyToOne(targetEntity="\P4M\UserBundle\Entity\User", inversedBy="sentPressforms")
      */
     private $sender;

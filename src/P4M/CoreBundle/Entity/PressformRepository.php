@@ -78,7 +78,6 @@ class PressformRepository extends EntityRepository
         $qb = $em->createQueryBuilder();
         $qb ->select('count(DISTINCT p.post)');
         $qb ->from('P4MCoreBundle:PressForm','p');
-        
         $qb ->where('p.date>:lastMonth')
             ->setParameter('lastMonth', $lastMonth );
         return $qb->getQuery()->getSingleScalarResult();
@@ -89,6 +88,8 @@ class PressformRepository extends EntityRepository
             ->leftJoin('PF.post', 'P')
             ->leftJoin('P.author', 'A')
             ->leftJoin('P.tempAuthor', 'T')
+            ->leftJoin('S.picture', 'SP')
+            ->addSelect("CONCAT( CONCAT(SP.id, '.' ), SP.name) as sender_picture")
             ->addSelect('S.username as sender')
             ->addSelect('P.slug')
             ->addSelect('A.username as author')
@@ -107,6 +108,8 @@ class PressformRepository extends EntityRepository
             ->leftJoin('PF.post', 'P')
             ->leftJoin('P.author', 'A')
             ->leftJoin('P.tempAuthor', 'T')
+            ->leftJoin('S.picture', 'SP')
+            ->addSelect("CONCAT( CONCAT(SP.id, '.' ), SP.name) as sender_picture")
             ->addSelect('S.username as sender')
             ->addSelect('P.slug')
             ->addSelect('A.username as author')
@@ -123,6 +126,8 @@ class PressformRepository extends EntityRepository
             ->leftJoin('PF.post', 'P')
             ->leftJoin('P.author', 'A')
             ->leftJoin('P.tempAuthor', 'T')
+            ->leftJoin('S.picture', 'SP')
+            ->addSelect("CONCAT( CONCAT(SP.id, '.' ), SP.name) as sender_picture")
             ->addSelect('S.username as sender')
             ->addSelect('P.slug')
             ->addSelect('A.username as author')
@@ -139,6 +144,8 @@ class PressformRepository extends EntityRepository
             ->leftJoin('PF.post', 'P')
             ->leftJoin('P.author', 'A')
             ->leftJoin('P.tempAuthor', 'T')
+            ->leftJoin('S.picture', 'SP')
+            ->addSelect("CONCAT( CONCAT(SP.id, '.' ), SP.name) as sender_picture")
             ->addSelect('S.username as sender')
             ->addSelect('P.slug')
             ->addSelect('A.username as author')

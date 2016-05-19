@@ -2,6 +2,7 @@
 
 namespace P4M\CoreBundle\Entity;
 
+use JMS\Serializer\Annotation\Groups;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -26,14 +27,14 @@ class Image
 
     /**
      * @var string
-     *
+     * @Groups({"json"})
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var string
-     *
+     * @Groups({"json"})
      * @ORM\Column(name="alt", type="string", length=255)
      */
     private $alt;
