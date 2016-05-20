@@ -159,7 +159,7 @@ class ListController extends FOSRestController
             $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Post')->findBySlug($slug);
         }
         elseif(!empty($url)){
-            $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Pressform')->findDonationBySourceURL($url);
+            $list = $this->getDoctrine()->getRepository('P4MCoreBundle:Post')->findBySourceUrl($url);
         }
         else{
             $user = $this->getUser();

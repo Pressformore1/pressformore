@@ -228,7 +228,7 @@ class Post
     
     /**
      * @ORM\ManyToOne(targetEntity="P4M\UserBundle\Entity\User",inversedBy="productions",cascade="remove")
-     * @Groups({"list", "json"})
+     * @Groups({"list", "json", "donator"})
      */
     private $author;
     
