@@ -170,6 +170,11 @@ class MangoController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $mangoUser = $user->getMangoUserNatural();
+        if($mangoUser == null){
+            $this->response['status_codes'] = 404;
+            $this->response['message'] = 'vous n\'avez pas de compte en banque';
+            return $this->response;
+        }
         $walletFill =  $em->getRepository('P4MMangoPayBundle:WalletFill')->findOneBy(['user' => $user]);
         $cards = $mango->getUserCards($mangoUser);
         $last_card = null;
