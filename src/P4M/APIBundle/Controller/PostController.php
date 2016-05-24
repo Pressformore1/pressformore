@@ -113,13 +113,21 @@ class PostController extends FOSRestController
      * @param Request $request
      * @ApiDoc(
      *     resource="Post",
-     *     description="Get a post"
+     *     description="Get a post",
+     *     parameters={
+     *          {"name"="slug", "dataType"="string", "required"=false, "description"="slug of post"},
+     *     }
      * )
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"donator"})
      */
     public function getPostAction(Request $request){
         if($slug = $request->query->get('slug')){
             $post = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Post')->findOneBySlug($slug);
+            if($post == null){
+                $this->response['status_codes'] = 404;
+                $this->response['message'] = "This post don't exist";
+            }
+//            $this->response = $post;
             $this->response['status_codes'] = 200;
             $this->response['post'] = $post->toArray();
         }else{

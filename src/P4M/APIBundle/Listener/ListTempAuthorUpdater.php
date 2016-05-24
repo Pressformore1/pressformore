@@ -51,8 +51,11 @@ class ListTempAuthorUpdater implements EventSubscriber
             $d['slug'] = $post->getSlug();
             $d['author']['email'] = $entity->getEmail();
             $d['author']['twitter'] = $entity->getTwitter();
+            foreach ($post->getWantPressforms() as $wantPressform){
+                $d['wantpress'][$wantPressform->getUser()->getUsername()] = $wantPressform->getUser()->getPicture()->getWebPath();
+            }
+            
             $data_full[$entity_id] = $data_tmp[$entity_id] = $d;
-
             $new_list_full = json_encode($data_full);
             file_put_contents($file_root_full, $new_list_full);
 
@@ -75,6 +78,7 @@ class ListTempAuthorUpdater implements EventSubscriber
             $d['status'] = 'NO VALIDATE';
             $d['wantpress'][$entity->getUser()->getUsername()]['email'] = $entity->getEmail();
             $d['wantpress'][$entity->getUser()->getUsername()]['twitter'] = $entity->getTwitter();
+            $d['wantpress'][$entity->getUser()->getUsername()]['picture'] = $entity->getUser()->getPicture()->getWebPath();
 
             $data_full[$entity_id] = $data_tmp[$entity_id] = $d;
             $new_list_full = json_encode($data_full);

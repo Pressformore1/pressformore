@@ -68,7 +68,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="sourceUrl", type="string", length=255,unique = true)
-     * @Groups({"list"})
+     * @Groups({"list", "donator"})
      */
     private $sourceUrl;
 
@@ -134,7 +134,7 @@ class Post
     /**
     * @Gedmo\Slug(fields={"title"})
     * @ORM\Column(length=128, unique=true)
-    * @Groups("json")
+    * @Groups({"json", "donator"})
     */
     private $slug;
     

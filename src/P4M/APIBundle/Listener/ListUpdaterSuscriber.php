@@ -6,6 +6,7 @@ use Doctrine\ORM\Event\LifecycleEventArgs;
 use P4M\CoreBundle\Entity\Post;
 
 use Doctrine\Common\EventSubscriber;
+use P4M\CoreBundle\Entity\Pressform;
 use Symfony\Component\DependencyInjection\Container;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -57,6 +58,10 @@ class ListUpdaterSuscriber implements EventSubscriber
             $d['author']['username'] = $author->getUsername();
             $d['author']['producerKey'] = $author->getProducerKey();
             $d['author']['picture'] = $author->getPicture()->getFile();
+            foreach ($entity->getPressforms() as $pressform){
+                   $sender = $pressform->getSender();
+                   $d['pressform'][$sender->getUsername()]['picture'] = $sender->getPicture()->getWebPath();
+            }
             $data[$entity_id] = $d;
             $data_full[$entity_id] = $d;
 

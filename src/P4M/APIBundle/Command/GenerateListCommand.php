@@ -41,11 +41,24 @@ class GenerateListCommand extends ContainerAwareCommand
         $em = $container->get('doctrine')->getManager();
         $posts = $em->getRepository('P4MCoreBundle:Post')
             ->createQueryBuilder('P')
+            ->leftJoin('P.wantPressforms', 'W')
+            ->leftJoin('W.user', 'S')
+            ->leftJoin('S.picture', 'SP')
+            ->addSelect('W')
+            ->addSelect('S')
+            ->addSelect('SP')
             ->where('P.author IS NOT NULL')
             ->getQuery()->getResult();
         $posts_tmpAuthor = $em->getRepository('P4MCoreBundle:Post')
             ->createQueryBuilder('P')
             ->join('P.tempAuthor', 'T')
+            ->addSelect('T')
+            ->leftJoin('P.wantPressforms', 'W')
+            ->addSelect('W')
+            ->leftJoin('W.user', 'WU')
+            ->addSelect('WU')
+            ->leftJoin('WU.picture', 'WUP')
+            ->addSelect('WUP')
             ->where('T.id IS NOT NULL')
             ->getQuery()->getResult();
 
@@ -67,7 +80,11 @@ class GenerateListCommand extends ContainerAwareCommand
                 $data[$post->getId()]['status'] = 'COMPLETE';
                 $data[$post->getId()]['author']['username'] = $author->getUsername();
                 $data[$post->getId()]['author']['producerKey'] = $author->getProducerKey();
-                $data[$post->getId()]['author']['picture'] = $author->getPicture()->getFile();
+                $data[$post->getId()]['author']['picture'] = $author->getPicture()->getWebPath();
+                foreach ($post->getPressforms() as $pressform){
+                        $sender = $pressform->getSender();
+                        $data[$post->getId()]['pressform'][$sender->getUsername()] = $sender->getPicture()->getWebPath();
+                }
             }
             $count++;
         }
@@ -80,8 +97,16 @@ class GenerateListCommand extends ContainerAwareCommand
                 $data_tmp[$post->getId()]['author']['email'] = $TempAuthor->getEmail();
                 $data_tmp[$post->getId()]['author']['twitter'] = $TempAuthor->getTwitter();
             }
+            if($post instanceof  Post){
+                foreach ($post->getWantPressforms() as $wantPressform){
+                        $data_tmp[$post->getId()]['wantpress'][$wantPressform->getUser()->getUsername()] = $wantPressform->getUser()->getPicture()->getWebPath();
+
+                }
+            }
+
             $count++;
         }
+
         foreach ($posts_proposal as $want) {
             $post_id = $want->getPost()->getId();
             $data_tmp[$post_id]['sourceUrl'] = $want->getPost()->getSourceUrl();
@@ -89,6 +114,7 @@ class GenerateListCommand extends ContainerAwareCommand
             $data_tmp[$post_id]['status'] = 'NO VALIDATE';
             $data_tmp[$post_id]['wantpress'][$want->getUser()->getUsername()]['email'] = $want->getEmail();
             $data_tmp[$post_id]['wantpress'][$want->getUser()->getUsername()]['twitter'] = $want->getTwitter();
+            $data_tmp[$post_id]['wantpress'][$want->getUser()->getUsername()]['picture'] = $want->getUser()->getPicture();
             $count++;
         }
         $list = json_encode($data);
