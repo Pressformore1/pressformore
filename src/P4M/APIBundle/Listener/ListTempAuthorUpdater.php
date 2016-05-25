@@ -12,6 +12,16 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ListTempAuthorUpdater implements EventSubscriber
 {
     private $container;
+    private $file_root_full;
+    private $file_root_tmp;
+    private $list_tmp;
+    private $list_full;
+
+    public function __construct()
+    {
+    }
+
+
     /**
      * Returns an array of events this subscriber wants to listen to.
      *
@@ -41,7 +51,7 @@ class ListTempAuthorUpdater implements EventSubscriber
             $file_root_full = $this->container->get('kernel')->getRootDir() . '/../web/api/list/rewardlistfull.json';
             $file_root_tmp = $this->container->get('kernel')->getRootDir() . '/../web/api/list/rewardlisttmp.json';
             $post = $entity->getPost();
-            $entity_id = $post->getId();
+            $post_id = $post->getId();
             $list_tmp = file_get_contents($file_root_tmp);
             $data_tmp = json_decode($list_tmp, true);
             $list_full = file_get_contents($file_root_full);
@@ -54,8 +64,8 @@ class ListTempAuthorUpdater implements EventSubscriber
             foreach ($post->getWantPressforms() as $wantPressform){
                 $d['wantpress'][$wantPressform->getUser()->getUsername()] = $wantPressform->getUser()->getPicture()->getWebPath();
             }
-            
-            $data_full[$entity_id] = $data_tmp[$entity_id] = $d;
+
+            $data_full[$post_id] = $data_tmp[$post_id] = $d;
             $new_list_full = json_encode($data_full);
             file_put_contents($file_root_full, $new_list_full);
 
@@ -67,11 +77,11 @@ class ListTempAuthorUpdater implements EventSubscriber
             $file_root_full = $this->container->get('kernel')->getRootDir() . '/../web/api/list/rewardlistfull.json';
             $file_root_tmp = $this->container->get('kernel')->getRootDir() . '/../web/api/list/rewardlisttmp.json';
             $list_full = file_get_contents($file_root_full);
-            $data_full = json_decode($list_full, true);
             $list_tmp = file_get_contents($file_root_tmp);
+            $data_full = json_decode($list_full, true);
             $data_tmp = json_decode($list_tmp, true);
             $post = $entity->getPost();
-            $entity_id = $post->getId();
+            $post_id = $post->getId();
 
             $d['sourceUrl'] = $post->getSourceUrl();
             $d['slug'] = $post->getSlug();
@@ -80,10 +90,11 @@ class ListTempAuthorUpdater implements EventSubscriber
             $d['wantpress'][$entity->getUser()->getUsername()]['twitter'] = $entity->getTwitter();
             $d['wantpress'][$entity->getUser()->getUsername()]['picture'] = $entity->getUser()->getPicture()->getWebPath();
 
-            $data_full[$entity_id] = $data_tmp[$entity_id] = $d;
+            $data_full[$post_id] = $d;
+            $data_tmp[$post_id] = $d;
             $new_list_full = json_encode($data_full);
             file_put_contents($file_root_full, $new_list_full);
-            $new_list_tmp = json_encode($data_full);
+            $new_list_tmp = json_encode($data_tmp);
             file_put_contents($file_root_tmp, $new_list_tmp);
         }
     }

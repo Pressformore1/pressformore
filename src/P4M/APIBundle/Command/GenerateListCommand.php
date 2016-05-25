@@ -114,12 +114,12 @@ class GenerateListCommand extends ContainerAwareCommand
             $data_tmp[$post_id]['status'] = 'NO VALIDATE';
             $data_tmp[$post_id]['wantpress'][$want->getUser()->getUsername()]['email'] = $want->getEmail();
             $data_tmp[$post_id]['wantpress'][$want->getUser()->getUsername()]['twitter'] = $want->getTwitter();
-            $data_tmp[$post_id]['wantpress'][$want->getUser()->getUsername()]['picture'] = $want->getUser()->getPicture();
+            $data_tmp[$post_id]['wantpress'][$want->getUser()->getUsername()]['picture'] = $want->getUser()->getPicture()->getWebPath();
             $count++;
         }
         $list = json_encode($data);
         $list_tmp = json_encode($data_tmp);
-        $list_full = json_encode(array_merge($data, $data_tmp));
+        $list_full = json_encode($data + $data_tmp);
         file_put_contents($file_root, $list);
         file_put_contents($file_root_tmp, $list_tmp);
         file_put_contents($file_root_full, $list_full);
