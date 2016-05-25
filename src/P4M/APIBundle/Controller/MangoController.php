@@ -184,7 +184,14 @@ class MangoController extends FOSRestController
             elseif($last_card instanceof Card && $last_card->CreationDate < $card->CreationDate && $card->Validity == 'VALID')
                 $last_card = $card;
         }
+
         $wallets = $mango->getUserWallets($mangoUser);
+        if(!is_array($wallets) or empty($wallets)){
+            $this->response['status_codes'] = 403;
+            $this->response['message'] = "Vous n'avez pas encore d'information de payement";
+            return $this->response;
+        }
+        
         $wallet = $wallets[0];
         $this->response['wallet'] = $wallet;
         $this->response['last_card'] = $last_card;
