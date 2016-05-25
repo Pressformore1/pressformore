@@ -187,11 +187,11 @@ class MangoController extends FOSRestController
 
         $wallets = $mango->getUserWallets($mangoUser);
         if(!is_array($wallets) or empty($wallets)){
-            $this->response['status_codes'] = 403;
+            $this->response['status_codes'] = 404;
             $this->response['message'] = "Vous n'avez pas encore d'information de payement";
             return $this->response;
         }
-        
+
         $wallet = $wallets[0];
         $this->response['wallet'] = $wallet;
         $this->response['last_card'] = $last_card;
