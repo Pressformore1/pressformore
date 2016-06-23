@@ -12,7 +12,7 @@ class PostVerifyCommand extends ContainerAwareCommand{
     protected function configure()
     {
         $this->setName('post:verify:url')
-            ->setDescription("Vérifie les url de la liste (prend du temps)");
+            ->setDescription("Vérifie les url de la liste (prend du temps !)");
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
@@ -67,9 +67,10 @@ class PostVerifyCommand extends ContainerAwareCommand{
             $em->flush();
         }
         $progress_bar->finish();
-        $output->writeln($i . ' posts ont été mis à jours'
-            .$r.' posts ont été rediriger'
-            .$d.' posts ont été supprimer');
+        $output->writeln('
+        <bg=green;fg=white>'.$i .' posts ont été mis à jours</>
+        <bg=yellow;fg=white>'.$r.' posts ont été rediriger</>
+        <bg=red;fg=white>'.$d.' posts ont été supprimer</>');
 
     }
     /**
