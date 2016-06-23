@@ -2,6 +2,7 @@
 
 namespace P4M\CoreBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use JMS\Serializer\Annotation\Groups;
@@ -16,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Post
 {
-    
+
     const STATUS_PUBLISHED = "status_published";
     const STATUS_DRAFT = "status_draft";
     
@@ -105,12 +106,12 @@ class Post
      * 
      */
     private $tags;
-    
+
     /**
      *
      * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Comment",cascade={"persist","remove"},mappedBy="post")
-     * 
-     * 
+     *
+     *
      */
 //    @ORM\OrderBy({"dateAdded" = "DESC"})
     private $comments;
@@ -158,7 +159,7 @@ class Post
     private $votes;
     
     /**
-     * @ORM\OneToOne(targetEntity="\P4M\ModerationBundle\Entity\PostFlag",mappedBy="post",cascade="remove")
+     * @ORM\OneToOne(targetEntity="\P4M\ModerationBundle\Entity\PostFlag",mappedBy="post", cascade="remove")
      */
     private $flag;
     
@@ -227,19 +228,24 @@ class Post
     private $userBanned;
     
     /**
-     * @ORM\ManyToOne(targetEntity="P4M\UserBundle\Entity\User",inversedBy="productions",cascade="remove")
+     * @ORM\ManyToOne(targetEntity="P4M\UserBundle\Entity\User",inversedBy="productions")
      * @Groups({"list", "json", "donator"})
      */
     private $author;
     
     /**
-     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Pressform",mappedBy="post")
+     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Pressform",mappedBy="post", cascade="remove")
      * @Groups({"donator"})
      */
     private $pressforms;
+
+    /**
+     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Unpressform",mappedBy="post", cascade="remove")
+     */
+    private $unpressforms;
     
     /**
-     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\WantPressform",mappedBy="post")
+     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\WantPressform",mappedBy="post", cascade="remove")
      * @Groups({"donator"})
      */
     private $wantPressforms;
@@ -263,7 +269,7 @@ class Post
     
     /**
      *
-     * @ORM\OneToOne(targetEntity="P4M\CoreBundle\Entity\TempAuthor", mappedBy="post")
+     * @ORM\OneToOne(targetEntity="P4M\CoreBundle\Entity\TempAuthor", mappedBy="post", cascade="remove")
      */
     private $tempAuthor;
     
@@ -273,12 +279,12 @@ class Post
     
     public function __construct()
     {
-        $this->categories = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->comments = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->views = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->votes = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->tags = new \Doctrine\Common\Collections\ArrayCollection();
-        $this->readLater = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->categories = new ArrayCollection();
+        $this->comments = new ArrayCollection();
+        $this->views = new ArrayCollection();
+        $this->votes = new ArrayCollection();
+        $this->tags = new ArrayCollection();
+        $this->readLater = new ArrayCollection();
         $this->pictureList = array();
         $this->dateAdded = new \DateTime();
         $this->lastScanned = new \DateTime();
@@ -927,6 +933,8 @@ class Post
     
     public function getCommentsCount()
     {
+        if(!$this->comments)
+            return ;
         return $this->comments->count();
     }
     
@@ -1500,4 +1508,83 @@ class Post
         return $data;
     }
 
+
+    /**
+     * Add categories
+     *
+     * @param \P4M\CoreBundle\Entity\Category $categories
+     * @return Post
+     */
+    public function addCategory(\P4M\CoreBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \P4M\CoreBundle\Entity\Category $categories
+     */
+    public function removeCategory(\P4M\CoreBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
+
+    /**
+     * Add activities
+     *
+     * @param \P4M\TrackingBundle\Entity\UserActivity $activities
+     * @return Post
+     */
+    public function addActivity(\P4M\TrackingBundle\Entity\UserActivity $activities)
+    {
+        $this->activities[] = $activities;
+
+        return $this;
+    }
+
+    /**
+     * Remove activities
+     *
+     * @param \P4M\TrackingBundle\Entity\UserActivity $activities
+     */
+    public function removeActivity(\P4M\TrackingBundle\Entity\UserActivity $activities)
+    {
+        $this->activities->removeElement($activities);
+    }
+
+    /**
+     * Add unpressforms
+     *
+     * @param \P4M\CoreBundle\Entity\UnPressform $unpressforms
+     * @return Post
+     */
+    public function addUnpressform(\P4M\CoreBundle\Entity\UnPressform $unpressforms)
+    {
+        $this->unpressforms[] = $unpressforms;
+
+        return $this;
+    }
+
+    /**
+     * Remove unpressforms
+     *
+     * @param \P4M\CoreBundle\Entity\UnPressform $unpressforms
+     */
+    public function removeUnpressform(\P4M\CoreBundle\Entity\UnPressform $unpressforms)
+    {
+        $this->unpressforms->removeElement($unpressforms);
+    }
+
+    /**
+     * Get unpressforms
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUnpressforms()
+    {
+        return $this->unpressforms;
+    }
 }
