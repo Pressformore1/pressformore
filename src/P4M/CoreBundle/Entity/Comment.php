@@ -59,7 +59,7 @@ class Comment
     private $wall;
     
     /**
-     * @ORM\OneToMany(targetEntity="\P4M\CoreBundle\Entity\Comment", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="\P4M\CoreBundle\Entity\Comment", mappedBy="parent", cascade="remove")
      */
     private $children;
 
