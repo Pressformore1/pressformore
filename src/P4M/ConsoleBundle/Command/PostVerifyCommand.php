@@ -4,6 +4,7 @@ namespace P4M\ConsoleBundle\Command;
 
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Bundle\FrameworkBundle\Command\ContainerAwareCommand;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -68,9 +69,13 @@ class PostVerifyCommand extends ContainerAwareCommand{
         }
         $progress_bar->finish();
         $output->writeln('
-        <bg=green;fg=white>'.$i .' posts ont été mis à jours</>
+        <bg=green;fg=white>'.$i .' posts ont été mis à jours</>sudo ser
         <bg=yellow;fg=white>'.$r.' posts ont été rediriger</>
         <bg=red;fg=white>'.$d.' posts ont été supprimer</>');
+
+        $i = new ArrayInput(array());
+        $command = $this->getApplication()->find('generate:list:api');
+        $command->run($i, $output);
 
     }
     /**
@@ -89,7 +94,7 @@ class PostVerifyCommand extends ContainerAwareCommand{
         if (!isset($url_parts['host'])) return false; //can't process relative URLs
         if (!isset($url_parts['path'])) $url_parts['path'] = '/';
 
-        $sock = @fsockopen($url_parts['host'], (isset($url_parts['port']) ? (int)$url_parts['port'] : 80), $errno, $errstr, 10);
+        $sock = @fsockopen($url_parts['host'], (isset($url_parts['port']) ? (int)$url_parts['port'] : 80), $errno, $errstr, 20);
         if (!$sock) return false;
 
         $request = "HEAD " . $url_parts['path'] . (isset($url_parts['query']) ? '?'.$url_parts['query'] : '') . " HTTP/1.1\r\n";

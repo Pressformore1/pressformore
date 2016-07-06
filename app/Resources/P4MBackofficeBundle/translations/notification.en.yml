@@ -6,3 +6,22 @@
 'user followed': 'user followed'
 'Your producer wallet has been loaded': 'Your producer wallet has been loaded'
 '%user% pressed your post': '%user% a récompensé votre contenu'
+'%user% rated a strew': '%user% rated a strew'
+'%user% added a new content': '%user% added a new content'
+'%user% commented a content': '%user% commented a content'
+'%user% added metadata to a content': '%user% added metadata to a content'
+'%user% reported a content': '%user% reported a content'
+'%user% rated a content': '%user% rated a content'
+'%user% commented a strew': '%user% commented a strew'
+'%user% created a new strew': '%user% created a new strew'
+'%user% rated a comment': '%user% rated a comment'
+'%user% is now following you': '%user% is now following you'
+'Another producer key has been refereced for this post : %post%': 'Another producer key has been refereced for this post : %post%'
+'you have been referenced as author for this post : %post%': 'you have been referenced as author for this post : %post%'
+
+
+
+
+
+
+
