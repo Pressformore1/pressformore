@@ -10,13 +10,13 @@ services:
   api.listupdate_suscriber:
       class: P4M\APIBundle\Listener\ListUpdaterSuscriber
       calls:
-          -  [ setContainer, [@service_container] ]
+          -  [ setUpdater, [@api.updater_list] ]
       tags:
           - { name: doctrine.event_subscriber, connection: default }
 
-  api.listtempauthor_updater:
-        class: P4M\APIBundle\Listener\ListTempAuthorUpdater
-        calls:
-            -  [ setContainer, [@service_container] ]
-        tags:
-            - { name: doctrine.event_subscriber, connection: default }
+  api.updater_list:
+    class: P4M\APIBundle\Services\UpdateList
+    arguments: [ @kernel ]
+    tags:
+      - { name: updater.list }
+
