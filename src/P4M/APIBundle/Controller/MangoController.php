@@ -177,6 +177,11 @@ class MangoController extends FOSRestController
         }
         $walletFill =  $em->getRepository('P4MMangoPayBundle:WalletFill')->findOneBy(['user' => $user]);
         $cards = $mango->getUserCards($mangoUser);
+        if($cards == null){
+            $this->response['status_codes'] = 404;
+            $this->response['message'] = "Vous n'avez pas encore d'information de payement";
+            return $this->response;
+        }
         $last_card = null;
         foreach($cards as $card){
             if($card->Validity == 'VALID')

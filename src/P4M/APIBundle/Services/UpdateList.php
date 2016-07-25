@@ -31,7 +31,6 @@ class UpdateList
 
     public function __construct(Kernel $kernel)
     {
-
         $this->file_root = $kernel->getRootDir() . '/../web/api/list/rewardlist.json';
         $this->file_root_full = $kernel->getRootDir() . '/../web/api/list/rewardlistfull.json';
         $this->file_root_tmp = $kernel->getRootDir() . '/../web/api/list/rewardlisttmp.json';
@@ -47,7 +46,7 @@ class UpdateList
 
 
     /**
-     * Update list for Api without save
+     * Update list for a post without save
      * @param Post $post
      */
     public function updateList(Post $post){
@@ -117,6 +116,7 @@ class UpdateList
      * @param $id
      */
     public function deletePost($id){
+
         if (array_key_exists($id, $this->data)){
             unset($this->data[$id]);
         }
@@ -128,7 +128,7 @@ class UpdateList
         if (array_key_exists($id, $this->data_full)){
             unset($this->data_full[$id]);
         }
-        
+
     }
 
     /**

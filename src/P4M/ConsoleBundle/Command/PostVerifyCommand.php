@@ -12,12 +12,15 @@ class PostVerifyCommand extends ContainerAwareCommand{
 
     protected function configure()
     {
+
         $this->setName('post:verify:url')
             ->setDescription("Vérifie les url de la liste (prend du temps !)");
+
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+
         $container = $this->getContainer();
         $em = $container->get('doctrine')->getManager();
         $posts = $em->getRepository('P4MCoreBundle:Post')->findAll();
@@ -28,15 +31,16 @@ class PostVerifyCommand extends ContainerAwareCommand{
         $progress_bar = new ProgressBar($output, $c);
         $progress_bar->start();
         foreach ($posts as $post){
+
             $url = $post->getSourceUrl();
-            //$output->writeln($post->getId());
+
             $code = $this->get_http_response_code($url);
-//            $output->writeln($code);
+
             if($code == 301 or $code == 302){
                 $new_url = $this->get_final_url($url);
-//                $output->writeln('1: '.$url);
-//                $output->writeln("2: ".$new_url);
+
                 $test_new_url = $em->getRepository('P4MCoreBundle:Post')->findOneBySourceUrl($new_url);
+                
                 if(null == $test_new_url){
                     if(is_array($new_url)){
                         if (strlen($new_url[0]) > 255){
@@ -59,17 +63,20 @@ class PostVerifyCommand extends ContainerAwareCommand{
                     $i++;
                 }
 
-            }elseif ($code == 404 or $code == 410 ){
+            }
+            elseif ($code == 404 or $code == 410 ){
                 $em->remove($post);
                 $d++;
                 $i++;
             }
             $progress_bar->advance();
             $em->flush();
+
         }
+
         $progress_bar->finish();
         $output->writeln('
-        <bg=green;fg=white>'.$i .' posts ont été mis à jours</>sudo ser
+        <bg=green;fg=white>'.$i .' posts ont été mis à jours</>
         <bg=yellow;fg=white>'.$r.' posts ont été rediriger</>
         <bg=red;fg=white>'.$d.' posts ont été supprimer</>');
 
@@ -78,6 +85,7 @@ class PostVerifyCommand extends ContainerAwareCommand{
         $command->run($i, $output);
 
     }
+
     /**
      * get_redirect_url()
      * Gets the address that the provided URL redirects to,
