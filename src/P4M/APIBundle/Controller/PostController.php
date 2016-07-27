@@ -116,24 +116,62 @@ class PostController extends FOSRestController
      *     description="Get a post",
      *     parameters={
      *          {"name"="slug", "dataType"="string", "required"=false, "description"="slug of post"},
+     *          {"name"="url", "dataType"="string", "required"=false, "description"="url of post"},
      *     }
      * )
-     * @Rest\View(serializerGroups={"donator"})
+     * @Rest\View(serializerGroups={"json", "donator"})
      */
     public function getPostAction(Request $request){
+        $post=null;
         if($slug = $request->query->get('slug')){
             $post = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Post')->findOneBySlug($slug);
             if($post == null){
                 $this->response['status_codes'] = 404;
                 $this->response['message'] = "This post don't exist";
             }
-//            $this->response = $post;
             $this->response['status_codes'] = 200;
-            $this->response['post'] = $post->toArray();
-        }else{
-            $this->response['status_codes'] = 500;
-            $this->response['message'] = 'Need a slug for find a post';
+        }elseif ($url = $request->query->get('url')){
+            $post = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Post')->findOneBySourceUrl($url);
+            if($post == null){
+                $this->response['status_codes'] = 404;
+                $this->response['message'] = "This post don't exist";
+            }
         }
+        else{
+            $this->response['status_codes'] = 500;
+            $this->response['message'] = 'Need a parameters for find a post';
+
+        }
+        if($post != null){
+            $data['sourceUrl'] = $post->getSourceUrl();
+            $data['slug'] = $post->getSlug();
+
+            if($post->getAuthor()){
+                $data['status'] = 'COMPLETE';
+                $data['author']['username'] = $post->getAuthor()->getUsername();
+                $data['author']['producerKey'] = $post->getAuthor()->getProducerKey();
+                $data['author']['picture'] = $post->getAuthor()->getPicture()->getWebPath();
+                foreach ($post->getPressforms() as $pressform){
+                    $sender = $pressform->getSender();
+                    $data['pressform'][$sender->getUsername()] = $sender->getPicture()->getWebPath();
+                }
+            }elseif ($post->getTempAuthor()){
+                $data['status'] = 'VALIDATE';
+                $data['author']['email'] = $post->getTempAuthor()->getEmail();
+                $data['author']['twitter'] = $post->getTempAuthor()->getTwitter();
+                foreach ($post->getWantPressforms() as $wantPressform){
+                    $data['wantpress'][$wantPressform->getUser()->getUsername()] = $wantPressform->getUser()->getPicture()->getWebPath();
+                }
+            }else{
+                $data['status'] = 'NO VALIDATE';
+                foreach ($post->getWantPressforms() as $wantPressform){
+                    $data['wantpress'][$wantPressform->getUser()->getUsername()] = $wantPressform->getUser()->getPicture()->getWebPath();
+                }
+            }
+            $this->response['status_codes'] = 200;
+            $this->response['post'] = $data;
+        }
+
 
         return $this->response;
     }
