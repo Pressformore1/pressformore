@@ -46,6 +46,12 @@ class MyLocaleListener implements EventSubscriberInterface
     public function onKernelRequest(GetResponseEvent $event)
     {
         $request = $event->getRequest();
+        $uri = $request->getRequestUri();
+        $route = $request->get('_route');
+
+        if(preg_match('#^/api#', $uri)){
+            return;
+        }
         if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
             return;
         }
@@ -54,7 +60,7 @@ class MyLocaleListener implements EventSubscriberInterface
             $user = $this->token_storage->getToken()->getUser();
             $user_local = $user->getLanguage();
             $locale = $request->getLocale();
-            $route = $request->get('_route');
+
             //$request->getSession()->set('_locale', $locale);
             if($user_local !== $locale){
                 $request->setLocale($user_local);
