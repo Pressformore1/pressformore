@@ -102,22 +102,7 @@ class ListController extends FOSRestController
         $repository = $repositoryManager->getRepository('P4MCoreBundle:Post');
         $page = (!empty($request->request->get('page'))) ? $request->request->get('page') : 1;
         $nb_by_page = (!empty($request->request->get('nb_by_page'))) ? $request->request->get('nb_by_page') : 30;
-        if ($wall === null) {
-            $searchResult = $repository->findPressablePosts([], $page, $nb_by_page);
-        } else {
-            $view = new \P4M\TrackingBundle\Entity\WallView();
-            $view->setWall($wall);
-            $view->setUser($user);
-            $em->persist($view);
-            $em->flush();
-            $bannedPostId = $em->getRepository('P4MBackofficeBundle:BannedPost')->findIdsByUser($user);
-            $postData['categories'] = $wall->getIncludedCatsId();
-            $postData['tags'] = $wall->getIncludedTagsId();
-            $postData['excludedCategories'] = $wall->getExcludedCatsId();
-            $postData['excludedTags'] = $wall->getExcludedTagsId();
-            $postData['bannedPost'] = $bannedPostId;
-            $searchResult = $repository->findCustom(null, $postData, $page, $nb_by_page);
-        }
+        $searchResult = $repository->findPressablePosts([], $page, $nb_by_page);
         $posts = $searchResult['entities'];
         foreach ($posts as $key => $value) {
             $read_later = $value->getReadLater();
