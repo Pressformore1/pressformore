@@ -4,6 +4,8 @@ namespace P4M\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use P4M\CoreBundle\Entity\Image;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
 use P4M\UserBundle\Entity\User;
@@ -128,6 +130,7 @@ class DefaultController extends FOSRestController
      *          {"name"="website", "dataType"="string", "required"=false, "description"="your website"},
      *          {"name"="bio", "dataType"="text", "required"=false, "description"="your biography"},
      *          {"name"="skills", "dataType"="text", "required"=false, "description"="your skills"},
+     *          {"name"="picture", "dataType"="string", "required"=false, "description"="your picture"},
      *     },
      *     statusCodes={
      *              200="User Correctly updated",
@@ -181,6 +184,25 @@ class DefaultController extends FOSRestController
                 $mangoUser = $mango->createUser($user);
                 $wallets = $mango->createWallet($mangoUser);
             }
+            if(!empty($data['picture'])){
+
+                $fileRAW = imagecreatefromstring(base64_decode($data['picture']));
+                $name = uniqid();
+                $tmp_path = sys_get_temp_dir() .'/' .$name . '.png';
+                imagepng($fileRAW, $tmp_path);
+                $file =  new UploadedFile($tmp_path, $name, 'image/png',null,null,true);
+
+                $image = new Image();
+                $image->setFile($file);
+                $old_image = $user->getPicture();
+                if($old_image->getId() != 'defaultUser'){
+                    $em->remove($old_image);
+                }
+                $user->setPicture($image);
+                $em->persist($image);
+
+            }
+
             try {
                 $em->persist($user);
                 $em->flush();

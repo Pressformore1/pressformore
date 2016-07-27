@@ -15,8 +15,7 @@ services:
           - { name: doctrine.event_subscriber, connection: default }
 
   api.updater_list:
-    class: P4M\APIBundle\Services\UpdateList
-    arguments: [ @kernel ]
-    tags:
-      - { name: updater.list }
-
+      class: P4M\APIBundle\Services\UpdateList
+      arguments: [ @kernel ]
+      tags:
+          - { name: updater.list }
