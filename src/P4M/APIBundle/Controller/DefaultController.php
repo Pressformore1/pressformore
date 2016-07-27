@@ -78,9 +78,11 @@ class DefaultController extends FOSRestController
         }
         if(!empty($data['username'])){
             $test_username = $em->getRepository('P4MUserBundle:User')->findOneBy(['username' => $data['username']]);
-            $this->response['status_codes'] = 620;
-            $this->response['message'] = 'Cette utilisateur existe déjà';
-            return $this->response;
+            if($test_username !== null ){
+                $this->response['status_codes'] = 620;
+                $this->response['message'] = 'Cette utilisateur existe déjà';
+                return $this->response;
+            }
         }
 
         // Crée un utilisateur
@@ -146,6 +148,12 @@ class DefaultController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        if ($user->getFirstLogin()===true)
+        {
+            $user->setFirstLogin(false);
+            $em->persist($user);
+            $em->flush();
+        }
         //hydrate les données reçues
         $data = $request->request->all();
         $this->response['count'] = $request->request->count();
