@@ -26,7 +26,7 @@ class AddSiteToBlacklistCommand extends ContainerAwareCommand
 
         $site = $input->getOption('url');
         if(empty($site)){
-            $output->writeln('Vous devez indiquez une url avec le paramètre -url= ou -u=');
+            $output->writeln('Vous devez indiquez une url avec le paramètre -url exemple.com ou -u exemple.com');
         }
         else{
             $blackListManager->addSite($site)->save();
