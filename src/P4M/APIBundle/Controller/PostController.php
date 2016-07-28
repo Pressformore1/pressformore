@@ -222,9 +222,12 @@ class PostController extends FOSRestController
                 return $this->response;
             }
             $metas = $userUtils->grabMetas($url);
-            if(!empty($metas)) {$this->response['metas'] = $metas;}
+            if(array_key_exists('content', $metas) && !empty($metas['content']) &&
+                array_key_exists('title', $metas) && !empty($metas['title'])) {
+                $this->response['metas'] = $metas;
+            }
             else{
-                $this->response['status_codes'] = 500;
+                $this->response['status_codes'] = 403;
                 $this->response['message']= 'Il n\'y pas d\'information a extraire';
             }
         }
