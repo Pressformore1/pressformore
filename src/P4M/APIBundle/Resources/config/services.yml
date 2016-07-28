@@ -19,3 +19,9 @@ services:
       arguments: [ @kernel ]
       tags:
           - { name: updater.list }
+
+  api.blacklist_manager:
+      class: P4M\APIBundle\Services\BlackListManager
+      arguments: [ @kernel ]
+      tags:
+          - { name: blacklist.manager }
