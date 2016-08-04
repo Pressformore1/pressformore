@@ -69,7 +69,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="sourceUrl", type="string", length=255,unique = true)
-     * @Groups({"list", "donator"})
+     * @Groups({"list", "donator", "json"})
      */
     private $sourceUrl;
 
