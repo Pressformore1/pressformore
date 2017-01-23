@@ -47,7 +47,7 @@ class MangoPay
 //        die($_SERVER['DOCUMENT_ROOT']);
         $this->api->Config->ClientId = $mango_id;
         $this->api->Config->ClientPassword = $mango_password;
-        $this->api->Config->TemporaryFolder = $root_dir.'/cache/mangopay/';
+        $this->api->Config->TemporaryFolder = __DIR__.'/../../../../MP_tmp/';
 
         $this->api->Config->BaseUrl = $mango_url;
     }
