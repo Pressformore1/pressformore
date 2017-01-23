@@ -34,3 +34,7 @@ parameters:
 
     ajax_salt: ~
     nombre_post_par_page: 10
+
+    mango_id:
+    mango_password:
+    mango_url:

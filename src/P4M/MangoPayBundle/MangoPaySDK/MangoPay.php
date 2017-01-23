@@ -25,34 +25,41 @@ use P4M\MangoPayBundle\MangoPaySDK\Types\Money;
 class MangoPay
 {
     private $em;
+
     private $api;
    
-    public function __construct(\Doctrine\ORM\EntityManager $em,  MangoPayApi $api)
+
+    public function __construct(\Doctrine\ORM\EntityManager $em,  MangoPayApi $api , $root_dir, $mango_id, $mango_password, $mango_url)
     {
         $this->em = $em;
         $this->api = $api;
-        
-        $this->config();
+        $this->config($mango_id, $mango_password, $mango_url, $root_dir);
     }
-    
-    private function config()
+
+    /**
+     * @param $mango_id
+     * @param $mango_password
+     * @param $mango_url
+     * @param $root_dir
+     */
+    private function config($mango_id, $mango_password, $mango_url, $root_dir)
     {
 //        die($_SERVER['DOCUMENT_ROOT']);
+        $this->api->Config->ClientId = $mango_id;
+        $this->api->Config->ClientPassword = $mango_password;
+        $this->api->Config->TemporaryFolder = $root_dir.'/cache/mangopay/';
 
-        $this->api->Config->ClientId = 'pfm-sandbox';
-        $this->api->Config->ClientPassword = 'Qe9v3rZD0uYRMPdbK2Aky0esSLEkU5kmjagFuX5imc5jNRwAaO';
-        $this->api->Config->TemporaryFolder = __DIR__.'/../../../../MP_tmp/';
-
-        $this->api->Config->BaseUrl = 'https://api.sandbox.mangopay.com/';
+        $this->api->Config->BaseUrl = $mango_url;
     }
+
     public function getClientId(){
         return $this->api->Config->ClientId;
     }
+
     public function getBaseUrl(){
         return $this->api->Config->BaseUrl;
     }
-    
-    
+
     public function createUser(User $user)
     {
         $mangoUser = new MangoUserNatural();

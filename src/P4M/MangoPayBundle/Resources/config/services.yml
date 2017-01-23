@@ -6,7 +6,7 @@ services:
         class: P4M\MangoPayBundle\MangoPaySDK\MangoPayApi
     p4_m_mango_pay.util:
         class: P4M\MangoPayBundle\MangoPaySDK\MangoPay
-        arguments: [ @doctrine.orm.entity_manager, @p4_m_mango_pay.api ]
+        arguments: [ @doctrine.orm.entity_manager, @p4_m_mango_pay.api, %kernel.root_dir%, %mango_id% , %mango_password%, %mango_url%]
 #    p4_m_mango_pay.example:
 #        class: %p4_m_mango_pay.example.class%
 #        arguments: [@service_id, "plain_value", %parameter%]
