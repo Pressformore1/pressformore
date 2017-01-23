@@ -27,13 +27,13 @@ class MangoPay
     private $em;
 
     private $api;
-   
 
-    public function __construct(\Doctrine\ORM\EntityManager $em,  MangoPayApi $api , $root_dir, $mango_id, $mango_password, $mango_url)
+
+    public function __construct(\Doctrine\ORM\EntityManager $em,  MangoPayApi $api , $mango_id, $mango_password, $mango_url)
     {
         $this->em = $em;
         $this->api = $api;
-        $this->config($mango_id, $mango_password, $mango_url, $root_dir);
+        $this->config($mango_id, $mango_password, $mango_url);
     }
 
     /**
@@ -42,7 +42,7 @@ class MangoPay
      * @param $mango_url
      * @param $root_dir
      */
-    private function config($mango_id, $mango_password, $mango_url, $root_dir)
+    private function config($mango_id, $mango_password, $mango_url)
     {
 //        die($_SERVER['DOCUMENT_ROOT']);
         $this->api->Config->ClientId = $mango_id;
