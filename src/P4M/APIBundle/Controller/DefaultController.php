@@ -100,7 +100,7 @@ class DefaultController extends FOSRestController
             $user->setEmail($data['email']);
             $user->setEnabled(true);
             $user->setSuperAdmin(false);
-            $user->setTermsAccepted($data['term_accepted']);
+            $user->setTermsAccepted(1);
             $em->persist($user);
             try {
                 $em->flush();
