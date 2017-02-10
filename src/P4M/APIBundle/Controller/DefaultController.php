@@ -5,6 +5,8 @@ namespace P4M\APIBundle\Controller;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use P4M\CoreBundle\Entity\Image;
+use P4M\UserBundle\Form\UserType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -13,6 +15,7 @@ use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Acl\Exception\Exception;
 use DateTime;
+use Symfony\Component\Validator\Constraints\IsTrue;
 
 class DefaultController extends FOSRestController
 {
@@ -39,18 +42,6 @@ class DefaultController extends FOSRestController
      *          {"name"="first_name", "dataType"="string", "required"=true, "description"="your first name"},
      *          {"name"="last_name", "dataType"="string", "required"=true, "description"="your last name"},
      *          {"name"="term_accepted", "dataType"="boolean", "required"=true, "description"="term accepted"},
-     *     },
-     *   statusCodes={
-     *          200="User correctly create",
-     *          601="Empty Username",
-     *          602="Empty Email",
-     *          603="Empty First Name",
-     *          604="Empty Last Name",
-     *          605="Empty Password",
-     *          615="Bad email format",
-     *          620="User already exist",
-     *          621="Email already exist",
-     *          640="Terms need to be accepted"
      *     }
      * )
      * @param Request $request
@@ -61,10 +52,27 @@ class DefaultController extends FOSRestController
     {
         $em = $this->getDoctrine()->getManager();
         $data = $request->request->all();
-        $this->response['data'] = $data;
 
+//        $user = new User();
+//        $form = $this->get('form.factory')->createNamed(null, UserType::class, $user)
+//            ->remove('language')->remove('title')->remove('website')->remove('address')
+//            ->remove('city')->remove('country')->remove('birthDate')->remove('website')
+//            ->remove('bio')->remove('picture')->remove('publicStatus')->remove('skills')
+//            ->remove('bio')->add('termsAccepted', CheckboxType::class, ['constraints' => new isTrue() ]);
+//        $form->submit($request->request->all());
+//        if ($form->isSubmitted() AND $form->isValid()) {
+//            $password = $this->get('security.password_encoder')
+//                ->encodePassword($user, $user->getPlainPassword());
+//            $user->setPassword($password);
+//            $em = $this->getDoctrine()->getManager();
+//            $em->persist($user);
+//            $em->flush();
+//            return $user;
+//        }
+//
+//        return $form->getErrors();
 
-        // Vérifie si les termes son accepté
+         // Vérifie si les termes son accepté
         if (!$data['term_accepted']) {
             $this->response['status_codes'] = 640;
             $this->response['message'] = 'Les termes du contract doivent être accepter';
@@ -159,7 +167,7 @@ class DefaultController extends FOSRestController
         }
         //hydrate les données reçues
         $data = $request->request->all();
-        $this->response['count'] = $request->request->count();
+//        $this->response['count'] = $request->request->count();
         // sauvegarde les données utilisateurs
         if ($this->checkData($data, 'FULL_REGISTER')) {
             $user->setAddress($data['address']);

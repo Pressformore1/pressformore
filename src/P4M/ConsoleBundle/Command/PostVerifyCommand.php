@@ -58,22 +58,26 @@ class PostVerifyCommand extends ContainerAwareCommand{
                     $i++;
                 }
                 else{
-                    $em->remove($post);
+                    $post->setQuarantaine(true);
+                    $em->persist($post);
                     $d++;
                     $i++;
                 }
 
             }
             elseif ($code == 404 or $code == 410 ){
-                $em->remove($post);
+                $post->setQuarantaine(true);
+                $em->persist($post);
                 $d++;
                 $i++;
             }
+
+            $progress_bar->setFormat(' %current%/%max% [%bar%] %percent:3s%% %elapsed:6s%/%estimated:-6s% %memory:6s% 
+<bg=green;fg=white>'.$i .' posts ont été mis à jours</>');
             $progress_bar->advance();
-            $em->flush();
 
         }
-
+        $em->flush();
         $progress_bar->finish();
         $output->writeln('
         <bg=green;fg=white>'.$i .' posts ont été mis à jours</>

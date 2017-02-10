@@ -25,14 +25,13 @@ class User extends BaseUser
 
     /**
      * @var string
-     * @Groups({"json"})
+     * @Groups({"info","json"})
      */
     protected $email;
 
     /**
      * @var string
-     * @Groups({"json", "list"})
-     * @Groups({"donator"})
+     * @Groups({"info", "json", "list", "donator"})
      */
     protected $username;
 
@@ -94,8 +93,6 @@ class User extends BaseUser
     private $address;
     
     /**
-     *
-     * @var text
      * @ORM\ManyToOne(targetEntity="P4M\UserBundle\Entity\Country")
      * @Groups({"json"})
      */
@@ -104,7 +101,6 @@ class User extends BaseUser
     
     
     /**
-     * @var String
      * 
      * @ORM\Column(name="url",type="string",length=255, nullable=true)
      * @Groups({"json"})
@@ -117,22 +113,19 @@ class User extends BaseUser
     private $skills;
     
     /**
-     *
+     * @var object
      * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Wall",mappedBy="user",cascade="remove")
      */
     private $walls;
     
    
     /**
-     *
      * @var integer
-     * 
      * @ORM\Column(name="wpId",type="integer",length=11, nullable=true)
      */
     private $wpId;
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\UserBundle\Entity\UserLink", mappedBy="follower",cascade="all")
      */
    
@@ -140,46 +133,40 @@ class User extends BaseUser
     
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\UserBundle\Entity\UserLink", mappedBy="following",cascade="all")
      */
    
     private $followers;
     
     /**
-     *
      * @ORM\OneToOne(targetEntity="P4M\CoreBundle\Entity\Image",cascade={"persist","remove"})
-     * @Groups({"json", "donator"})
+     * @Groups({"info","json", "donator"})
      */
     private $picture;
     
     /**
-     *
      * @ORM\OneToOne(targetEntity="P4M\UserBundle\Entity\UserPublicStatus",cascade={"persist","remove"})
      */
     private $publicStatus;
     
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Post",mappedBy="user",cascade="remove")
+     *
      */
     private $posts;
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Vote",mappedBy="user",cascade="remove")
      */
     private $votes;
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\BackofficeBundle\Entity\ReadPostLater",mappedBy="user",cascade="remove")
      */
     private $readLater;
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\NotificationBundle\Entity\Notification",mappedBy="user",cascade="remove")
      * @ORM\OrderBy({"date" = "DESC"})
      */
@@ -187,9 +174,7 @@ class User extends BaseUser
     
     
     /**
-     *
      * @var boolean
-     * 
      * @ORM\Column(name="termsAccepted",type="boolean")
      */
     private $termsAccepted;
@@ -218,13 +203,11 @@ class User extends BaseUser
     
     
     /**
-     *
      * @ORM\ManytoMany(targetEntity="P4M\CoreBundle\Entity\Wall",inversedBy="followers")
      */
     private $wallsFollowed;
     
     /**
-     *
      * @ORM\Column(name="dateCreated",type="datetime",nullable=true)
      */
     private $dateCreated;
@@ -235,9 +218,6 @@ class User extends BaseUser
     private $mangoUserNatural;
     
     /**
-     *
-     * @var date
-     * 
      * @ORM\Column(name="birthDate",type="date",nullable=true)
      * @Groups({"json"})
      */
@@ -265,27 +245,24 @@ class User extends BaseUser
     private $postViews;
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Comment",mappedBy="user",cascade={"persist","remove"})
      * @ORM\OrderBy({"dateAdded" = "DESC"})
      */
     private $comments;
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\ModerationBundle\Entity\UserFlagConfirmation",mappedBy="user",cascade="remove")
      */
     private $confirmations;
     
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Post",mappedBy="author")
+     * @Groups({"info"})
      */
     private $productions;
     
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Pressform",mappedBy="sender")
      */
     private $sentPressforms;
@@ -304,14 +281,12 @@ class User extends BaseUser
     
     
     /**
-     *
      * @var boolean
      * @ORM\Column(name="firstLogin",type="boolean")
      */
     private $firstLogin;
     
     /**
-     *
      * @var boolean
      * @ORM\Column(name="alertWalletEmpty",type="boolean")
      */
@@ -321,7 +296,6 @@ class User extends BaseUser
      * @var string
      * @ORM\Column(name="language", type="string", options={"default":"en"}, nullable=False)
      */
-    
     private $language = "en";
 
     public function __construct()
@@ -612,10 +586,6 @@ class User extends BaseUser
     {
         return $this->followers;
     }
-
-   
-
-   
 
     /**
      * Set title
@@ -1595,8 +1565,7 @@ class User extends BaseUser
         }
         return $unpayed;
     }
-
-   
+    
 
     /**
      * Set producerEnabled

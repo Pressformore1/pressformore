@@ -3,6 +3,7 @@
 namespace P4M\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation\Groups;
 
 /**
  * Unpressform
@@ -25,6 +26,7 @@ class Unpressform
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="datetime")
+     * @Groups({"info"})
      */
     private $date;
     

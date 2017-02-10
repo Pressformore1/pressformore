@@ -3,6 +3,7 @@
 namespace P4M\UserBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * UserRepository
@@ -12,98 +13,116 @@ use Doctrine\ORM\EntityRepository;
  */
 class UserRepository extends EntityRepository
 {
-    
+
     public function findWallMembers($wallId)
     {
-        
+
     }
-    
+
     public function findCommunity(User $user)
     {
         $qb = $this->createQueryBuilder('u');
-        
-        $qb ->join('u.followers','flwr','with','flwg.follower=:user')
-            ->join('u.following','flwg','with','flwg.following=:user')
+
+        $qb->join('u.followers', 'flwr', 'with', 'flwg.follower=:user')
+            ->join('u.following', 'flwg', 'with', 'flwg.following=:user')
 //            ->where('flwr.following=:user')
 //            ->orWhere('flwg.follower=:user')
             ->setParameter('user', $user);
-        
+
         return $qb->getQuery()->getResult();
-                
+
     }
-    
+
     public function findFollowers(User $user)
     {
         $qb = $this->createQueryBuilder('u');
-        
-        $qb ->join('u.following','flwg','with','flwg.following=:user')
+
+        $qb->join('u.following', 'flwg', 'with', 'flwg.following=:user')
 //            ->where('flwg.follower=:user')
             ->setParameter('user', $user);
-        
+
         return $qb->getQuery()->getResult();
     }
-    
+
     public function findFollowing(User $user)
     {
         $qb = $this->createQueryBuilder('u');
-        
-        $qb ->leftJoin('u.followers','flwr','with','flwg.follower=:user')
+
+        $qb->leftJoin('u.followers', 'flwr', 'with', 'flwg.follower=:user')
 //            ->where('flwr.following=:user')
             ->setParameter('user', $user);
-        
+
         return $qb->getQuery()->getResult();
     }
-    
+
     public function findByRole($role)
     {
         $qb = $this->createQueryBuilder('u');
-        $qb ->where('u.roles LIKE :roles')
+        $qb->where('u.roles LIKE :roles')
             ->setParameter('roles', '%"' . $role . '"%');
-        
+
         return $qb->getQuery()->getResult();
-                
+
     }
-    
+
     public function findActiveUserNumber()
     {
         $lastMonth = new \DateTime();
         $lastMonth->modify('-1 month');
-        
+
         $em = $this->getEntityManager();
         $qb = $em->createQueryBuilder();
         $qb->select('count(u.id)');
-        $qb->from('P4MUserBundle:User','u');
-        $qb ->where('u.enabled=1')
+        $qb->from('P4MUserBundle:User', 'u');
+        $qb->where('u.enabled=1')
             ->andWhere('u.lastLogin>:lastMonth')
             ->setParameter('lastMonth', $lastMonth);
-        
-        
-        
+
+
         return $qb->getQuery()->getSingleScalarResult();
-        
+
     }
+
     public function findLastMonthRegistration()
     {
         $lastMonth = new \DateTime();
         $lastMonth->modify('-1 month');
-        
+
         $qb = $this->createQueryBuilder('u');
-        $qb ->where('u.dateCreated>:lastMonth')
+        $qb->where('u.dateCreated>:lastMonth')
             ->setParameter('lastMonth', $lastMonth);
-        
-        
-        
+
+
         return $qb->getQuery()->getResult();
-        
-}
-    
+
+    }
+
     public function findGoodGuys()
     {
         $qb = $this->createQueryBuilder('u');
-        $qb ->join('u.mangoUserNatural','m')
-              ->addSelect('m')
-                ;
+        $qb->join('u.mangoUserNatural', 'm')
+            ->addSelect('m');
         return $qb->getQuery()->getResult();
+    }
+
+    public function getInfoByKey($pfmKey, $post, $user)
+    {
+        $qb = $this->createQueryBuilder('a');
+        $qb->select('a')
+            ->leftJoin('a.picture', 'i')
+            ->addSelect('i picture')
+            ->leftJoin('a.productions', 'p', Join::WITH, 'p = :post')
+            ->leftJoin('p.pressforms', 'press', Join::WITH, 'press.sender = :user')
+            ->leftJoin('p.unpressforms', 'unPress')
+            ->addSelect('p post')
+            ->addSelect('press')
+            ->addSelect('unPress')
+            ->andWhere('a.producerKey = :pfmkey')
+            ->setParameter('post', $post)
+            ->setParameter('pfmkey', $pfmKey)
+            ->setParameter('user', $user)
+        ;
+        return $qb->getQuery()->getSingleResult(); //->getSQL() . ' params: '.$qb->getParameters();
     }
 
 }

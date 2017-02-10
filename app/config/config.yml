@@ -549,6 +549,9 @@ fos_oauth_server:
             access_token_lifetime: 2592000
 
 nelmio_api_doc: ~
+#    sandbox:
+#        request_format:
+#            method: accept_header
 
 fos_rest:
     routing_loader:

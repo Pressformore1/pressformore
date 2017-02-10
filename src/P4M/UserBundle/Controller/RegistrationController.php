@@ -131,6 +131,9 @@ class RegistrationController extends ContainerAware
 
     /**
      * Receive the confirmation token from user email provider, login the user
+     * @param Request $request
+     * @param $token
+     * @return null|RedirectResponse|\Symfony\Component\HttpFoundation\Response
      */
     public function confirmAction(Request $request, $token)
     {
@@ -171,7 +174,7 @@ class RegistrationController extends ContainerAware
      */
     public function confirmedAction()
     {
-        $user = $this->container->get('security.context')->getToken()->getUser();
+        $user = $this->getcontainer->get('security.context')->getToken()->getUser();
         if (!is_object($user) || !$user instanceof UserInterface) {
             throw new AccessDeniedException('This user does not have access to this section.');
         }

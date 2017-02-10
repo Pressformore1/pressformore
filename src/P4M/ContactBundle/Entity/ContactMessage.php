@@ -224,4 +224,27 @@ class ContactMessage
     {
         return $this->parent;
     }
+
+    /**
+     * Add children
+     *
+     * @param \P4M\ContactBundle\Entity\ContactMessage $children
+     * @return ContactMessage
+     */
+    public function addChild(\P4M\ContactBundle\Entity\ContactMessage $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \P4M\ContactBundle\Entity\ContactMessage $children
+     */
+    public function removeChild(\P4M\ContactBundle\Entity\ContactMessage $children)
+    {
+        $this->children->removeElement($children);
+    }
 }

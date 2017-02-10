@@ -433,4 +433,27 @@ class PostArchive
     {
         return $this->originalPost;
     }
+
+    /**
+     * Add categories
+     *
+     * @param \P4M\CoreBundle\Entity\Category $categories
+     * @return PostArchive
+     */
+    public function addCategory(\P4M\CoreBundle\Entity\Category $categories)
+    {
+        $this->categories[] = $categories;
+
+        return $this;
+    }
+
+    /**
+     * Remove categories
+     *
+     * @param \P4M\CoreBundle\Entity\Category $categories
+     */
+    public function removeCategory(\P4M\CoreBundle\Entity\Category $categories)
+    {
+        $this->categories->removeElement($categories);
+    }
 }

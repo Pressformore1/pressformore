@@ -437,4 +437,27 @@ class BankAccount
         $this->id = $mangoAccount->Id;
         
     }
+
+    /**
+     * Set country
+     *
+     * @param \P4M\UserBundle\Entity\Country $country
+     * @return BankAccount
+     */
+    public function setCountry(\P4M\UserBundle\Entity\Country $country = null)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return \P4M\UserBundle\Entity\Country 
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
 }

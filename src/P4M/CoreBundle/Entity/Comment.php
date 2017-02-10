@@ -367,4 +367,60 @@ class Comment
     {
         return $this->dateAdded->getTimestamp();
     }
+
+    /**
+     * Add children
+     *
+     * @param \P4M\CoreBundle\Entity\Comment $children
+     * @return Comment
+     */
+    public function addChild(\P4M\CoreBundle\Entity\Comment $children)
+    {
+        $this->children[] = $children;
+
+        return $this;
+    }
+
+    /**
+     * Remove children
+     *
+     * @param \P4M\CoreBundle\Entity\Comment $children
+     */
+    public function removeChild(\P4M\CoreBundle\Entity\Comment $children)
+    {
+        $this->children->removeElement($children);
+    }
+
+    /**
+     * Add activities
+     *
+     * @param \P4M\TrackingBundle\Entity\UserActivity $activities
+     * @return Comment
+     */
+    public function addActivity(\P4M\TrackingBundle\Entity\UserActivity $activities)
+    {
+        $this->activities[] = $activities;
+
+        return $this;
+    }
+
+    /**
+     * Remove activities
+     *
+     * @param \P4M\TrackingBundle\Entity\UserActivity $activities
+     */
+    public function removeActivity(\P4M\TrackingBundle\Entity\UserActivity $activities)
+    {
+        $this->activities->removeElement($activities);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
 }

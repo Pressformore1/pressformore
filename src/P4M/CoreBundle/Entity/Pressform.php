@@ -4,6 +4,7 @@ namespace P4M\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Pressform
@@ -26,33 +27,31 @@ class Pressform
      * @var \DateTime
      *
      * @ORM\Column(name="date", type="date")
-     * @Groups("json")
+     * @Groups({"info","json"})
      */
     private $date;
 
     
     /**
-     * @Groups({"json", "donator"})
+     * @Groups({"info","json", "donator"})
      * @ORM\ManyToOne(targetEntity="\P4M\UserBundle\Entity\User", inversedBy="sentPressforms")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $sender;
-    
-    
+
     /**
      * @ORM\ManyToOne(targetEntity="\P4M\CoreBundle\Entity\Post", inversedBy="pressforms")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      * @Groups("json")
      */
     private $post;
-    
-    
+
     /**
-     *
      * @var boolean
-     * @Groups({"json", "donator"})
+     * @Groups({"info","json", "donator"})
      * @ORM\Column(name="payed",type="boolean")
      */
     private $payed;
-    
     
     public function __construct()
     {

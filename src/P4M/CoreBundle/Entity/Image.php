@@ -28,7 +28,7 @@ class Image
 
     /**
      * @var string
-     * @Groups({"json", "donator"})
+     * @Groups({"info","json", "donator"})
      * @Accessor(getter="getWebPath")
      * @ORM\Column(name="name", type="string", length=255)
      */
@@ -40,7 +40,7 @@ class Image
      * @ORM\Column(name="alt", type="string", length=255)
      */
     private $alt;
-    
+
 //    @Assert\NotBlank(message="Please choose a picture")
     /**
      *
@@ -193,14 +193,12 @@ class Image
           }
         }
 
-
         // On déplace le fichier envoyé dans le répertoire de notre choix
         $this->file->move(
           $this->getUploadRootDir(), // Le répertoire de destination
           $this->id.'.'.$this->name   // Le nom du fichier à créer, ici « id.extension »
         );
-        
-        
+      
         chmod( $this->getUploadRootDir().'/'.$this->id.'.'.$this->name, 0777);
   }
 
@@ -242,7 +240,6 @@ class Image
     return $this->getUploadDir().'/'.$this->getId().'.'.$this->getName();
   }
 
-  
   public function forceLocalPicture($path)
   {
         $this->forced = true;
@@ -266,4 +263,10 @@ class Image
             chmod($dest, 0644);
         }
     }
+
+    function __toString()
+    {
+        return $this->getWebPath();
+    }
+
 }

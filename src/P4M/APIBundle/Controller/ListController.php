@@ -2,8 +2,10 @@
 
 namespace P4M\APIBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations\Route;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
+use JMS\Serializer\SerializerBuilder;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -166,7 +168,7 @@ class ListController extends FOSRestController
      * @Rest\View(serializerGroups={"json"})
      * @ApiDoc(
      *     resource="List",
-     *     description="Get list of post pressed"
+     *     description="Get list of post pressed",
      * )
      */
     public function getListPressedAction()
@@ -190,6 +192,49 @@ class ListController extends FOSRestController
             return $this->response;
         }
         return $data;
+    }
+
+    /**
+     * @return Response
+     * @Rest\View(serializerGroups={"info"})
+     * @ApiDoc(
+     *     resource="Info",
+     *     description="Get info about current pfm-key",
+     *     parameters={
+     *        {"name"="url", "dataType"="string", "required"=true, "description"="Current url"}
+     *     },
+     *     requirements={
+     *          {"name"="pfmKey", "dataType"="string", "description"="PFM-Key of the current page"  }
+     *     }
+     * )
+     */
+    public function getInfoAction(Request $request, $pfmKey){
+        $user = $this->getUser();
+        $url = $request->query->get('url');
+        $em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository('P4MCoreBundle:Post')->findBySourceUrl($url);
+        $author = $em->getRepository('P4MUserBundle:User')->getInfoByKey($pfmKey, $post, $user);
+        //$post = $em->getRepository('P4MCoreBundle:Post')->findBySourceUrl($url);
+        $mango = $this->container->get('p4_m_mango_pay.util');
+        $user = $this->getUser();
+        $mangoUser = $user->getMangoUserNatural();
+        if($mangoUser){
+            $wallets = $mango->getUserWallets($mangoUser);
+            if($wallets == null){
+                $response['wallet'] = 'EMPTY';
+            }
+            else{
+                $serializer = SerializerBuilder::create()->build();
+                $w = $serializer->toArray($wallets[0]);
+                $response['wallet'] = $w;
+            }
+        }else{
+            $response['wallet'] = 'EMPTY';
+        }
+        $response['_embed'] = $author;
+
+        
+        return $response;
     }
     
 

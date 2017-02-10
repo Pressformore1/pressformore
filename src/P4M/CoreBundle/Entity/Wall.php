@@ -942,4 +942,129 @@ class Wall
     {
         return $this->user->getUsername().' '.$this->name;
     }
+
+    /**
+     * Add includedCategories
+     *
+     * @param \P4M\CoreBundle\Entity\Category $includedCategories
+     * @return Wall
+     */
+    public function addIncludedCategory(\P4M\CoreBundle\Entity\Category $includedCategories)
+    {
+        $this->includedCategories[] = $includedCategories;
+
+        return $this;
+    }
+
+    /**
+     * Remove includedCategories
+     *
+     * @param \P4M\CoreBundle\Entity\Category $includedCategories
+     */
+    public function removeIncludedCategory(\P4M\CoreBundle\Entity\Category $includedCategories)
+    {
+        $this->includedCategories->removeElement($includedCategories);
+    }
+
+    /**
+     * Add includedPeople
+     *
+     * @param \P4M\UserBundle\Entity\User $includedPeople
+     * @return Wall
+     */
+    public function addIncludedPerson(\P4M\UserBundle\Entity\User $includedPeople)
+    {
+        $this->includedPeople[] = $includedPeople;
+
+        return $this;
+    }
+
+    /**
+     * Remove includedPeople
+     *
+     * @param \P4M\UserBundle\Entity\User $includedPeople
+     */
+    public function removeIncludedPerson(\P4M\UserBundle\Entity\User $includedPeople)
+    {
+        $this->includedPeople->removeElement($includedPeople);
+    }
+
+    /**
+     * Add excludedCategories
+     *
+     * @param \P4M\CoreBundle\Entity\Category $excludedCategories
+     * @return Wall
+     */
+    public function addExcludedCategory(\P4M\CoreBundle\Entity\Category $excludedCategories)
+    {
+        $this->excludedCategories[] = $excludedCategories;
+
+        return $this;
+    }
+
+    /**
+     * Remove excludedCategories
+     *
+     * @param \P4M\CoreBundle\Entity\Category $excludedCategories
+     */
+    public function removeExcludedCategory(\P4M\CoreBundle\Entity\Category $excludedCategories)
+    {
+        $this->excludedCategories->removeElement($excludedCategories);
+    }
+
+    /**
+     * Add excludedPeople
+     *
+     * @param \P4M\UserBundle\Entity\User $excludedPeople
+     * @return Wall
+     */
+    public function addExcludedPerson(\P4M\UserBundle\Entity\User $excludedPeople)
+    {
+        $this->excludedPeople[] = $excludedPeople;
+
+        return $this;
+    }
+
+    /**
+     * Remove excludedPeople
+     *
+     * @param \P4M\UserBundle\Entity\User $excludedPeople
+     */
+    public function removeExcludedPerson(\P4M\UserBundle\Entity\User $excludedPeople)
+    {
+        $this->excludedPeople->removeElement($excludedPeople);
+    }
+
+    /**
+     * Add activities
+     *
+     * @param \P4M\TrackingBundle\Entity\UserActivity $activities
+     * @return Wall
+     */
+    public function addActivity(\P4M\TrackingBundle\Entity\UserActivity $activities)
+    {
+        $this->activities[] = $activities;
+
+        return $this;
+    }
+
+    /**
+     * Remove activities
+     *
+     * @param \P4M\TrackingBundle\Entity\UserActivity $activities
+     */
+    public function removeActivity(\P4M\TrackingBundle\Entity\UserActivity $activities)
+    {
+        $this->activities->removeElement($activities);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActivities()
+    {
+        return $this->activities;
+    }
 }

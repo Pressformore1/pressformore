@@ -37,7 +37,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title",type="string",length=255)
-     * @Groups({"list", "json", "donator"})
+     * @Groups({"info", "list", "json", "donator"})
      */
     
     private $title;
@@ -69,7 +69,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="sourceUrl", type="string", length=255,unique = true)
-     * @Groups({"list", "donator", "json"})
+     * @Groups({"info","list", "donator", "json"})
      */
     private $sourceUrl;
 
@@ -135,7 +135,7 @@ class Post
     /**
     * @Gedmo\Slug(fields={"title"})
     * @ORM\Column(length=128, unique=true)
-    * @Groups({"json", "donator"})
+    * @Groups({"info", "json", "donator"})
     */
     private $slug;
     
@@ -234,18 +234,19 @@ class Post
     private $author;
     
     /**
-     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Pressform",mappedBy="post", cascade="remove")
-     * @Groups({"donator"})
+     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Pressform",mappedBy="post")
+     * @Groups({"info","donator"})
      */
     private $pressforms;
 
     /**
-     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Unpressform",mappedBy="post", cascade="remove")
+     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Unpressform",mappedBy="post")
+     * @Groups({"info"})
      */
     private $unpressforms;
     
     /**
-     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\WantPressform",mappedBy="post", cascade="remove")
+     * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\WantPressform",mappedBy="post")
      * @Groups({"donator"})
      */
     private $wantPressforms;

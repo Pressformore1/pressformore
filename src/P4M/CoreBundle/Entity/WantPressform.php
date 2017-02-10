@@ -2,17 +2,20 @@
 
 namespace P4M\CoreBundle\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * WantPressform
  *
  * @ORM\Table()
- * * @ORM\Entity(repositoryClass="P4M\CoreBundle\Entity\WantPressformRepository")
+ * @ORM\Entity(repositoryClass="P4M\CoreBundle\Entity\WantPressformRepository")
  */
 class WantPressform
 {
+
     /**
      * @var integer
      *
@@ -49,11 +52,13 @@ class WantPressform
     /**
      * @Groups({"donator"})
      * @ORM\ManyToOne(targetEntity="\P4M\UserBundle\Entity\User")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $user;
 
 
-    
+
+
     public function __construct()
     {
         $this->date = new \DateTime();
@@ -182,4 +187,43 @@ class WantPressform
     {
         return $this->email;
     }
+
+    /**
+     * Set url
+     *
+     * @param string $url
+     * @return WantPressform
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get url
+     *
+     * @return string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * @Assert\Callback
+     * @param WantPressform $object
+     * @param ExecutionContextInterface $context
+     * @param $payload
+     */
+    public static function validate(WantPressform $object, ExecutionContextInterface $context, $payload)
+    {
+            if(!$object->getPost() AND !$object->getUrl()){
+                $context->buildViolation('Vous devez vouloir rémunerer un article')
+                    ->atPath('post')
+                    ->addViolation();
+            }
+    }
+
 }
