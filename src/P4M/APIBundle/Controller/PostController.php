@@ -28,7 +28,8 @@ class PostController extends FOSRestController
 
     /**
      * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
+     * @Rest\View(serializerGroups={"post"})
      * @Rest\Post("/post")
      * @ApiDoc(
      *     resource="Post",
@@ -51,11 +52,10 @@ class PostController extends FOSRestController
         $em = $this->getDoctrine()->getManager();
         $post = new Post();
         $data = $request->request->all();
-
+        $form = $this->get('form.factory')->create(new PostType($data['pictureList']), $post, ['method' => 'PUT' ]);
         if($this->checkKey($data)){
             $search = $em->getRepository('P4MCoreBundle:Post')->findOneBySourceUrl($data['sourceUrl']);
             if(null === $search){
-                $form = $this->get('form.factory')->create(new PostType($data['pictureList']), $post, ['method' => 'PUT' ]);
                 $form->submit($data);
                 if($form->isValid()){
                     $post->setUser($this->getUser());
@@ -86,25 +86,25 @@ class PostController extends FOSRestController
                         $em->persist($cat);
                     }
                     $em->flush();
-                    // $this->response['post'] = $post;
-                    $this->response['status_codes'] = 200;
-                    $this->response['message'] = 'post has been added';
+                    $em->refresh($post);
+                    $res['_embed'] = $post;
+                    return $res;
+
                 }else{
-                    $this->response['error'] = 'no Valid';
-                    $this->response['data'] = $request->request->all();
-                    $this->response['errorMessage'] = $form->getErrors();
+                    $res = $form;
+                    return $res;
                 }
             }
             else{
-                $this->response['message'] = 'post already exists';
+               $res['message'] = 'DUPLICATE_ENTRY';
+               $res['status'] = 401;
             }
+        }else{
+            $res['message'] = 'MISSING_ARGUMENT';
+            $res['status'] = 401;
         }
-        else{
-            $this->response['message'] = 'des arguments son manquant';
-            $this->response['data'] = $request->request->all();
-        }
-        $view = $this->view($this->response);
-        return $this->handleView($view);
+
+        return $res;
     }
 
     /**
@@ -175,28 +175,6 @@ class PostController extends FOSRestController
 
         return $this->response;
     }
-
-//    /**
-//     * @param Request $request
-//     * @ApiDoc(
-//     *     resource=true,
-//     *     description="Edit a post"
-//     * )
-//     */
-//    public function putPostAction(Request $request){
-//
-//    }
-//
-//    /**
-//     * @param Request $request
-//     * @ApiDoc(
-//     *     resource=true,
-//     *     description="Delete a post"
-//     * )
-//     */
-//    public function deletePostAction(Request $request){
-//
-//    }
 
     /**
      * @param Request $request

@@ -110,10 +110,10 @@ class UserRepository extends EntityRepository
         $qb = $this->createQueryBuilder('a');
         $qb->select('a')
             ->leftJoin('a.picture', 'i')
-            ->addSelect('i picture')
             ->leftJoin('a.productions', 'p', Join::WITH, 'p = :post')
             ->leftJoin('p.pressforms', 'press', Join::WITH, 'press.sender = :user')
             ->leftJoin('p.unpressforms', 'unPress')
+            ->addSelect('i picture')
             ->addSelect('p post')
             ->addSelect('press')
             ->addSelect('unPress')
@@ -122,7 +122,7 @@ class UserRepository extends EntityRepository
             ->setParameter('pfmkey', $pfmKey)
             ->setParameter('user', $user)
         ;
-        return $qb->getQuery()->getSingleResult(); //->getSQL() . ' params: '.$qb->getParameters();
+        return $qb->getQuery()->getOneOrNullResult(); //->getSQL() . ' params: '.$qb->getParameters();
     }
 
 }

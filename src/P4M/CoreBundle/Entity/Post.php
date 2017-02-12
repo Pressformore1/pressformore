@@ -27,7 +27,7 @@ class Post
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @Groups({"list", "json", "donator"})
+     * @Groups({"post","list", "json", "donator"})
      */
     private $id;
     
@@ -37,7 +37,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="title",type="string",length=255)
-     * @Groups({"info", "list", "json", "donator"})
+     * @Groups({"post","info", "list", "json", "donator"})
      */
     
     private $title;
@@ -46,7 +46,7 @@ class Post
     /**
      * @var string
      * @ORM\Column(name="picture", type="string", length=255)
-     * @Groups({"list", "donator"})
+     * @Groups({"post","list", "donator"})
      */
     private $picture;
     
@@ -61,7 +61,7 @@ class Post
      * @var string
      *
      * @ORM\Column(name="content", type="text")
-     * @Groups({"list"})
+     * @Groups({"post","list"})
      */
     private $content;
 
@@ -69,18 +69,20 @@ class Post
      * @var string
      *
      * @ORM\Column(name="sourceUrl", type="string", length=255,unique = true)
-     * @Groups({"info","list", "donator", "json"})
+     * @Groups({"post","info","list", "donator", "json"})
      */
     private $sourceUrl;
 
     /**
      * @var \DateTime
      * @ORM\Column(name="dateAdded", type="datetime")
+     * @Groups({"post"})
      */
     private $dateAdded;
 
     
     /**
+     * @Groups({"post"})
      * @ORM\ManyToOne(targetEntity="P4M\CoreBundle\Entity\PostType",cascade="persist")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -93,14 +95,13 @@ class Post
     private $user;
     
     /**
-     *
+     * @Groups({"post"})
      * @ORM\ManyToMany(targetEntity="P4M\CoreBundle\Entity\Category",cascade="persist",mappedBy="posts")
-     * 
      */
     private $categories;
     
     /**
-     *
+     * @Groups({"post"})
      * @ORM\ManyToMany(targetEntity="P4M\CoreBundle\Entity\Tag",cascade="persist",mappedBy="posts")
      * @ORM\JoinColumn(name="tag_id", referencedColumnName="id", onDelete="CASCADE")
      * 
@@ -108,10 +109,7 @@ class Post
     private $tags;
 
     /**
-     *
      * @ORM\OneToMany(targetEntity="P4M\CoreBundle\Entity\Comment",cascade={"persist","remove"},mappedBy="post")
-     *
-     *
      */
 //    @ORM\OrderBy({"dateAdded" = "DESC"})
     private $comments;
@@ -135,7 +133,7 @@ class Post
     /**
     * @Gedmo\Slug(fields={"title"})
     * @ORM\Column(length=128, unique=true)
-    * @Groups({"info", "json", "donator"})
+    * @Groups({"post","info", "json", "donator"})
     */
     private $slug;
     
@@ -229,7 +227,7 @@ class Post
     
     /**
      * @ORM\ManyToOne(targetEntity="P4M\UserBundle\Entity\User",inversedBy="productions")
-     * @Groups({"list", "json", "donator"})
+     * @Groups({"post","list", "json", "donator"})
      */
     private $author;
     
@@ -270,6 +268,7 @@ class Post
     
     /**
      *
+     * @Groups({"post"})
      * @ORM\OneToOne(targetEntity="P4M\CoreBundle\Entity\TempAuthor", mappedBy="post", cascade="remove")
      */
     private $tempAuthor;
