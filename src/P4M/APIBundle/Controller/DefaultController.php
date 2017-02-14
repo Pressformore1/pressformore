@@ -185,13 +185,7 @@ class DefaultController extends FOSRestController
             if (!empty($data['bio']))
                 $user->setBio($data['bio']);
             //crée un utilisateur mango s'il n'existe pas
-            $mangoUser = $user->getMangoUserNatural();
-            $userUtil = $this->container->get('p4mUser.user_utils');
-            if (null == $mangoUser && $userUtil->isMangoUserAvailable($user)) {
-                $mango = $this->container->get('p4_m_mango_pay.util');
-                $mangoUser = $mango->createUser($user);
-                $wallets = $mango->createWallet($mangoUser);
-            }
+
             if(!empty($data['picture'])){
 
                 $fileRAW = imagecreatefromstring(base64_decode($data['picture']));
@@ -210,12 +204,18 @@ class DefaultController extends FOSRestController
                 $em->persist($image);
 
             }
-
             try {
                 $em->persist($user);
                 $em->flush();
                 $this->response['status_codes'] = 200;
                 $this->response['message'] = 'Votre compte a bien été mis à jour';
+                $mangoUser = $user->getMangoUserNatural();
+                $userUtil = $this->container->get('p4mUser.user_utils');
+                if (null == $mangoUser && $userUtil->isMangoUserAvailable($user)) {
+                    $mango = $this->container->get('p4_m_mango_pay.util');
+                    $mangoUser = $mango->createUser($user);
+                    $wallets = $mango->createWallet($mangoUser);
+                }
             } catch (Exception $e) {
                 $this->response['status_codes'] = 'unknown';
                 $this->response['message'] = "Votre compte n'a pas été mis à jour";
