@@ -7,18 +7,18 @@ services:
       tags:
          - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
-  api.listupdate_suscriber:
-      class: P4M\APIBundle\Listener\ListUpdaterSuscriber
-      calls:
-          -  [ setUpdater, [@api.updater_list] ]
-      tags:
-          - { name: doctrine.event_subscriber, connection: default }
-
-  api.updater_list:
-      class: P4M\APIBundle\Services\UpdateList
-      arguments: [ @kernel ]
-      tags:
-          - { name: updater.list }
+#  api.listupdate_suscriber:
+#      class: P4M\APIBundle\Listener\ListUpdaterSuscriber
+#      calls:
+#          -  [ setUpdater, [@api.updater_list] ]
+#      tags:
+#          - { name: doctrine.event_subscriber, connection: default }
+#
+#  api.updater_list:
+#      class: P4M\APIBundle\Services\UpdateList
+#      arguments: [ @kernel ]
+#      tags:
+#          - { name: updater.list }
 
   api.blacklist_manager:
       class: P4M\APIBundle\Services\BlackListManager

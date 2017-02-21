@@ -26,12 +26,14 @@ class User extends BaseUser
     /**
      * @var string
      * @Groups({"info","json"})
+     * @Assert\NotBlank()
      */
     protected $email;
 
     /**
      * @var string
      * @Groups({"info", "json", "list", "donator"})
+     * @Assert\NotBlank()
      */
     protected $username;
 
@@ -40,6 +42,7 @@ class User extends BaseUser
      * @var string
      * @ORM\Column(name="name",type="string")
      * @Groups({"json"})
+     * @Assert\NotBlank()
      */
     private $firstName;
     
@@ -48,6 +51,7 @@ class User extends BaseUser
      * @var string
      * @ORM\Column(name="surname",type="string")
      * @Groups({"json"})
+     * @Assert\NotBlank()
      */
     private $lastName;
     
@@ -89,12 +93,14 @@ class User extends BaseUser
      * @var text
      * @ORM\Column(name="address",type="text", nullable=true)
      * @Groups({"json"})
+     * @Assert\NotBlank()
      */
     private $address;
     
     /**
      * @ORM\ManyToOne(targetEntity="P4M\UserBundle\Entity\Country")
      * @Groups({"json"})
+     * @Assert\NotBlank()
      */
     private $country;
     

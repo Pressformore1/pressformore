@@ -3,12 +3,12 @@
 namespace P4M\APIBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
+use P4M\APIBundle\Form\PostType;
 use P4M\BackofficeBundle\Entity\ReadPostLater;
 use P4M\CoreBundle\Entity\Post;
 use P4M\CoreBundle\Entity\Pressform;
 use P4M\CoreBundle\Entity\Vote;
 use P4M\CoreBundle\Entity\WantPressform;
-use P4M\CoreBundle\Form\PostType;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -45,66 +45,110 @@ class PostController extends FOSRestController
      *          {"name"="sourceUrl", "dataType"="url", "required"=true, "description"=""},
      *          {"name"="type", "dataType"="integer", "required"=true, "description"=""},
      *          {"name"="lang", "dataType"="integer", "required"=true, "description"=""},
+     *          {"name"="pfm_key", "dataType"="string", "required"=false, "description"="key of author"}
      *     }
      * )
      */
-    public function postPostAction(Request $request){
+    public function postPostAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
         $post = new Post();
+       // $request->request->set('pictureList', ["http://magazine.ouishare.net/fr/wp-content/uploads/sites/2/2013/06/investisseur-startup-vc.jpg", "http://magazine.ouishare.net/fr/wp-content/uploads/sites/2/2013/06/investisseur.jpg"]);
+        //$request->request->set('categories', ["3"]);
         $data = $request->request->all();
-        $form = $this->get('form.factory')->create(new PostType($data['pictureList']), $post, ['method' => 'PUT' ]);
-        if($this->checkKey($data)){
-            $search = $em->getRepository('P4MCoreBundle:Post')->findOneBySourceUrl($data['sourceUrl']);
-            if(null === $search){
-                $form->submit($data);
-                if($form->isValid()){
-                    $post->setUser($this->getUser());
-                    $postUtils = $this->get('p4mCore.post_utils');
+        $form = $this->get('form.factory')->create(new PostType($data['pictureList']), $post, ['method' => 'PUT']);
+        $search = $em->getRepository('P4MCoreBundle:Post')->findOneBySourceUrl($data['sourceUrl']);
+        if ($search) {
+            $res['message'] = 'DUPLICATE_ENTRY';
+            $res['status'] = 401;
+            return $res;
+        }
+        $form->submit($data);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $post->setUser($this->getUser());
+            $postUtils = $this->get('p4mCore.post_utils');
+            $authorKey = $postUtils->getPostAuthorMeta($post->getSourceUrl());
+            $userRepo = $em->getRepository('P4MUserBundle:User');
+            if (null !== $authorKey) {
 
-                    $authorKey = $postUtils->getPostAuthorMeta($post->getSourceUrl());
-
-                    if (null !== $authorKey)
-                    {
-                        $userRepo = $em->getRepository('P4MUserBundle:User');
-                        $author = $userRepo->findOneByProducerKey($authorKey);
-
-                        if (null !== $author)
-                        {
-                            $post->setAuthor($author);
-                        }
-                    }
-                    $em->persist($post);
-
-                    foreach($post->getTags() as $tag)
-                    {
-                        $tag->addPost($post);
-                        $em->persist($tag);
-                    }
-                    foreach($post->getCategories() as $cat)
-                    {
-                        $cat->addPost($post);
-                        $em->persist($cat);
-                    }
-                    $em->flush();
-                    $em->refresh($post);
-                    $res['_embed'] = $post;
-                    return $res;
-
-                }else{
-                    $res = $form;
-                    return $res;
+                $author = $userRepo->findOneByProducerKey($authorKey);
+                if (null !== $author) {
+                    $post->setAuthor($author);
+                }
+            }else if($pfmKey = $request->request->get('pfm_key')){
+                $author = $userRepo->findOneByProducerKey($pfmKey);
+                if (null !== $author) {
+                    $post->setAuthor($author);
                 }
             }
-            else{
-               $res['message'] = 'DUPLICATE_ENTRY';
-               $res['status'] = 401;
+            $em->persist($post);
+            foreach ($post->getTags() as $tag) {
+                $tag->addPost($post);
+                $em->persist($tag);
             }
-        }else{
-            $res['message'] = 'MISSING_ARGUMENT';
-            $res['status'] = 401;
+            foreach ($post->getCategories() as $cat) {
+                $cat->addPost($post);
+                $em->persist($cat);
+            }
+            $em->flush();
+            $em->refresh($post);
+            $res['_embed'] = $post;
+            return $res;
         }
+        return $form;
 
-        return $res;
+//        if($this->checkKey($data)){
+//            $search = $em->getRepository('P4MCoreBundle:Post')->findOneBySourceUrl($data['sourceUrl']);
+//            if(null === $search){
+//                $form->submit($data);
+//                if($form->isValid()){
+//                    $post->setUser($this->getUser());
+//                    $postUtils = $this->get('p4mCore.post_utils');
+//
+//                    $authorKey = $postUtils->getPostAuthorMeta($post->getSourceUrl());
+//
+//                    if (null !== $authorKey)
+//                    {
+//                        $userRepo = $em->getRepository('P4MUserBundle:User');
+//                        $author = $userRepo->findOneByProducerKey($authorKey);
+//
+//                        if (null !== $author)
+//                        {
+//                            $post->setAuthor($author);
+//                        }
+//                    }
+//                    $em->persist($post);
+//
+//                    foreach($post->getTags() as $tag)
+//                    {
+//                        $tag->addPost($post);
+//                        $em->persist($tag);
+//                    }
+//                    foreach($post->getCategories() as $cat)
+//                    {
+//                        $cat->addPost($post);
+//                        $em->persist($cat);
+//                    }
+//                    $em->flush();
+//                    $em->refresh($post);
+//                    $res['_embed'] = $post;
+//                    return $res;
+//
+//                }else{
+//                    $res = $form;
+//                    return $res;
+//                }
+//            }
+//            else{
+//               $res['message'] = 'DUPLICATE_ENTRY';
+//               $res['status'] = 401;
+//            }
+//        }else{
+//            $res['message'] = 'MISSING_ARGUMENT';
+//            $res['status'] = 401;
+//        }
+//
+//        return $res;
     }
 
     /**
@@ -121,50 +165,50 @@ class PostController extends FOSRestController
      * )
      * @Rest\View(serializerGroups={"json", "donator"})
      */
-    public function getPostAction(Request $request){
-        $post=null;
-        if($slug = $request->query->get('slug')){
+    public function getPostAction(Request $request)
+    {
+        $post = null;
+        if ($slug = $request->query->get('slug')) {
             $post = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Post')->findOneBySlug($slug);
-            if($post == null){
+            if ($post == null) {
                 $this->response['status_codes'] = 404;
                 $this->response['message'] = "This post don't exist";
             }
             $this->response['status_codes'] = 200;
-        }elseif ($url = $request->query->get('url')){
+        } elseif ($url = $request->query->get('url')) {
             $post = $this->getDoctrine()->getManager()->getRepository('P4MCoreBundle:Post')->findOneBySourceUrl($url);
-            if($post == null){
+            if ($post == null) {
                 $this->response['status_codes'] = 404;
                 $this->response['message'] = "This post don't exist";
             }
-        }
-        else{
+        } else {
             $this->response['status_codes'] = 500;
             $this->response['message'] = 'Need a parameters for find a post';
 
         }
-        if($post != null){
+        if ($post != null) {
             $data['sourceUrl'] = $post->getSourceUrl();
             $data['slug'] = $post->getSlug();
 
-            if($post->getAuthor()){
+            if ($post->getAuthor()) {
                 $data['status'] = 'COMPLETE';
                 $data['author']['username'] = $post->getAuthor()->getUsername();
                 $data['author']['producerKey'] = $post->getAuthor()->getProducerKey();
                 $data['author']['picture'] = $post->getAuthor()->getPicture()->getWebPath();
-                foreach ($post->getPressforms() as $pressform){
+                foreach ($post->getPressforms() as $pressform) {
                     $sender = $pressform->getSender();
                     $data['pressform'][$sender->getUsername()] = $sender->getPicture()->getWebPath();
                 }
-            }elseif ($post->getTempAuthor()){
+            } elseif ($post->getTempAuthor()) {
                 $data['status'] = 'VALIDATE';
                 $data['author']['email'] = $post->getTempAuthor()->getEmail();
                 $data['author']['twitter'] = $post->getTempAuthor()->getTwitter();
-                foreach ($post->getWantPressforms() as $wantPressform){
+                foreach ($post->getWantPressforms() as $wantPressform) {
                     $data['wantpress'][$wantPressform->getUser()->getUsername()] = $wantPressform->getUser()->getPicture()->getWebPath();
                 }
-            }else{
+            } else {
                 $data['status'] = 'NO VALIDATE';
-                foreach ($post->getWantPressforms() as $wantPressform){
+                foreach ($post->getWantPressforms() as $wantPressform) {
                     $data['wantpress'][$wantPressform->getUser()->getUsername()] = $wantPressform->getUser()->getPicture()->getWebPath();
                 }
             }
@@ -188,25 +232,26 @@ class PostController extends FOSRestController
      * )
      * @Rest\View()
      */
-    public function getPostPreviewAction(Request $request){
+    public function getPostPreviewAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
         $userUtils = $this->get('p4mCore.post_utils');
-        if(!empty($url = $request->query->get('url'))){
+        if (!empty($url = $request->query->get('url'))) {
             $postRepo = $em->getRepository('P4MCoreBundle:Post');
             $post = $postRepo->findOneBySourceUrl($url);
-            if(null !== $post){
+            if (null !== $post) {
                 $this->response['status_codes'] = 500;
-                $this->response['message']= 'Cette article a déjà été partagé';
+                $this->response['message'] = 'Cette article a déjà été partagé';
                 return $this->response;
             }
             $metas = $userUtils->grabMetas($url);
-            if(array_key_exists('content', $metas) && !empty($metas['content']) &&
-                array_key_exists('title', $metas) && !empty($metas['title'])) {
+            if (array_key_exists('content', $metas) && !empty($metas['content']) &&
+                array_key_exists('title', $metas) && !empty($metas['title'])
+            ) {
                 $this->response['metas'] = $metas;
-            }
-            else{
+            } else {
                 $this->response['status_codes'] = 403;
-                $this->response['message']= 'Il n\'y pas d\'information a extraire';
+                $this->response['message'] = 'Il n\'y pas d\'information a extraire';
             }
         }
         return $this->response;
@@ -225,16 +270,17 @@ class PostController extends FOSRestController
      *     }
      * )
      */
-    public function postPostReadlaterAction(Request $request){
+    public function postPostReadlaterAction(Request $request)
+    {
 
-        $user =$this->getUser();
+        $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $slug = $request->request->get('slug');
         $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($slug);
         $check_if_exists = $em->getRepository('P4MBackofficeBundle:ReadPostLater')->findOneBy(['post' => $post, 'user' => $user]);
 
-        if($check_if_exists === null){
-            if($post !== null){
+        if ($check_if_exists === null) {
+            if ($post !== null) {
                 $readPostLater = new ReadPostLater();
                 $readPostLater->setUser($user);
                 $readPostLater->setPost($post);
@@ -270,12 +316,13 @@ class PostController extends FOSRestController
      *     }
      * )
      */
-    public function deletePostReadlaterAction(Request $request){
+    public function deletePostReadlaterAction(Request $request)
+    {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $slug = $request->request->get('slug');
         $readPostLater = $em->getRepository('P4MBackofficeBundle:ReadPostLater')->findOneBy(['slug' => $slug, 'user' => $user]);
-        if($readPostLater !== null){
+        if ($readPostLater !== null) {
             $post = $em->getRepository('P4MCoreBundle:Post')->find($slug);
             $post->removeReadLater($readPostLater);
             $em->persist($post);
@@ -306,18 +353,19 @@ class PostController extends FOSRestController
      *     }
      * )
      */
-    public function postPostPressAction(Request $request){
+    public function postPostPressAction(Request $request)
+    {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($request->request->get('slug'));
-        $pressForm = $em->getRepository('P4MCoreBundle:Pressform')->findOneBy(['post'=>$post,'sender'=>$user,'payed'=>false]);
-        if( null !== $pressForm){
+        $pressForm = $em->getRepository('P4MCoreBundle:Pressform')->findOneBy(['post' => $post, 'sender' => $user, 'payed' => false]);
+        if (null !== $pressForm) {
             $this->response['status_codes'] = 500;
             $this->response['message'] = 'post already press';
             return $this->response;
         }
-        $unpressForm = $em->getRepository('P4MCoreBundle:Unpressform')->findOneBy(['post'=>$post,'user'=>$user]);
-        if(null !== $unpressForm)
+        $unpressForm = $em->getRepository('P4MCoreBundle:Unpressform')->findOneBy(['post' => $post, 'user' => $user]);
+        if (null !== $unpressForm)
             $em->remove($unpressForm);
         $pressForm = new Pressform();
         $pressForm->setSender($user);
@@ -347,19 +395,19 @@ class PostController extends FOSRestController
      *     }
      * )
      */
-    public function putPostPressAction(Request $request){
+    public function putPostPressAction(Request $request)
+    {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $data = $request->request->all();
         $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($data['slug']);
-        $unpressform = $em->getRepository('P4MCoreBundle:Unpressform')->findOneBy(['post'=>$post,'user'=>$user]);
+        $unpressform = $em->getRepository('P4MCoreBundle:Unpressform')->findOneBy(['post' => $post, 'user' => $user]);
         $type = $em->getRepository('P4MCoreBundle:UnpressformType')->find($data['type']);
-        if($unpressform === null){
+        if ($unpressform === null) {
             $this->response['status_codes'] = 500;
             $this->response['message'] = 'This post is not unpressed';
             return $this->response;
-        }
-        elseif($type === null){
+        } elseif ($type === null) {
             $this->response['status_codes'] = 501;
             $this->response['message'] = 'The type is not valid';
             return $this->response;
@@ -390,18 +438,19 @@ class PostController extends FOSRestController
      *     }
      * )
      */
-    public function deletePostPressAction(Request $request){
+    public function deletePostPressAction(Request $request)
+    {
         $user = $this->getUser();
         $em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($request->request->get('slug'));
-        $pressForm = $em->getRepository('P4MCoreBundle:Pressform')->findOneBy(['post'=>$post,'sender'=>$user,'payed'=>false]);
+        $pressForm = $em->getRepository('P4MCoreBundle:Pressform')->findOneBy(['post' => $post, 'sender' => $user, 'payed' => false]);
 
-        if(null == $pressForm){
+        if (null == $pressForm) {
             $this->response['status_codes'] = 500;
             $this->response['message'] = 'This post is not pressed';
             return $this->response;
         }
-        if($pressForm->getPayed() == true){
+        if ($pressForm->getPayed() == true) {
             $this->response['status_codes'] = 501;
             $this->response['message'] = 'You cant unpress a post already payed';
             return $this->response;
@@ -432,15 +481,15 @@ class PostController extends FOSRestController
      *     }
      * )
      */
-    public function postPostVoteAction(Request $request){
+    public function postPostVoteAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $slug = $request->request->get('slug');
         $score = $request->request->get('score');
         $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($slug);
-        $userVote = $em->getRepository('P4MCoreBundle:Vote')->findOneBy(array('post'=>$post,'user'=>$user));
-        if (null === $userVote)
-        {
+        $userVote = $em->getRepository('P4MCoreBundle:Vote')->findOneBy(array('post' => $post, 'user' => $user));
+        if (null === $userVote) {
             $userVote = new Vote();
             $userVote->setUser($user);
             $userVote->setPost($post);
@@ -476,16 +525,16 @@ class PostController extends FOSRestController
      *     }
      * )
      */
-    public function postInfoAuthorAction(Request $request){
+    public function postInfoAuthorAction(Request $request)
+    {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
         $slug = $request->request->get('slug');
         $email = $request->request->get('email');
         $twitter = $request->request->get('twitter');
         $post = $em->getRepository('P4MCoreBundle:Post')->findOneBySlug($slug);
-        $wantPressForm = $em->getRepository('P4MCoreBundle:WantPressform')->findOneBy(['user'=>$user,'post'=>$post]);
-        if(null === $wantPressForm)
-        {
+        $wantPressForm = $em->getRepository('P4MCoreBundle:WantPressform')->findOneBy(['user' => $user, 'post' => $post]);
+        if (null === $wantPressForm) {
             $wantPressForm = new WantPressform();
             $wantPressForm->setPost($post);
             $wantPressForm->setUser($user);
@@ -495,34 +544,34 @@ class PostController extends FOSRestController
             $em->persist($wantPressForm);
             $em->flush();
             $this->response['status_codes'] = 200;
-        }
-        else{
+        } else {
             $this->response['status_codes'] = 500;
         }
         return $this->response;
     }
 
-    private function checkKey(array $data){
-        foreach($data as $key => $value){
-            if(!array_key_exists('title', $data))
+    private function checkKey(array $data)
+    {
+        foreach ($data as $key => $value) {
+            if (!array_key_exists('title', $data))
                 return false;
-            if(!array_key_exists('content', $data))
+            if (!array_key_exists('content', $data))
                 return false;
-            if(!array_key_exists('tags', $data))
+            if (!array_key_exists('tags', $data))
                 return false;
-            if(!array_key_exists('type', $data))
+            if (!array_key_exists('type', $data))
                 return false;
-            if(!array_key_exists('sourceUrl', $data))
+            if (!array_key_exists('sourceUrl', $data))
                 return false;
-            if(!array_key_exists('lang', $data))
+            if (!array_key_exists('lang', $data))
                 return false;
-            if(!array_key_exists('picture', $data))
+            if (!array_key_exists('picture', $data))
                 return false;
-            if(!array_key_exists('pictureList', $data))
+            if (!array_key_exists('pictureList', $data))
                 return false;
-            if(!array_key_exists('iframeAllowed', $data))
+            if (!array_key_exists('iframeAllowed', $data))
                 return false;
-            if(!array_key_exists('categories', $data))
+            if (!array_key_exists('categories', $data))
                 return false;
             return true;
         }

@@ -97,6 +97,7 @@ class Post
     /**
      * @Groups({"post"})
      * @ORM\ManyToMany(targetEntity="P4M\CoreBundle\Entity\Category",cascade="persist",mappedBy="posts")
+     * @ORM\JoinColumn(nullable=true)
      */
     private $categories;
     

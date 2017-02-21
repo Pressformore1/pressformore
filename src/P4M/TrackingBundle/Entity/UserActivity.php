@@ -69,6 +69,7 @@ class UserActivity
     
     /**
      * @ORM\ManyToOne(targetEntity="P4M\CoreBundle\Entity\Post",inversedBy="activities")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $post;
     

@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\Annotations as Rest;
 use P4M\CoreBundle\Entity\Image;
 use P4M\UserBundle\Form\UserType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -72,7 +73,7 @@ class DefaultController extends FOSRestController
 //
 //        return $form->getErrors();
 
-         // Vérifie si les termes son accepté
+        // Vérifie si les termes son accepté
         if (!$data['term_accepted']) {
             $this->response['status_codes'] = 640;
             $this->response['message'] = 'Les termes du contract doivent être accepter';
@@ -86,9 +87,9 @@ class DefaultController extends FOSRestController
                 return $this->response;
             }
         }
-        if(!empty($data['username'])){
+        if (!empty($data['username'])) {
             $test_username = $em->getRepository('P4MUserBundle:User')->findOneBy(['username' => $data['username']]);
-            if($test_username !== null ){
+            if ($test_username !== null) {
                 $this->response['status_codes'] = 620;
                 $this->response['message'] = 'Cette utilisateur existe déjà';
                 return $this->response;
@@ -130,11 +131,11 @@ class DefaultController extends FOSRestController
      *          {"name"="address", "dataType"="string", "required"=true, "description"="your address"},
      *          {"name"="city", "dataType"="string", "required"=true, "description"="your city"},
      *          {"name"="country", "dataType"="integer", "required"=true, "description"="your country"},
-     *          {"name"="birth_date", "dataType"="Year-Month-Day", "required"=true, "description"="your birth date"},
+     *          {"name"="birthDate", "dataType"="array", "required"=true, "description"="your birth date"},
      *          {"name"="language", "dataType"="string", "required"=false, "description"="Default en can be en or fr"},
      *          {"name"="email", "dataType"="email", "required"=false, "description"="your email"},
-     *          {"name"="first_name", "dataType"="string", "required"=true, "description"="your first name"},
-     *          {"name"="last_name", "dataType"="string", "required"=true, "description"="your last name"},
+     *          {"name"="firstName", "dataType"="string", "required"=true, "description"="your first name"},
+     *          {"name"="lastName", "dataType"="string", "required"=true, "description"="your last name"},
      *          {"name"="website", "dataType"="string", "required"=false, "description"="your website"},
      *          {"name"="bio", "dataType"="text", "required"=false, "description"="your biography"},
      *          {"name"="skills", "dataType"="text", "required"=false, "description"="your skills"},
@@ -152,78 +153,112 @@ class DefaultController extends FOSRestController
      *     }
      * )
      * @param Request $request
+     * @View(serializerGroups={"json"})
      * @return Response
-     * @View()
      */
     public function postCompleteRegisterAction(Request $request)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        if ($user->getFirstLogin()===true)
-        {
+        if ($user->getFirstLogin() === true) {
             $user->setFirstLogin(false);
             $em->persist($user);
             $em->flush();
         }
         //hydrate les données reçues
         $data = $request->request->all();
+
+        $form = $this->get('form.factory')->createNamed(null, new \P4M\UserBundle\Form\UserType(), $user, ['csrf_protection' => false, 'allow_extra_fields' => true]);
+        //$form = $this->createNamed(null,new \P4M\UserBundle\Form\UserType(),$user, ['csrf_protection'   => false, 'allow_extra_fields' => true]);
+        $form->remove('username')
+            ->remove('picture')
+            ->remove('plainPassword')
+            ->remove('title')
+            ->remove('language')
+            ->remove('bio')
+            ->remove('publicStatus')
+            ->remove('skills')
+            ->remove('website')
+            ->remove('birthDate')->add('birthDate', DateType::class, [
+                'widget' => 'single_text',
+                'format' => 'dd/MM/yyyy',
+            ]);
+        $form->submit($data);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            //return $data;
+            //$user->setBirthDate(new DateTime($data['birthDate']));
+            $em->persist($user);
+            $em->flush();
+            $mangoUser = $user->getMangoUserNatural();
+            $userUtil = $this->container->get('p4mUser.user_utils');
+            if (null == $mangoUser && $userUtil->isMangoUserAvailable($user)) {
+                $mango = $this->container->get('p4_m_mango_pay.util');
+                $mangoUser = $mango->createUser($user);
+                $wallets = $mango->createWallet($mangoUser);
+            }
+
+            return $user;
+
+        }
+        return $form;
+
 //        $this->response['count'] = $request->request->count();
         // sauvegarde les données utilisateurs
-        if ($this->checkData($data, 'FULL_REGISTER')) {
-            $user->setAddress($data['address']);
-            $user->setCity($data['city']);
-            if (!empty($data['country']))
-                $user->setCountry($em->getRepository('P4MUserBundle:Country')->find($data['country']));
-            $user->setBirthDate(new DateTime($data['birth_date']));
-            if (!empty($data['language']))
-                $user->setLanguage($data['language']);
-            $user->setEmail($data['email']);
-            $user->setFirstName($data['first_name']);
-            $user->setLastName($data['last_name']);
-            if (!empty($data['website']))
-                $user->setWebsite($data['website']);
-            if (!empty($data['bio']))
-                $user->setBio($data['bio']);
-            //crée un utilisateur mango s'il n'existe pas
-
-            if(!empty($data['picture'])){
-
-                $fileRAW = imagecreatefromstring(base64_decode($data['picture']));
-                $name = uniqid();
-                $tmp_path = sys_get_temp_dir() .'/' .$name . '.png';
-                imagepng($fileRAW, $tmp_path);
-                $file =  new UploadedFile($tmp_path, $name, 'image/png',null,null,true);
-
-                $image = new Image();
-                $image->setFile($file);
-                $old_image = $user->getPicture();
-                if($old_image->getId() != 'defaultUser'){
-                    $em->remove($old_image);
-                }
-                $user->setPicture($image);
-                $em->persist($image);
-
-            }
-            try {
-                $em->persist($user);
-                $em->flush();
-                $this->response['status_codes'] = 200;
-                $this->response['message'] = 'Votre compte a bien été mis à jour';
-                $mangoUser = $user->getMangoUserNatural();
-                $userUtil = $this->container->get('p4mUser.user_utils');
-                if (null == $mangoUser && $userUtil->isMangoUserAvailable($user)) {
-                    $mango = $this->container->get('p4_m_mango_pay.util');
-                    $mangoUser = $mango->createUser($user);
-                    $wallets = $mango->createWallet($mangoUser);
-                }
-            } catch (Exception $e) {
-                $this->response['status_codes'] = 'unknown';
-                $this->response['message'] = "Votre compte n'a pas été mis à jour";
-            }
-        }
-        return $this->response;
+//        if ($this->checkData($data, 'FULL_REGISTER')) {
+//            $user->setAddress($data['address']);
+//            $user->setCity($data['city']);
+//            if (!empty($data['country']))
+//                $user->setCountry($em->getRepository('P4MUserBundle:Country')->find($data['country']));
+//            $user->setBirthDate(new DateTime($data['birth_date']));
+//            if (!empty($data['language']))
+//                $user->setLanguage($data['language']);
+//            $user->setEmail($data['email']);
+//            $user->setFirstName($data['first_name']);
+//            $user->setLastName($data['last_name']);
+//            if (!empty($data['website']))
+//                $user->setWebsite($data['website']);
+//            if (!empty($data['bio']))
+//                $user->setBio($data['bio']);
+//
+//            if(!empty($data['picture'])){
+//
+//                $fileRAW = imagecreatefromstring(base64_decode($data['picture']));
+//                $name = uniqid();
+//                $tmp_path = sys_get_temp_dir() .'/' .$name . '.png';
+//                imagepng($fileRAW, $tmp_path);
+//                $file =  new UploadedFile($tmp_path, $name, 'image/png',null,null,true);
+//
+//                $image = new Image();
+//                $image->setFile($file);
+//                $old_image = $user->getPicture();
+//                if($old_image->getId() != 'defaultUser'){
+//                    $em->remove($old_image);
+//                }
+//                $user->setPicture($image);
+//                $em->persist($image);
+//
+//            }
+//            try {
+//                $em->persist($user);
+//                $em->flush();
+//                $this->response['status_codes'] = 200;
+//                $this->response['message'] = 'Votre compte a bien été mis à jour';
+//                $mangoUser = $user->getMangoUserNatural();
+//                $userUtil = $this->container->get('p4mUser.user_utils');
+//                if (null == $mangoUser && $userUtil->isMangoUserAvailable($user)) {
+//                    $mango = $this->container->get('p4_m_mango_pay.util');
+//                    $mangoUser = $mango->createUser($user);
+//                    $wallets = $mango->createWallet($mangoUser);
+//                }
+//            } catch (Exception $e) {
+//                $this->response['status_codes'] = 'unknown';
+//                $this->response['message'] = "Votre compte n'a pas été mis à jour";
+//            }
+//        }
+//        return $this->response;
     }
-    
+
     /**
      * @ApiDoc(
      *     resource="Register",

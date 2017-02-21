@@ -50,17 +50,16 @@ class PostType extends AbstractType
 //            ->add('categories', null, array(
 //                'attr' => array( 'class'=>"chosen-select", 'data-placeholder'=>"Find the category")
 //                ))
-            ->add('categories', 'p4m_corebundle_usercategory', array(
+            ->add('categories', 'p4m_corebundle_usercategory', [
                 'class' => 'P4MCoreBundle:Category',
                 'multiple'=>true
                 //'property' => 'CategoryTypeTitle'
-            ))
-            ->add('tags','posttags', array(
-                'attr' => array( 'class'=>"col-xs-20"),
-            ))
+            ])
+            ->add('tags','posttags', [
+                'attr' => ['class'=>"col-xs-20"],
+            ])
             ->add('pictureList','collection',array(
-                'allow_add' => true, 
-                
+                'allow_add' => true,
             ))
             ->add('anchors','collection',array(
                 'allow_add' => true, 
@@ -70,7 +69,7 @@ class PostType extends AbstractType
                 'required'=>false
             ))
             ->add('embed','hidden')
-             ->add('iframeAllowed',null,['required'=>false])
+            ->add('iframeAllowed',null,['required'=>false])
         ;
     }
     

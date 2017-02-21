@@ -46,6 +46,7 @@ class WantPressform
     
     /**
      * @ORM\ManyToOne(targetEntity="\P4M\CoreBundle\Entity\Post",inversedBy="wantPressforms")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $post;
     

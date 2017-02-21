@@ -99,6 +99,7 @@ class PostArchive
     /**
      *
      * @ORM\ManyToOne(targetEntity="P4M\CoreBundle\Entity\Post", inversedBy="archives")
+     * @ORM\JoinColumn(onDelete="CASCADE")
      */
     private $originalPost;
     
