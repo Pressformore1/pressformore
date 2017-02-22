@@ -147,11 +147,11 @@ p4_m_core:
     
 fos_user_security:
     resource: "@FOSUserBundle/Resources/config/routing/security.xml"
-    prefix: /{_locale}/secure_area
-    requirements:
-      _locale: en|fr
-    defaults:
-      _locale: %locale%
+    prefix: /secure_area
+#    requirements:
+#      _locale: en|fr
+#    defaults:
+#      _locale: %locale%
 
 fos_user_profile:
     resource: "@FOSUserBundle/Resources/config/routing/profile.xml"

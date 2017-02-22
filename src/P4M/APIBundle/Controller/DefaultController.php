@@ -162,8 +162,6 @@ class DefaultController extends FOSRestController
         $user = $this->getUser();
         if ($user->getFirstLogin() === true) {
             $user->setFirstLogin(false);
-            $em->persist($user);
-            $em->flush();
         }
         //hydrate les données reçues
         $data = $request->request->all();
@@ -197,7 +195,7 @@ class DefaultController extends FOSRestController
                 $mangoUser = $mango->createUser($user);
                 $wallets = $mango->createWallet($mangoUser);
             }
-
+            $em->refresh($user);
             return $user;
 
         }

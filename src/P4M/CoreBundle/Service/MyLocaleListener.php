@@ -52,6 +52,9 @@ class MyLocaleListener implements EventSubscriberInterface
         if(preg_match('#^/api#', $uri)){
             return;
         }
+        else if(preg_match('#^/oauth#', $uri)){
+            return;
+        }
         if (HttpKernel::MASTER_REQUEST != $event->getRequestType()) {
             return;
         }

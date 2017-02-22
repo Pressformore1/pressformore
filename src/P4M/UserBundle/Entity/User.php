@@ -300,6 +300,7 @@ class User extends BaseUser
 
     /**
      * @var string
+     * @Groups({"info","json"})
      * @ORM\Column(name="language", type="string", options={"default":"en"}, nullable=False)
      */
     private $language = "en";
