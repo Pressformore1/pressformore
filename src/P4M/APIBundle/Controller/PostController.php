@@ -59,8 +59,7 @@ class PostController extends FOSRestController
         $form = $this->get('form.factory')->create(new PostType($data['pictureList']), $post, ['method' => 'PUT']);
         $search = $em->getRepository('P4MCoreBundle:Post')->findOneBySourceUrl($data['sourceUrl']);
         if ($search) {
-            $res['message'] = 'DUPLICATE_ENTRY';
-            $res['status'] = 401;
+            $res['_embed'] = $search;
             return $res;
         }
         $form->submit($data);
@@ -70,7 +69,6 @@ class PostController extends FOSRestController
             $authorKey = $postUtils->getPostAuthorMeta($post->getSourceUrl());
             $userRepo = $em->getRepository('P4MUserBundle:User');
             if (null !== $authorKey) {
-
                 $author = $userRepo->findOneByProducerKey($authorKey);
                 if (null !== $author) {
                     $post->setAuthor($author);
